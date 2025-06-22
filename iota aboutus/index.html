@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IOTA - About Us</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="nav-logo">
+        <div><b>IOTA</b></div>
+        <div>JADAVPUR UNIVERSITY</div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#"><b>HOME</b></a></li>
+          <li><a href="#"><b>EVENTS</b></a></li>
+          <li><a href="#"><b>RESOURCES</b></a></li>
+          <li><a href="#"><b>PROJECTS</b></a></li>
+          <li><a href="#"><b>TEAM</b></a></li>
+          <li><a href="#"><b>ABOUT</b></a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <div class="about-section">
+      <div class="about-header">
+        <h1>ABOUT US</h1>
+        <p class="learn-more"><a href="#">LEARN MORE ABOUT US</a></p>
+      </div>
+      <div class="about-box">
+        <button>Learn More</button>
+      </div>
+    </div>
+
+    <div class="group-photo">
+      <img src="./assets/group.png" alt="IOTA Team">
+    </div>
+
+    <footer>
+      <p>"THE INTERNET OF THINGS WILL AUGMENT YOUR BRAIN"</p>
+      <div class="nav">
+        <a href="#">Home</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+      </div>
+      
+      <div class="foot">
+        <div class="social-icons">
+          <p>Follow us</p>
+          <div class="icon-container">
+            <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" />
+            </a>
+            <a href="https://www.facebook.com/yourprofile" target="_blank" aria-label="Facebook">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" />
+            </a>
+            <a href="https://www.linkedin.com/in/yourprofile" target="_blank" aria-label="LinkedIn">
+              <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" />
+            </a>
+          </div>
+        </div>
+
+        <div class="map-container">
+          <iframe
+            title="Jadavpur University Map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.4362872510785!2d88.36860497507938!3d22.498867279552353!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713b4630fb55%3A0x34db0a9e9912b0a2!2sJadavpur%20University!5e0!3m2!1sen!2sin!4v1718717412807!5m2!1sen!2sin"
+            width="100%"
+            height="200"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+        <p>&#9993; iotajuofficial@gmail.com</p>
+      </div>
+    </footer>
+  </div>
+  <script>
+    
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    
+    document.querySelectorAll('.about-box, .group-photo, .footer-line, .footer-top, .footer-bottom')
+      .forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
