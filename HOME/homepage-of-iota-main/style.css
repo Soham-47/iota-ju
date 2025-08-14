@@ -1146,3 +1146,32 @@ nav .routes a:hover {
   box-shadow: 0 8px 20px rgba(243, 156, 18, 0.6);
 }
 
+/* Add to <style> in <head> */
+.hero-carousel {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  background-color: #000;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform: translateX(100%);
+  transition: transform 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s;
+  z-index: 1;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  transform: translateX(0);
+  z-index: 2;
+}
+

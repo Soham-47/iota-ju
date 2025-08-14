@@ -457,3 +457,40 @@ function refreshGSAP() {
     ScrollTrigger.refresh();
   }, 300); // time to settle scroll
 }
+
+const heroSlides = document.querySelectorAll('.hero-slide');
+let heroCurrent = 0;
+
+function showHeroSlide(idx) {
+  heroSlides.forEach((slide, i) => {
+    slide.style.transition = 'none';
+    slide.style.opacity = '0';
+    slide.style.transform = 'translateX(100%)';
+    slide.classList.remove('active');
+  });
+  heroSlides[idx].style.transition = 'transform 0.5s cubic-bezier(.77,0,.18,1), opacity 0.5s';
+  heroSlides[idx].style.opacity = '1';
+  heroSlides[idx].style.transform = 'translateX(0)';
+  heroSlides[idx].classList.add('active');
+}
+
+function hideHeroSlide(idx) {
+  heroSlides[idx].style.transition = 'transform 0.3s cubic-bezier(.77,0,.18,1), opacity 0.3s';
+  heroSlides[idx].style.opacity = '0';
+  heroSlides[idx].style.transform = 'translateX(-100%)';
+  heroSlides[idx].classList.remove('active');
+}
+
+function startHeroCarousel() {
+  showHeroSlide(heroCurrent);
+  setInterval(() => {
+    hideHeroSlide(heroCurrent);
+    setTimeout(() => {
+      heroCurrent = (heroCurrent + 1) % heroSlides.length;
+      showHeroSlide(heroCurrent);
+    }, 300); // Slide out fast
+  }, 2300); // 2s display + 0.3s slide out
+}
+
+startHeroCarousel();
+
