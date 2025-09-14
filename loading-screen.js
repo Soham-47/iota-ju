@@ -100,30 +100,130 @@ class LoadingScreen {
   }
 
   onPageLoad() {
+    // Use requestIdleCallback to prioritize user interaction
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => this.checkAndHideLoader(), { timeout: 2000 });
+    } else {
+      // Fallback for browsers that don't support requestIdleCallback
+      setTimeout(() => this.checkAndHideLoader(), 2000);
+    }
+  }
+  
+  checkAndHideLoader() {
+    // Check if the page is fully rendered
+    if (document.readyState === 'complete') {
+      this.hideLoadingScreen();
+      return;
+    }
+
+    // If not, wait for window load event which fires when all resources are loaded
+    const onWindowLoad = () => {
+      window.removeEventListener('load', onWindowLoad);
+      this.hideLoadingScreen();
+    };
+    
+    window.addEventListener('load', onWindowLoad);
+    
+    // Fallback in case load event doesn't fire
+    setTimeout(() => {
+      window.removeEventListener('load', onWindowLoad);
+      this.hideLoadingScreen();
+    }, 3000);
+  }
+  
+  hideLoadingScreen() {
+    // Don't hide if already hidden
+    if (!this.loadingScreen || this.loadingScreen.style.visibility === 'hidden') {
+      return;
+    }
+
     const elapsed = Date.now() - this.startTime;
     const remaining = Math.max(0, this.minDisplayTime - elapsed);
     
-    setTimeout(() => {
+    // Use a flag to prevent multiple hide attempts
+    if (this.isHiding) return;
+    this.isHiding = true;
+    
+    const hide = () => {
+      if (!this.loadingScreen) return;
+      
       this.loadingScreen.style.opacity = '0';
       this.loadingScreen.style.visibility = 'hidden';
+      this.loadingScreen.style.transition = 'opacity 0.5s ease, visibility 0.5s';
+      
       document.body.style.overflow = 'auto';
+      document.body.style.overflowX = 'hidden';
       
       // Enable navigation after initial load
       this.enableNavigation();
-    }, remaining);
+      
+      // Clean up after hiding
+      const onTransitionEnd = () => {
+        if (this.loadingScreen && this.loadingScreen.parentNode) {
+          this.loadingScreen.removeEventListener('transitionend', onTransitionEnd);
+          this.loadingScreen.parentNode.removeChild(this.loadingScreen);
+          this.loadingScreen = null;
+        }
+        this.isHiding = false;
+      };
+      
+      this.loadingScreen.addEventListener('transitionend', onTransitionEnd, { once: true });
+      
+      // Force cleanup if transition doesn't end
+      setTimeout(() => {
+        if (this.loadingScreen && this.loadingScreen.parentNode) {
+          this.loadingScreen.removeEventListener('transitionend', onTransitionEnd);
+          this.loadingScreen.parentNode.removeChild(this.loadingScreen);
+          this.loadingScreen = null;
+          this.isHiding = false;
+        }
+      }, 1000);
+    };
+    
+    // Ensure minimum display time
+    if (remaining > 0) {
+      setTimeout(hide, remaining);
+    } else {
+      hide();
+    }
   }
   
   enableNavigation() {
-    document.querySelectorAll('a').forEach(link => {
-      if (link.href && !link.classList.contains('no-loader')) {
-        link.addEventListener('click', (e) => {
-          const href = link.getAttribute('href');
-          if (href && !href.startsWith('#') && !href.includes('javascript:') && !e.ctrlKey && !e.metaKey) {
-            e.preventDefault();
-            this.startPageTransition(href);
-          }
-        });
+    // Handle regular link clicks
+    document.addEventListener('click', (e) => {
+      // Find the closest anchor tag
+      let target = e.target;
+      while (target && target.tagName !== 'A') {
+        if (target === document.body) return;
+        target = target.parentNode;
       }
+      
+      if (!target) return;
+      
+      const href = target.getAttribute('href');
+      
+      // Skip if it's an external link, anchor link, or special link
+      if (!href || 
+          href.startsWith('#') || 
+          href.startsWith('http') || 
+          href.startsWith('mailto:') || 
+          href.startsWith('tel:') ||
+          target.target === '_blank' ||
+          e.ctrlKey || 
+          e.metaKey ||
+          e.shiftKey ||
+          target.classList.contains('no-loader')) {
+        return;
+      }
+      
+      e.preventDefault();
+      this.startPageTransition(href);
+    });
+    
+    // Handle browser back/forward buttons
+    window.addEventListener('popstate', () => {
+      this.showLoadingScreen();
+      window.location.reload();
     });
   }
   
@@ -131,16 +231,22 @@ class LoadingScreen {
     if (this.isTransitioning) return;
     this.isTransitioning = true;
     
+    // Create loading screen if it doesn't exist
+    if (!this.loadingScreen) {
+      this.createLoadingScreen();
+    }
+    
     // Show loading screen
     this.loadingScreen.style.opacity = '1';
     this.loadingScreen.style.visibility = 'visible';
+    this.loadingScreen.style.transition = 'opacity 0.3s ease, visibility 0.3s';
     document.body.style.overflow = 'hidden';
     
     // Reset progress
     this.assetsLoaded = 0;
     this.updateProgress(0);
     
-    // Start loading the next page
+    // Start loading the next page with a small delay to ensure UI updates
     setTimeout(() => {
       window.location.href = url;
     }, 300);

@@ -2,28 +2,16 @@
   "version": 2,
   "builds": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "**/*.html",
       "use": "@vercel/static"
     },
     {
-      "src": "**/*.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.js",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*",
+      "src": "**/*.@(js|css|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot|mp4|webm|json)",
       "use": "@vercel/static"
     }
   ],
   "routes": [
     { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/HOME/homepage-of-iota-main/home.html" }
+    { "src": "/.*", "dest": "/index.html" }
   ]
 }
