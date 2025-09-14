@@ -9,42 +9,32 @@
         body {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background-color: #1a1a1a;
+            overflow: hidden;
             height: 100vh;
-            background: #1a1a1a;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-        }
-        .loading-message {
-            text-align: center;
-        }
-        .skip-link {
-            display: inline-block;
-            margin-top: 1rem;
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
 <body>
-    <div class="loading-message">
-        <p>Loading IOTA...</p>
-        <a href="HOME/homepage-of-iota-main/home.html" class="skip-link">Skip to Home</a>
-    </div>
-
+    <!-- Loading screen will be injected by loading-screen.js -->
+    
+    <script src="loading-screen.js"></script>
     <script>
-        // Check if the user has seen the intro before
-        const hasSeenIntro = sessionStorage.getItem('introShown');
-        
-        // Redirect to home page if intro was already shown, otherwise show intro
-        if (hasSeenIntro) {
-            window.location.href = 'HOME/homepage-of-iota-main/home.html';
-        } else {
-            window.location.href = 'intro-video.html';
-        }
+        // Initialize loading screen immediately
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if the user has seen the intro before
+            const hasSeenIntro = sessionStorage.getItem('introShown');
+            
+            // Redirect after a small delay to allow loading screen to initialize
+            setTimeout(() => {
+                if (hasSeenIntro) {
+                    window.location.href = 'HOME/homepage-of-iota-main/home.html';
+                } else {
+                    window.location.href = 'intro-video.html';
+                }
+            }, 100);
+        });
     </script>
 </body>
 </html>

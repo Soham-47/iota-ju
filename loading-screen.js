@@ -8,21 +8,34 @@ class LoadingScreen {
     this.minDisplayTime = 1000; // Minimum display time in ms
     this.startTime = Date.now();
     this.isTransitioning = false;
+    this.isInitialized = false;
     this.init();
   }
 
   init() {
+    if (this.isInitialized) return;
+    
     // Create loading screen elements
     this.createLoadingScreen();
     
-    // Start loading assets
-    this.loadAssets();
+    // Start with 0% progress
+    this.updateProgress(0);
     
-    // Add event listeners
-    window.addEventListener('load', () => this.onPageLoad());
+    // Start loading assets after a small delay to ensure UI is ready
+    setTimeout(() => {
+      this.loadAssets();
+      
+      // Add event listeners
+      if (document.readyState === 'complete') {
+        this.onPageLoad();
+      } else {
+        window.addEventListener('load', () => this.onPageLoad());
+        // Fallback in case load event doesn't fire
+        setTimeout(() => this.onPageLoad(), 5000);
+      }
+    }, 50);
     
-    // Fallback in case load event doesn't fire
-    setTimeout(() => this.onPageLoad(), 5000);
+    this.isInitialized = true;
   }
 
   createLoadingScreen() {
@@ -108,9 +121,17 @@ class LoadingScreen {
   }
 
   updateProgress(percent) {
+    if (!this.loadingScreen) return;
+    
+    // Ensure percent is between 0 and 100
+    percent = Math.max(0, Math.min(100, percent));
+    
     if (this.progressBar) {
       this.progressBar.style.width = `${percent}%`;
-      this.loadingText.textContent = `Loading... ${percent}%`;
+    }
+    
+    if (this.loadingText) {
+      this.loadingText.textContent = `Loading... ${Math.round(percent)}%`;
     }
   }
 
@@ -144,8 +165,8 @@ class LoadingScreen {
   }
   
   hideLoadingScreen() {
-    // Don't hide if already hidden
-    if (!this.loadingScreen || this.loadingScreen.style.visibility === 'hidden') {
+    // Don't hide if already hidden or not initialized
+    if (!this.loadingScreen || this.loadingScreen.style.visibility === 'hidden' || !this.isInitialized) {
       return;
     }
 
@@ -156,8 +177,16 @@ class LoadingScreen {
     if (this.isHiding) return;
     this.isHiding = true;
     
+    // Ensure we show 100% before hiding
+    this.updateProgress(100);
+    
     const hide = () => {
       if (!this.loadingScreen) return;
+      
+      // Remove the loading text when hiding
+      if (this.loadingText) {
+        this.loadingText.textContent = '';
+      }
       
       this.loadingScreen.style.opacity = '0';
       this.loadingScreen.style.visibility = 'hidden';
@@ -256,6 +285,7 @@ class LoadingScreen {
     
     // Reset progress
     this.assetsLoaded = 0;
+    this.assets = [];
     this.updateProgress(0);
     
     // Start loading the next page with a small delay to ensure UI updates
@@ -265,15 +295,34 @@ class LoadingScreen {
   }
 }
 
-// Initialize loading screen when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  // Check if this is the intro page
+// Initialize loading screen immediately
+(function() {
+  // Skip initialization for specific pages
   if (window.location.pathname.includes('intro-video.html')) {
-    return; // Don't show loading screen on intro page
+    return;
   }
   
-  // Only initialize if loading screen doesn't exist
+  // Create loading screen if it doesn't exist
   if (!document.querySelector('.loading-screen')) {
+    // Add loading screen CSS if not already added
+    if (!document.querySelector('#loading-screen-styles')) {
+      const link = document.createElement('link');
+      link.id = 'loading-screen-styles';
+      link.rel = 'stylesheet';
+      link.href = 'loading-screen.css';
+      document.head.appendChild(link);
+    }
+    
+    // Initialize loading screen
     window.loadingScreen = new LoadingScreen();
+    
+    // Handle page transitions
+    document.addEventListener('click', (e) => {
+      let target = e.target.closest('a');
+      if (target && target.href && !target.href.includes('#')) {
+        e.preventDefault();
+        loadingScreen.startPageTransition(target.href);
+      }
+    }, true);
   }
-});
+})();
