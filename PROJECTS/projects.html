@@ -6,6 +6,7 @@
   <title>Projects</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="nav-style.css" />
+  <link rel="stylesheet" href="../HOME/homepage-of-iota-main/footer-styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     /* Import Montserrat font */
@@ -34,22 +35,36 @@
     
     /* Navigation styles */
     nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
       z-index: 100;
-      background: transparent;
-      padding: 1rem 2rem;
-      border: none;
-      box-shadow: none;
+      position: fixed;
+      width: 100%;
       height: 16vh;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Montserrat', sans-serif;
+      padding: 3rem 4rem;
+      color: white;
     }
     
     .logo-section {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: 3rem;
+    }
+    
+    .routes {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    
+    .routes a {
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: white;
+      text-decoration: none;
     }
 
     .logo-img {
@@ -81,7 +96,7 @@
       background-color: transparent !important;
     }
     
-    /* Button hover effects */
+    /* Button styles - no animations */
     .project-button {
       display: inline-block;
       padding: 0.8rem 2rem;
@@ -90,42 +105,65 @@
       text-decoration: none;
       border-radius: 50px;
       font-weight: 500;
-      transition: all 0.3s ease;
       border: 1px solid rgba(255, 255, 255, 0.2);
       box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
-      position: relative;
-      overflow: hidden;
     }
     
-    .project-button:hover {
-      transform: translateY(-3px) scale(1.05);
-      background: rgba(76, 175, 80, 1);
-      box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
-      border-color: rgba(255, 255, 255, 0.4);
+    .project-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 4rem auto;
+      max-width: 1000px;
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
     }
     
-    .project-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s ease;
+    .project-card img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      border: 1px solid #4CAF50;
     }
     
-    .project-button:hover::before {
-      left: 100%;
+    .project-card h2 {
+      color: #fff;
+      margin-top: 0;
+      margin-bottom: 1.2rem;
+      font-size: 2rem;
+      font-weight: 600;
+      text-decoration: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background-image: none !important;
+      letter-spacing: 0.5px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .project-card p {
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
     }
   </style>
-</head>
+
+    <link rel="stylesheet" href="../loading-screen.css">
+  </head>
 <body>
   <nav>
     <!-- Left: Logos -->
     <div class="logo-section">
       <div class="logo">
-        <img src="images/logo.png" alt="IOTA Logo" class="logo-img" />
+        <img src="images/IOTA.png" alt="IOTA Logo" class="logo-img" />
       </div>
   
       <div class="separator"></div>
@@ -152,66 +190,44 @@
     </div>
 
     <!-- Project 1 -->
-    <div class="project-card" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; opacity: 0; transform: translateX(-50px); transition: all 0.6s ease-out 0.1s; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
+    <div class="project-card">
       <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
-        <img src="images/4wheeler.jpg" alt="4-Wheeler Project" style="max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
+        <img src="images/4wheeler.jpg" alt="4-Wheeler Project">
       </div>
       <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
-        <h2 style="color: #fff; margin-top: 0; margin-bottom: 1.2rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">4-Wheeler Automation</h2>
-        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 2rem; font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 400;">
-          An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems.
-        </p>
+        <h2>4-Wheeler Automation</h2>
+        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems.</p>
         <a href="project-details/4wheeler.html" class="project-button">Learn More</a>
       </div>
     </div>
 
     <!-- Project 2 -->
-    <div class="project-card" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; opacity: 0; transform: translateX(50px); transition: all 0.6s ease-out 0.2s; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
+    <div class="project-card">
       <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
-        <img src="images/2wheeler.jpg" alt="2-Wheeler Project" style="max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
+        <img src="images/2wheeler.jpg" alt="2-Wheeler Project">
       </div>
       <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
-        <h2 style="color: #fff; margin-top: 0; margin-bottom: 1.2rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">2-Wheeler Automation</h2>
-        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 2rem; font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 400;">
-          An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems.
-        </p>
+        <h2>2-Wheeler Automation</h2>
+        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems.</p>
         <a href="project-details/2wheeler.html" class="project-button">Learn More</a>
       </div>
     </div>
 
     <!-- Project 3 -->
-    <div class="project-card" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; opacity: 0; transform: translateX(-50px); transition: all 0.6s ease-out 0.3s; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
+    <div class="project-card">
       <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
-        <img src="images/drone.jpg" alt="Drone Project" style="max-width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
+        <img src="images/drone.jpg" alt="Drone Project">
       </div>
       <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
-        <h2 style="color: #fff; margin-top: 0; margin-bottom: 1.2rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">Drone Automation</h2>
-        <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 2rem; font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 400;">
-          An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems.It is a drone that can navigate through the air and avoid obstacles.This drone is equipped with a camera and a lidar sensor to detect obstacles and navigate through the air.
-        </p>
+        <h2>Drone Automation</h2>
+        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems. It is a drone that can navigate through the air and avoid obstacles. This drone is equipped with a camera and a lidar sensor to detect obstacles and navigate through the air.</p>
         <a href="project-details/drone.html" class="project-button">Learn More</a>
       </div>
     </div>
   </section>
 
   <!-- Gallery Section -->
-  <section class="gallery-section" style="margin-top: 2rem; padding-top: 2rem; background: transparent;">
-    <div class="gallery-wrapper" style="background: transparent;">
-      <div class="gallery-scroll" id="galleryScroll">
-        <img src="https://images.unsplash.com/photo-1494022299300-899b96e49893?w=600" alt="gallery1" />
-        <img src="https://images.unsplash.com/photo-1529788295308-1eace6f67388?q=80" alt="gallery2" />
-        <img src="https://images.unsplash.com/photo-1494022299300-899b96e49893?w=600" alt="gallery3" />
-        <img src="https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600" alt="gallery4" />
-        <img src="https://images.unsplash.com/photo-1611462985358-60d3498e0364?w=600" alt="gallery5" />
-        
-        <img src="https://images.unsplash.com/photo-1494022299300-899b96e49893?w=600" alt="gallery1" />
-        <img src="https://images.unsplash.com/photo-1529788295308-1eace6f67388?q=80" alt="gallery2" />
-        <img src="https://images.unsplash.com/photo-1494022299300-899b96e49893?w=600" alt="gallery3" />
-        <img src="https://images.unsplash.com/photo-1538370965046-79c0d6907d47?w=600" alt="gallery4" />
-        <img src="https://images.unsplash.com/photo-1611462985358-60d3498e0364?w=600" alt="gallery5" />
-      </div>
-    </div>
-  </section>
+ 
 
   <footer class="footer">
     <!-- Background Image -->
@@ -219,22 +235,22 @@
   
     <!-- First Column: Logo & Social -->
     <div class="footer-column">
-      <div class="footer-logo">
-        <img src="images/logo.png" alt="IOTA Logo" />
-        <p>IoT Applications Club, Jadavpur University</p>
+      <div class="footer-logo" style="text-align: center;">
+        <img src="images/IOTA.png" alt="IOTA Logo" style="display: block; margin: 0 auto 1rem auto;" />
+        <p style="margin: 0 auto;">IoT Applications Club, Jadavpur University</p>
       </div>
       <div class="social-icons">
         <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL" target="_blank">
-          <img src="images/facebook (2).png" alt="Facebook" />
+          <img src="images/facebook (2).png" alt="Facebook" style="filter: invert(1);" />
         </a>
         <a href="https://www.instagram.com/iota_ju/" target="_blank">
-          <img src="images/Instagram (2).png" alt="Instagram" />
+          <img src="images/Instagram (2).png" alt="Instagram" style="filter: invert(1);" />
         </a>
         <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" target="_blank">
           <img src="images/Linkedin (2).png" alt="LinkedIn" />
         </a>
         <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank">
-          <img src="images/Github.png" alt="Github" />
+          <img src="images/Github.png" alt="Github" style="filter: invert(1);" />
         </a>
       </div>
     </div>
@@ -271,48 +287,15 @@
     
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
-    // Initialize ScrollTrigger
-    gsap.registerPlugin(ScrollTrigger);
-
-    // Animate project cards on scroll
-    document.addEventListener('DOMContentLoaded', () => {
-      const projectCards = document.querySelectorAll('.project-card');
-      
-      projectCards.forEach((card, index) => {
-        gsap.to(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 90%',
-            end: 'top 60%',
-            toggleActions: 'play none none none',
-            once: true,
-            markers: false // Set to true to see the trigger points
-          },
-          opacity: 1,
-          x: 0,
-          duration: 0.5,
-          ease: 'power2.out',
-          delay: index * 0.1
-        });
-      });
-    });
-  </script>
-  <script src="script.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-<script>
-    // Simplified GSAP Navbar Animation
-    ScrollTrigger.create({
-        start: 'top -80',
-        end: 99999,
-        toggleClass: {
-            className: 'nav-scrolled',
-            targets: 'nav'
+    // Set navbar to always have dark background with blur
+    document.addEventListener('DOMContentLoaded', function() {
+        const nav = document.querySelector('nav');
+        if (nav) {
+            nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            nav.style.backdropFilter = 'blur(10px)';
         }
     });
 </script>
-</body>
+  </body>
 </html>

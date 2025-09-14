@@ -530,6 +530,7 @@ img {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
+  justify-content: center;
 }
 
 .social-icons a {
@@ -543,6 +544,7 @@ img {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
 }
 
 .social-icons a[href*="linkedin"],
@@ -565,6 +567,11 @@ img {
   height: 24px;
   transition: transform 0.3s ease-in-out;
   filter: brightness(0) invert(1);
+}
+
+.social-icons a[href*="linkedin"] img,
+.social-icons a[href*="facebook"] img {
+  filter: none;
 }
 
 .social-icons a:hover img {
@@ -776,6 +783,25 @@ nav .routes a {
 nav .routes a:hover {
   color: gold;
   transform: scale(1.05);
+}
+
+/* Logo Section Styling */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+}
+
+.separator {
+  width: 2px;
+  height: 40px;
+  background-color: white;
+  opacity: 0.6;
 }
 
 .subtitle {

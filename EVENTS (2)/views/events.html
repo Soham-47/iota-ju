@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="data:,">  <!-- Prevents favicon.ico 404 error -->
     <title>IOTA</title>
-    <!-- GSAP Core + Plugins -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- GSAP removed as it's not needed -->
     <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="nav-style.css">
+    <link rel="stylesheet" href="../../HOME/homepage-of-iota-main/footer-styles.css">
 
     <style>
       
@@ -112,29 +111,7 @@
         text-decoration: none !important;
       }
       
-      /* Animation classes */
-      .fade-up {
-        opacity: 0;
-        transform: translateY(50px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      }
-      
-      .fade-left {
-        opacity: 0;
-        transform: translateX(-50px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      }
-      
-      .fade-right {
-        opacity: 0;
-        transform: translateX(50px);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-      }
-      
-      .animate {
-        opacity: 1;
-        transform: translate(0, 0) !important;
-      }
+      /* Animation classes removed */
       
       /* Add some spacing between sections */
       .event-row {
@@ -251,13 +228,15 @@
         left: 100%;
       }
     </style>
+  
+    <link rel="stylesheet" href="../loading-screen.css">
   </head>
 <body>
   <nav>
     <!-- Left: Logos -->
     <div class="logo-section">
       <div class="logo">
-        <img src="../images/logo.png" alt="IOTA Logo" class="logo-img" />
+        <img src="../images/IOTA.png" alt="IOTA Logo" class="logo-img" />
       </div>
   
       <div class="separator"></div>
@@ -278,7 +257,7 @@
   </nav>
   <!--###########################################################-->
   <!-- INNOVATIA Section -->
-<div class="event-row left-event fade-left" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
+<div class="event-row" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
   <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
     <img src="../images/logoinnovatia.png" alt="INNOVATIA 2025" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
   </div>
@@ -299,118 +278,13 @@
     <!-- Load GSAP and ScrollTrigger -->
 
     <script>
-      // Initialize GSAP and ScrollTrigger when DOM is loaded
-      document.addEventListener('DOMContentLoaded', function() {
-        // Check if GSAP and ScrollTrigger are loaded
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
-          console.error('GSAP or ScrollTrigger not loaded');
-          return;
-        }
-        
-        // Register ScrollTrigger plugin
-        gsap.registerPlugin(ScrollTrigger);
-        
-        // Function to initialize animations
-        function initAnimations() {
-          // Animate all event rows
-          gsap.utils.toArray('.event-row').forEach((row, i) => {
-            // Set initial state
-            gsap.set(row, { opacity: 0, y: 50 });
-            
-            // Create animation for the row
-            gsap.to(row, {
-              opacity: 1,
-              y: 0,
-              duration: 0.8,
-              ease: 'power2.out',
-              scrollTrigger: {
-                trigger: row,
-                start: 'top 85%',
-                toggleActions: 'play none none none',
-                once: true
-              }
-            });
-            
-            // Animate images with a slight delay
-            const img = row.querySelector('img');
-            if (img) {
-              gsap.fromTo(img, 
-                { scale: 0.9, opacity: 0 },
-                {
-                  scale: 1,
-                  opacity: 1,
-                  duration: 0.8,
-                  ease: 'back.out(1.4)',
-                  delay: 0.2,
-                  scrollTrigger: {
-                    trigger: row,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none',
-                    once: true
-                  }
-                }
-              );
-            }
-            
-            // Animate content
-            const content = row.querySelector('.event-content');
-            if (content) {
-              gsap.fromTo(content,
-                { opacity: 0, y: 20 },
-                {
-                  opacity: 1,
-                  y: 0,
-                  duration: 0.8,
-                  delay: 0.3,
-                  scrollTrigger: {
-                    trigger: row,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none',
-                    once: true
-                  }
-                }
-              );
-            }
-            
-            // Animate buttons with a slight delay
-            const buttons = row.querySelectorAll('.btn-hover-effect');
-            buttons.forEach((btn, btnIndex) => {
-              gsap.fromTo(btn,
-                { scale: 0.9, opacity: 0 },
-                {
-                  scale: 1,
-                  opacity: 1,
-                  duration: 0.5,
-                  delay: 0.4 + (btnIndex * 0.1),
-                  ease: 'back.out(1.7)',
-                  scrollTrigger: {
-                    trigger: row,
-                    start: 'top 85%',
-                    toggleActions: 'play none none none',
-                    once: true
-                  }
-                }
-              );
-            });
-          });
-          
-          console.log('All animations initialized successfully');
-        }
-        
-        // Initialize animations
-        initAnimations();
-        
-        // Refresh ScrollTrigger on window resize
-        window.addEventListener('resize', function() {
-          ScrollTrigger.refresh();
-        });
-      });
+      // No animations initialization needed
     </script>
   </div>
 </div>
 
 <!-- LORD OF THE RINGS Section -->
-<div class="event-row left-event fade-left" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
+<div class="event-row" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
   <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
     <img src="../images/lordftherings.jpg" alt="Lord of the Rings Event" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50; object-fit: contain;">
   </div>
@@ -433,23 +307,21 @@
 </div>
 
 <!-- CONNEXION Section -->
-<div class="event-row left-event" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; opacity: 0; transform: translateX(-50px); transition: all 0.6s ease-out 0.3s; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
+<div class="event-row" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
   <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
-    <img src="../images/connexion.jpg" alt="Connexion" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
+    <img src="../images/connexion.jpg" alt="CONNEXION" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
   </div>
   <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
-    <h3 style="color: #fff; margin-top: 0; margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif; padding-top: 0.5rem;">CONNEXION</h3>
-    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.8; margin-bottom: 2.5rem; font-size: 1.1rem; font-family: 'Poppins', sans-serif; font-weight: 400; padding-right: 1rem;">
-      <title>Events - IOT Applications Club</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script> The IoT Applications Club launched its first-ever IoT Hackathon, "Connexion", inviting enthusiastic freshmen to explore the vast world of Internet of Things through innovation and teamwork.
+    <h3 style="color: #fff; margin-top: 0; margin-bottom: 1.2rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">CONNEXION</h3>
+    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 2rem; font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 400;">
+      The IoT Applications Club launched its first-ever IoT Hackathon, "Connexion", inviting enthusiastic freshmen to explore the vast world of Internet of Things through innovation and teamwork.
     </p>
-    <div style="margin-top: 1.5rem;">
-      <a href="connexion.html" class="btn-hover-effect event-button" 
-   style="text-decoration: none; display: inline-block;"
-   onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 8px 15px rgba(0,0,0,0.2)';"
-   onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
-   onmousedown="this.style.transform='translateY(1px) scale(0.98)';"
-   onmouseup="this.style.transform='translateY(-3px) scale(1.05)';">
+    <a href="connexion.html" class="btn-hover-effect event-button" 
+       style="text-decoration: none; background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%); color: white; padding: 12px 24px; border-radius: 30px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; display: inline-block;"
+       onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(110, 72, 170, 0.4)';"
+       onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';"
+       onmousedown="this.style.transform='translateY(1px) scale(0.98)';"
+       onmouseup="this.style.transform='translateY(-3px) scale(1.05)';">
   About This Event
 </a>
     </div>
@@ -463,21 +335,21 @@
         <!-- First Column: Logo & Social -->
         <div class="footer-column">
           <div class="footer-logo">
-            <img src="../images/logo.png" alt="IOTA Logo" />
+            <img src="../images/IOTA.png" alt="IOTA Logo" />
             <p>IoT Applications Club, Jadavpur University</p>
           </div>
           <div class="social-icons">
             <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL" target="_blank">
-              <img src="../images/facebook.png" alt="Facebook" />
+              <img src="../images/facebook (2).png" alt="Facebook" style="filter: invert(1);" />
             </a>
             <a href="https://www.instagram.com/iota_ju/" target="_blank">
-              <img src="../images/instagram.png" alt="Instagram" />
+              <img src="../images/Instagram (2).png" alt="Instagram" style="filter: invert(1);" />
             </a>
             <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" target="_blank">
-              <img src="../images/linkedin.png" alt="LinkedIn" />
+              <img src="../images/Linkedin (2).png" alt="LinkedIn" />
             </a>
             <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank">
-              <img src="../images/github.png" alt="GitHub" />
+              <img src="../images/Github.png" alt="Github" style="filter: invert(1);" />
             </a>
           </div>
         </div>
@@ -575,5 +447,7 @@
 
 <!-- Local script references removed to prevent 404 errors -->
 <!-- If you need these scripts, ensure the files exist at the correct paths -->
-</body>
+
+    <script src="../loading-screen.js"></script>
+  </body>
 </html>

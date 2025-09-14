@@ -2,20 +2,49 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IOTA - Loading...</title>
+    <link rel="stylesheet" href="loading-screen.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #1a1a1a;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .loading-message {
+            text-align: center;
+        }
+        .skip-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-message">
+        <p>Loading IOTA...</p>
+        <a href="HOME/homepage-of-iota-main/home.html" class="skip-link">Skip to Home</a>
+    </div>
+
     <script>
         // Check if the user has seen the intro before
-        const hasSeenIntro = document.cookie.split(';').some((item) => item.trim().startsWith('introShown='));
+        const hasSeenIntro = sessionStorage.getItem('introShown');
         
         // Redirect to home page if intro was already shown, otherwise show intro
         if (hasSeenIntro) {
             window.location.href = 'HOME/homepage-of-iota-main/home.html';
         } else {
-            window.location.href = 'intro.html';
+            window.location.href = 'intro-video.html';
         }
     </script>
-</head>
-<body>
-    <p>Loading IOTA... <a href="HOME/homepage-of-iota-main/home.html">Skip to Home</a></p>
 </body>
 </html>

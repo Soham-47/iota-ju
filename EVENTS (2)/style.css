@@ -87,11 +87,31 @@ nav .routes a:hover {
   transform: scale(1.05);
 }
 
+/* Logo Section Styling */
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-img {
+  height: 60px;
+  width: auto;
+}
+
+.separator {
+  width: 2px;
+  height: 40px;
+  background-color: white;
+  opacity: 0.6;
+}
+
 /* Social Icons Styling */
 .social-icons {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
+  justify-content: center;
 }
 
 .social-icons a {

@@ -26,6 +26,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="preload" href="footer-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="footer-styles.css"></noscript>
+    <link rel="stylesheet" href="fix-overflow.css">
+    <link rel="stylesheet" href="../../loading-screen.css">
+    <script src="../../loading-screen.js"></script>
 
     <style>
       .explore-btn {
@@ -114,6 +117,8 @@
       }
 
     </style>
+  
+    <link rel="stylesheet" href="../loading-screen.css">
   </head>
   <body>
     <nav>
@@ -147,9 +152,9 @@
     <div class="page1">
       <div class="hero-carousel">
         <img src="images/home1.jpg" class="hero-slide active" alt="Hero 1" />
-        <img src="images/home2.jpg" class="hero-slide" alt="Hero 2" />
-        <img src="images/home3.jpg" class="hero-slide" alt="Hero 3" />
-        <img src="images/home4.jpg" class="hero-slide" alt="Hero 4" />
+        <img src="images/home2.jpg" class="hero-slide active" alt="Hero 2" />
+        <img src="images/home3.jpg" class="hero-slide active" alt="Hero 3" />
+        <img src="images/home4.jpg" class="hero-slide active" alt="Hero 4" />
       </div>
       
       <div class="herocontent">
@@ -194,37 +199,6 @@
             <button class="explore-btn" onclick="window.location.href='../../EVENTS (2)/views/events.html'">EXPLORE</button>
 
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="page3">
-      <img src="images/homebg.jpg" alt="Gallery background" class="Carouselimg" />
-      <h1>GALLERY</h1>
-      <div class="carouselbody">
-        <div class="carousel-container">
-          <button class="arrow left" aria-label="Previous slide">&#8592;</button>
-          <div class="carousel" id="carousel">
-            <div class="carousel-slide active">
-              <img src="images/carousel1.jpg" alt="IOTA Event 1" />
-            </div>
-            <div class="carousel-slide">
-              <img src="images/carousel2.jpg" alt="IOTA Event 2" />
-            </div>
-            <div class="carousel-slide">
-              <img src="images/carousel4.png" alt="IOTA Workshop" />
-            </div>
-            <div class="carousel-slide">
-              <img src="images/carousel3.jpg" alt="IOTA Seminar" />
-            </div>
-            <div class="carousel-slide">
-              <img src="images/carousel6.jpg" alt="IOTA Team" />
-            </div>
-            <div class="carousel-slide">
-              <img src="images/carousel7.jpg" alt="IOTA Event 6" />
-            </div>
-          </div>
-          <button class="arrow right" aria-label="Next slide">&#8594;</button>
-          <div class="carousel-controls" id="dots"></div>
         </div>
       </div>
     </div>
@@ -387,25 +361,46 @@
       
     </footer>
     
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" async></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script>
-      document.querySelector('.discover').addEventListener('click', () => {
-        const target = document.querySelector('#page2');
-        target.scrollIntoView({ behavior: 'smooth' });
-    
-        // After a short delay, refresh ScrollTrigger
-        setTimeout(() => {
-          if (ScrollTrigger) ScrollTrigger.refresh();
-        }, 1000); // Adjust delay if animation is still late
-      });
-    </script>
-    
-    <script src="script.js"></script>
+    <!-- Load GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    
+    <script src="script.js"></script>
+    <!-- Load loading screen -->
+    <script src="../../loading-screen.js"></script>
+    
     <script>
-        // Simplified GSAP Navbar Animation
+      // Smooth scroll for discover button
+      document.addEventListener('DOMContentLoaded', function() {
+          // Mark intro as shown when home page loads
+          sessionStorage.setItem('introShown', 'true');
+          
+          // Initialize loading screen if not already done
+          if (!window.loadingScreen && !document.querySelector('.loading-screen')) {
+            window.loadingScreen = new LoadingScreen();
+          }
+          
+          // Smooth scroll for discover button
+          const discoverBtn = document.querySelector('.discover');
+          if (discoverBtn) {
+            discoverBtn.addEventListener('click', (e) => {
+              e.preventDefault();
+              const target = document.querySelector('#page2');
+              if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+                // Refresh ScrollTrigger after scroll
+                setTimeout(() => {
+                  if (typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
+                  }
+                }, 1000);
+              }
+            });
+          }
+      });
+      
+      // Simplified GSAP Navbar Animation
+      if (typeof ScrollTrigger !== 'undefined') {
         ScrollTrigger.create({
             start: 'top -80',
             end: 99999,
@@ -414,6 +409,53 @@
                 targets: 'nav'
             }
         });
+      }
+      
+      // Handle page transitions
+      document.addEventListener('click', function(e) {
+        let target = e.target;
+        
+        // Find the nearest anchor element
+        while (target && target.tagName !== 'A') {
+          target = target.parentNode;
+          if (target === document.body) return;
+        }
+        
+        if (target && target.tagName === 'A') {
+          const href = target.getAttribute('href');
+          
+          // Only handle internal links that don't have special attributes
+          if (href && 
+              !href.startsWith('#') && 
+              !href.startsWith('javascript:') && 
+              !href.startsWith('mailto:') && 
+              !target.getAttribute('target') && 
+              !e.ctrlKey && 
+              !e.metaKey) {
+            
+            e.preventDefault();
+            
+            // Show loading screen if available
+            if (window.loadingScreen) {
+              loadingScreen.show();
+            } else if (!document.querySelector('.loading-screen')) {
+              // Fallback: Add a simple loading indicator
+              const loader = document.createElement('div');
+              loader.className = 'loading-screen';
+              loader.innerHTML = `
+                <div class="loader"></div>
+                <div class="loading-text">Loading...</div>
+              `;
+              document.body.appendChild(loader);
+            }
+            
+            // Navigate after a short delay
+            setTimeout(() => {
+              window.location.href = href;
+            }, 300);
+          }
+        }
+      });
     </script>
   </body>
 </html>
