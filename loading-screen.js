@@ -61,13 +61,27 @@ class LoadingScreen {
   }
 
   loadAssets() {
-    // Get all images, scripts, and stylesheets
+    // Get all images, background images, and videos
     const images = Array.from(document.images);
-    const scripts = Array.from(document.scripts);
-    const links = Array.from(document.querySelectorAll('link[rel="stylesheet"]'));
+    const videos = Array.from(document.querySelectorAll('video'));
+    const elements = Array.from(document.querySelectorAll('*'));
+    const bgImages = [];
+    
+    // Find elements with background images
+    elements.forEach(el => {
+      const bgImg = window.getComputedStyle(el).backgroundImage;
+      if (bgImg && bgImg !== 'none') {
+        const url = bgImg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
+        if (url) {
+          const img = new Image();
+          img.src = url;
+          bgImages.push(img);
+        }
+      }
+    });
     
     // Combine all assets
-    this.assets = [...images, ...scripts, ...links];
+    this.assets = [...images, ...videos, ...bgImages];
     
     // If no assets to load, update progress
     if (this.assets.length === 0) {
@@ -77,11 +91,12 @@ class LoadingScreen {
     
     // Add load/error event listeners to all assets
     this.assets.forEach(asset => {
-      if (asset.complete) {
+      if (asset.complete || asset.readyState >= 3) { // 3 = HAVE_FUTURE_DATA
         this.onAssetLoaded();
       } else {
         asset.addEventListener('load', () => this.onAssetLoaded());
         asset.addEventListener('error', () => this.onAssetLoaded());
+        asset.addEventListener('canplaythrough', () => this.onAssetLoaded());
       }
     });
   }
@@ -100,35 +115,32 @@ class LoadingScreen {
   }
 
   onPageLoad() {
-    // Use requestIdleCallback to prioritize user interaction
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => this.checkAndHideLoader(), { timeout: 2000 });
-    } else {
-      // Fallback for browsers that don't support requestIdleCallback
-      setTimeout(() => this.checkAndHideLoader(), 2000);
-    }
+    // Wait for all assets to load
+    this.checkAssetsLoading();
+    
+    // Set a maximum loading time of 5 seconds
+    setTimeout(() => {
+      this.hideLoadingScreen();
+    }, 5000);
   }
   
-  checkAndHideLoader() {
-    // Check if the page is fully rendered
-    if (document.readyState === 'complete') {
-      this.hideLoadingScreen();
-      return;
-    }
-
-    // If not, wait for window load event which fires when all resources are loaded
-    const onWindowLoad = () => {
-      window.removeEventListener('load', onWindowLoad);
-      this.hideLoadingScreen();
+  checkAssetsLoading() {
+    // Check if all assets are loaded
+    const check = () => {
+      const allLoaded = this.assets.every(asset => 
+        asset.complete || asset.readyState >= 3
+      );
+      
+      if (allLoaded) {
+        this.hideLoadingScreen();
+      } else {
+        // Check again after a short delay
+        setTimeout(check, 100);
+      }
     };
     
-    window.addEventListener('load', onWindowLoad);
-    
-    // Fallback in case load event doesn't fire
-    setTimeout(() => {
-      window.removeEventListener('load', onWindowLoad);
-      this.hideLoadingScreen();
-    }, 3000);
+    // Start checking
+    check();
   }
   
   hideLoadingScreen() {
