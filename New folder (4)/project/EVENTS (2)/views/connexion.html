@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONNEXION - IOTA Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1976D2;
+            --text-color: #333;
+            --light-bg: #f9f9f9;
+            --white: #ffffff;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #E8F4FD; /* Light version of blue header */
+            min-height: 100vh;
+        }
+
+        .event-container {
+            background: #E8F4FD; /* Same as body */
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .event-header {
+            background: linear-gradient(135deg, #2196F3, #1976D2);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .event-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .event-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        .event-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .event-details {
+            background: white; /* White background for content area */
+            border-radius: 10px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            padding: 2.5rem;
+            margin: 2rem auto;
+            max-width: 1000px;
+            color: #333;
+        }
+
+        .event-image {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            border-radius: 8px;
+            margin: 0 auto 2rem;
+            display: block;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .event-section {
+            margin-bottom: 2rem;
+            background: #F5FAFF; /* Very light version of blue header */
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border-left: 4px solid #2196F3;
+        }
+
+        .event-section h2 {
+            color: #81D4FA;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .event-section h2:after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #40C4FF, #00B0FF);
+            color: #0D47A1;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #00B0FF, #0091EA);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn i {
+            margin-right: 5px;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+        }
+
+        @media (max-width: 768px) {
+            .event-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .event-header p {
+                font-size: 1rem;
+            }
+            
+            .event-container {
+                padding: 1rem;
+            }
+            
+            .event-details {
+                padding: 1.5rem;
+            }
+            
+            .event-image {
+                height: 250px;
+            }
+        }
+    </style>
+
+    
+    <style>
+        /* Loader Styles */
+        .app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        .app-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-box {
+            text-align: center;
+            color: white;
+        }
+        
+        .loader-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .progress-track {
+            width: 200px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 0 auto 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: #3498db;
+            transition: width 0.3s ease-out;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        body.is-loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
+    </head>
+<body>
+    <header class="event-header">
+        <a href="events.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Events</a>
+        <h1>CONNEXION</h1>
+        <p>The IoT Applications Club launched its first-ever IoT Hackathon, "Connexion", inviting enthusiastic freshmen to explore the vast world of Internet of Things through innovation and teamwork.</p>
+    </header>
+
+    <div class="event-container">
+        <div class="event-details">
+            <img src="../images/connexion.jpg" alt="CONNEXION" class="event-image" style="width: 100%; max-width: 800px; height: auto; border-radius: 8px; margin: 0 auto 2rem; display: block;">
+            
+            <div class="event-section">
+                <h2>About the Event</h2>
+                <p>CONNEXION is IOTA's flagship hackathon designed exclusively for freshmen to dive into the exciting world of IoT. This event provides a platform for budding technologists to connect, collaborate, and create innovative IoT solutions to real-world problems.</p>
+            </div>
+            
+            <div class="event-section">
+                <h2>Event Highlights</h2>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>24-hour hackathon focused on IoT solutions</li>
+                    <li>Beginner-friendly workshops and mentorship</li>
+                    <li>Hands-on experience with IoT hardware and software</li>
+                    <li>Networking with industry professionals</li>
+                    <li>Exciting prizes and goodies for winners</li>
+                </ul>
+            </div>
+            
+            <div class="event-section">
+                <h2>Event Details</h2>
+                <p><strong>Date:</strong> Coming Soon</p>
+                <p><strong>Time:</strong> 24-hour event (overnight)</p>
+                <p><strong>Venue:</strong> Jadavpur University, Kolkata</p>
+                <p><strong>Team Size:</strong> 2-4 members</p>
+                <p><strong>Eligibility:</strong> Open to all first-year students</p>
+            </div>
+            
+            <div class="event-section">
+                <h2>What You'll Learn</h2>
+                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                    <li>Basics of IoT and its applications</li>
+                    <li>Working with microcontrollers and sensors</li>
+                    <li>Data collection and analysis</li>
+                    <li>Prototyping and presentation skills</li>
+                </ul>
+            </div>
+            
+            <a href="#" class="btn">Register Now</a>
+        </div>
+    </div>
+
+    <script>
+        // Add any interactive elements here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+
+            <script src="assets/js/loader.js"></script>
+</body>
+</html>

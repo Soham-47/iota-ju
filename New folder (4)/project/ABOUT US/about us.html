@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<!-- 
+    IOTA - About Us Page
+    ===================
+    This page provides information about IOTA, its mission, and its team.
+    It includes sections for the organization's history, mission, and contact information.
+    
+    Last Updated: 2025-09-15
+-->
+<html lang="en">
+<head>
+    <!-- Meta Information -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Learn more about IOTA - Our mission, vision, and team">
+    <title>IOTA - About Us</title>
+    
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="../assets/css/navbar.css">
+    <link rel="stylesheet" href="../assets/css/loader.css">
+    
+    
+    <!-- Inline Styles removed: use shared navbar styles -->
+
+    <style>
+        /* Loader Styles */
+        .app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        .app-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-box {
+            text-align: center;
+            color: white;
+        }
+        
+        .loader-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .progress-track {
+            width: 200px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 0 auto 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: #3498db;
+            transition: width 0.3s ease-out;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        body.is-loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
+    </head>
+<body>
+  <!-- Navbar is injected by shared assets/js/navbar.js -->
+  
+
+    <div class="about-section">
+      <div class="about-header split">
+        <div class="about-text">
+          <h1>ABOUT US</h1>
+          <p>The IoT Applications Club at Jadavpur University (IOTA JU), founded in 2023, is driven by a compelling mission: to unite enthusiastic engineering students dedicated to pioneering research and development within the dynamic realm of the Internet of Things (IoT). IOTA JU is devoted to cultivating an inspiring environment that fosters not only the technical skills but also the core values essential for the academic and professional advancement of students in diverse IoT disciplines.</p>
+          <p>Our expansive focus encompasses exciting fields such as Robotics, Sensors, Communication Systems, and Networking, while also delving into crucial software development domains, including Artificial Intelligence/Machine Learning (AI/ML), Cloud Computing, and Data Science. At this club, students embark on a transformative journey, where they are equipped with the knowledge and experience necessary to thrive and innovate in the rapidly changing landscape of technology.</p>
+          
+        </div>
+        <div class="about-image">
+          <img src="images/team.jpg" alt="IOTA Team" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Mission & Vision Section -->
+    <div class="mission-vision-section">
+      <div class="container">
+        <div class="mission-vision-grid">
+          <div class="mission-card">
+            <h2>Our Mission</h2>
+            <p>To create a collaborative environment where students can explore, learn, and innovate in the field of Internet of Things, fostering technical excellence and professional growth.</p>
+          </div>
+          <div class="vision-card">
+            <h2>Our Vision</h2>
+            <p>To be the leading IoT community at Jadavpur University, driving innovation and preparing students for the future of connected technology.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- What We Do Section -->
+    <div class="what-we-do-section">
+      <div class="container">
+        <h2>What We Do</h2>
+        <div class="activities-grid">
+          <div class="activity-card">
+            <h3>Research & Development</h3>
+            <p>Pioneering research in IoT technologies, sensors, and connected systems.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Workshops & Seminars</h3>
+            <p>Regular technical workshops and seminars to enhance practical skills.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Projects & Innovation</h3>
+            <p>Hands-on projects covering robotics, AI/ML, and cloud computing.</p>
+          </div>
+          <div class="activity-card">
+            <h3>Community Building</h3>
+            <p>Building a strong network of IoT enthusiasts and professionals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <!-- Background Image -->
+      <img src="images/footerbg.png" alt="Footer Background" class="footerbg" />
+    
+      <!-- Main Footer Content -->
+      <div class="footer-content">
+        
+        <!-- Column 1: Logo & Social Icons -->
+        <div class="footer-column">
+          <div class="footer-logo">
+            <img src="images/logo.png" alt="IOTA Logo" />
+            <p>IoT Applications Club, Jadavpur University</p>
+          </div>
+          <div class="social-icons">
+            <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/" target="_blank" aria-label="Facebook">
+              <img src="images/facebook.png" alt="Facebook Icon" />
+            </a>
+            <a href="https://www.instagram.com/iota_ju/" target="_blank" aria-label="Instagram">
+              <img src="images/instagram.png" alt="Instagram Icon" />
+            </a>
+            <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" target="_blank" aria-label="LinkedIn">
+              <img src="images/linkedin.png" alt="LinkedIn Icon" />
+            </a>
+            <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" aria-label="GitHub">
+              <img src="images/Github.png" alt="GitHub Icon" />
+            </a>
+          </div>
+        </div>
+    
+        <!-- Column 2: Google Map -->
+        <div class="footer-column">
+          <iframe class="map"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+            width="300" height="200" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="JU Prajukti Bhavan Location Map">
+          </iframe>
+        </div>
+    
+        <!-- Column 3: Contact Form -->
+        <div class="footer-column contact-section">
+          <h3>Contact Us</h3>
+          <form class="contact-form">
+            <input type="text" placeholder="Name" required />
+            <input type="tel" placeholder="Phone Number" required />
+            <input type="email" placeholder="Email" required />
+            <textarea placeholder="Message" rows="4" required></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+    
+      </div> <!-- .footer-content -->
+    
+      <!-- Footer Bottom Section -->
+      <div class="footer-bottom">
+        <div class="footer-left">
+          <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+        </div>
+        <div class="footer-right">
+          <p>Designed and developed by IOTA WebDev Team @2025</p>
+        </div>
+      </div>
+    </footer>
+  <script src="../assets/js/navbar.js"></script>
+  <script src="../assets/js/loader.js" defer></script>
+  <!-- Page-specific navbar JS removed: using shared navbar.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <!-- Removed GSAP nav toggle to keep shared behavior consistent -->
+
+    </body>
+</html>

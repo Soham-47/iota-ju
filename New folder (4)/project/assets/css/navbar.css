@@ -1,0 +1,154 @@
+/* Shared Navbar Styles - used across all pages */
+
+nav {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 1rem !important;
+  transition: background 0.25s ease, padding 0.25s ease !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  background: rgba(14, 16, 22, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  height: 56px !important;
+  box-sizing: border-box;
+  transform: none !important;
+}
+
+nav.scrolled {
+  height: 52px !important;
+  background: rgba(14, 16, 22, 0.7);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  padding: 0.35rem 1rem !important;
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Force show when other scripts toggle this class */
+nav.nav-scrolled {
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
+nav.menu-open {
+  background: rgba(0, 0, 0, 0.98);
+  border-bottom-color: transparent;
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.logo-img {
+  height: 30px;
+  width: auto;
+}
+
+.separator {
+  width: 1px;
+  height: 18px;
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.routes {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-right: 0.25rem;
+}
+
+.routes a {
+  position: relative;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  text-transform: none;
+  letter-spacing: 0.3px;
+  padding: 0.2rem 0;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.routes a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #7aa2ff, #9a7bff);
+  transition: width 0.2s ease;
+}
+
+.routes a:hover,
+.routes a:focus,
+.routes a.active {
+  color: #ffffff;
+}
+
+.routes a:hover::after,
+.routes a:focus::after,
+.routes a.active::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  z-index: 1001;
+  padding: 0.5rem;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+
+@media (max-width: 992px) {
+  .routes {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 72%;
+    max-width: 280px;
+    height: 100vh;
+    background: rgba(14, 16, 22, 0.96);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 0.75rem;
+    transition: right 0.35s ease, opacity 0.35s ease;
+    z-index: 1000;
+    padding: 4rem 1rem 1rem;
+    opacity: 0;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;
+  }
+  .routes.active { right: 0; opacity: 1; }
+  .routes a { width: 100%; padding: 0.6rem 0; font-size: 1rem; }
+  .menu-toggle { display: flex; }
+  .logo-img { height: 28px; }
+}
+
+@media (max-width: 576px) {
+  nav { height: 52px; padding: 0 0.75rem; }
+  .separator { height: 16px; }
+  .routes { width: 85%; }
+}
+
+

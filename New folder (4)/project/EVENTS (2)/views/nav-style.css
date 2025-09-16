@@ -1,0 +1,10 @@
+/* Add this CSS to a new file or a <style> tag */
+nav {
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+nav.nav-scrolled {
+    opacity: 0;
+    transform: translateY(-100%);
+    pointer-events: none; /* Prevents interaction when hidden */
+}

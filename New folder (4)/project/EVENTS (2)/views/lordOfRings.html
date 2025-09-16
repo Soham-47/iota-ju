@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <link rel="stylesheet" href="/EVENTS (2)/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    
+    <style>
+        /* Loader Styles */
+        .app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        .app-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-box {
+            text-align: center;
+            color: white;
+        }
+        
+        .loader-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .progress-track {
+            width: 200px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 0 auto 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: #3498db;
+            transition: width 0.3s ease-out;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        body.is-loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
+    </head>
+<body class="text-white min-h-screen flex items-center justify-center p-5">
+    <iframe src="/" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; border: none; z-index: -1; opacity: 0.2;"></iframe>
+    <div class="max-w-3xl bg-[url('https://hips.hearstapps.com/hmg-prod/images/digitally-created-3-dimensional-starry-sky-with-royalty-free-image-1744992067.pjpeg?crop=1xw:1xh;center,top&resize=1200:*')] bg-cover bg-center h-full w-full p-10 rounded-lg shadow-lg">
+        <a href="/" class="text-blue-500 text-2xl" id="styling">Home</a>
+        <h1 class="font-bold mb-4 text-center text-blue-400" id="gradient-text">Lord Of Rings</h1>
+        <p class="text-lg leading-relaxed text-gray-300">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur qui minus vitae non molestias fuga nemo at id, deleniti dolorum, itaque fugiat expedita. Rem quasi maiores asperiores illum assumenda, minima atque tempora numquam rerum sed esse incidunt similique odit nihil aliquid adipisci dolor temporibus explicabo dolorum eligendi doloremque? Iste illo assumenda commodi repudiandae tempora mollitia modi, quasi minima perspiciatis harum praesentium dignissimos recusandae delectus deleniti ratione eaque quaerat esse. Voluptate fugit nostrum ab et, consequatur provident ullam. Quo esse distinctio quia voluptatibus? Accusantium minus dolorem in omnis dolore tempora dolores odio ipsam. Sint nisi in rerum nobis, praesentium iure dicta atque corrupti! Accusantium, beatae quae. Non ullam voluptatum, ratione expedita architecto veritatis distinctio omnis minima iure voluptatem tenetur temporibus voluptate reiciendis esse ea pariatur labore magnam, dolore corporis porro qui illo dignissimos, laborum doloribus! Iste exercitationem corporis veritatis placeat aliquam possimus maxime animi consequuntur, quibusdam fuga similique quisquam odio dolore. Molestiae doloribus adipisci consequatur vero distinctio ratione porro dolores? Corrupti, laboriosam. Laudantium iusto laboriosam autem cum quia facere consequuntur aperiam inventore velit eos? Nobis, exercitationem illo accusantium alias nam sequi rem at nemo eius porro blanditiis eligendi, nulla expedita. Reiciendis animi eligendi dignissimos voluptas? Iure necessitatibus maxime in ratione laudantium.
+        </p>
+        <br>
+        <br>
+        <a href="#">Click to Register</a>
+    </div>
+
+            <script src="assets/js/loader.js"></script>
+</body>
+</html>

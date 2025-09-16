@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projects</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="nav-style.css" />
+  <link rel="stylesheet" href="../assets/css/navbar.css" />
+  <link rel="stylesheet" href="../assets/css/loader.css" />
+  <link rel="stylesheet" href="../HOME/homepage-of-iota-main/footer-styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Import Montserrat font */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    
+    /* Apply Montserrat to all elements */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    /* Ensure html and body take full height */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Remove focus outline from all interactive elements */
+    a:focus, button:focus, input:focus, select:focus, textarea:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+    
+    /* Navigation styles */
+    nav {
+      z-index: 100;
+      position: fixed;
+      width: 100%;
+      height: 16vh;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Montserrat', sans-serif;
+      padding: 3rem 4rem;
+      color: white;
+    }
+    
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    
+    .routes {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+    }
+    
+    .routes a {
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: white;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 60px;
+      width: auto;
+    }
+
+    .separator {
+      width: 2px;
+      height: 40px;
+      background-color: white;
+      opacity: 0.6;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .projects-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+    
+    /* Button styles - no animations */
+    .project-button {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      background: rgba(76, 175, 80, 0.9);
+      color: white;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 500;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+    }
+    
+    .project-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 4rem auto;
+      max-width: 1000px;
+      padding: 2.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    }
+    
+    .project-card img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 8px;
+      border: 1px solid #4CAF50;
+    }
+    
+    .project-card h2 {
+      color: #fff;
+      margin-top: 0;
+      margin-bottom: 1.2rem;
+      font-size: 2rem;
+      font-weight: 600;
+      text-decoration: none !important;
+      border-bottom: none !important;
+      box-shadow: none !important;
+      background-image: none !important;
+      letter-spacing: 0.5px;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    .project-card p {
+      color: rgba(255, 255, 255, 0.9);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+    }
+  </style>
+
+    <link rel="stylesheet" href="../../assets/css/loader.css">
+  
+    <style>
+        /* Loader Styles */
+        .app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        .app-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-box {
+            text-align: center;
+            color: white;
+        }
+        
+        .loader-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .progress-track {
+            width: 200px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 0 auto 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: #3498db;
+            transition: width 0.3s ease-out;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        body.is-loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
+    </head>
+<body>
+  <nav>
+    <!-- Left: Logos -->
+    <div class="logo-section">
+      <div class="logo">
+        <img src="images/IOTA.png" alt="IOTA Logo" class="logo-img" />
+      </div>
+  
+      <div class="separator"></div>
+  
+      <div class="logo">
+        <img src="images/JULogo.png" alt="JU Logo" class="logo-img" />
+      </div>
+    </div>
+  
+    <!-- Right: Navigation Links -->
+    <div class="routes">
+      <a href="../HOME/homepage-of-iota-main/home.html">Home</a>
+      <a href="../EVENTS (2)/views/events.html">Events</a>
+      <a href="projects.html">Projects</a>
+      <a href="../TEAM/team.html">Team</a>
+      <a href="../ABOUT US/about us.html">About Us</a>
+    </div>
+  </nav>
+
+  <!-- Main Projects Section -->
+  <section class="projects-container" style="padding-top: 8rem; overflow-x: hidden; background: transparent !important; border: none !important; box-shadow: none !important;">
+    <div class="projects-header" style="margin-bottom: 3rem; background: transparent !important; display: none;">
+      
+    </div>
+
+    <!-- Project 1 -->
+    <div class="project-card">
+      <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
+        <img src="images/4wheeler.jpg" alt="4-Wheeler Project">
+      </div>
+      <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
+        <h2>4-Wheeler Automation</h2>
+        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems.</p>
+        <a href="project-details/4wheeler.html" class="project-button">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card">
+      <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
+        <img src="images/2wheeler.jpg" alt="2-Wheeler Project">
+      </div>
+      <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
+        <h2>2-Wheeler Automation</h2>
+        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems.</p>
+        <a href="project-details/2wheeler.html" class="project-button">Learn More</a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card">
+      <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
+        <img src="images/drone.jpg" alt="Drone Project">
+      </div>
+      <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
+        <h2>Drone Automation</h2>
+        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control systems. It is a drone that can navigate through the air and avoid obstacles. This drone is equipped with a camera and a lidar sensor to detect obstacles and navigate through the air.</p>
+        <a href="project-details/drone.html" class="project-button">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery Section -->
+ 
+
+  <footer class="footer">
+    <!-- Background Image -->
+    <img src="images/footerbg.png" alt="" class="footerbg" />
+  
+    <!-- First Column: Logo & Social -->
+    <div class="footer-column">
+      <div class="footer-logo" style="text-align: center;">
+        <img src="images/IOTA.png" alt="IOTA Logo" style="display: block; margin: 0 auto 1rem auto;" />
+        <p style="margin: 0 auto;">IoT Applications Club, Jadavpur University</p>
+      </div>
+      <div class="social-icons">
+        <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL" target="_blank">
+          <img src="images/facebook (2).png" alt="Facebook" style="filter: invert(1);" />
+        </a>
+        <a href="https://www.instagram.com/iota_ju/" target="_blank">
+          <img src="images/Instagram (2).png" alt="Instagram" style="filter: invert(1);" />
+        </a>
+        <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" target="_blank">
+          <img src="images/Linkedin (2).png" alt="LinkedIn" />
+        </a>
+        <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank">
+          <img src="images/Github.png" alt="Github" style="filter: invert(1);" />
+        </a>
+      </div>
+    </div>
+  
+    <!-- Second Column: Google Map -->
+    <div class="footer-column">
+      <iframe class="map"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+        width="300" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy">
+      </iframe>
+    </div>
+  
+    <!-- Third Column: Contact Form -->
+    <div class="footer-column contact-section">
+      <h3>Contact Us</h3>
+      <form class="contact-form">
+        <input type="text" placeholder="Name" required />
+        <input type="tel" placeholder="Phone Number" required />
+        <input type="email" placeholder="Email" required />
+        <textarea placeholder="Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  
+    <!-- Footer Bottom Section -->
+    <div class="footer-bottom">
+      <div class="footer-left">
+        <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+      </div>
+      <div class="footer-right">
+        <p>Designed and developed by IOTA WebDev Team @2025</p>
+      </div>
+    </div>
+    
+  </footer>
+
+  <script>
+    // Set navbar to always have dark background with blur
+    document.addEventListener('DOMContentLoaded', function() {
+        const nav = document.querySelector('nav');
+        if (nav) {
+            nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            nav.style.backdropFilter = 'blur(10px)';
+        }
+    });
+</script>
+  </body>
+  <script src="../assets/js/navbar.js"></script>
+  <script src="../assets/js/loader.js" defer></script>
+</html>

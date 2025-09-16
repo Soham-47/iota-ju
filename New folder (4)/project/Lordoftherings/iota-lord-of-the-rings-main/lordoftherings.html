@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IOTA</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="/Lordoftherings/iota-lord-of-the-rings-main/style.css" />
+  
+    
+    <style>
+        /* Loader Styles */
+        .app-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.3s ease-out;
+        }
+        
+        .app-loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loader-box {
+            text-align: center;
+            color: white;
+        }
+        
+        .loader-logo {
+            width: 150px;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        .progress-track {
+            width: 200px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            margin: 0 auto 10px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0;
+            background: #3498db;
+            transition: width 0.3s ease-out;
+        }
+        
+        .progress-text {
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        body.is-loading {
+            overflow: hidden;
+            height: 100vh;
+        }
+    </style>
+    </head>
+  <body>
+    <div class="container">
+      <div class="hero">
+        <div class="left">
+          <img src="/Lordoftherings/iota-lord-of-the-rings-main/media/lordofringsposter.jpg" alt="" />
+        </div>
+        <div class="right">
+          <div class="title">
+            <img src="/Lordoftherings/iota-lord-of-the-rings-main/media/logo.png" alt="" />
+            <p>Presents</p>
+            <h1>Lord of The Ring</h1>
+          </div>
+          <div class="description">
+            <p>
+                As part of Jadavpur University’s annual techfest Srijan in March 2025, IOTA JU presented the adrenaline-charged Robo War competition, “Lord of the Ring.”
+                This thrilling event saw teams of five battling it out in either wired or wireless formats, engineering and controlling their custom-built robots in a dynamic circular arena. With over 130 fierce contenders, the competition followed an intense knockout format, featuring three gripping rounds per match. The arena roared with energy as robots clashed in high-stakes duels, brilliantly showcasing participants’ innovation, design prowess, and technical control.
+            </p>
+            <p>Date:<br>18 April 2025 12:00pm-4:00pm<br> 19 April 2025 12:00pm-4:00pm</p>
+            <a href="/Lordoftherings/iota-lord-of-the-rings-main/brochure.pdf" target="_blank" rel="noopener noreferrer">
+              <button>
+                <i class="fa-solid fa-download"></i> VIEW BROCHURE FOR COMPLETE INFORMATION
+              </button>
+            </a>
+            
+          </div>
+        </div>
+      </div>
+      <div class="eventpics">
+        <img src="/Lordoftherings/iota-lord-of-the-rings-main/media/ep1.jpg" alt=""><img src="/Lordoftherings/iota-lord-of-the-rings-main/media/ep2.jpg" alt=""><img src="/Lordoftherings/iota-lord-of-the-rings-main/media/ep3.jpg" alt=""><img src="/Lordoftherings/iota-lord-of-the-rings-main/media/ep4.jpg" alt=""><img src="/Lordoftherings/iota-lord-of-the-rings-main/media/ep5.jpg" alt=""><img src="/Lordoftherings/iota-lord-of-the-rings-main/media/ep6.jpg" alt="">
+        
+      </div>
+      <div class="returnbtn">
+        <a href="/EVENTS (2)/views/events.html">
+          <button class="back-btn">
+            <i class="fa-solid fa-arrow-left"></i> Back to Events
+          </button>
+        </a>
+      </div>
+      
+      
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="/Lordoftherings/iota-lord-of-the-rings-main/script.js"></script>
+  
+            <script src="assets/js/loader.js"></script>
+</body>
+</html>
