@@ -116,8 +116,9 @@ opacity: 0.6;
     </div>
 
     <!-- Team Photo Section -->
-    
-
+    <div class="group-photo">
+      <img src="images/aboutus.jpg" alt="IOTA Team Group Photo" />
+    </div>
 
     <footer class="footer">
       <!-- Background Image -->
@@ -143,7 +144,7 @@ opacity: 0.6;
               <img src="images/linkedin.png" alt="LinkedIn Icon" />
             </a>
             <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" aria-label="GitHub">
-              <img src="images/github.png" alt="GitHub Icon" />
+              <img src="images/Github.png" alt="GitHub Icon" />
             </a>
           </div>
         </div>
@@ -182,56 +183,16 @@ opacity: 0.6;
         </div>
       </div>
     </footer>
-    
-  </div>
-  </div>
   <script>
-    function toggleMap(event) {
-      // Prevent event bubbling to avoid toggling twice
-      if (event) {
-        event.stopPropagation();
-      }
-      
-      const mapContainer = document.querySelector('.map-container');
-      const body = document.body;
-      
-      // Toggle the expanded class
-      mapContainer.classList.toggle('expanded');
-      
-      // Toggle body overflow to prevent scrolling when map is expanded
-      if (mapContainer.classList.contains('expanded')) {
-        body.style.overflow = 'hidden';
-      } else {
-        body.style.overflow = '';
-      }
-    }
-    
-    // Close map when clicking outside the map content
-    document.addEventListener('click', function(event) {
-      const mapContainer = document.querySelector('.map-container.expanded');
-      const mapContent = document.querySelector('.map-container.expanded .map-full');
-      
-      if (mapContainer && !mapContainer.contains(event.target)) {
-        mapContainer.classList.remove('expanded');
-        document.body.style.overflow = '';
-      }
-    });
-    
-    // Prevent closing when clicking inside the map content
-    document.querySelector('.map-full').addEventListener('click', function(event) {
-      event.stopPropagation();
-    });
-    
     window.addEventListener('scroll', function() {
-      const header = document.querySelector('header');
+      const nav = document.querySelector('nav');
       if (window.scrollY > 50) {
-        header.classList.add('scrolled');
+        nav.classList.add('nav-scrolled');
       } else {
-        header.classList.remove('scrolled');
+        nav.classList.remove('nav-scrolled');
       }
     });
 
-    
     const observerOptions = {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px'
@@ -246,8 +207,7 @@ opacity: 0.6;
       });
     }, observerOptions);
 
-    
-    document.querySelectorAll('.about-box, .group-photo, .footer-line, .footer-top, .footer-bottom')
+    document.querySelectorAll('.group-photo, .mission-card, .vision-card, .activity-card')
       .forEach(el => observer.observe(el));
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>

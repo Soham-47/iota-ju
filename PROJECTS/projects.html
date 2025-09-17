@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projects</title>
+  <title>Projects - IOTA</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="nav-style.css" />
   <link rel="stylesheet" href="../HOME/homepage-of-iota-main/footer-styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Global Loader CSS -->
+  <link rel="stylesheet" href="../assets/css/global-loader.css" />
+  <link rel="stylesheet" href="../loading-screen.css" />
   <style>
     /* Import Montserrat font */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
@@ -159,6 +162,7 @@
     <link rel="stylesheet" href="../loading-screen.css">
   </head>
 <body>
+  <!-- Global loading screen will be inserted here by global-loader.js -->
   <nav>
     <!-- Left: Logos -->
     <div class="logo-section">
@@ -175,11 +179,11 @@
   
     <!-- Right: Navigation Links -->
     <div class="routes">
-      <a href="../HOME/homepage-of-iota-main/home.html">Home</a>
-      <a href="../EVENTS (2)/views/events.html">Events</a>
-      <a href="projects.html">Projects</a>
-      <a href="../TEAM/team.html">Team</a>
-      <a href="../ABOUT US/about us.html">About Us</a>
+      <a href="../HOME/homepage-of-iota-main/home.html" class="nav-link">Home</a>
+      <a href="../EVENTS (2)/views/events.html" class="nav-link">Events</a>
+      <a href="projects.html" class="nav-link">Projects</a>
+      <a href="../TEAM/team.html" class="nav-link">Team</a>
+      <a href="../ABOUT US/about us.html" class="nav-link">About Us</a>
     </div>
   </nav>
 
@@ -297,5 +301,26 @@
         }
     });
 </script>
+  <!-- Global Loader Script -->
+  <script src="../assets/js/global-loader.js"></script>
+  <script src="../loading-screen.js"></script>
+  <script>
+    // Ensure loading screen is properly initialized
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.loadingScreen && !document.querySelector('.loading-screen')) {
+        window.loadingScreen.createLoadingScreen();
+      }
+      
+      // Preload any additional images that might be loaded via JavaScript
+      const preloadImages = [
+        // Add any additional image paths here that are loaded via JavaScript
+      ];
+      
+      preloadImages.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    });
+  </script>
   </body>
 </html>

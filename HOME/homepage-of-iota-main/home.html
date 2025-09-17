@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <!-- Preload critical assets -->
-    <link rel="preload" as="image" href="images/logo.png" fetchpriority="high">
+    <link rel="preload" as="image" href="images/IOTA.png" fetchpriority="high">
     <link rel="preload" as="image" href="images/JULogo.png" fetchpriority="high">
-    <link rel="preload" as="image" href="images/homebg.jpg" fetchpriority="high">
+    <link rel="preload" as="image" href="images/home1.jpg" fetchpriority="high">
     <!-- Video preloading is handled by the video element's preload attribute -->
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
@@ -27,10 +27,48 @@
     <link rel="preload" href="footer-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="footer-styles.css"></noscript>
     <link rel="stylesheet" href="fix-overflow.css">
+    <!-- Global Loader CSS -->
+    <link rel="stylesheet" href="../../assets/css/global-loader.css">
     <link rel="stylesheet" href="../../loading-screen.css">
     <script src="../../loading-screen.js"></script>
 
     <style>
+      /* Video container styles */
+      .video-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+      
+      .video-container video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      
+      .video-fallback {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        display: none; /* Hide by default, shown if video fails */
+      }
+      
+      .video-container.video-error video {
+        display: none;
+      }
+      
+      .video-container.video-error .video-fallback {
+        display: block;
+      }
+      
       .explore-btn {
         padding: 14px 32px;
         font-size: 1rem;
@@ -121,6 +159,7 @@
     <link rel="stylesheet" href="../loading-screen.css">
   </head>
   <body>
+    <!-- Global loading screen will be inserted here by global-loader.js -->
     <nav>
       <!-- Left: Logos -->
       <div class="logo-section">
@@ -137,11 +176,11 @@
     
       <!-- Right: Navigation Links -->
       <div class="routes">
-        <a href="./home.html">Home</a>
-        <a href="../../EVENTS (2)/views/events.html">Events</a>
-        <a href="../../PROJECTS/projects.html">Projects</a>
-        <a href="../../TEAM/team.html">Team</a>
-        <a href="../../ABOUT US/about us.html">About Us</a>
+        <a href="home.html" class="nav-link">Home</a>
+        <a href="../../EVENTS (2)/views/events.html" class="nav-link">Events</a>
+        <a href="../../PROJECTS/projects.html" class="nav-link">Projects</a>
+        <a href="../../TEAM/team.html" class="nav-link">Team</a>
+        <a href="../../ABOUT US/about us.html" class="nav-link">About Us</a>
       </div>
       
     </nav>
@@ -204,10 +243,13 @@
     </div>
     <!-- PAGE 4: PROJECTS -->
 <div class="page4 projects-page">
-  <video autoplay muted loop playsinline class="projectsbg" preload="none" loading="lazy" poster="videos/code-poster.jpg">
+  <div class="video-container">
+    <video autoplay muted loop playsinline class="projectsbg" preload="metadata" loading="lazy">
         <source src="videos/code.mp4" type="video/mp4" />
         Your browser does not support the video tag.
     </video>
+    <div class="video-fallback" style="background-image: url('images/projects.jpg');"></div>
+</div>
   <div class="page2content">
     <h1>PROJECTS</h1>
     <div class="events">
@@ -365,36 +407,84 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
+    <!-- Global Loader Script -->
+    <script src="../../assets/js/global-loader.js"></script>
     <script src="script.js"></script>
-    <!-- Load loading screen -->
-    <script src="../../loading-screen.js"></script>
+    <script src="nav-script.js"></script>
     
     <script>
+      // Handle video loading errors
+      document.addEventListener('DOMContentLoaded', function() {
+        const videoContainers = document.querySelectorAll('.video-container');
+        videoContainers.forEach(container => {
+          const video = container.querySelector('video');
+          if (video) {
+            video.onerror = function() {
+              container.classList.add('video-error');
+            };
+            
+            // Also check if video can play
+            video.oncanplay = function() {
+              video.play().catch(e => {
+                console.error('Video play failed:', e);
+                container.classList.add('video-error');
+              });
+            };
+            
+            // Fallback if video doesn't load within 3 seconds
+            setTimeout(() => {
+              if (video.readyState < 3) { // HAVE_FUTURE_DATA
+                container.classList.add('video-error');
+              }
+            }, 3000);
+          }
+        });
+      });
+      
       // Smooth scroll for discover button
       document.addEventListener('DOMContentLoaded', function() {
-          // Mark intro as shown when home page loads
-          sessionStorage.setItem('introShown', 'true');
+        // Mark intro as shown when home page loads
+        sessionStorage.setItem('introShown', 'true');
+        
+        // Initialize loading screen if not already done
+        if (typeof LoadingScreen !== 'undefined' && !window.loadingScreen) {
+          window.loadingScreen = new LoadingScreen();
+        } else if (!document.querySelector('.loading-screen')) {
+          // Fallback: Add a simple loading indicator
+          const loader = document.createElement('div');
+          loader.className = 'loading-screen';
+          loader.innerHTML = `
+            <div class="loader"></div>
+            <div class="loading-text">Loading...</div>
+          `;
+          document.body.appendChild(loader);
           
-          // Initialize loading screen if not already done
-          if (!window.loadingScreen && !document.querySelector('.loading-screen')) {
-            window.loadingScreen = new LoadingScreen();
-          }
-          
-          // Smooth scroll for discover button
-          const discoverBtn = document.querySelector('.discover');
-          if (discoverBtn) {
-            discoverBtn.addEventListener('click', (e) => {
-              e.preventDefault();
-              const target = document.querySelector('#page2');
-              if (target) {
-                target.scrollIntoView({ behavior: 'smooth' });
-                // Refresh ScrollTrigger after scroll
-                setTimeout(() => {
-                  if (typeof ScrollTrigger !== 'undefined') {
-                    ScrollTrigger.refresh();
-                  }
-                }, 1000);
-              }
+          // Hide loader when page is fully loaded
+          window.addEventListener('load', () => {
+            setTimeout(() => {
+              loader.style.opacity = '0';
+              setTimeout(() => {
+                loader.style.display = 'none';
+              }, 500);
+            }, 500);
+          });
+        }
+        
+        // Smooth scroll for discover button
+        const discoverBtn = document.querySelector('.discover');
+        if (discoverBtn) {
+          discoverBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector('#page2');
+            if (target) {
+              target.scrollIntoView({ behavior: 'smooth' });
+              // Refresh ScrollTrigger after scroll
+              setTimeout(() => {
+                if (typeof ScrollTrigger !== 'undefined') {
+                  ScrollTrigger.refresh();
+                }
+              }, 1000);
+            }
             });
           }
       });
@@ -423,9 +513,11 @@
         
         if (target && target.tagName === 'A') {
           const href = target.getAttribute('href');
+          const isNavLink = target.closest('.routes') !== null;
           
-          // Only handle internal links that don't have special attributes
+          // Only handle internal links that don't have special attributes and are not nav links
           if (href && 
+              !isNavLink &&
               !href.startsWith('#') && 
               !href.startsWith('javascript:') && 
               !href.startsWith('mailto:') && 

@@ -1,0 +1,75 @@
+/* Global Loader Styles */
+
+/* Hide content until page is fully loaded */
+html:not(.loaded) {
+  visibility: hidden;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Show content after loading is complete */
+html.loaded {
+  visibility: visible;
+  height: auto;
+  overflow: auto;
+}
+
+/* Loading screen styles */
+.global-loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.global-loader {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.global-loading-text {
+  color: #fff;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', Arial, sans-serif;
+  text-align: center;
+}
+
+.global-progress-bar {
+  width: 200px;
+  height: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.global-progress-fill {
+  height: 100%;
+  width: 0%;
+  background-color: #3498db;
+  transition: width 0.3s ease;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Prevent scrolling while loading */
+body.loading {
+  overflow: hidden;
+  height: 100vh;
+}

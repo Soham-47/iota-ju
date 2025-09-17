@@ -4,25 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IOTA - Loading...</title>
-    <link rel="stylesheet" href="loading-screen.css">
+    
+    <!-- Global Loader CSS -->
+    <link rel="stylesheet" href="assets/css/global-loader.css">
+    
     <style>
+        /* Hide content until fully loaded */
+        html:not(.loaded) {
+            visibility: hidden;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        /* Show content after loading is complete */
+        html.loaded {
+            visibility: visible;
+            height: auto;
+            overflow: auto;
+        }
+        
+        /* Basic page styles */
         body {
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a;
-            overflow: hidden;
-            height: 100vh;
             font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
         }
     </style>
 </head>
 <body>
-    <!-- Loading screen will be injected by loading-screen.js -->
+    <!-- Content will be loaded dynamically -->
     
-    <script src="loading-screen.js"></script>
+    <!-- Global Loader Script -->
+    <script src="assets/js/global-loader.js"></script>
+    
     <script>
-        // Initialize loading screen immediately
+        // Show the page once the loading screen is ready
         document.addEventListener('DOMContentLoaded', () => {
+            // Check if the page has been loaded before
+            const hasLoadedBefore = localStorage.getItem('pageLoaded');
+            
+            if (!hasLoadedBefore) {
+                // First time load - show loader
+                document.documentElement.classList.add('loaded');
+                localStorage.setItem('pageLoaded', 'true');
+            } else {
+                // Subsequent visits - skip loader
+                document.documentElement.classList.add('loaded');
+                document.querySelector('html').style.visibility = 'visible';
+            }
+            
             // Check if the user has seen the intro before
             const hasSeenIntro = sessionStorage.getItem('introShown');
             
@@ -31,9 +63,9 @@
                 if (hasSeenIntro) {
                     window.location.href = 'HOME/homepage-of-iota-main/home.html';
                 } else {
-                    window.location.href = 'intro-video.html';
+                    window.location.href = 'INTRO/intro.html';
                 }
-            }, 100);
+            }, hasLoadedBefore ? 0 : 100); // No delay for subsequent visits
         });
     </script>
 </body>
