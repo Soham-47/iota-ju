@@ -1,2 +1,0 @@
-# iota-about-us
-
