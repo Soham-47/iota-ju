@@ -1,177 +1,72 @@
-// GSAP Animations and Core Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Register GSAP plugins
-    if (typeof gsap !== 'undefined') {
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Hero Carousel Logic ---
+    const slides = document.querySelectorAll('.hero-slide');
+    let currentSlide = 0;
+    const slideInterval = 5000; // 5 seconds
+
+    function nextSlide() {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }
+
+    if (slides.length > 0) {
+        setInterval(nextSlide, slideInterval);
+    }
+
+    // --- Navbar Scroll Effect ---
+    const navbar = document.getElementById('navbar');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // --- GSAP Animations ---
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
-    }
 
-    // Navigation animation
-    if (typeof gsap !== 'undefined') {
-        // Navbar scroll effect
-        gsap.to("nav", {
+        // Hero Content Animation
+        gsap.from('.hero-content', {
+            y: 50,
             opacity: 0,
-            scale: 0.95,
             duration: 1.5,
-            scrollTrigger: {
-                trigger: "nav",
-                scroller: "body",
-                start: "top -10%",
-                end: "top -200%",
-                scrub: true,
-                toggleActions: "play none none reverse",
-            },
+            ease: 'power3.out',
+            delay: 0.5
         });
 
-        // Hero section animation
-        const heroTimeline = gsap.timeline();
-        heroTimeline
-            .from(".herocontent", {
-                x: 1000,
-                opacity: 0,
-                scale: 0.8,
-                duration: 1.4,
-                ease: "power3.out",
-            })
-            .from(
-                "nav",
-                {
-                    y: -100,
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: "power2.out",
-                },
-                "-=0.5"
-            );
+        // Section Animations
+        const sections = document.querySelectorAll('.content-card');
 
-        // Page 2 animations
-        const page2Animations = [
-            { selector: ".page2content>h1", x: -400, y: 0 },
-            { selector: ".homeevents", x: 0, y: 200 },
-            { selector: ".eventtxt", x: 300, y: 100 }
-        ];
-
-        page2Animations.forEach(anim => {
-            gsap.from(anim.selector, {
-                x: anim.x,
-                y: anim.y,
+        sections.forEach(section => {
+            gsap.from(section, {
+                y: 100,
                 opacity: 0,
-                duration: 1.8,
-                ease: "power3.out",
+                duration: 1,
+                ease: 'power3.out',
                 scrollTrigger: {
-                    trigger: ".page2content",
-                    scroller: "body",
-                    start: "top 70%",
-                    end: "top 40%",
-                    scrub: 2,
-                    toggleActions: "play reverse play reverse",
-                },
+                    trigger: section,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                }
             });
         });
 
-        // Page 3 animations
-        gsap.from(".page3>h1", {
-            y: 150,
-            opacity: 0,
-            scale: 0.95,
-            duration: 1.6,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: ".page3",
-                scroller: "body",
-                start: "top 65%",
-                end: "top 40%",
-                scrub: 2,
-                toggleActions: "play reverse play reverse",
-            },
-        });
-
-        // Know More section animations
-        const knowMoreAnimations = [
-            { selector: ".knowmore>h1", y: 150 },
-            { selector: ".knowmore>h2", x: -300, y: 0 },
-            { selector: ".knowmorecontent .knowmorecontentleft", x: -500 },
-            { selector: ".knowmorecontent .knowmorecontentright", x: 500 }
-        ];
-
-        knowMoreAnimations.forEach(anim => {
-            gsap.from(anim.selector, {
-                x: anim.x || 0,
-                y: anim.y || 0,
+        // Section Titles
+        gsap.utils.toArray('.section-title').forEach(title => {
+            gsap.from(title, {
+                y: 30,
                 opacity: 0,
-                duration: 2,
-                ease: "power3.out",
+                duration: 1,
                 scrollTrigger: {
-                    trigger: ".knowmorecontent",
-                    scroller: "body",
-                    start: "top 80%",
-                    end: "top 40%",
-                    scrub: 2,
-                    toggleActions: "play reverse play reverse",
-                },
+                    trigger: title,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
             });
         });
     }
-
-    // Hero Carousel Functionality
-    const heroSlides = document.querySelectorAll('.hero-slide');
-    let heroCurrent = 0;
-    let carouselInterval = null;
-
-    function showHeroSlide(idx) {
-        if (heroSlides.length === 0) return;
-        
-        if (idx < 0) idx = heroSlides.length - 1;
-        if (idx >= heroSlides.length) idx = 0;
-        
-        heroSlides.forEach((slide, i) => {
-            if (slide) {
-                slide.style.transition = 'opacity 0.5s ease-in-out';
-                slide.style.opacity = i === idx ? '1' : '0';
-                slide.style.zIndex = i === idx ? '1' : '0';
-            }
-        });
-        
-        heroCurrent = idx;
-    }
-
-    function startHeroCarousel() {
-        if (heroSlides.length <= 1) return;
-        
-        // Clear any existing interval
-        if (carouselInterval) {
-            clearInterval(carouselInterval);
-        }
-        
-        carouselInterval = setInterval(() => {
-            showHeroSlide(heroCurrent + 1);
-        }, 5000); // Change slide every 5 seconds
-    }
-
-    // Initialize hero carousel if slides exist
-    if (heroSlides.length > 0) {
-        showHeroSlide(0);
-        startHeroCarousel();
-        
-        // Clean up interval when page is unloaded
-        window.addEventListener('beforeunload', () => {
-            if (carouselInterval) clearInterval(carouselInterval);
-        });
-    }
-
-    // Single function to handle GSAP refresh
-    function refreshGSAP() {
-        if (typeof ScrollTrigger !== 'undefined') {
-            // Small delay to ensure all elements are rendered
-            setTimeout(() => {
-                ScrollTrigger.refresh();
-            }, 100);
-        }
-    }
-
-    // Set up event listeners for GSAP refresh
-    window.addEventListener('load', refreshGSAP);
-    window.addEventListener('resize', refreshGSAP);
-    
-    // Initial refresh
-    refreshGSAP();
 });

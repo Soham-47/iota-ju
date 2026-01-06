@@ -1,17 +1,24 @@
 /* Reset all text decorations */
-*, 
-*::before, 
+*,
+*::before,
 *::after,
 :root,
 html,
 body,
 div,
 span,
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 p,
 a,
 img,
-ul, ol, li,
+ul,
+ol,
+li,
 form,
 label,
 header,
@@ -30,7 +37,11 @@ main {
   border-bottom: none !important;
 }
 
-a, a:hover, a:focus, a:active, a:visited {
+a,
+a:hover,
+a:focus,
+a:active,
+a:visited {
   text-decoration: none !important;
   text-underline-offset: 0 !important;
   text-underline-position: unset !important;
@@ -81,7 +92,7 @@ body::before {
   width: 100%;
   height: 100%;
   background: url('media/teambg.jpg') no-repeat center center/cover;
-  
+
   background-blend-mode: overlay;
   z-index: -1;
 }
@@ -102,7 +113,10 @@ nav {
   padding-top: 100px;
 }
 
-a, a:hover, a:focus, a:active {
+a,
+a:hover,
+a:focus,
+a:active {
   text-decoration: none !important;
   color: inherit;
   transition: var(--transition);
@@ -110,10 +124,30 @@ a, a:hover, a:focus, a:active {
   box-shadow: none !important;
 }
 
-h1, h2, h3, h4, h5, h6,
-h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
-h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover,
-h1:focus, h2:focus, h3:focus, h4:focus, h5:focus, h6:focus {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a,
+h1:hover,
+h2:hover,
+h3:hover,
+h4:hover,
+h5:hover,
+h6:hover,
+h1:focus,
+h2:focus,
+h3:focus,
+h4:focus,
+h5:focus,
+h6:focus {
   text-decoration: none !important;
   border-bottom: none !important;
   box-shadow: none !important;
@@ -227,7 +261,7 @@ img {
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #4CAF50;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -319,16 +353,16 @@ img {
     gap: 2rem;
     text-align: center;
   }
-  
+
   .project-row.reverse {
     flex-direction: column;
   }
-  
+
   .project-content h2::after {
     left: 50%;
     transform: translateX(-50%);
   }
-  
+
   .project-image {
     max-width: 100%;
   }
@@ -431,7 +465,7 @@ img {
   background-clip: text;
 }
 
-.gallery-section > p {
+.gallery-section>p {
   color: #bdc3c7;
   margin-bottom: 2.5rem;
   font-size: 1.1rem;
@@ -489,177 +523,18 @@ img {
 }
 
 /* Footer */
-.site-footer {
-  background: #0a0f1f;
-  color: #bdc3c7;
-  padding: 4rem 0 0;
-  position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer-content {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.footer-section {
-  padding: 0 1rem;
-}
-
-.footer-logo {
-  margin-bottom: 1.5rem;
-}
-
-.footer-logo-img {
-  height: 50px;
-  margin-bottom: 1rem;
-}
-
-.footer-logo p {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #bdc3c7;
-}
-
-.social-icons {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1.5rem;
-  justify-content: center;
-}
-
-.social-icons a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  text-decoration: none;
-}
-
-.social-icons a[href*="linkedin"],
-.social-icons a[href*="facebook"] {
-  background: white;
-}
-
-.social-icons a[href*="linkedin"] img,
-.social-icons a[href*="facebook"] img {
-  filter: none;
-}
-
-.social-icons a:hover {
-  transform: scale(1.2);
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.social-icons img {
-  width: 24px;
-  height: 24px;
-  transition: transform 0.3s ease-in-out;
-  filter: brightness(0) invert(1);
-}
-
-.social-icons a[href*="linkedin"] img,
-.social-icons a[href*="facebook"] img {
-  filter: none;
-}
-
-.social-icons a:hover img {
-  transform: scale(1.1);
-}
-
-.footer-section h4 {
-  color: white;
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  position: relative;
-  padding-bottom: 0.8rem;
-}
-
-.footer-section h4::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 50px;
-  height: 2px;
-  background: var(--primary);
-}
-
-.footer-links {
-  list-style: none;
-}
-
-.footer-links li {
-  margin-bottom: 0.8rem;
-}
-
-.footer-links a {
-  color: #bdc3c7;
-  transition: var(--transition);
-  display: inline-block;
-  font-size: 0.95rem;
-}
-
-.footer-links a:hover {
-  color: var(--primary);
-  transform: translateX(5px);
-}
-
-.contact-info p {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-size: 0.95rem;
-}
-
-.contact-info i {
-  margin-right: 0.8rem;
-  color: var(--primary);
-  width: 20px;
-  text-align: center;
-}
-
-.map-container {
-  margin-top: 1.5rem;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.footer-bottom {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 1.5rem;
-  text-align: center;
-  font-size: 0.9rem;
-  color: #7f8c8d;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.footer-bottom p {
-  margin: 0.5rem 0;
-}
+/* Footer styles removed to use global-nav.css */
 
 /* Responsive Design */
 @media (max-width: 1200px) {
   .projects-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   .gallery-grid {
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   }
-  
+
   .footer-content {
     gap: 2rem;
   }
@@ -670,73 +545,79 @@ img {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
-  
-  .projects-header h1, .gallery-section h2 {
+
+  .projects-header h1,
+  .gallery-section h2 {
     font-size: 2rem;
   }
-  
-  .projects-header p, .gallery-section > p {
+
+  .projects-header p,
+  .gallery-section>p {
     font-size: 1.1rem;
   }
-  
+
   .project-content h3 {
     font-size: 1.3rem;
   }
-  
+
   .footer-content {
     grid-template-columns: 1fr;
     gap: 2.5rem;
   }
-  
+
   .footer-section {
     padding: 0;
   }
 }
 
 @media (max-width: 480px) {
-  .projects-container, .gallery-section {
+
+  .projects-container,
+  .gallery-section {
     padding: 1rem;
   }
-  
-  .projects-header, .gallery-section {
+
+  .projects-header,
+  .gallery-section {
     margin-bottom: 1.5rem;
   }
-  
-  .projects-header h1, .gallery-section h2 {
+
+  .projects-header h1,
+  .gallery-section h2 {
     font-size: 1.6rem;
   }
-  
+
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
     max-width: 350px;
     margin: 0 auto;
   }
-  
+
   .gallery-grid {
     grid-template-columns: 1fr;
     gap: 1.25rem;
   }
-  
+
   .project-image {
     height: 140px;
   }
-  
+
   .gallery-item {
     height: 150px;
   }
-  
+
   .gallery-overlay {
     transform: translateY(0);
     background: rgba(0, 0, 0, 0.7);
     padding: 1rem 0.75rem 0.75rem;
   }
-  
+
   .gallery-overlay h4 {
     font-size: 1rem;
     margin-bottom: 0.2rem;
   }
-  
+
   .gallery-overlay span {
     font-size: 0.8rem;
   }
@@ -761,10 +642,12 @@ nav h1 {
   font-size: 1.7rem;
   font-weight: 900;
 }
+
 nav h2 {
   font-size: 0.8rem;
   font-weight: 400;
 }
+
 nav .routes {
   display: flex;
   align-items: center;
@@ -776,7 +659,7 @@ nav .routes a {
   font-weight: 900;
   color: white;
   text-decoration: none;
-  
+
   transition: all 0.3s ease-in-out;
 }
 
@@ -805,7 +688,7 @@ nav .routes a:hover {
 }
 
 .subtitle {
-  margin-top:0;
+  margin-top: 0;
   margin-bottom: 8rem;
   font-size: 1rem;
   font-weight: 400;
@@ -858,7 +741,8 @@ nav .routes a:hover {
   position: absolute;
   left: 30rem;
   bottom: 3.5rem;
-  background-color: rgba(255, 255, 255, 0.42); /* translucent white */
+  background-color: rgba(255, 255, 255, 0.42);
+  /* translucent white */
   padding: 20px 25px;
   color: white;
   width: 25rem;
@@ -875,7 +759,7 @@ nav .routes a:hover {
   position: absolute;
   left: -8rem;
   bottom: 3.5rem;
-  background-color: rgba(255, 255, 255, 0.42); 
+  background-color: rgba(255, 255, 255, 0.42);
   padding: 20px 25px;
   color: white;
   width: 25rem;
@@ -1039,6 +923,7 @@ nav .routes a:hover {
   font-size: 0.9rem;
   color: #ccc;
 }
+
 .footer-left,
 .footer-right {
   flex: 1;
@@ -1051,6 +936,7 @@ nav .routes a:hover {
   .footer-left {
     text-align: left;
   }
+
   .footer-right {
     text-align: right;
   }
@@ -1074,16 +960,19 @@ nav .routes a:hover {
 .footchat i {
   margin-right: 8px;
 }
+
 .main-heading {
   font-size: 4rem;
   font-weight: 900;
   color: white;
   text-align: center;
-  margin-top: 18vh; /* adds space below fixed nav */
+  margin-top: 18vh;
+  /* adds space below fixed nav */
   margin-bottom: 2rem;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
+
 .event-title {
   font-size: 1.5rem;
   font-weight: 900;

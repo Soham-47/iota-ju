@@ -1,229 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IOTA - About Us</title>
+  <title>About Us - IOTA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="nav-style.css">
-  <style>
-      
-    .logo-section {
-display: flex;
-align-items: center;
-gap: 1.5rem;
-}
+  <link rel="stylesheet" href="../assets/css/global-nav.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-.logo-img {
-height: 60px;
-width: auto;
-}
+  <link rel="stylesheet" href="../loading-screen.css">
+</head>
 
-.separator {
-width: 2px;
-height: 40px;
-background-color: white;
-opacity: 0.6;
-}
-
-  </style>
-
-    <link rel="stylesheet" href="../loading-screen.css">
-  </head>
 <body>
-  <nav>
-    <!-- Left: Logos -->
+  <!-- Standardized Navigation -->
+  <nav id="navbar">
     <div class="logo-section">
-      <div class="logo">
-        <img src="images/logo.png" alt="IOTA Logo" class="logo-img" />
-      </div>
-  
-      <div class="separator"></div>
-  
-      <div class="logo">
-        <img src="images/JULogo.png" alt="JU Logo" class="logo-img" />
-      </div>
+      <img src="images/logo.png" alt="IOTA Logo" class="nav-logo" />
+      <div class="nav-separator"></div>
+      <img src="images/JULogo.png" alt="JU Logo" class="nav-logo" />
     </div>
-  
-    <!-- Right: Navigation Links -->
-    <div class="routes">
+
+    <div class="nav-links">
       <a href="../HOME/homepage-of-iota-main/home.html">Home</a>
       <a href="../EVENTS (2)/views/events.html">Events</a>
       <a href="../PROJECTS/projects.html">Projects</a>
       <a href="../TEAM/team.html">Team</a>
-      <a href="about us.html">About Us</a>
+      <a href="about us.html" class="active">About Us</a>
     </div>
-    
+
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
   </nav>
-  
 
-    <div class="about-section">
-      <div class="about-header split">
-        <div class="about-text">
-          <h1>ABOUT US</h1>
-          <p>The IoT Applications Club at Jadavpur University (IOTA JU), founded in 2023, is driven by a compelling mission: to unite enthusiastic engineering students dedicated to pioneering research and development within the dynamic realm of the Internet of Things (IoT). IOTA JU is devoted to cultivating an inspiring environment that fosters not only the technical skills but also the core values essential for the academic and professional advancement of students in diverse IoT disciplines.</p>
-          <p>Our expansive focus encompasses exciting fields such as Robotics, Sensors, Communication Systems, and Networking, while also delving into crucial software development domains, including Artificial Intelligence/Machine Learning (AI/ML), Cloud Computing, and Data Science. At this club, students embark on a transformative journey, where they are equipped with the knowledge and experience necessary to thrive and innovate in the rapidly changing landscape of technology.</p>
-          
+  <div class="about-section">
+    <div class="about-header split">
+      <div class="about-text">
+        <h1>ABOUT US</h1>
+        <p>The IoT Applications Club at Jadavpur University (IOTA JU), founded in 2023, is driven by a compelling
+          mission: to unite enthusiastic engineering students dedicated to pioneering research and development within
+          the dynamic realm of the Internet of Things (IoT).</p>
+        <p>Our expansive focus encompasses exciting fields such as Robotics, Sensors, Communication Systems, and
+          Networking, while also delving into AI/ML, Cloud Computing, and Data Science.</p>
+      </div>
+      <div class="about-image">
+        <img src="images/team.jpg" alt="IOTA Team" />
+      </div>
+    </div>
+  </div>
+
+  <div class="mission-vision-section">
+    <div class="container">
+      <div class="mission-vision-grid">
+        <div class="mission-card">
+          <h2>Our Mission</h2>
+          <p>To create a collaborative environment where students can explore, learn, and innovate in the field of
+            Internet of Things, fostering technical excellence and professional growth.</p>
         </div>
-        <div class="about-image">
-          <img src="images/team.jpg" alt="IOTA Team" />
+        <div class="vision-card">
+          <h2>Our Vision</h2>
+          <p>To be the leading IoT community at Jadavpur University, driving innovation and preparing students for the
+            future of connected technology.</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Mission & Vision Section -->
-    <div class="mission-vision-section">
-      <div class="container">
-        <div class="mission-vision-grid">
-          <div class="mission-card">
-            <h2>Our Mission</h2>
-            <p>To create a collaborative environment where students can explore, learn, and innovate in the field of Internet of Things, fostering technical excellence and professional growth.</p>
-          </div>
-          <div class="vision-card">
-            <h2>Our Vision</h2>
-            <p>To be the leading IoT community at Jadavpur University, driving innovation and preparing students for the future of connected technology.</p>
-          </div>
+  <div class="what-we-do-section">
+    <div class="container">
+      <h2>What We Do</h2>
+      <div class="activities-grid">
+        <div class="activity-card">
+          <h3>Research & Development</h3>
+          <p>Pioneering research in IoT technologies, sensors, and connected systems.</p>
+        </div>
+        <div class="activity-card">
+          <h3>Workshops & Seminars</h3>
+          <p>Regular technical workshops and seminars to enhance practical skills.</p>
+        </div>
+        <div class="activity-card">
+          <h3>Projects & Innovation</h3>
+          <p>Hands-on projects covering robotics, AI/ML, and cloud computing.</p>
+        </div>
+        <div class="activity-card">
+          <h3>Community Building</h3>
+          <p>Building a strong network of IoT enthusiasts and professionals.</p>
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- What We Do Section -->
-    <div class="what-we-do-section">
-      <div class="container">
-        <h2>What We Do</h2>
-        <div class="activities-grid">
-          <div class="activity-card">
-            <h3>Research & Development</h3>
-            <p>Pioneering research in IoT technologies, sensors, and connected systems.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Workshops & Seminars</h3>
-            <p>Regular technical workshops and seminars to enhance practical skills.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Projects & Innovation</h3>
-            <p>Hands-on projects covering robotics, AI/ML, and cloud computing.</p>
-          </div>
-          <div class="activity-card">
-            <h3>Community Building</h3>
-            <p>Building a strong network of IoT enthusiasts and professionals.</p>
-          </div>
+  <div class="group-photo">
+    <img src="images/aboutus.jpg" alt="IOTA Team Group Photo" />
+  </div>
+
+  <!-- Footer -->
+  <footer class="new-footer">
+    <div class="footer-content">
+      <div class="footer-col brand-col">
+        <img src="images/logo.png" alt="IOTA Logo" class="footer-logo">
+        <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a better
+          tomorrow.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><img src="images/facebook.png" alt="Facebook"></a>
+          <a href="#" class="social-btn"><img src="images/instagram.png" alt="Instagram"></a>
+          <a href="#" class="social-btn"><img src="images/linkedin.png" alt="LinkedIn"></a>
+          <a href="#" class="social-btn"><img src="images/github.png" alt="GitHub"></a>
         </div>
       </div>
-    </div>
-
-    <!-- Team Photo Section -->
-    <div class="group-photo">
-      <img src="images/aboutus.jpg" alt="IOTA Team Group Photo" />
-    </div>
-
-    <footer class="footer">
-      <!-- Background Image -->
-      <img src="images/footerbg.png" alt="Footer Background" class="footerbg" />
-    
-      <!-- Main Footer Content -->
-      <div class="footer-content">
-        
-        <!-- Column 1: Logo & Social Icons -->
-        <div class="footer-column">
-          <div class="footer-logo">
-            <img src="images/logo.png" alt="IOTA Logo" />
-            <p>IoT Applications Club, Jadavpur University</p>
-          </div>
-          <div class="social-icons">
-            <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/" target="_blank" aria-label="Facebook">
-              <img src="images/facebook.png" alt="Facebook Icon" />
-            </a>
-            <a href="https://www.instagram.com/iota_ju/" target="_blank" aria-label="Instagram">
-              <img src="images/instagram.png" alt="Instagram Icon" />
-            </a>
-            <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" target="_blank" aria-label="LinkedIn">
-              <img src="images/linkedin.png" alt="LinkedIn Icon" />
-            </a>
-            <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" aria-label="GitHub">
-              <img src="images/Github.png" alt="GitHub Icon" />
-            </a>
-          </div>
-        </div>
-    
-        <!-- Column 2: Google Map -->
-        <div class="footer-column">
-          <iframe class="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
-            width="300" height="200" style="border:0; border-radius:10px;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="JU Prajukti Bhavan Location Map">
-          </iframe>
-        </div>
-    
-        <!-- Column 3: Contact Form -->
-        <div class="footer-column contact-section">
-          <h3>Contact Us</h3>
-          <form class="contact-form">
-            <input type="text" placeholder="Name" required />
-            <input type="tel" placeholder="Phone Number" required />
-            <input type="email" placeholder="Email" required />
-            <textarea placeholder="Message" rows="4" required></textarea>
-            <button type="submit">Send Message</button>
-          </form>
-        </div>
-    
-      </div> <!-- .footer-content -->
-    
-      <!-- Footer Bottom Section -->
-      <div class="footer-bottom">
-        <div class="footer-left">
-          <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
-        </div>
-        <div class="footer-right">
-          <p>Designed and developed by IOTA WebDev Team @2025</p>
-        </div>
+      <div class="footer-col links-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../HOME/homepage-of-iota-main/home.html">Home</a></li>
+          <li><a href="../EVENTS (2)/views/events.html">Events</a></li>
+          <li><a href="../PROJECTS/projects.html">Projects</a></li>
+          <li><a href="../TEAM/team.html">Team</a></li>
+          <li><a href="about us.html">About Us</a></li>
+        </ul>
       </div>
-    </footer>
-  <script>
-    window.addEventListener('scroll', function() {
-      const nav = document.querySelector('nav');
-      if (window.scrollY > 50) {
-        nav.classList.add('nav-scrolled');
-      } else {
-        nav.classList.remove('nav-scrolled');
-      }
-    });
+      <div class="footer-col map-col">
+        <h4>Locate Us</h4>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="footer-col contact-col">
+        <h4>Get in Touch</h4>
+        <form class="contact-form">
+          <div class="form-group">
+            <input type="email" class="footer-input" placeholder="Your Email Address" required>
+          </div>
+          <div class="form-group">
+            <textarea class="footer-input" rows="2" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="footer-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.group-photo, .mission-card, .vision-card, .activity-card')
-      .forEach(el => observer.observe(el));
-  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="../loading-screen.js"></script>
+  <script src="../assets/js/global-nav.js"></script>
   <script>
-    // Simplified GSAP Navbar Animation
-    ScrollTrigger.create({
-      start: 'top -80',
-      end: 99999,
-      toggleClass: {
-        className: 'nav-scrolled',
-        targets: 'nav'
-      }
-    });
+    if (typeof ScrollTrigger !== 'undefined') {
+      ScrollTrigger.create({
+        start: 'top -80',
+        end: 99999,
+        toggleClass: {
+          className: 'nav-scrolled',
+          targets: 'nav'
+        }
+      });
+    }
   </script>
+</body>
 
-    <script src="../loading-screen.js"></script>
-  </body>
 </html>

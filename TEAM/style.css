@@ -3,6 +3,7 @@
   margin: 0;
   box-sizing: border-box;
 }
+
 body,
 html {
   height: 100%;
@@ -30,10 +31,12 @@ nav h1 {
   font-size: 1.7rem;
   font-weight: 900;
 }
+
 nav h2 {
   font-size: 0.8rem;
   font-weight: 400;
 }
+
 nav .routes {
   display: flex;
   align-items: center;
@@ -45,7 +48,7 @@ nav .routes a {
   font-weight: 900;
   color: white;
   text-decoration: none;
-  
+
   transition: all 0.3s ease-in-out;
 }
 
@@ -61,6 +64,7 @@ nav .routes a:hover {
   flex-direction: column;
   justify-content: end;
 }
+
 .hero h1 {
   font-size: 6rem;
   font-weight: 900;
@@ -74,7 +78,7 @@ nav .routes a:hover {
   transform: translateY(30px) scale(0.9);
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .herocontent {
@@ -97,7 +101,8 @@ nav .routes a:hover {
 .teamabout {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px); /* for Safari */
+  -webkit-backdrop-filter: blur(6px);
+  /* for Safari */
   color: white;
   border-radius: 20px;
   padding: 30px;
@@ -105,7 +110,7 @@ nav .routes a:hover {
   font-family: "Poppins", sans-serif;
   line-height: 1.6;
   font-size: 1.4rem;
-transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 
@@ -125,7 +130,8 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   font-size: 3rem;
   font-weight: 900;
   margin-bottom: 40px;
-  font-family: 'Poppins', sans-serif; /* or 'Montserrat', 'Urbanist', etc. */
+  font-family: 'Poppins', sans-serif;
+  /* or 'Montserrat', 'Urbanist', etc. */
   color: #ffffff;
   text-align: center;
 
@@ -201,185 +207,64 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 
-  /* === FOOTER MAIN === */
-  .footer {
-    background: #020a13;
-    color: white;
-    padding: 40px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    position: relative;
-    text-align: center;
-    gap: 30px;
-  }
-  
-  .footerbg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0.1;
-    z-index: 0;
-  }
-  
-  .footer-column {
-    position: relative;
-    z-index: 1;
-    flex: 1;
-    min-width: 250px;
-    max-width: 350px;
-  }
-  
-  .footer-logo img {
-    width: 120px;
-    margin-bottom: 10px;
-  }
-  
-  .footer-logo p {
-    margin: 10px 0;
-    font-weight: bold;
-  }
-  
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
-  }
-  
-  .social-icons a img {
-    width: 40px;
-    height: 40px;
-    transition: transform 0.3s ease-in-out;
-    filter: brightness(1.2);
-    background: white;
-    border-radius: 50%;
-    padding: 5px;
-  }
-  
-  .social-icons a img:hover {
-    transform: scale(1.2);
-    filter: brightness(1);
-  }
-  
-  /* === CONTACT FORM === */
-  .contact-section {
-    border: 2px solid white;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .contact-form input,
-  .contact-form textarea {
-    width: 100%;
-    margin: 10px 0;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-  }
-  
-  .contact-form button {
-    background: gold;
-    color: black;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
-  }
-  
-  /* === FOOTER BOTTOM === */
-  .footer-bottom {
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    margin-top: 30px;
-    padding-top: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-    color: #ccc;
-  }
-  
-  .footer-left,
-  .footer-right {
-    flex: 1;
-    min-width: 250px;
-    padding: 10px;
-    text-align: center;
-  }
-  
-  @media (min-width: 600px) {
-    .footer-left {
-      text-align: left;
-    }
-    .footer-right {
-      text-align: right;
-    }
-  }
-  
-  /* === EXTRA (From Original Footer1/Footer2 Layout - Not used now, but preserved) === */
+/* Footer styles removed to use global-nav.css */
 
-  
-  footer > h3 {
-    text-align: center;
-    font-size: 28px;
-  }
-  
-  footer li {
-    list-style: none;
-  }
-  
-  .footer1 {
-    width: 100%;
-    height: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 40px;
-    font-size: 25px;
-  }
-  
-  .footer2 {
-    width: 100%;
-    height: 50%;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .chat,
-  .email {
-    display: flex;
-    align-items: center;
-    font-size: 20px;
-  }
-  
-  /* === Routes & Chat (if ever used again) === */
-  .footRoutes {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .footRoutes h1 {
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  .footchat {
-    display: flex;
-    gap: 20px;
-  }
-  
-  .footchat i {
-    margin-right: 8px;
-  }
+/* === EXTRA (From Original Footer1/Footer2 Layout - Not used now, but preserved) === */
+
+
+footer>h3 {
+  text-align: center;
+  font-size: 28px;
+}
+
+footer li {
+  list-style: none;
+}
+
+.footer1 {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 40px;
+  font-size: 25px;
+}
+
+.footer2 {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat,
+.email {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+/* === Routes & Chat (if ever used again) === */
+.footRoutes {
+  display: flex;
+  gap: 20px;
+}
+
+.footRoutes h1 {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.footchat {
+  display: flex;
+  gap: 20px;
+}
+
+.footchat i {
+  margin-right: 8px;
+}
+
 .group-photo-section {
   background: url(media/teambg.jpg) no-repeat center center/cover;
 
@@ -411,6 +296,7 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
   font-family: "Poppins", sans-serif;
 }
+
 @media (max-width: 992px) {
   .member-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -422,13 +308,18 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     grid-template-columns: 1fr;
   }
 }
+
 /* Target board members only */
 .board-members .member-card {
-  background: rgba(30, 30, 47, 0.3); /* semi-transparent */
-  backdrop-filter: blur(10px);       /* glass blur */
-  -webkit-backdrop-filter: blur(10px); /* Safari support */
-  
-  border: 2px solid rgba(0, 198, 255, 0.3); /* softened neon border */
+  background: rgba(30, 30, 47, 0.3);
+  /* semi-transparent */
+  backdrop-filter: blur(10px);
+  /* glass blur */
+  -webkit-backdrop-filter: blur(10px);
+  /* Safari support */
+
+  border: 2px solid rgba(0, 198, 255, 0.3);
+  /* softened neon border */
   border-radius: 20px;
   padding: 1.5rem;
   margin: 1rem;
@@ -465,6 +356,7 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   color: #ccc;
   margin-top: 0.25rem;
 }
+
 .board-members .board-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -483,12 +375,14 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
     grid-template-columns: 1fr;
   }
 }
+
 .member-department {
   font-size: 0.9rem;
   font-style: italic;
   color: #cccccc;
   margin-top: 0.3rem;
 }
+
 .mentor-card {
   background: linear-gradient(to bottom right, #1f1f2e, #2c2c3d);
   border: 3px solid gold;
@@ -527,12 +421,17 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   color: #ccc;
   font-style: italic;
 }
+
 .member-grid1 {
   display: flex;
-  justify-content: center;      /* Centers the items horizontally */
-  gap: 2rem;                    /* Adds space between cards */
-  flex-wrap: wrap;              /* Ensures responsiveness */
+  justify-content: center;
+  /* Centers the items horizontally */
+  gap: 2rem;
+  /* Adds space between cards */
+  flex-wrap: wrap;
+  /* Ensures responsiveness */
 }
+
 .bouncing-heading {
   display: inline-block;
   font-size: 4rem;
@@ -548,36 +447,44 @@ transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
   0% {
     transform: translateX(-100vw) translateY(0);
   }
+
   10% {
     transform: translateX(-70vw) translateY(-120px);
   }
+
   20% {
     transform: translateX(-50vw) translateY(0px);
   }
+
   30% {
     transform: translateX(-30vw) translateY(-100px);
   }
+
   40% {
     transform: translateX(-20vw) translateY(0px);
   }
+
   50% {
     transform: translateX(-10vw) translateY(-70px);
   }
+
   60% {
     transform: translateX(-5vw) translateY(0px);
   }
+
   70% {
     transform: translateX(0vw) translateY(-40px);
   }
+
   80% {
     transform: translateX(0vw) translateY(0px);
   }
+
   90% {
     transform: translateX(0vw) translateY(-15px);
   }
+
   100% {
     transform: translateX(0vw) translateY(0);
   }
 }
-
-

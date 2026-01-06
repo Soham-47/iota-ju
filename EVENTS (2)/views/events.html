@@ -1,484 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="data:,">  <!-- Prevents favicon.ico 404 error -->
-    <title>IOTA</title>
-    <!-- GSAP removed as it's not needed -->
-    <link rel="stylesheet" href="../style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="nav-style.css">
-    <link rel="stylesheet" href="../../HOME/homepage-of-iota-main/footer-styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events - IOTA</title>
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../../assets/css/global-nav.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
 
-    <style>
-      
-      .logo-section {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-}
 
-.logo-img {
-  height: 60px;
-  width: auto;
-}
+  <link rel="stylesheet" href="../../loading-screen.css">
+  <style>
+    /* Force visibility of all events */
+    .event-row,
+    .event-container,
+    .left-event,
+    .right-event {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+      animation: none !important;
+    }
 
-.separator {
-  width: 2px;
-  height: 40px;
-  background-color: white;
-  opacity: 0.6;
-}
+    .event-text h2,
+    .event-text p,
+    .event-button {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+      animation: none !important;
+    }
 
-    </style>
-    <style>
-      /* Reset and base styles */
-      html {
-        scroll-behavior: smooth;
-      }
-      
-      /* Navbar styles */
-      nav {
-        z-index: 100;
-        position: fixed;
-        width: 100%;
-        height: 16vh;
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        font-family: 'Montserrat', sans-serif !important;
-        padding: 3rem 4rem;
-        color: white;
-      }
-      
-      nav h1 {
-        font-size: 1.7rem;
-        font-weight: 900;
-      }
-      
-      nav h2 {
-        font-size: 0.8rem;
-        font-weight: 400;
-      }
-      
-      .logo-section {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-      }
-      
-      .logo-img {
-        height: 60px;
-        width: auto;
-      }
-      
-      .separator {
-        width: 2px;
-        height: 40px;
-        background-color: white;
-        opacity: 0.6;
-      }
-      
-      .routes {
-        display: flex;
-        align-items: center;
-        gap: 3rem;
-        transition: opacity 0.3s ease-in-out;
-      }
-      
-      .routes a {
-        font-size: 1.7rem;
-        font-weight: 900;
-        color: white;
-        text-decoration: none;
-        transition: all 0.3s ease-in-out;
-      }
-      
-      .routes a:hover {
-        color: gold;
-        transform: scale(1.05);
-      }
-      
-      /* Event container styles */
-      .event-container a,
-      .event-row a,
-      .left-event a,
-      .right-event a {
-        transform: none !important;
-        text-decoration: none !important;
-      }
-      
-      /* Animation classes removed */
-      
-      /* Add some spacing between sections */
-      .event-row {
-        margin: 6rem 0;
-        position: relative;
-      }
-      
-      /* Button styles */
-      .event-button,
-      .btn-hover-effect {
-        display: inline-block !important;
-        padding: 12px 15px 12px 12px !important;
-        margin: 5px 0 !important;
-        background: #4CAF50 !important;
-        color: white !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 15px !important;
-        text-decoration: none !important;
-        border-radius: 25px !important;
-        font-weight: 500 !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-        white-space: nowrap !important;
-        position: relative !important;
-        z-index: 1 !important;
-        text-align: center !important;
-        line-height: 1.4 !important;
-        overflow: hidden !important;
-        width: auto !important;
-        min-width: 160px !important;
-        box-sizing: border-box !important;
-        transition: all 0.3s ease !important;
-        cursor: pointer !important;
-      }
-      
-      .event-button:hover,
-      .btn-hover-effect:hover {
-        transform: translateY(-3px) scale(1.03) !important;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
-        background: #45a049 !important;
-        border-color: rgba(255,255,255,0.4) !important;
-      }
-      
-      .event-button:active,
-      .btn-hover-effect:active {
-        transform: translateY(1px) scale(0.98) !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
-      }
-      
-      .event-button {
-        display: inline-block !important;
-        padding: 12px 15px 12px 12px !important;
-        margin: 5px 0 !important;
-        background: #4CAF50 !important;
-        color: white !important;
-        font-family: 'Poppins', sans-serif !important;
-        font-size: 15px !important;
-        text-decoration: none !important;
-        border-radius: 25px !important;
-        font-weight: 500 !important;
-        transition: all 0.3s ease !important;
-        border: 1px solid rgba(255,255,255,0.3) !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
-        white-space: nowrap !important;
-        position: relative !important;
-        z-index: 1 !important;
-        text-align: center !important;
-        line-height: 1.4 !important;
-        overflow: visible !important;
-        width: auto !important;
-        min-width: 160px !important;
-        box-sizing: border-box !important;
-      }
-      
-      .event-button {
-        /* Existing styles */
-        cursor: pointer !important; /* Add pointer cursor */
-        position: relative !important;
-        overflow: hidden !important;
-        transition: all 0.3s ease !important; /* Smooth transition for all properties */
-      }
-      
-      .event-button:hover {
-        transform: translateY(-3px) scale(1.03) !important;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.3) !important;
-        background: #45a049 !important;
-        border-color: rgba(255,255,255,0.4) !important;
-      }
-      
-      .event-button:active {
-        transform: translateY(1px) scale(0.98) !important;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.2) !important;
-        transition: all 0.1s ease !important;
-      }
-      
-      /* Add shine effect on hover */
-      .event-button::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 50%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          rgba(255,255,255,0) 0%,
-          rgba(255,255,255,0.2) 50%,
-          rgba(255,255,255,0) 100%
-        );
-        transition: 0.5s;
-      }
-      
-      .event-button:hover::after {
-        left: 100%;
-      }
-    </style>
-  
-    <!-- Global Loader Script -->
-    <script src="../../assets/js/global-loader.js"></script>
-    <script src="../../loading-screen.js"></script>
-    <!-- Loading screen will be injected by loading-screen.js -->
-  </head>
+    /* Ensure content is not hidden behind nav */
+    body {
+      padding-top: 16vh !important;
+    }
+  </style>
+</head>
+
 <body>
-  <!-- Global loading screen will be inserted here by global-loader.js -->
-  <nav>
-    <!-- Left: Logos -->
+  <!-- Standardized Navigation -->
+  <nav id="navbar">
     <div class="logo-section">
-      <div class="logo">
-        <img src="../images/IOTA.png" alt="IOTA Logo" class="logo-img" />
-      </div>
-  
-      <div class="separator"></div>
-  
-      <div class="logo">
-        <img src="../images/JULogo.png" alt="JU Logo" class="logo-img" />
-      </div>
+      <img src="../images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+      <div class="nav-separator"></div>
+      <img src="../images/JULogo.png" alt="JU Logo" class="nav-logo" />
     </div>
-  
-    <!-- Right: Navigation Links -->
-    <div class="routes">
-      <a href="../../HOME/homepage-of-iota-main/home.html" class="nav-link">Home</a>
-      <a href="#" class="nav-link active">Events</a>
-      <a href="../../PROJECTS/projects.html" class="nav-link">Projects</a>
-      <a href="../../TEAM/team.html" class="nav-link">Team</a>
-      <a href="../../ABOUT US/about us.html" class="nav-link">About Us</a>
+
+    <div class="nav-links">
+      <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
+      <a href="#" class="active">Events</a>
+      <a href="../../PROJECTS/projects.html">Projects</a>
+      <a href="../../TEAM/team.html">Team</a>
+      <a href="../../ABOUT US/about us.html">About Us</a>
+    </div>
+
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
     </div>
   </nav>
-  <!--###########################################################-->
-  <!-- INNOVATIA Section -->
-<div class="event-row" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
-  <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
-    <img src="../images/logoinnovatia.png" alt="INNOVATIA 2025" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
-  </div>
-  <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
-    <h3 style="color: #fff; margin-top: 0; margin-bottom: 1.2rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">INNOVATIA 2025</h3>
-    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 2rem; font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 400;">
-      Join us for a journey through innovation, creativity, and technology. Dive into competitions, exhibitions, and more!
-    </p>
-    <a href="innovatia.html" class="btn-hover-effect event-button" 
-       style="text-decoration: none; background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%); color: white; padding: 12px 24px; border-radius: 30px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; display: inline-block;"
-       onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(110, 72, 170, 0.4)';"
-       onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';"
-       onmousedown="this.style.transform='translateY(1px) scale(0.98)';"
-       onmouseup="this.style.transform='translateY(-3px) scale(1.05)';">
-      About This Event
-    </a>
-    
-    <!-- Load GSAP and ScrollTrigger -->
 
-    <script>
-      // No animations initialization needed
-    </script>
-  </div>
-</div>
+  <div style="padding-top: 4rem;">
+    <!-- INNOVATIA Section -->
+    <div class="event-row">
+      <div class="event-img-container">
+        <img src="../images/logoinnovatia.png" alt="INNOVATIA 2025">
+      </div>
+      <div class="event-content">
+        <h3>INNOVATIA 2025</h3>
+        <p>Join us for a journey through innovation, creativity, and technology. Dive into competitions, exhibitions,
+          and more!</p>
+        <a href="innovatia.html" class="event-button">About This Event</a>
+      </div>
+    </div>
 
-<!-- LORD OF THE RINGS Section -->
-<div class="event-row" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
-  <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
-    <img src="../images/lordftherings.jpg" alt="Lord of the Rings Event" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50; object-fit: contain;">
-  </div>
-  <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
-    <h3 style="color: #fff; margin-top: 0; margin-bottom: 1.5rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif; padding-top: 0.5rem;">LORD OF THE RINGS</h3>
-    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.8; margin-bottom: 2.5rem; font-size: 1.1rem; font-family: 'Poppins', sans-serif; font-weight: 400; padding-right: 1rem;">
-      A thrilling event journeying through the challenges of IoT systems. Collaborate, compete, and conquer!
-    </p>
-    <div style="margin-top: 1.5rem;">
-      <a href="lordOfTheRings.html" class="btn-hover-effect event-button" 
-   style="text-decoration: none; display: inline-block;"
-   onmouseover="this.style.transform='translateY(-3px) scale(1.05)'; this.style.boxShadow='0 8px 15px rgba(0,0,0,0.2)';"
-   onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 8px rgba(0,0,0,0.1)';"
-   onmousedown="this.style.transform='translateY(1px) scale(0.98)';"
-   onmouseup="this.style.transform='translateY(-3px) scale(1.05)';">
-  About This Event
-</a>
+    <!-- LORD OF THE RINGS Section -->
+    <div class="event-row">
+      <div class="event-img-container">
+        <img src="../images/lordftherings.jpg" alt="Lord of the Rings Event">
+      </div>
+      <div class="event-content">
+        <h3>LORD OF THE RINGS</h3>
+        <p>A thrilling event journeying through the challenges of IoT systems. Collaborate, compete, and conquer!</p>
+        <a href="lordOfTheRings.html" class="event-button">About This Event</a>
+      </div>
+    </div>
+
+    <!-- CONNEXION Section -->
+    <div class="event-row">
+      <div class="event-img-container">
+        <img src="../images/connexion.jpg" alt="CONNEXION">
+      </div>
+      <div class="event-content">
+        <h3>CONNEXION</h3>
+        <p>The IoT Applications Club launched its first-ever IoT Hackathon, "Connexion", inviting enthusiastic freshmen
+          to explore the vast world of Internet of Things.</p>
+        <a href="connexion.html" class="event-button">About This Event</a>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- CONNEXION Section -->
-<div class="event-row" style="display: flex; justify-content: center; align-items: center; margin: 4rem auto; max-width: 1000px; padding: 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);">
-  <div style="flex: 0 0 300px; text-align: center; margin-right: 4rem;">
-    <img src="../images/connexion.jpg" alt="CONNEXION" style="width: 100%; max-width: 300px; height: auto; display: block; margin: 0 auto; border-radius: 8px; border: 1px solid #4CAF50;">
-  </div>
-  <div style="flex: 1; padding: 0 2rem 0 0; color: #fff;">
-    <h3 style="color: #fff; margin-top: 0; margin-bottom: 1.2rem; font-size: 2rem; font-weight: 600; text-decoration: none !important; border-bottom: none !important; box-shadow: none !important; background-image: none !important; letter-spacing: 0.5px; font-family: 'Poppins', sans-serif;">CONNEXION</h3>
-    <p style="color: rgba(255, 255, 255, 0.9); line-height: 1.7; margin-bottom: 2rem; font-size: 1.05rem; font-family: 'Poppins', sans-serif; font-weight: 400;">
-      The IoT Applications Club launched its first-ever IoT Hackathon, "Connexion", inviting enthusiastic freshmen to explore the vast world of Internet of Things through innovation and teamwork.
-    </p>
-    <a href="connexion.html" class="btn-hover-effect event-button" 
-       style="text-decoration: none; background: linear-gradient(135deg, #6e48aa 0%, #9d50bb 100%); color: white; padding: 12px 24px; border-radius: 30px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; display: inline-block;"
-       onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 20px rgba(110, 72, 170, 0.4)';"
-       onmouseout="this.style.transform=''; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';"
-       onmousedown="this.style.transform='translateY(1px) scale(0.98)';"
-       onmouseup="this.style.transform='translateY(-3px) scale(1.05)';">
-  About This Event
-</a>
+  <!-- Footer -->
+  <footer class="new-footer">
+    <div class="footer-content">
+      <div class="footer-col brand-col">
+        <img src="../images/IOTA.png" alt="IOTA Logo" class="footer-logo">
+        <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a better
+          tomorrow.</p>
+        <div class="social-links">
+          <a href="#" class="social-btn"><img src="../images/facebook (2).png" alt="Facebook"></a>
+          <a href="#" class="social-btn"><img src="../images/Instagram (2).png" alt="Instagram"></a>
+          <a href="#" class="social-btn"><img src="../images/Linkedin (2).png" alt="LinkedIn"></a>
+          <a href="#" class="social-btn"><img src="../images/Github.png" alt="GitHub"></a>
+        </div>
+      </div>
+      <div class="footer-col links-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../../HOME/homepage-of-iota-main/home.html">Home</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="../../PROJECTS/projects.html">Projects</a></li>
+          <li><a href="../../TEAM/team.html">Team</a></li>
+          <li><a href="../../ABOUT US/about us.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col map-col">
+        <h4>Locate Us</h4>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="footer-col contact-col">
+        <h4>Get in Touch</h4>
+        <form class="contact-form">
+          <div class="form-group">
+            <input type="email" class="footer-input" placeholder="Your Email Address" required>
+          </div>
+          <div class="form-group">
+            <textarea class="footer-input" rows="2" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="footer-btn">Send Message</button>
+        </form>
+      </div>
     </div>
-  </div>
-</div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
 
-  <footer class="footer">
-        <!-- Background Image -->
-        <img src="../images/footerbg.png" alt="" class="footerbg" />
-      
-        <!-- First Column: Logo & Social -->
-        <div class="footer-column">
-          <div class="footer-logo">
-            <img src="../images/IOTA.png" alt="IOTA Logo" />
-            <p>IoT Applications Club, Jadavpur University</p>
-          </div>
-          <div class="social-icons">
-            <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL" target="_blank">
-              <img src="../images/facebook (2).png" alt="Facebook" style="filter: invert(1);" />
-            </a>
-            <a href="https://www.instagram.com/iota_ju/" target="_blank">
-              <img src="../images/Instagram (2).png" alt="Instagram" style="filter: invert(1);" />
-            </a>
-            <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" target="_blank">
-              <img src="../images/Linkedin (2).png" alt="LinkedIn" />
-            </a>
-            <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank">
-              <img src="../images/Github.png" alt="Github" style="filter: invert(1);" />
-            </a>
-          </div>
-        </div>
-      <!--#####################################################################-->
-        <!-- Second Column: Google Map -->
-        <div class="footer-column">
-          <iframe class="map"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
-            width="300" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy">
-          </iframe>
-        </div>
-      
-        <!-- Third Column: Contact Form -->
-        <div class="footer-column contact-section">
-          <h3>Contact Us</h3>
-          <form class="contact-form">
-            <input type="text" placeholder="Name" required />
-            <input type="tel" placeholder="Phone Number" required />
-            <input type="email" placeholder="Email" required />
-            <textarea placeholder="Message" rows="4" required></textarea>
-            <button type="submit">Send Message</button>
-          </form>
-        </div>
-      
-        <!-- Footer Bottom Section -->
-        <div class="footer-bottom">
-          <div class="footer-left">
-            <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
-          </div>
-          <div class="footer-right">
-            <p>Designed and developed by IOTA WebDev Team @2025</p>
-          </div>
-        </div>
-        
-      </footer>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Remove opacity and transform from event rows
-        const eventRows = document.querySelectorAll('.event-row');
-        eventRows.forEach(row => {
-          row.style.opacity = '1';
-          row.style.transform = 'translateX(0)';
-        });
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="../../loading-screen.js"></script>
+  <script src="../../assets/js/global-nav.js"></script>
+  <script>
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
 
-        // Simplified GSAP Navbar Animation
-        ScrollTrigger.create({
-            start: 'top -80',
-            end: 99999,
-            toggleClass: {
-                className: 'nav-scrolled',
-                targets: 'nav'
-            }
-        });
-
-        // Add ripple effect to all event buttons
-        const buttons = document.querySelectorAll('.event-button');
-        buttons.forEach(button => {
-          button.addEventListener('click', function(e) {
-            // Create ripple element
-            const ripple = this.querySelector('.ripple');
-            const rect = this.getBoundingClientRect();
-            const size = Math.max(rect.width, rect.height);
-            
-            // Position the ripple at click position
-            const x = e.clientX - rect.left - size / 2;
-            const y = e.clientY - rect.top - size / 2;
-            
-            ripple.style.width = ripple.style.height = `${size}px`;
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-            
-            // Trigger ripple animation
-            ripple.style.animation = 'none';
-            void ripple.offsetWidth; // Trigger reflow
-            ripple.style.animation = 'ripple 0.6s linear';
-            
-            // Navigate after a short delay to see the animation
-            setTimeout(() => {
-              window.location.href = this.href;
-            }, 300);
-          });
-        });
+      ScrollTrigger.create({
+        start: 'top -80',
+        end: 99999,
+        toggleClass: {
+          className: 'nav-scrolled',
+          targets: 'nav'
+        }
       });
-      
-      // Smooth scroll for anchor links
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-      });
-    </script>
+    }
+  </script>
+</body>
 
-<!-- Local script references removed to prevent 404 errors -->
-<!-- If you need these scripts, ensure the files exist at the correct paths -->
-
-    <!-- Global Loader CSS -->
-    <link rel="stylesheet" href="../../assets/css/global-loader.css">
-    
-    <!-- Global Loader Script -->
-    <script src="../../assets/js/global-loader.js"></script>
-    
-    <script>
-      // Mark page as loaded when everything is ready
-      document.addEventListener('DOMContentLoaded', function() {
-        // Add any page-specific initialization code here
-        
-        // Mark HTML as loaded (this will be shown after loading is complete)
-        document.documentElement.classList.add('loaded');
-        
-        // Initialize smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-          anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-              target.scrollIntoView({
-                behavior: 'smooth'
-              });
-            }
-          });
-        });
-      });
-    </script>
-  </body>
 </html>

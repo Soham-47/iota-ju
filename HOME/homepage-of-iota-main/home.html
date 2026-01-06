@@ -1,553 +1,273 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IOTA</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <!-- Preload critical assets -->
-    <link rel="preload" as="image" href="images/IOTA.png" fetchpriority="high">
-    <link rel="preload" as="image" href="images/JULogo.png" fetchpriority="high">
-    <link rel="preload" as="image" href="images/home1.jpg" fetchpriority="high">
-    <!-- Video preloading is handled by the video element's preload attribute -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="preload" href="style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="style.css"></noscript>
-    <link rel="stylesheet" href="nav-style.css">
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-    <link rel="preload" href="footer-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="footer-styles.css"></noscript>
-    <link rel="stylesheet" href="fix-overflow.css">
-    <!-- Global Loader CSS -->
-    <link rel="stylesheet" href="../../assets/css/global-loader.css">
-    <link rel="stylesheet" href="../../loading-screen.css">
-    <script src="../../loading-screen.js"></script>
 
-    <style>
-      /* Video container styles */
-      .video-container {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-      
-      .video-container video {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      
-      .video-fallback {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-size: cover;
-        background-position: center;
-        display: none; /* Hide by default, shown if video fails */
-      }
-      
-      .video-container.video-error video {
-        display: none;
-      }
-      
-      .video-container.video-error .video-fallback {
-        display: block;
-      }
-      
-      .explore-btn {
-        padding: 14px 32px;
-        font-size: 1rem;
-        background: linear-gradient(145deg, #ff6d00, #e65100);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 8px 15px rgba(255, 109, 0, 0.3);
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
-        font-weight: bold;
-        perspective: 1000px;
-        transform-style: preserve-3d;
-        margin-top: 0.5rem;
-        display: inline-block;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IOTA - IoT Applications Club</title>
 
-      .explore-btn:hover {
-        transform: translateY(-5px) scale(1.03) rotateX(5deg);
-        box-shadow: 0 12px 20px rgba(255, 109, 0, 0.5);
-        background: linear-gradient(145deg, #ff8f00, #f57c00);
-      }
-      
-      .logo-section {
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-      }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
 
-      .logo-img {
-        height: 60px;
-        width: auto;
-      }
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
-      .separator {
-        width: 2px;
-        height: 40px;
-        background-color: white;
-        opacity: 0.6;
-      }
-      .eventbtn {
-        padding: 14px 32px;
-        font-size: 1rem;
-        background: linear-gradient(145deg, #00bfa6, #009688);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        box-shadow: 0 8px 15px rgba(0, 191, 166, 0.3);
-        transition: all 0.3s ease-in-out;
-        cursor: pointer;
-        font-weight: bold;
-        perspective: 1000px;
-        transform-style: preserve-3d;
-      }
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+  <link rel="stylesheet" href="nav-style.css" />
+  <link rel="stylesheet" href="../../loading-screen.css" />
 
-      .eventbtn:hover {
-        transform: translateY(-5px) scale(1.03) rotateX(5deg);
-        box-shadow: 0 12px 20px rgba(0, 191, 166, 0.5);
-        background: linear-gradient(145deg, #00e0bb, #007f6e);
-      }
+  <!-- Preload Critical Assets -->
+  <link rel="preload" as="image" href="images/home1.jpg">
+  <link rel="preload" as="image" href="images/IOTA.png">
+</head>
 
-      .event-description {
-        font-size: 1.5rem;
-        font-weight: 600;
-        font-family: 'Poppins', sans-serif; /* Modern & energetic */
-        color: #ffffff;
-        text-shadow: 1px 1px 4px rgba(0, 191, 166, 0.5);
-        line-height: 1.6;
-        letter-spacing: 0.5px;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-        animation: fadeUp 1.2s ease-in-out both;
-      }
+<body>
+  <!-- Global Loader -->
+  <script src="../../loading-screen.js"></script>
+  <script>
+    // Initialize loader immediately
+    if (typeof LoadingScreen !== 'undefined' && !window.loadingScreen) {
+      window.loadingScreen = new LoadingScreen();
+    }
+  </script>
 
-      @keyframes fadeUp {
-        0% {
-          opacity: 0;
-          transform: translateY(40px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
+  <!-- Navigation -->
+  <nav id="navbar">
+    <div class="logo-section">
+      <img src="images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+      <div class="nav-separator"></div>
+      <img src="images/JULogo.png" alt="JU Logo" class="nav-logo" />
+    </div>
 
-    </style>
-  
-    <link rel="stylesheet" href="../loading-screen.css">
-  </head>
-  <body>
-    <!-- Global loading screen will be inserted here by global-loader.js -->
-    <nav>
-      <!-- Left: Logos -->
-      <div class="logo-section">
-        <div class="logo">
-          <img src="images/IOTA.png" alt="IOTA Logo" class="logo-img" />
-        </div>
-    
-        <div class="separator"></div>
-    
-        <div class="logo">
-          <img src="images/JULogo.png" alt="JU Logo" class="logo-img" />
-        </div>
-      </div>
-    
-      <!-- Right: Navigation Links -->
-      <div class="routes">
-        <a href="home.html" class="nav-link">Home</a>
-        <a href="../../EVENTS (2)/views/events.html" class="nav-link">Events</a>
-        <a href="../../PROJECTS/projects.html" class="nav-link">Projects</a>
-        <a href="../../TEAM/team.html" class="nav-link">Team</a>
-        <a href="../../ABOUT US/about us.html" class="nav-link">About Us</a>
-      </div>
-      
-    </nav>
-    
-      
-      
-      
-    <div class="page1">
-      <div class="hero-carousel">
-        <img src="images/home1.jpg" class="hero-slide active" alt="Hero 1" />
-        <img src="images/home2.jpg" class="hero-slide active" alt="Hero 2" />
-        <img src="images/home3.jpg" class="hero-slide active" alt="Hero 3" />
-        <img src="images/home4.jpg" class="hero-slide active" alt="Hero 4" />
-      </div>
-      
-      <div class="herocontent">
-        <h1>
-          <span class="typing-line1">WELCOME TO THE IoT Applications Club,</span><br />
-          <span class="typing-line2">Jadavpur University</span>
-        </h1>
-        
-        
-      
-        <h2>
-          We are a group that love to discover greater possibilities with
-          Internet of Things.
-        </h2>
-      
-        <h2 class="fade-in-text">Join us now.</h2>
-      
-        <button class="discover">DISCOVER MORE</button>
-      </div>
-     </div>
-     <div class="page2" id="page2">
-      <video autoplay muted loop playsinline class="page2bg" preload="auto">
-        <source src="videos/lordofring.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
+    <div class="nav-links">
+      <a href="#" class="active">Home</a>
+      <a href="../../EVENTS (2)/views/events.html">Events</a>
+      <a href="../../PROJECTS/projects.html">Projects</a>
+      <a href="../../TEAM/team.html">Team</a>
+      <a href="../../ABOUT US/about us.html">About Us</a>
+    </div>
+
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-carousel">
+      <img src="images/home1.jpg" class="hero-slide active" alt="Hero 1">
+      <img src="images/home2.jpg" class="hero-slide" alt="Hero 2">
+      <img src="images/home3.jpg" class="hero-slide" alt="Hero 3">
+      <img src="images/home4.jpg" class="hero-slide" alt="Hero 4">
+      <div class="hero-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="line1">WELCOME TO THE IoT Applications Club,</span>
+        <span class="line2">Jadavpur University</span>
+      </h1>
+      <p class="hero-subtitle">
+        We are a group that love to discover greater possibilities with Internet of Things.
+      </p>
+      <a href="#intro" class="cta-button discover-btn">DISCOVER MORE</a>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="intro-section" id="intro">
+    <div class="intro-video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="videos/lordofring.mp4" type="video/mp4">
       </video>
-      
+      <div class="video-overlay"></div>
+    </div>
 
-      <div class="page2content">
-        
-        <h1>RECENT EVENTS</h1>
-        <div class="events">
-          
-          <img src="images/prizedistribution.jpg" alt="Prize distribution event" class="homeevents" loading="lazy" width="600" height="400" />
-          <div class="eventtxt">
-            <h1>EVENTS, SEMINARS AND HACKATHONS</h1>
-            <h2 class="event-description">
-              From adrenaline-pumping hackathons to idea-fueled seminars, <br />
-              we bring the IoT revolution to life — all year long. <br />
-              Be where innovation meets action.
-            </h2>
-            
-            <button class="explore-btn" onclick="window.location.href='../../EVENTS (2)/views/events.html'">EXPLORE</button>
-
-          </div>
+    <div class="section-content">
+      <h2 class="section-title">RECENT EVENTS</h2>
+      <div class="content-card">
+        <div class="card-image">
+          <img src="images/prizedistribution.jpg" alt="Prize Distribution">
+        </div>
+        <div class="card-text">
+          <h3>EVENTS, SEMINARS AND HACKATHONS</h3>
+          <p>
+            From adrenaline-pumping hackathons to idea-fueled seminars,
+            we bring the IoT revolution to life — all year long.
+            Be where innovation meets action.
+          </p>
+          <a href="../../EVENTS (2)/views/events.html" class="cta-button discover-btn">EXPLORE</a>
         </div>
       </div>
     </div>
-    <!-- PAGE 4: PROJECTS -->
-<div class="page4 projects-page">
-  <div class="video-container">
-    <video autoplay muted loop playsinline class="projectsbg" preload="metadata" loading="lazy">
-        <source src="videos/code.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-    </video>
-    <div class="video-fallback" style="background-image: url('images/projects.jpg');"></div>
-</div>
-  <div class="page2content">
-    <h1>PROJECTS</h1>
-    <div class="events">
-      <img src="images/projects.jpg" alt="Project" class="homeevents" />
-      <div class="eventtxt">
-        <h1>Ongoing and Past IoT Projects</h1>
-        <h2>
-          Discover our top projects involving smart automation,<br />
-          connected devices, environmental monitoring,<br />
-          and AI-powered systems.
-        </h2>
-        <button class="projectsbtn" onclick="window.location.href='../../PROJECTS/projects.html'">
-          Explore Projects
-        </button>
-      </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <div class="section-bg">
+      <video autoplay muted loop playsinline>
+        <source src="videos/code.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
     </div>
-  </div>
-</div>
 
-<!-- PAGE 5: TEAM -->
-<div class="page5 team-page">
-  <video autoplay muted loop playsinline class="teambg">
-    <source src="videos/chips.mp4" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-  <div class="page2content">
-    <h1>OUR TEAM</h1>
-    <div class="events">
-      <img src="images/team.jpg" alt="Team" class="homeevents" />
-      <div class="eventtxt">
-        <h1>Meet Our Dedicated Members</h1>
-        <h2>
-          A collaborative group of innovators,<br />
-          engineers, developers and designers<br />
-          leading IOTA towards excellence.
-        </h2>
-        <button class="teambtn" onclick="window.location.href='../../TEAM/team.html'">
-          Know the Team
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- PAGE 6: ABOUT US -->
-<div class="page6 about-page">
-      <video autoplay muted loop playsinline class="aboutbg" preload="none" poster="videos/about-poster.jpg">
-    <source src="videos/aboutus.mov" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-  <div class="page2content">
-    <h1>ABOUT US</h1>
-    <div class="events">
-      <img src="images/aboutus.jpg" alt="About IOTA" class="homeevents" loading="lazy" />
-      <div class="eventtxt">
-        <h1>Who We Are</h1>
-        <h2>
-          IOTA is the official IoT Applications Club at Jadavpur University.<br />
-          We explore Internet of Things through research,<br />
-          hands-on projects, and community engagement.
-        </h2>
-        <button class="aboutbtn" onclick="window.location.href='../../ABOUT US/about us.html'">
-          Read More
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    <div class="page4">
-      <img src="images/homebg.jpg" class="page4img" alt="IOTA Background" loading="lazy" width="1920" height="1080" decoding="async" />
-      <div class="page2content">
-        <div class="knowmore">
-          <h1>KNOW MORE ABOUT US HERE</h1>
-          <div class="knowmorecontent">
-            <div class="knowmorecontentleft">
-              <img src="images/logo.png" alt="" />
-            </div>
-            <div class="knowmorecontentright">
-              <h1>
-                WE ARE THE CLUB THAT LEARN, SHARE AND EXPLORE EVERYTHING RELATED
-                TO IOT.
-              </h1>
-              <h2>
-                IOTA IS A JADAVPUR UNIVERSITY CLUB, WHERE WE WORK TOWARD
-                INCREASING KNOWLEDGE AND INTEL ABOUT INTERNET OF THINGS AND WE
-                ARE STILL DISCOVERING A LOT ABOUT IT. LET'S LEARN TOGETHER.
-              </h2>
-            </div>
-          </div>
-          <h2>“THE INTERNET OF THINGS WILL AUGMENT YOUR BRAIN”</h2>
+    <div class="section-content">
+      <h2 class="section-title">PROJECTS</h2>
+      <div class="content-card reverse">
+        <div class="card-image">
+          <img src="images/projects.jpg" alt="Projects">
+        </div>
+        <div class="card-text">
+          <h3>Ongoing and Past IoT Projects</h3>
+          <p>
+            Discover our top projects involving smart automation,
+            connected devices, environmental monitoring,
+            and AI-powered systems.
+          </p>
+          <a href="../../PROJECTS/projects.html" class="cta-button outline-btn">Explore Projects</a>
         </div>
       </div>
     </div>
-    <footer class="footer">
-      <!-- Background Image -->
-      <img src="images/footerbg.png" alt="" class="footerbg" />
-    
-      <!-- First Column: Logo & Social -->
-      <div class="footer-column">
-        <div class="footer-logo">
-          <img src="images/logo.png" alt="IOTA Logo" />
-          <p>IoT Applications Club, Jadavpur University</p>
+  </section>
+
+  <!-- Team Section -->
+  <section class="team-section">
+    <div class="section-bg">
+      <video autoplay muted loop playsinline>
+        <source src="videos/chips.mp4" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="section-content">
+      <h2 class="section-title">OUR TEAM</h2>
+      <div class="content-card">
+        <div class="card-image">
+          <img src="images/team.jpg" alt="Team">
         </div>
-        <div class="social-icons">
-          <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL" target="_blank">
-            <img src="images/facebook.png" alt="Facebook" class="social" />
-          </a>
-          <a href="https://www.instagram.com/iota_ju/" target="_blank">
-            <img src="images/instagram.png" alt="Instagram" class="social" />
-          </a>
-          <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all" target="_blank">
-            <img src="images/linkedin.png" alt="LinkedIn" class="social" />
-          </a>
-          <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank">
-            <img src="images/github.png" alt="GitHub" class="social" />
-          </a>
+        <div class="card-text">
+          <h3>Meet Our Dedicated Members</h3>
+          <p>
+            A collaborative group of innovators,
+            engineers, developers and designers
+            leading IOTA towards excellence.
+          </p>
+          <a href="../../TEAM/team.html" class="cta-button gradient-btn">Know the Team</a>
         </div>
       </div>
-    
-      <!-- Second Column: Google Map -->
-      <div class="footer-column">
-        <iframe class="map"
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <div class="section-bg">
+      <video autoplay muted loop playsinline>
+        <source src="videos/aboutus.mov" type="video/mp4">
+      </video>
+      <div class="video-overlay"></div>
+    </div>
+
+    <div class="section-content">
+      <h2 class="section-title">ABOUT US</h2>
+      <div class="content-card reverse">
+        <div class="card-image">
+          <img src="images/aboutus.jpg" alt="About Us">
+        </div>
+        <div class="card-text">
+          <h3>Who We Are</h3>
+          <p>
+            IOTA is the official IoT Applications Club at Jadavpur University.
+            We explore Internet of Things through research,
+            hands-on projects, and community engagement.
+          </p>
+          <a href="../../ABOUT US/about us.html" class="cta-button yellow-btn">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="new-footer">
+    <div class="footer-content">
+      <!-- Brand Column -->
+      <div class="footer-col brand-col">
+        <img src="images/IOTA.png" alt="IOTA Logo" class="footer-logo">
+        <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a better
+          tomorrow.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL"
+            target="_blank" class="social-btn"><img src="images/facebook.png" alt="Facebook"></a>
+          <a href="https://www.instagram.com/iota_ju/" target="_blank" class="social-btn"><img
+              src="images/instagram.png" alt="Instagram"></a>
+          <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all"
+            target="_blank" class="social-btn"><img src="images/linkedin.png" alt="LinkedIn"></a>
+          <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" class="social-btn"><img
+              src="images/github.png" alt="GitHub"></a>
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-col links-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="../../EVENTS (2)/views/events.html">Events</a></li>
+          <li><a href="../../PROJECTS/projects.html">Projects</a></li>
+          <li><a href="../../TEAM/team.html">Team</a></li>
+          <li><a href="../../ABOUT US/about us.html">About Us</a></li>
+        </ul>
+      </div>
+
+      <!-- Map Column -->
+      <div class="footer-col map-col">
+        <h4>Locate Us</h4>
+        <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
-          width="300" height="200" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy">
-        </iframe>
+          allowfullscreen="" loading="lazy"></iframe>
+        <div class="address-text">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Jadavpur University, Kolkata, West Bengal 700032</span>
+        </div>
       </div>
-    
-      <!-- Third Column: Contact Form -->
-      <div class="footer-column contact-section">
-        <h3>Contact Us</h3>
+
+      <!-- Contact Column -->
+      <div class="footer-col contact-col">
+        <h4>Get in Touch</h4>
         <form class="contact-form">
-          <input type="text" placeholder="Name" required />
-          <input type="tel" placeholder="Phone Number" required />
-          <input type="email" placeholder="Email" required />
-          <textarea placeholder="Message" rows="4" required></textarea>
-          <button type="submit">Send Message</button>
+          <div class="form-group">
+            <input type="email" class="footer-input" placeholder="Your Email Address" required>
+          </div>
+          <div class="form-group">
+            <textarea class="footer-input" rows="2" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="footer-btn">Send Message</button>
         </form>
       </div>
-    
-      <!-- Footer Bottom Section -->
-      <div class="footer-bottom">
-        <div class="footer-left">
-          <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
-        </div>
-        <div class="footer-right">
-          <p>Designed and developed by IOTA WebDev Team @2025</p>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
         </div>
       </div>
-      
-    </footer>
-    
-    <!-- Load GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <!-- Global Loader Script -->
-    <script src="../../assets/js/global-loader.js"></script>
-    <script src="script.js"></script>
-    <script src="nav-script.js"></script>
-    
-    <script>
-      // Handle video loading errors
-      document.addEventListener('DOMContentLoaded', function() {
-        const videoContainers = document.querySelectorAll('.video-container');
-        videoContainers.forEach(container => {
-          const video = container.querySelector('video');
-          if (video) {
-            video.onerror = function() {
-              container.classList.add('video-error');
-            };
-            
-            // Also check if video can play
-            video.oncanplay = function() {
-              video.play().catch(e => {
-                console.error('Video play failed:', e);
-                container.classList.add('video-error');
-              });
-            };
-            
-            // Fallback if video doesn't load within 3 seconds
-            setTimeout(() => {
-              if (video.readyState < 3) { // HAVE_FUTURE_DATA
-                container.classList.add('video-error');
-              }
-            }, 3000);
-          }
-        });
-      });
-      
-      // Smooth scroll for discover button
-      document.addEventListener('DOMContentLoaded', function() {
-        // Mark intro as shown when home page loads
-        sessionStorage.setItem('introShown', 'true');
-        
-        // Initialize loading screen if not already done
-        if (typeof LoadingScreen !== 'undefined' && !window.loadingScreen) {
-          window.loadingScreen = new LoadingScreen();
-        } else if (!document.querySelector('.loading-screen')) {
-          // Fallback: Add a simple loading indicator
-          const loader = document.createElement('div');
-          loader.className = 'loading-screen';
-          loader.innerHTML = `
-            <div class="loader"></div>
-            <div class="loading-text">Loading...</div>
-          `;
-          document.body.appendChild(loader);
-          
-          // Hide loader when page is fully loaded
-          window.addEventListener('load', () => {
-            setTimeout(() => {
-              loader.style.opacity = '0';
-              setTimeout(() => {
-                loader.style.display = 'none';
-              }, 500);
-            }, 500);
-          });
-        }
-        
-        // Smooth scroll for discover button
-        const discoverBtn = document.querySelector('.discover');
-        if (discoverBtn) {
-          discoverBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector('#page2');
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-              // Refresh ScrollTrigger after scroll
-              setTimeout(() => {
-                if (typeof ScrollTrigger !== 'undefined') {
-                  ScrollTrigger.refresh();
-                }
-              }, 1000);
-            }
-            });
-          }
-      });
-      
-      // Simplified GSAP Navbar Animation
-      if (typeof ScrollTrigger !== 'undefined') {
-        ScrollTrigger.create({
-            start: 'top -80',
-            end: 99999,
-            toggleClass: {
-                className: 'nav-scrolled',
-                targets: 'nav'
-            }
-        });
-      }
-      
-      // Handle page transitions
-      document.addEventListener('click', function(e) {
-        let target = e.target;
-        
-        // Find the nearest anchor element
-        while (target && target.tagName !== 'A') {
-          target = target.parentNode;
-          if (target === document.body) return;
-        }
-        
-        if (target && target.tagName === 'A') {
-          const href = target.getAttribute('href');
-          const isNavLink = target.closest('.routes') !== null;
-          
-          // Only handle internal links that don't have special attributes and are not nav links
-          if (href && 
-              !isNavLink &&
-              !href.startsWith('#') && 
-              !href.startsWith('javascript:') && 
-              !href.startsWith('mailto:') && 
-              !target.getAttribute('target') && 
-              !e.ctrlKey && 
-              !e.metaKey) {
-            
-            e.preventDefault();
-            
-            // Show loading screen if available
-            if (window.loadingScreen) {
-              loadingScreen.show();
-            } else if (!document.querySelector('.loading-screen')) {
-              // Fallback: Add a simple loading indicator
-              const loader = document.createElement('div');
-              loader.className = 'loading-screen';
-              loader.innerHTML = `
-                <div class="loader"></div>
-                <div class="loading-text">Loading...</div>
-              `;
-              document.body.appendChild(loader);
-            }
-            
-            // Navigate after a short delay
-            setTimeout(() => {
-              window.location.href = href;
-            }, 300);
-          }
-        }
-      });
-    </script>
-  </body>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+  <script src="../../assets/js/site-preloader.js"></script>
+  <script src="../../assets/js/global-nav.js"></script>
+</body>
+
 </html>
