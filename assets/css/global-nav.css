@@ -185,7 +185,7 @@ nav.scrolled {
 .social-btn img {
     width: 20px;
     height: 20px;
-    filter: brightness(0) invert(1);
+    /* filter: brightness(0) invert(1); */
     transition: transform 0.3s ease;
 }
 
@@ -198,7 +198,7 @@ nav.scrolled {
 
 .social-btn:hover img {
     transform: scale(1.1);
-    filter: brightness(0) invert(0);
+    /* filter: brightness(0) invert(0); */
 }
 
 /* Quick Links */
@@ -444,3 +444,22 @@ nav.scrolled {
         margin: 0;
     }
 }
+
+/* Alternate Footer Style (For non-home pages) */
+.footer-alt .brand-col {
+    align-items: center;
+    text-align: center;
+}
+
+.footer-alt .social-btn {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* .footer-alt .social-btn img {
+    filter: none;
+}
+
+.footer-alt .social-btn:hover img {
+    filter: none;
+    transform: scale(1.1);
+} */
