@@ -61,9 +61,9 @@
             // Redirect after a small delay to allow loading screen to initialize
             setTimeout(() => {
                 if (hasSeenIntro) {
-                    window.location.href = 'HOME/homepage-of-iota-main/home.html';
+                    window.location.href = '/HOME/homepage-of-iota-main/home.html';
                 } else {
-                    window.location.href = 'INTRO/intro.html';
+                    window.location.href = '/INTRO/intro.html';
                 }
             }, hasLoadedBefore ? 0 : 100); // No delay for subsequent visits
         });
