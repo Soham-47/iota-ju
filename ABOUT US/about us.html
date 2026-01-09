@@ -5,14 +5,358 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us - IOTA</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="../assets/css/global-nav.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
   <link rel="stylesheet" href="../loading-screen.css">
+
+  <style>
+    /* Premium Modern Styles for About Us */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary-accent: #3b82f6;
+      --secondary-accent: #00d4ff;
+      --bg-dark: #050a18;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.7);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('media/teambg.jpg') no-repeat center center/cover;
+      background-blend-mode: overlay;
+      background-color: rgba(5, 10, 24, 0.4);
+      opacity: 0.5;
+      z-index: -1;
+    }
+
+    /* Abstract background elements */
+    .bg-blob {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+      filter: blur(180px);
+      border-radius: 50%;
+      opacity: 0.08;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      top: -100px;
+      right: -100px;
+    }
+
+    .blob-2 {
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      padding-top: 180px;
+      padding-bottom: 80px;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      min-height: 85vh;
+    }
+
+    .hero-content {
+      flex: 1;
+    }
+
+    .hero-label {
+      text-transform: uppercase;
+      letter-spacing: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-accent);
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -2px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    .hero-image-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .hero-image-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -20px;
+      border: 1px solid var(--glass-border);
+      border-radius: 30px;
+      z-index: -1;
+    }
+
+    .hero-image-wrap img {
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+      filter: grayscale(20%);
+      transition: filter 0.5s ease;
+    }
+
+    .hero-image-wrap:hover img {
+      filter: grayscale(0%);
+    }
+
+    /* Bento Grid Section */
+    .bento-section {
+      padding: 100px 0;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, auto);
+      gap: 2rem;
+    }
+
+    .bento-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      padding: 3rem;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      /* Will be animated */
+      transform: translateY(20px);
+    }
+
+    .bento-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--primary-accent);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .card-mission {
+      grid-column: span 2;
+    }
+
+    .card-vision {
+      grid-column: span 1;
+    }
+
+    .card-stats {
+      grid-column: span 3;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 4rem;
+    }
+
+    .bento-card h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .bento-card p {
+      color: var(--text-dim);
+      line-height: 1.8;
+      font-size: 1.1rem;
+      font-weight: 300;
+    }
+
+    /* Stats Item */
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--primary-accent);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1;
+    }
+
+    .stat-label {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      margin-top: 0.5rem;
+    }
+
+    /* Activities Section */
+    .activities-section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+      text-align: center;
+      margin-bottom: 4rem;
+      background: linear-gradient(to right, #fff, var(--primary-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .activities-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .activity-item {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.5rem;
+      background: var(--card-bg);
+      border-radius: 24px;
+      border: 1px solid var(--glass-border);
+      transition: all 0.4s ease;
+      opacity: 0;
+      /* Will be animated */
+    }
+
+    .activity-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      transform: scale(1.02);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .activity-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-accent);
+      font-size: 1.5rem;
+    }
+
+    .activity-info h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .activity-info p {
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+
+    /* Large Photo */
+    .full-width-photo {
+      width: 100%;
+      height: 60vh;
+      margin: 100px 0;
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .full-width-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .full-width-photo::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, var(--bg-dark), transparent);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 140px;
+      }
+
+      .hero-content p {
+        margin: 0 auto 2.5rem;
+      }
+
+      .bento-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-mission,
+      .card-vision,
+      .card-stats {
+        grid-column: span 1;
+      }
+
+      .card-stats {
+        flex-direction: column;
+        gap: 3rem;
+      }
+
+      .activity-item {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -37,66 +381,99 @@
     </div>
   </nav>
 
-  <div class="about-section">
-    <div class="about-header split">
-      <div class="about-text">
-        <h1>ABOUT US</h1>
-        <p>The IoT Applications Club at Jadavpur University (IOTA JU), founded in 2023, is driven by a compelling
-          mission: to unite enthusiastic engineering students dedicated to pioneering research and development within
-          the dynamic realm of the Internet of Things (IoT).</p>
-        <p>Our expansive focus encompasses exciting fields such as Robotics, Sensors, Communication Systems, and
-          Networking, while also delving into AI/ML, Cloud Computing, and Data Science.</p>
-      </div>
-      <div class="about-image">
-        <img src="images/team.jpg" alt="IOTA Team" />
-      </div>
-    </div>
-  </div>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
 
-  <div class="mission-vision-section">
-    <div class="container">
-      <div class="mission-vision-grid">
-        <div class="mission-card">
-          <h2>Our Mission</h2>
-          <p>To create a collaborative environment where students can explore, learn, and innovate in the field of
-            Internet of Things, fostering technical excellence and professional growth.</p>
-        </div>
-        <div class="vision-card">
-          <h2>Our Vision</h2>
-          <p>To be the leading IoT community at Jadavpur University, driving innovation and preparing students for the
-            future of connected technology.</p>
-        </div>
-      </div>
+  <!-- Hero Section -->
+  <section class="container hero-section">
+    <div class="hero-content">
+      <span class="hero-label">Pioneering Hardware</span>
+      <h1>WE ARE IOTA</h1>
+      <p>The IoT Applications Club at Jadavpur University is a collective of visionary engineers dedicated to bridging
+        the gap between the digital and physical worlds.</p>
+      <p>Founded in 2023, we explore the frontiers of Robotics, Sensors, and Communication systems, fueled by a passion
+        for pure innovation.</p>
     </div>
-  </div>
+    <div class="hero-image-wrap">
+      <img src="images/team.jpg" alt="IOTA Team" />
+    </div>
+  </section>
 
-  <div class="what-we-do-section">
-    <div class="container">
-      <h2>What We Do</h2>
-      <div class="activities-grid">
-        <div class="activity-card">
-          <h3>Research & Development</h3>
-          <p>Pioneering research in IoT technologies, sensors, and connected systems.</p>
+  <!-- Bento Grid Section -->
+  <section class="container bento-section">
+    <div class="bento-grid">
+      <div class="bento-card card-mission">
+        <h2>Our Mission</h2>
+        <p>To architect a collaborative sanctuary where the brightest minds at Jadavpur University converge to explore,
+          dismantle, and rebuild the future of connected technology. We foster a culture of radical technical excellence
+          and professional growth.</p>
+      </div>
+
+      <div class="bento-card card-vision">
+        <h2>Our Vision</h2>
+        <p>To become the epicenter of IoT research and product development, setting new benchmarks for university-led
+          hardware innovation.</p>
+      </div>
+
+      <div class="bento-card card-stats">
+        <div class="stat-item">
+          <span class="stat-number">50+</span>
+          <span class="stat-label">Members</span>
         </div>
-        <div class="activity-card">
-          <h3>Workshops & Seminars</h3>
-          <p>Regular technical workshops and seminars to enhance practical skills.</p>
+        <div class="stat-item">
+          <span class="stat-number">20+</span>
+          <span class="stat-label">Workshops</span>
         </div>
-        <div class="activity-card">
-          <h3>Projects & Innovation</h3>
-          <p>Hands-on projects covering robotics, AI/ML, and cloud computing.</p>
+        <div class="stat-item">
+          <span class="stat-number">2023</span>
+          <span class="stat-label">Founded</span>
         </div>
-        <div class="activity-card">
-          <h3>Community Building</h3>
-          <p>Building a strong network of IoT enthusiasts and professionals.</p>
+        <div class="stat-item">
+          <span class="stat-number">12+</span>
+          <span class="stat-label">Events</span>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <div class="group-photo">
-    <img src="images/aboutus.jpg" alt="IOTA Team Group Photo" />
-  </div>
+  <!-- What We Do Section -->
+  <section class="container activities-section">
+    <h2 class="section-title">What We Do</h2>
+    <div class="activities-stack">
+      <div class="activity-item">
+        <div class="activity-icon"><i class="fas fa-microchip"></i></div>
+        <div class="activity-info">
+          <h3>Advanced R&D</h3>
+          <p>We push microcontrollers to their absolute limits, developing low-latency sensor networks and smart systems
+            that solve local challenges.</p>
+        </div>
+      </div>
+
+      <div class="activity-item">
+        <div class="activity-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="activity-info">
+          <h3>Knowledge Fusion</h3>
+          <p>Regular deep-dive workshops on Embedded C, PCB design, and RTOS, ensuring our members are industry-ready
+            from day one.</p>
+        </div>
+      </div>
+
+      <div class="activity-item">
+        <div class="activity-icon"><i class="fas fa-robot"></i></div>
+        <div class="activity-info">
+          <h3>Robotics & AI</h3>
+          <p>Merging mechanical precision with intelligent algorithms to create autonomous systems that can perceive
+            and interact with the real world.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="full-width-photo">
+      <img src="images/aboutus.jpg" alt="IOTA Team Group Photo" />
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="new-footer footer-alt">
@@ -157,16 +534,91 @@
   <script src="../loading-screen.js"></script>
   <script src="../assets/js/global-nav.js"></script>
   <script>
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.create({
-        start: 'top -80',
-        end: 99999,
-        toggleClass: {
-          className: 'nav-scrolled',
-          targets: 'nav'
+    document.addEventListener('DOMContentLoaded', () => {
+      // Force loading screen to hide if it gets stuck
+      setTimeout(() => {
+        const loader = document.querySelector('.loading-screen');
+        if (loader) {
+          loader.style.opacity = '0';
+          loader.style.visibility = 'hidden';
+          setTimeout(() => loader.remove(), 500);
+        }
+      }, 3000);
+
+      // Ensure GSAP is loaded
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        console.error('Animation libraries not found');
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero animations
+      const tl = gsap.timeline();
+
+      tl.from('.hero-content h1', {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: 'power4.out'
+      })
+        .from('.hero-label', {
+          opacity: 0,
+          y: 20,
+          duration: 0.8,
+          ease: 'power3.out'
+        }, "-=0.6")
+        .from('.hero-content p', {
+          opacity: 0,
+          y: 20,
+          stagger: 0.2,
+          duration: 0.8,
+          ease: 'power3.out'
+        }, "-=0.4")
+        .from('.hero-image-wrap', {
+          opacity: 0,
+          scale: 0.95,
+          duration: 1.2,
+          ease: 'power2.out'
+        }, "-=0.8");
+
+      // Bento Grid reveal
+      gsap.to('.bento-card', {
+        scrollTrigger: {
+          trigger: '.bento-grid',
+          start: 'top 90%',
+          toggleActions: 'play none none none'
+        },
+        opacity: 1,
+        y: 0,
+        stagger: 0.1,
+        duration: 0.8,
+        ease: 'power2.out'
+      });
+
+      // Activity list reveal
+      gsap.to('.activity-item', {
+        scrollTrigger: {
+          trigger: '.activities-stack',
+          start: 'top 95%',
+        },
+        opacity: 1,
+        x: 0,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: 'power2.out'
+      });
+
+      // Nav scroll effect
+      const nav = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          nav.classList.add('nav-scrolled');
+        } else {
+          nav.classList.remove('nav-scrolled');
         }
       });
-    }
+    });
   </script>
 </body>
 

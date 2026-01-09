@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Events - IOTA</title>
-  <link rel="stylesheet" href="../style.css">
+
   <link rel="stylesheet" href="../../assets/css/global-nav.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
@@ -16,29 +16,280 @@
 
   <link rel="stylesheet" href="../../loading-screen.css">
   <style>
-    /* Force visibility of all events */
-    .event-row,
-    .event-container,
-    .left-event,
-    .right-event {
-      opacity: 1 !important;
-      transform: none !important;
-      visibility: visible !important;
-      animation: none !important;
+    /* Import Montserrat and Poppins fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary-accent: #3b82f6;
+      --secondary-accent: #00d4ff;
+      --bg-dark: #050a18;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.7);
     }
 
-    .event-text h2,
-    .event-text p,
-    .event-button {
-      opacity: 1 !important;
-      transform: none !important;
-      visibility: visible !important;
-      animation: none !important;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
     }
 
-    /* Ensure content is not hidden behind nav */
     body {
-      padding-top: 16vh !important;
+      background: var(--bg-dark);
+      color: var(--text-main);
+      overflow-x: hidden;
+      min-height: 100vh;
+      padding-top: 0 !important;
+      /* Managed by hero */
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../media/teambg.jpg') no-repeat center center/cover;
+      background-blend-mode: overlay;
+      opacity: 0.4;
+      /* Adjusted for better content legibility */
+      z-index: -1;
+    }
+
+    /* Abstract background elements */
+    .bg-blob {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+      filter: blur(150px);
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      top: -100px;
+      right: -100px;
+    }
+
+    .blob-2 {
+      bottom: -100px;
+      left: -100px;
+    }
+
+    /* Hero Section */
+    .events-hero {
+      height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 80px;
+      background: linear-gradient(to bottom, transparent, var(--bg-dark));
+    }
+
+    .hero-caption {
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-accent);
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .events-hero h1 {
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #fff 30%, var(--primary-accent), var(--secondary-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      letter-spacing: -3px;
+      line-height: 0.9;
+      filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.2));
+    }
+
+    .events-hero p {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--text-dim);
+      max-width: 750px;
+      line-height: 1.8;
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
+
+    .events-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    /* Event Cards */
+    .event-card {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      margin-bottom: 8rem;
+      padding: 3rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      border-color: rgba(59, 130, 246, 0.3);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .event-card:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    .card-img-container {
+      flex: 1;
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .event-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card-content {
+      flex: 1;
+      z-index: 1;
+    }
+
+    .event-status {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--primary-accent);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .event-card h3 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1.5rem;
+      color: #fff;
+      letter-spacing: -0.5px;
+      position: relative;
+    }
+
+    .event-card h3::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 40px;
+      height: 4px;
+      background: var(--primary-accent);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .event-card:hover h3::after {
+      width: 100px;
+    }
+
+    .event-card p {
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--text-dim);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    /* Premium Button */
+    .event-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+      color: #000;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .event-button:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .event-button i {
+      transition: transform 0.3s ease;
+    }
+
+    .event-button:hover i {
+      transform: translateX(3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+
+      .event-card,
+      .event-card:nth-child(even) {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .event-card h3 {
+        font-size: 2rem;
+      }
+
+      .events-hero h1 {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .events-hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .events-container {
+        padding: 2rem 1rem;
+      }
     }
   </style>
 </head>
@@ -65,45 +316,60 @@
     </div>
   </nav>
 
-  <div style="padding-top: 4rem;">
-    <!-- INNOVATIA Section -->
-    <div class="event-row">
-      <div class="event-img-container">
-        <img src="../images/logoinnovatia.png" alt="INNOVATIA 2025">
-      </div>
-      <div class="event-content">
-        <h3>INNOVATIA 2025</h3>
-        <p>Join us for a journey through innovation, creativity, and technology. Dive into competitions, exhibitions,
-          and more!</p>
-        <a href="innovatia.html" class="event-button">About This Event</a>
-      </div>
-    </div>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
 
-    <!-- LORD OF THE RINGS Section -->
-    <div class="event-row">
-      <div class="event-img-container">
-        <img src="../images/lordftherings.jpg" alt="Lord of the Rings Event">
-      </div>
-      <div class="event-content">
-        <h3>LORD OF THE RINGS</h3>
-        <p>A thrilling event journeying through the challenges of IoT systems. Collaborate, compete, and conquer!</p>
-        <a href="lordOfTheRings.html" class="event-button">About This Event</a>
-      </div>
-    </div>
+  <!-- Hero Section -->
+  <header class="events-hero">
+    <div class="hero-caption scale">Experience Innovation</div>
+    <h1 class="scale">OUR EVENTS</h1>
+    <p class="fade-in">Join us for a journey through innovation, creativity, and technology. From massive hackathons
+      to specialized workshops, discover the core of engineering.</p>
+  </header>
 
-    <!-- CONNEXION Section -->
-    <div class="event-row">
-      <div class="event-img-container">
+  <section class="events-container">
+    <!-- Event 1: Connexion -->
+    <div class="event-card">
+      <div class="card-img-container">
         <img src="../images/connexion.jpg" alt="CONNEXION">
       </div>
-      <div class="event-content">
+      <div class="card-content">
+        <span class="event-status">Upcoming</span>
         <h3>CONNEXION</h3>
-        <p>The IoT Applications Club launched its first-ever IoT Hackathon, "Connexion", inviting enthusiastic freshmen
-          to explore the vast world of Internet of Things.</p>
-        <a href="connexion.html" class="event-button">About This Event</a>
+        <p>Our premier IoT hackathon specifically tailored for the next generation of engineers. Enthusiastic freshmen
+          explore real-world prototyping using state-of-the-art microcontrollers.</p>
+        <a href="connexion.html" class="event-button">About This Event <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
-  </div>
+
+    <!-- Event 2: Lord of the Rings -->
+    <div class="event-card">
+      <div class="card-img-container">
+        <img src="../images/lordftherings.jpg" alt="Lord of the Rings Event">
+      </div>
+      <div class="card-content">
+        <span class="event-status">Upcoming</span>
+        <h3>LORD OF THE RINGS</h3>
+        <p>A high-stakes IoT survival challenge that pushes participants to think on their feet. Collaborate under
+          pressure and solve complex hardware puzzles to claim the ultimate title.</p>
+        <a href="lordOfTheRings.html" class="event-button">About This Event <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Event 3: Innovatia -->
+    <div class="event-card">
+      <div class="card-img-container">
+        <img src="../images/logoinnovatia.png" alt="INNOVATIA 2025">
+      </div>
+      <div class="card-content">
+        <span class="event-status">Ended</span>
+        <h3>INNOVATIA 2025</h3>
+        <p>A flagship technical festival where innovation meets imagination. Dive into a series of competitions,
+          exhibitions, and expert talks designed to bridge the gap between classroom and industry.</p>
+        <a href="innovatia.html" class="event-button">About This Event <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer class="new-footer footer-alt">
@@ -160,18 +426,54 @@
   <script src="../../loading-screen.js"></script>
   <script src="../../assets/js/global-nav.js"></script>
   <script>
-    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
       gsap.registerPlugin(ScrollTrigger);
 
-      ScrollTrigger.create({
-        start: 'top -80',
-        end: 99999,
-        toggleClass: {
-          className: 'nav-scrolled',
-          targets: 'nav'
+      // Hero animations
+      gsap.from('.events-hero h1', {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: 'power4.out'
+      });
+
+      gsap.from('.events-hero p, .hero-caption', {
+        opacity: 0,
+        y: 30,
+        duration: 1.2,
+        delay: 0.3,
+        stagger: 0.2,
+        ease: 'power4.out'
+      });
+
+      // Card reveal animations
+      const cards = gsap.utils.toArray('.event-card');
+      cards.forEach((card, i) => {
+        const direction = i % 2 === 0 ? -100 : 100;
+
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          },
+          opacity: 0,
+          x: direction,
+          duration: 1,
+          ease: 'power3.out'
+        });
+      });
+
+      // Nav scroll effect
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+          nav.classList.add('nav-scrolled');
+        } else {
+          nav.classList.remove('nav-scrolled');
         }
       });
-    }
+    });
   </script>
 </body>
 

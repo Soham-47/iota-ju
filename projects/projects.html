@@ -14,23 +14,24 @@
 
   <link rel="stylesheet" href="../loading-screen.css" />
   <style>
-    /* Import Montserrat font */
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+    /* Import Montserrat and Poppins fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-    /* Apply Montserrat to all elements */
+    :root {
+      --primary-accent: #00ff88;
+      --secondary-accent: #00d4ff;
+      --bg-dark: #050a18;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.7);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    /* Ensure html and body take full height */
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
+      font-family: 'Poppins', sans-serif;
     }
 
     /* Remove focus outline from all interactive elements */
@@ -44,134 +45,255 @@
     }
 
     body {
-      background: #0a0f1f;
-      color: #ecf0f1;
-      line-height: 1.6;
+      background: var(--bg-dark);
+      color: var(--text-main);
       overflow-x: hidden;
-      margin: 0;
-      padding: 0;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('media/teambg.jpg') no-repeat center center/cover;
+      background-blend-mode: overlay;
+      opacity: 0.4;
+      z-index: -1;
+    }
+
+    /* Abstract background elements */
+    .bg-blob {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+      filter: blur(150px);
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      top: -100px;
+      right: -100px;
+    }
+
+    .blob-2 {
+      bottom: -100px;
+      left: -100px;
+    }
+
+    /* Hero Section */
+    .projects-hero {
+      height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding-top: 80px;
+      background: linear-gradient(to bottom, transparent, var(--bg-dark));
+    }
+
+    .projects-hero h1 {
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      font-weight: 900;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #fff 30%, var(--primary-accent), var(--secondary-accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1.5rem;
+      letter-spacing: -3px;
+      line-height: 0.9;
+      filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.2));
+    }
+
+    .hero-caption {
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-accent);
+      margin-bottom: 2rem;
+      opacity: 0.8;
+    }
+
+    .projects-hero p {
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: var(--text-dim);
+      max-width: 750px;
+      line-height: 1.8;
+      font-weight: 300;
+      letter-spacing: 0.5px;
     }
 
     .projects-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 2rem 1.5rem;
-      background: transparent !important;
+      padding: 4rem 1.5rem;
     }
 
-    /* Button styles */
-    .project-button {
-      display: inline-block;
-      padding: 0.8rem 2rem;
-      background: rgba(76, 175, 80, 0.9);
-      color: white;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 500;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
-      transition: all 0.3s ease;
-    }
-
-    .project-button:hover {
-      background: #4CAF50;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
-    }
-
+    /* Project Cards */
     .project-card {
       display: flex;
-      justify-content: center;
       align-items: center;
-      margin: 4rem auto;
-      max-width: 1000px;
-      padding: 2.5rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
+      gap: 4rem;
+      margin-bottom: 8rem;
+      padding: 3rem;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
 
     .project-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-10px);
+      border-color: rgba(0, 255, 136, 0.3);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .project-card:nth-child(even) {
+      flex-direction: row-reverse;
     }
 
     .card-img-container {
-      flex: 0 0 300px;
-      text-align: center;
-      margin-right: 4rem;
+      flex: 1;
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 16/9;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     }
 
     .project-card img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      border-radius: 8px;
-      border: 1px solid #4CAF50;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s ease;
+    }
+
+    .project-card:hover img {
+      transform: scale(1.1);
     }
 
     .card-content {
       flex: 1;
-      color: #fff;
+      z-index: 1;
+    }
+
+    .project-status {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(0, 255, 136, 0.1);
+      color: var(--primary-accent);
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .project-card h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 1.5rem;
       color: #fff;
-      margin-top: 0;
-      margin-bottom: 1.2rem;
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      font-family: 'Poppins', sans-serif;
+      letter-spacing: -0.5px;
+      position: relative;
+    }
+
+    .project-card h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 40px;
+      height: 4px;
+      background: var(--primary-accent);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .project-card:hover h2::after {
+      width: 100px;
     }
 
     .project-card p {
-      color: rgba(255, 255, 255, 0.9);
-      line-height: 1.7;
-      margin-bottom: 2rem;
-      font-size: 1.05rem;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 400;
+      font-size: 1.15rem;
+      line-height: 1.9;
+      color: var(--text-dim);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
     }
 
-    @media (max-width: 992px) {
-      .project-card {
-        flex-direction: column;
-        text-align: center;
-        padding: 2rem;
-      }
+    /* Premium Button */
+    .project-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+      color: #000;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
 
-      .card-img-container {
-        margin-right: 0;
-        margin-bottom: 2rem;
-        flex: 0 0 auto;
+    .project-button:hover {
+      transform: translateX(5px);
+      box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
+    }
+
+    .project-button i {
+      transition: transform 0.3s ease;
+    }
+
+    .project-button:hover i {
+      transform: translateX(3px);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+
+      .project-card,
+      .project-card:nth-child(even) {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem;
+        text-align: center;
       }
 
       .project-card h2 {
-        font-size: 1.75rem;
+        font-size: 2rem;
+      }
+
+      .projects-hero h1 {
+        font-size: 3.5rem;
       }
     }
 
     @media (max-width: 600px) {
-      .project-card {
-        padding: 1.5rem;
-        margin: 2rem auto;
+      .projects-hero h1 {
+        font-size: 2.5rem;
       }
 
-      .card-img-container {
-        width: 100%;
-      }
-
-      .project-card h2 {
-        font-size: 1.5rem;
-      }
-
-      .project-card p {
-        font-size: 0.95rem;
+      .projects-container {
+        padding: 2rem 1rem;
       }
     }
   </style>
@@ -201,44 +323,58 @@
     </div>
   </nav>
 
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <!-- Hero Section -->
+  <header class="projects-hero">
+    <div class="hero-caption scale">Innovation in Motion</div>
+    <h1 class="scale">OUR PROJECTS</h1>
+    <p class="fade-in">We are pioneering the boundary between the digital and physical worlds through innovative IoT,
+      Robotics, and Hardware solutions designed for the future.</p>
+  </header>
+
   <!-- Main Projects Section -->
-  <section class="projects-container" style="padding-top: 8rem;">
+  <section class="projects-container">
     <!-- Project 1 -->
-    <div class="project-card">
-      <div class="card-img-container">
-        <img src="images/4wheeler.jpg" alt="4-Wheeler Project">
-      </div>
-      <div class="card-content">
-        <h2>4-Wheeler Automation</h2>
-        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control
-          systems.</p>
-        <a href="project-details/4wheeler.html" class="project-button">Learn More</a>
-      </div>
-    </div>
-
-    <!-- Project 2 -->
-    <div class="project-card">
-      <div class="card-img-container">
-        <img src="images/2wheeler.jpg" alt="2-Wheeler Project">
-      </div>
-      <div class="card-content">
-        <h2>2-Wheeler Automation</h2>
-        <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control
-          systems.</p>
-        <a href="project-details/2wheeler.html" class="project-button">Learn More</a>
-      </div>
-    </div>
-
-    <!-- Project 3 -->
-    <div class="project-card">
+    <div class="project-card reveal-left">
       <div class="card-img-container">
         <img src="images/drone.jpg" alt="Drone Project">
       </div>
       <div class="card-content">
+        <span class="project-status">Ongoing</span>
         <h2>Drone Automation</h2>
         <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control
-          systems. It is a drone that can navigate through the air and avoid obstacles.</p>
-        <a href="project-details/drone.html" class="project-button">Learn More</a>
+          systems. It is a drone that can navigate through the air and avoid obstacles with computer vision.</p>
+        <a href="project-details/drone.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Project 2 -->
+    <div class="project-card reveal-right">
+      <div class="card-img-container">
+        <img src="images/4wheeler.jpg" alt="4-Wheeler Project">
+      </div>
+      <div class="card-content">
+        <span class="project-status">Completed</span>
+        <h2>4-Wheeler Automation</h2>
+        <p>A flagship autonomous ground vehicle featuring advanced pathfinding algorithms, real-time mapping, and
+          dynamic obstacle avoidance capabilities.</p>
+        <a href="project-details/4wheeler.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- Project 3 -->
+    <div class="project-card reveal-left">
+      <div class="card-img-container">
+        <img src="images/2wheeler.jpg" alt="2-Wheeler Project">
+      </div>
+      <div class="card-content">
+        <span class="project-status">Completed</span>
+        <h2>2-Wheeler Automation</h2>
+        <p>Exploring self-balancing dynamics and precision control in single-track vehicles. This project pushes the
+          limits of embedded control systems and IMU sensor fusion.</p>
+        <a href="project-details/2wheeler.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
@@ -318,16 +454,53 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
   <script>
-    if (typeof ScrollTrigger !== 'undefined') {
-      ScrollTrigger.create({
-        start: 'top -80',
-        end: 99999,
-        toggleClass: {
-          className: 'nav-scrolled',
-          targets: 'nav'
+    document.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero animations
+      gsap.from('.projects-hero h1', {
+        opacity: 0,
+        y: 50,
+        duration: 1.2,
+        ease: 'power4.out'
+      });
+
+      gsap.from('.projects-hero p', {
+        opacity: 0,
+        y: 30,
+        duration: 1.2,
+        delay: 0.3,
+        ease: 'power4.out'
+      });
+
+      // Card reveal animations
+      const cards = gsap.utils.toArray('.project-card');
+      cards.forEach((card, i) => {
+        const direction = i % 2 === 0 ? -100 : 100;
+
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 85%',
+            toggleActions: 'play none none none'
+          },
+          opacity: 0,
+          x: direction,
+          duration: 1,
+          ease: 'power3.out'
+        });
+      });
+
+      // Nav scroll effect
+      window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+          nav.classList.add('nav-scrolled');
+        } else {
+          nav.classList.remove('nav-scrolled');
         }
       });
-    }
+    });
   </script>
   <script src="../loading-screen.js"></script>
   <script src="../assets/js/global-nav.js"></script>
