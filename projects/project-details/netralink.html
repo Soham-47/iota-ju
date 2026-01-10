@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Netra-Link | IOTA JU</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #00c853;
+            --primary-dark: #009624;
+            --bg: #0a0f1f;
+            --bg-light: #112240;
+            --text: #e6f1ff;
+            --text-secondary: #8892b0;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --card-border: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s ease-in-out;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: url('../images/homebg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        .project-detail {
+            max-width: 1200px;
+            margin: 2rem auto 4rem;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .project-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .award-badge {
+            display: inline-block;
+            padding: 0.4rem 1.25rem;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #ffd700;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #fff, var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-header p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .main-video-container {
+            width: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            margin-bottom: 4rem;
+            border: 1px solid var(--card-border);
+        }
+
+        .main-video-container video {
+            width: 100%;
+            display: block;
+        }
+
+        .project-content {
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            aspect-ratio: 1/1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+
+        .tech-table th,
+        .tech-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.95rem;
+        }
+
+        .tech-table th {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--primary);
+        }
+
+        pre {
+            background: #011627;
+            padding: 1.25rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--card-border);
+        }
+
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            color: #7dd3fc;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            margin-top: 3rem;
+            border: 2px solid var(--primary);
+            transition: var(--transition);
+            font-size: 1.1rem;
+        }
+
+        .back-button:hover {
+            background: var(--primary);
+            color: #0a192f;
+        }
+
+        @media (max-width: 768px) {
+            .project-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="../loading-screen.css" id="loading-screen-styles">
+</head>
+
+<body>
+    <div class="project-detail">
+        <div class="project-header">
+            <div class="award-badge">3rd Prize Winner - IEEE SSCS</div>
+            <h1>Netra-Link</h1>
+            <p>IoT-Enabled Assistive Goggle for individuals with severe motor disabilities</p>
+        </div>
+
+        <div class="main-video-container">
+            <video controls poster="../images/netralink1.png">
+                <source src="../media/NETRA-LINK (1).mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="project-content">
+            <h2>Project Overview</h2>
+            <p>Netra-Link is a smart wearable interface designed for individuals with severe motor disabilities (ALS,
+                Paralysis). It translates voluntary eye-blink patterns into digital commands for Home Automation and
+                Emergency Response.</p>
+
+            <p>Unlike standard eye-trackers, this system runs on low-cost hardware (ESP32) and includes a novel
+                "Unconsciousness Detection" algorithm that triggers an alert if the user's eye remains closed for an
+                abnormal duration.</p>
+
+            <div class="image-gallery">
+                <div class="gallery-item"><img src="../images/netralink1.png" alt="Netra-Link 1"></div>
+                <div class="gallery-item"><img src="../images/netralink2.png" alt="Netra-Link 2"></div>
+                <div class="gallery-item"><img src="../images/netralink3.png" alt="Netra-Link 3"></div>
+            </div>
+
+            <h2>Key Features</h2>
+            <ul>
+                <li><strong>Smart Blink Detection:</strong> Ignores natural blinks, toggles appliances on command
+                    blinks, and sends SOS alerts on double blinks.</li>
+                <li><strong>Unconsciousness Monitor:</strong> Automatically alerts caregivers if the user is
+                    unresponsive (eye closed > 8 seconds).</li>
+                <li><strong>IoT Connectivity:</strong> Sends push notifications via REST API for immediate emergency
+                    response.</li>
+                <li><strong>Menu System:</strong> Visualizes selections (Light/Fan/Speaker) via integration with a 16x2
+                    LCD.</li>
+            </ul>
+
+            <h2>Hardware Stack</h2>
+            <table class="tech-table">
+                <tr>
+                    <th>Component</th>
+                    <th>Specification</th>
+                </tr>
+                <tr>
+                    <td>Microcontroller</td>
+                    <td>ESP32 Dev Module (Wi-Fi)</td>
+                </tr>
+                <tr>
+                    <td>Sensors</td>
+                    <td>IR Obstacle Sensor</td>
+                </tr>
+                <tr>
+                    <td>Actuators</td>
+                    <td>3-Channel Relay, Piezo Buzzer</td>
+                </tr>
+                <tr>
+                    <td>Power</td>
+                    <td>3.7V Li-Ion Battery</td>
+                </tr>
+            </table>
+
+            <h2>Software Logic</h2>
+            <p>The firmware is written in C++ (Arduino Framework) centered around a state machine that monitors eye
+                closure timing to filter noise and trigger specific events based on blink duration.</p>
+
+            <pre><code>// Example Configuration
+const char* ssid = "YOUR_WIFI_SSID";
+const char* token = "YOUR_PUSHBULLET_TOKEN";
+</code></pre>
+
+            <a href="../projects.html" class="back-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    style="margin-right: 8px;">
+                    <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+                Back to Projects
+            </a>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.project-detail', {
+                opacity: 0,
+                y: 30,
+                duration: 0.8,
+                ease: 'power2.out'
+            });
+        });
+    </script>
+    <script src="../loading-screen.js"></script>
+</body>
+
+</html>
