@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lord of the Ring 2026 - IOTA</title>
+    <title>IoT Bidwars 2026 - IOTA</title>
 
     <link rel="stylesheet" href="../../assets/css/global-nav.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
@@ -14,9 +14,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Poppins:wght@300;400;500;600&display=swap');
 
         :root {
-            --primary-accent: #f1c40f;
-            /* Gold for LOTR */
-            --secondary-accent: #e67e22;
+            --primary-accent: #00ff88;
+            --secondary-accent: #00d4ff;
             --bg-dark: #050a18;
             --card-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -37,16 +36,17 @@
             overflow-x: hidden;
             /* Background setup */
             background-image:
-                radial-gradient(circle at top right, rgba(241, 196, 15, 0.08), transparent 50%),
-                radial-gradient(circle at bottom left, rgba(230, 126, 34, 0.08), transparent 50%);
+                radial-gradient(circle at top right, rgba(0, 255, 136, 0.1), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(0, 212, 255, 0.1), transparent 50%);
             background-attachment: fixed;
         }
 
-        /* Tight Layout container */
+        /* Tight Layout container removing excessive vertical/horizontal space */
         .event-split-layout {
             display: flex;
             min-height: 100vh;
             padding-top: 80px;
+            /* Account for global nav */
             max-width: 1400px;
             margin: 0 auto;
             gap: 3rem;
@@ -72,7 +72,7 @@
             border-radius: 20px;
             overflow: hidden;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(241, 196, 15, 0.1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 255, 136, 0.1);
             position: relative;
         }
 
@@ -82,7 +82,7 @@
             inset: -10%;
             width: 120%;
             height: 120%;
-            background: url('../images/lotr_poster.jpg') center/cover;
+            background: url('../images/bidwars_poster.jpg') center/cover;
             filter: blur(20px) brightness(0.4);
             z-index: 0;
         }
@@ -93,6 +93,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
+            /* ensures the flyer aspect ratio is respected without cropping */
         }
 
         /* Right Side: Content Area */
@@ -105,9 +106,9 @@
         .hero-tag {
             display: inline-block;
             padding: 0.4rem 1rem;
-            background: rgba(241, 196, 15, 0.1);
+            background: rgba(0, 255, 136, 0.1);
             color: var(--primary-accent);
-            border: 1px solid rgba(241, 196, 15, 0.3);
+            border: 1px solid rgba(0, 255, 136, 0.3);
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
@@ -164,7 +165,7 @@
 
         .event-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(241, 196, 15, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 255, 136, 0.2);
         }
 
         /* Compact Info Cards */
@@ -199,10 +200,9 @@
             font-size: 0.9rem;
             color: var(--text-dim);
             margin: 0;
-            line-height: 1.4;
         }
 
-        /* Clean Info List */
+        /* Clean Phases List */
         .section-title {
             font-family: 'Montserrat', sans-serif;
             font-size: 1.5rem;
@@ -230,16 +230,7 @@
             font-family: 'Montserrat', sans-serif;
             font-size: 2rem;
             font-weight: 900;
-            color: rgba(241, 196, 15, 0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            text-align: center;
-        }
-
-        .phase-num i {
-            font-size: 1.8rem;
+            color: rgba(0, 255, 136, 0.3);
         }
 
         .phase-text h4 {
@@ -296,23 +287,23 @@
         <div class="poster-col fade-in">
             <div class="poster-container">
                 <div class="poster-bg"></div>
-                <img src="../images/lotr_poster.jpg" alt="Lord of the Ring Poster" class="poster-img" />
+                <img src="../images/bidwars_poster.jpg" alt="IoT Bidwars Poster" class="poster-img" />
             </div>
         </div>
 
         <!-- Right: Concise Content Area -->
         <div class="content-col fade-in">
             <span class="hero-tag">Srijan 2026</span>
-            <h1>Lord of the Ring</h1>
-            <p>The pinnacle of robotic competition where engineering brilliance meets tactical mastery in the
-                exhilarating Robo Sumo arena.</p>
+            <h1>IoT Bidwars</h1>
+            <p>Unite strategy and smart circuitry. An intense online quiz followed by a high-stakes digital auction to
+                secure components for live IoT Blitz Circuit making.</p>
 
             <div class="action-panel">
                 <div>
                     <p style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Status</p>
                     <strong style="color: var(--primary-accent); font-size: 1.2rem;">Registrations Open</strong>
                 </div>
-                <a href="https://srijanju.in/events/lord-of-the-ring" target="_blank" class="event-btn">
+                <a href="https://srijanju.in/events/iotbw" target="_blank" class="event-btn">
                     Register on Srijan <i class="fas fa-external-link-alt"></i>
                 </a>
             </div>
@@ -320,41 +311,39 @@
             <div class="info-grid">
                 <div class="info-box">
                     <h3><i class="fas fa-users"></i> Team Size</h3>
-                    <p>3 to 5 members per team.</p>
+                    <p>2 to 3 members per team.</p>
                 </div>
                 <div class="info-box">
-                    <h3><i class="fas fa-calendar-alt"></i> Deadline</h3>
-                    <p>April 10, 2026</p>
+                    <h3><i class="fas fa-wallet"></i> Budget Rule</h3>
+                    <p>Rely on a strict virtual wallet for the auction.</p>
                 </div>
                 <div class="info-box">
-                    <h3><i class="fas fa-layer-group"></i> Categories</h3>
-                    <p>Wired and Wireless</p>
+                    <h3><i class="fas fa-map-marker-alt"></i> Venue</h3>
+                    <p>Jadavpur University</p>
                 </div>
             </div>
 
-            <h2 class="section-title">The Challenge</h2>
+            <h2 class="section-title">The Phases</h2>
             <div class="phase-list">
                 <div class="phase-item">
-                    <div class="phase-num"><i class="fas fa-clock"></i></div>
+                    <div class="phase-num">01</div>
                     <div class="phase-text">
-                        <h4>Match Duration</h4>
-                        <p>Each match consists of 3 rounds lasting 60 seconds each.</p>
+                        <h4>Online Quiz</h4>
+                        <p>Qualify via an intense IoT knowledge and circuit theory quiz.</p>
                     </div>
                 </div>
                 <div class="phase-item">
-                    <div class="phase-num"><i class="fas fa-gavel"></i></div>
+                    <div class="phase-num">02</div>
                     <div class="phase-text">
-                        <h4>Victory Conditions</h4>
-                        <p>First to win 2 rounds takes the match. Push the opponent out of bounds or immobilize them
-                            entirely.</p>
+                        <h4>Digital Auction</h4>
+                        <p>Bid against rival teams to secure crucial IoT components.</p>
                     </div>
                 </div>
                 <div class="phase-item">
-                    <div class="phase-num"><i class="fas fa-robot"></i></div>
+                    <div class="phase-num">03</div>
                     <div class="phase-text">
-                        <h4>Tactical Adaptation</h4>
-                        <p>The format strictly rewards both physical durability and tactical adaptation in real-time
-                            combat.</p>
+                        <h4>Blitz Build</h4>
+                        <p>Build a live IoT circuit using only the components your team won.</p>
                     </div>
                 </div>
             </div>

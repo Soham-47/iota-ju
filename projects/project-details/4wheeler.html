@@ -1,308 +1,356 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>4-Wheeler Automation Project | IOTA JU</title>
-  <link rel="stylesheet" href="../style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4-Wheeler Automation | IOTA JU</title>
+
+  <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+  <link rel="stylesheet" href="../../loading-screen.css" />
+
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-    
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
     :root {
-      --primary: #00c853;
-      --primary-dark: #009624;
-      --bg: #0a0f1f;
-      --bg-light: #112240;
-      --text: #e6f1ff;
-      --text-secondary: #8892b0;
+      --primary-accent: #00ff88;
+      --secondary-accent: #00d4ff;
+      --bg-dark: #050a18;
       --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.05);
-      --transition: all 0.3s ease-in-out;
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --text-main: #ffffff;
+      --text-dim: rgba(255, 255, 255, 0.7);
     }
-    
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-    }
-    
-    body {
       font-family: 'Poppins', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
+    }
+
+    body {
+      background: var(--bg-dark);
+      color: var(--text-main);
       overflow-x: hidden;
-      background-image: url('/PROJECTS/images/homebg.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
+      min-height: 100vh;
     }
-    
-    .project-detail {
-      max-width: 1200px;
-      margin: 2rem auto 4rem;
-      padding: 0 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('../media/teambg.jpg') no-repeat center center/cover;
+      background-blend-mode: overlay;
+      opacity: 0.3;
+      z-index: -1;
     }
-    
-    .project-header {
+
+    .bg-blob {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+      filter: blur(180px);
+      border-radius: 50%;
+      opacity: 0.12;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .blob-1 {
+      top: -100px;
+      right: -100px;
+    }
+
+    .blob-2 {
+      bottom: -100px;
+      left: -100px;
+    }
+
+    .project-header-section {
+      padding: 180px 5% 60px;
       text-align: center;
-      margin-bottom: 4rem;
-      position: relative;
-      padding-bottom: 1.5rem;
+      background: linear-gradient(180deg, rgba(5, 10, 24, 0.95) 0%, rgba(5, 10, 24, 0) 100%);
     }
-    
-    .project-header h1 {
-      font-size: 3.5rem;
-      font-weight: 700;
+
+    .project-header-section h1 {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 800;
+      font-family: 'Montserrat', sans-serif;
       margin-bottom: 1rem;
-      background: linear-gradient(90deg, #fff, var(--primary));
+      background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+      -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-decoration: none;
     }
-    
-    .project-header p {
-      font-size: 1.25rem;
-      color: var(--text-secondary);
+
+    .project-header-section p {
+      font-size: 1.2rem;
+      color: var(--text-dim);
       max-width: 700px;
       margin: 0 auto;
     }
-    
-    .project-image-container {
-      position: relative;
-      border-radius: 0;
-      overflow: visible;
-      box-shadow: none;
-      margin: 4rem auto;
-      transition: var(--transition);
-      max-width: 90%;
+
+    .project-showcase {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 5%;
+    }
+
+    .showcase-image {
       width: 100%;
-      display: flex;
-      justify-content: center;
-      background: transparent;
-      border: none;
-      padding: 0;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 30px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     }
-    
-    .project-image {
-      width: auto;
-      max-width: 100%;
-      height: auto;
-      max-height: 80vh;
-      object-fit: contain;
-      display: block;
-      transition: var(--transition);
-      border-radius: 0;
-      mix-blend-mode: screen;
-      filter: drop-shadow(0 10px 30px rgba(0, 200, 83, 0.3));
+
+    .content-grid {
+      max-width: 1200px;
+      margin: 0 auto 6rem;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
     }
-    
-    .project-image-container:hover .project-image {
-      transform: scale(1.02);
+
+    .glass-panel {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 3rem;
     }
-    
-    .project-content {
-      max-width: 900px;
-      margin: 0 auto;
-      width: 100%;
-      padding: 0 1rem;
-    }
-    
-    h2 {
-      font-size: 2rem;
-      margin: 3rem 0 1.5rem;
-      color: var(--primary);
-      position: relative;
-      display: inline-block;
-    }
-    
-    p {
+
+    .glass-panel h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.8rem;
+      color: #fff;
       margin-bottom: 1.5rem;
-      color: var(--text-secondary);
-      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .glass-panel h2 i {
+      color: var(--primary-accent);
+    }
+
+    .glass-panel p {
+      color: var(--text-dim);
       line-height: 1.8;
+      margin-bottom: 1.5rem;
     }
-    
-    ul {
+
+    .feature-list {
+      list-style: none;
       margin-bottom: 2rem;
-      padding-left: 1.5rem;
     }
-    
-    li {
-      margin-bottom: 0.75rem;
-      color: var(--text-secondary);
+
+    .feature-list li {
       position: relative;
-      padding-left: 1.5rem;
+      padding-left: 25px;
+      margin-bottom: 1rem;
+      color: var(--text-dim);
+      line-height: 1.6;
     }
-    
-    li::before {
-      content: '▹';
+
+    .feature-list li::before {
+      content: '\f058';
+      font-family: 'Font Awesome 6 Free';
+      font-weight: 900;
       position: absolute;
       left: 0;
-      color: var(--primary);
+      top: 2px;
+      color: var(--primary-accent);
     }
-    
-    .back-button {
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-accent);
+      margin-bottom: 0.5rem;
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .back-btn {
       display: inline-flex;
       align-items: center;
-      padding: 0.8rem 2rem;
+      gap: 10px;
+      padding: 1rem 2rem;
       background: transparent;
-      color: var(--primary);
+      border: 1px solid var(--glass-border);
+      color: #fff;
+      border-radius: 50px;
       text-decoration: none;
-      border-radius: 5px;
-      font-weight: 500;
-      margin-top: 3rem;
-      border: 2px solid var(--primary);
-      transition: var(--transition);
-      font-size: 1.1rem;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
+      font-weight: 600;
+      transition: all 0.3s;
+      margin-top: 2rem;
     }
-    
-    .back-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background: var(--primary);
-      transition: var(--transition);
-      z-index: -1;
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--primary-accent);
+      color: var(--primary-accent);
     }
-    
-    .back-button:hover {
-      color: #0a192f;
+
+    @media (max-width: 992px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .showcase-image {
+        height: 350px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
-    
-    .back-button:hover::before {
-      width: 100%;
-    }
-    
-    .back-button svg {
-      margin-right: 8px;
-      transition: var(--transition);
-    }
-    
-    .back-button:hover svg {
-      transform: translateX(-5px);
-    }
-    
+
     @media (max-width: 768px) {
-      .project-header h1 {
-        font-size: 2.5rem;
-      }
-      
-      .project-header p {
-        font-size: 1.1rem;
-      }
-      
-      h2 {
-        font-size: 1.75rem;
-      }
-    }
-    
-    @media (max-width: 480px) {
-      .project-header h1 {
-        font-size: 2rem;
-      }
-      
-      .project-detail {
-        padding: 0 1.5rem;
+      .stats-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
+</head>
 
-    <link rel="stylesheet" href="../loading-screen.css">
-  </head>
 <body>
-  <!-- Navigation removed as per user request -->
+  <nav id="navbar">
+    <div class="logo-section">
+      <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo"
+        onerror="this.src='../../assets/images/IOTA.png'" />
+      <div class="nav-separator"></div>
+      <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo"
+        onerror="this.src='../../assets/images/JULogo.png'" />
+    </div>
+    <div class="nav-links">
+      <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
+      <a href="../../EVENTS (2)/views/events.html">Events</a>
+      <a href="../projects.html" class="active">Projects</a>
+      <a href="../../team/team.html">Team</a>
+      <a href="../../ABOUT US/about us.html">About Us</a>
+    </div>
+    <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+  </nav>
 
-  <div class="project-detail">
-    <div class="project-header">
-      <h1>4-Wheeler Automation</h1>
-      <p>Revolutionizing autonomous transportation with cutting-edge technology</p>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+
+  <!-- Header -->
+  <header class="project-header-section">
+    <h1 class="fade-in">4-Wheeler Automation</h1>
+    <p class="fade-in">Revolutionizing autonomous transportation with cutting-edge pathfinding algorithms and real-time
+      mapping.</p>
+  </header>
+
+  <!-- Image Showcase -->
+  <section class="project-showcase fade-in">
+    <img src="../images/4wheeler.jpg" alt="4-Wheeler Automation" class="showcase-image">
+  </section>
+
+  <!-- Content Split -->
+  <main class="content-grid">
+    <!-- Main Content -->
+    <div class="glass-panel fade-in">
+      <h2><i class="fas fa-info-circle"></i> Project Overview</h2>
+      <p>Our 4-Wheeler Automation project represents a significant leap forward in autonomous vehicle technology. This
+        innovative system combines advanced sensors, machine learning algorithms, and real-time data processing to
+        create a safe and efficient self-driving experience.</p>
+
+      <h2 style="margin-top: 3rem;"><i class="fas fa-car-side"></i> Key Features</h2>
+      <p>This project aims to revolutionize urban mobility by testing safety mechanisms and efficient environmental
+        traversal.</p>
+      <ul class="feature-list">
+        <li>Advanced obstacle detection and avoidance system</li>
+        <li>Precise navigation using LIDAR and computer vision</li>
+        <li>Real-time traffic analysis and route optimization</li>
+        <li>Emergency braking and collision prevention</li>
+        <li>Intelligent speed adaptation</li>
+      </ul>
+
+      <a href="../projects.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
     </div>
-    
-    <div class="project-image-container">
-      <img src="../images/4wheeler.jpg" alt="4-Wheeler Automation Project" class="project-image">
-    </div>
-    
-    <div class="project-content">
-      <h2>Project Overview</h2>
-      <p>Our 4-Wheeler Automation project represents a significant leap forward in autonomous vehicle technology. This innovative system combines advanced sensors, machine learning algorithms, and real-time data processing to create a safe and efficient self-driving experience.</p>
-      
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 3rem 0;">
-        <div>
-          <h2>Key Features</h2>
-          <ul>
-            <li>Advanced obstacle detection and avoidance system</li>
-            <li>Precise navigation using LIDAR and computer vision</li>
-            <li>Real-time traffic analysis and route optimization</li>
-            <li>Emergency braking and collision prevention</li>
-            <li>Intelligent speed adaptation</li>
-          </ul>
-        </div>
-        
-        <div>
-          <h2>Technical Specs</h2>
-          <ul>
-            <li><strong>Processing:</strong> NVIDIA Jetson AGX Xavier</li>
-            <li><strong>Sensors:</strong> 360° LIDAR, Stereo Cameras</li>
-            <li><strong>Connectivity:</strong> 5G, V2X Communication</li>
-            <li><strong>Software:</strong> ROS 2, TensorFlow, OpenCV</li>
-            <li><strong>Range:</strong> 500 km per charge</li>
-            <li><strong>Autonomy:</strong> Level 4 Autonomous</li>
-          </ul>
+
+    <!-- Sidebar Stats -->
+    <aside class="sidebar fade-in">
+      <div class="glass-panel" style="padding: 2rem;">
+        <h2 style="font-size: 1.4rem; margin-bottom: 2rem;"><i class="fas fa-chart-line"></i> Global Impact</h2>
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-value">90%</div>
+            <div class="stat-label">Fewer Accidents</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">40%</div>
+            <div class="stat-label">Less Emissions</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">Lvl 4</div>
+            <div class="stat-label">Autonomy Level</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">ROS 2</div>
+            <div class="stat-label">Core System</div>
+          </div>
         </div>
       </div>
-      
-      <h2>Project Impact</h2>
-      <p>This project aims to revolutionize urban mobility by providing a safer, more efficient, and environmentally friendly transportation solution. Our autonomous vehicle technology has the potential to reduce traffic accidents by up to 90%, decrease carbon emissions by 40%, and improve overall transportation accessibility for all.</p>
-      
-      <div class="impact-stats" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin: 3rem 0; text-align: center;">
-        <div>
-          <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">90%</div>
-          <div>Reduction in Accidents</div>
-        </div>
-        <div>
-          <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">40%</div>
-          <div>Less Emissions</div>
-        </div>
-        <div>
-          <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem;">24/7</div>
-          <div>Operation</div>
-        </div>
-      </div>
-      
-      <a href="../projects.html" class="back-button">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Back to Projects
-      </a>
-    </div>
-  </div>
-  </div>
+    </aside>
+  </main>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <footer class="new-footer footer-alt">
+    <div class="footer-bottom" style="margin-top:0; background: rgba(0,0,0,0.3)">
+      <div class="footer-bottom-content">
+        <p>&copy; 2026 IoT Applications Club. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script>
-    // Simple fade-in animation for the content
     document.addEventListener('DOMContentLoaded', () => {
-      gsap.from('.project-detail', {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: 'power2.out'
-      });
+      if (typeof gsap !== 'undefined') {
+        gsap.from('.fade-in', { opacity: 0, y: 30, stagger: 0.15, duration: 1, ease: 'power3.out' });
+        window.addEventListener('scroll', () => {
+          const nav = document.getElementById('navbar');
+          if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }
+          else { nav.classList.remove('nav-scrolled'); }
+        });
+      }
     });
   </script>
+  <script src="../../loading-screen.js"></script>
+  <script src="../../assets/js/global-nav.js"></script>
+</body>
 
-    <script src="../loading-screen.js"></script>
-  </body>
 </html>

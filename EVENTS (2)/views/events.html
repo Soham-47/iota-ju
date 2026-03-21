@@ -2,25 +2,21 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Events - IOTA</title>
 
-  <link rel="stylesheet" href="../../assets/css/global-nav.css">
+  <link rel="stylesheet" href="../../assets/css/global-nav.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+  <link rel="stylesheet" href="../../loading-screen.css" />
 
-
-  <link rel="stylesheet" href="../../loading-screen.css">
   <style>
-    /* Import Montserrat and Poppins fonts */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
     :root {
-      --primary-accent: #3b82f6;
+      --primary-accent: #00ff88;
       --secondary-accent: #00d4ff;
       --bg-dark: #050a18;
       --card-bg: rgba(255, 255, 255, 0.03);
@@ -36,13 +32,20 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    a:focus,
+    button:focus,
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
     body {
       background: var(--bg-dark);
       color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
-      padding-top: 0 !important;
-      /* Managed by hero */
     }
 
     body::before {
@@ -52,14 +55,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('../media/teambg.jpg') no-repeat center center/cover;
+      background: url('../../projects/media/teambg.jpg') no-repeat center center/cover;
       background-blend-mode: overlay;
       opacity: 0.4;
-      /* Adjusted for better content legibility */
       z-index: -1;
     }
 
-    /* Abstract background elements */
     .bg-blob {
       position: fixed;
       width: 500px;
@@ -94,16 +95,6 @@
       background: linear-gradient(to bottom, transparent, var(--bg-dark));
     }
 
-    .hero-caption {
-      text-transform: uppercase;
-      letter-spacing: 5px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--primary-accent);
-      margin-bottom: 2rem;
-      opacity: 0.8;
-    }
-
     .events-hero h1 {
       font-size: clamp(3.5rem, 10vw, 6.5rem);
       font-weight: 900;
@@ -115,7 +106,17 @@
       margin-bottom: 1.5rem;
       letter-spacing: -3px;
       line-height: 0.9;
-      filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.2));
+      filter: drop-shadow(0 0 20px rgba(0, 255, 136, 0.2));
+    }
+
+    .hero-caption {
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-accent);
+      margin-bottom: 2rem;
+      opacity: 0.8;
     }
 
     .events-hero p {
@@ -152,7 +153,7 @@
 
     .event-card:hover {
       transform: translateY(-10px);
-      border-color: rgba(59, 130, 246, 0.3);
+      border-color: rgba(0, 255, 136, 0.3);
       box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
     }
 
@@ -188,9 +189,9 @@
     .event-status {
       display: inline-block;
       padding: 0.4rem 1rem;
-      background: rgba(59, 130, 246, 0.1);
+      background: rgba(0, 255, 136, 0.1);
       color: var(--primary-accent);
-      border: 1px solid rgba(59, 130, 246, 0.2);
+      border: 1px solid rgba(0, 255, 136, 0.2);
       border-radius: 50px;
       font-size: 0.8rem;
       font-weight: 600;
@@ -199,7 +200,7 @@
       letter-spacing: 1px;
     }
 
-    .event-card h3 {
+    .event-card h2 {
       font-size: 2.8rem;
       font-weight: 800;
       font-family: 'Montserrat', sans-serif;
@@ -209,7 +210,7 @@
       position: relative;
     }
 
-    .event-card h3::after {
+    .event-card h2::after {
       content: '';
       position: absolute;
       left: 0;
@@ -221,27 +222,32 @@
       transition: width 0.3s ease;
     }
 
-    .event-card:hover h3::after {
+    .event-card:hover h2::after {
       width: 100px;
     }
 
     .event-card p {
       font-size: 1.15rem;
-      line-height: 1.9;
+      line-height: 1.6;
       color: var(--text-dim);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       font-weight: 300;
     }
 
-    /* Premium Button */
-    .event-button {
+    .action-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .event-btn {
       position: relative;
       display: inline-flex;
       align-items: center;
       gap: 0.8rem;
       padding: 1rem 2.5rem;
-      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
       color: #000;
+      background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
       text-decoration: none;
       border-radius: 50px;
       font-weight: 600;
@@ -249,20 +255,32 @@
       cursor: pointer;
     }
 
-    .event-button:hover {
-      transform: translateX(5px);
-      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    .event-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 255, 136, 0.3);
     }
 
-    .event-button i {
+    .event-btn-ghost {
+      background: transparent;
+      color: #fff;
+      border: 1px solid var(--glass-border);
+    }
+
+    .event-btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--primary-accent);
+      color: var(--primary-accent);
+    }
+
+    .event-btn i {
       transition: transform 0.3s ease;
     }
 
-    .event-button:hover i {
+    .event-btn:hover i {
       transform: translateX(3px);
     }
 
-    /* Responsive Design */
+    /* Responsive */
     @media (max-width: 992px) {
 
       .event-card,
@@ -273,7 +291,15 @@
         text-align: center;
       }
 
-      .event-card h3 {
+      .event-card h2::after {
+        display: none;
+      }
+
+      .action-group {
+        justify-content: center;
+      }
+
+      .event-card h2 {
         font-size: 2rem;
       }
 
@@ -298,14 +324,16 @@
   <!-- Standardized Navigation -->
   <nav id="navbar">
     <div class="logo-section">
-      <img src="../images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+      <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo"
+        onerror="this.src='../../assets/images/IOTA.png'" />
       <div class="nav-separator"></div>
-      <img src="../images/JULogo.png" alt="JU Logo" class="nav-logo" />
+      <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo"
+        onerror="this.src='../../assets/images/JULogo.png'" />
     </div>
 
     <div class="nav-links">
       <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
-      <a href="#" class="active">Events</a>
+      <a href="events.html" class="active">Events</a>
       <a href="../../projects/projects.html">Projects</a>
       <a href="../../team/team.html">Team</a>
       <a href="../../ABOUT US/about us.html">About Us</a>
@@ -321,70 +349,75 @@
 
   <!-- Hero Section -->
   <header class="events-hero">
-    <div class="hero-caption scale">Experience Innovation</div>
+    <div class="hero-caption scale">Srijan 2026</div>
     <h1 class="scale">OUR EVENTS</h1>
-    <p class="fade-in">Join us for a journey through innovation, creativity, and technology. From massive hackathons
-      to specialized workshops, discover the core of engineering.</p>
+    <p class="fade-in">Discover our top events from high-stakes digital auctions to exhilarating Robo Sumo arenas.
+      Compete, build, and push the edge of engineering.</p>
   </header>
 
+  <!-- Main Events Section -->
   <section class="events-container">
-    <!-- Event 1: Connexion -->
-    <div class="event-card">
+
+    <!-- Event 1: IoT Bidwars -->
+    <div class="event-card reveal-left">
       <div class="card-img-container">
-        <img src="../images/connexion.jpg" alt="CONNEXION">
+        <!-- Using a sharp brochure crop or aesthetic tech image -->
+        <img src="../images/bidwars_poster.jpg" alt="IoT Bidwars" onerror="this.src='../images/homeevnts.jpg'">
       </div>
       <div class="card-content">
-        <span class="event-status">Upcoming</span>
-        <h3>CONNEXION</h3>
-        <p>Our premier IoT hackathon specifically tailored for the next generation of engineers. Enthusiastic freshmen
-          explore real-world prototyping using state-of-the-art microcontrollers.</p>
-        <a href="connexion.html" class="event-button">About This Event <i class="fas fa-arrow-right"></i></a>
+        <span class="event-status">Registrations Open</span>
+        <h2>IoT Bidwars 2026</h2>
+        <p>Unite strategy and smart circuitry. An intense online quiz followed by a high-stakes digital auction to
+          secure components for live IoT Blitz Circuit making.</p>
+        <div class="action-group">
+          <a href="iotaBidwars.html" class="event-btn">Explore Rules <i class="fas fa-arrow-right"></i></a>
+          <a href="https://srijanju.in/events/iotbw" target="_blank" class="event-btn event-btn-ghost">Register Now</a>
+        </div>
       </div>
     </div>
 
-    <!-- Event 2: Lord of the Rings -->
-    <div class="event-card">
+    <!-- Event 2: Lord of the Ring -->
+    <div class="event-card reveal-right">
       <div class="card-img-container">
-        <img src="../images/lordftherings.jpg" alt="Lord of the Rings Event">
+        <img src="../images/lotr_poster.jpg" alt="Lord of the Ring" onerror="this.src='../images/lordftherings.jpg'">
       </div>
       <div class="card-content">
-        <span class="event-status">Upcoming</span>
-        <h3>LORD OF THE RINGS</h3>
-        <p>A high-stakes IoT survival challenge that pushes participants to think on their feet. Collaborate under
-          pressure and solve complex hardware puzzles to claim the ultimate title.</p>
-        <a href="lordOfTheRings.html" class="event-button">About This Event <i class="fas fa-arrow-right"></i></a>
+        <span class="event-status"
+          style="color:#f1c40f; border-color:rgba(241,196,15,0.2); background:rgba(241,196,15,0.1)">Deadline Apr
+          10</span>
+        <h2
+          style="background:linear-gradient(135deg, #fff, #f1c40f); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+          Lord of the Ring 2026</h2>
+        <p>The pinnacle of robotic competition. Navigate through Wired and Wireless categories in electrifying
+          elimination rounds where every match tests the very limits of design and control.</p>
+        <div class="action-group">
+          <a href="lordOfTheRings.html" class="event-btn"
+            style="background:linear-gradient(135deg, #f1c40f, #e67e22);">Explore Rules <i
+              class="fas fa-arrow-right"></i></a>
+          <a href="https://srijanju.in/events/lord-of-the-ring" target="_blank"
+            class="event-btn event-btn-ghost">Register Now</a>
+        </div>
       </div>
     </div>
 
-    <!-- Event 3: Innovatia -->
-    <div class="event-card">
-      <div class="card-img-container">
-        <img src="../images/logoinnovatia.png" alt="INNOVATIA 2025">
-      </div>
-      <div class="card-content">
-        <span class="event-status">Ended</span>
-        <h3>INNOVATIA 2025</h3>
-        <p>A flagship technical festival where innovation meets imagination. Dive into a series of competitions,
-          exhibitions, and expert talks designed to bridge the gap between classroom and industry.</p>
-        <a href="innovatia.html" class="event-button">About This Event <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
   </section>
 
   <!-- Footer -->
   <footer class="new-footer footer-alt">
     <div class="footer-content">
       <div class="footer-col brand-col">
-        <img src="../images/IOTA.png" alt="IOTA Logo" class="footer-logo">
+        <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="footer-logo"
+          onerror="this.src='../../assets/images/IOTA.png'">
         <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a better
           tomorrow.</p>
         <div class="social-links">
-          <a href="#" class="social-btn"><img src="../images/facebook (2).png" alt="Facebook"></a>
-          <a href="#" class="social-btn"><img src="../images/Instagram (2).png" alt="Instagram"></a>
-          <a href="#" class="social-btn"><img src="../images/Linkedin (2).png" alt="LinkedIn"></a>
-          <a href="#" class="social-btn"><img src="../images/Github.png" alt="GitHub"></a>
+          <a href="#" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
         </div>
       </div>
+
       <div class="footer-col links-col">
         <h4>Quick Links</h4>
         <ul>
@@ -395,12 +428,18 @@
           <li><a href="../../ABOUT US/about us.html">About Us</a></li>
         </ul>
       </div>
+
       <div class="footer-col map-col">
         <h4>Locate Us</h4>
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
           allowfullscreen="" loading="lazy"></iframe>
+        <div class="address-text">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Jadavpur University, Kolkata, WB 700032</span>
+        </div>
       </div>
+
       <div class="footer-col contact-col">
         <h4>Get in Touch</h4>
         <form class="contact-form">
@@ -414,67 +453,52 @@
         </form>
       </div>
     </div>
+
     <div class="footer-bottom">
       <div class="footer-bottom-content">
-        <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+        <p>&copy; 2026 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
       </div>
     </div>
   </footer>
 
+  <!-- Load GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-  <script src="../../loading-screen.js"></script>
-  <script src="../../assets/js/global-nav.js"></script>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      gsap.registerPlugin(ScrollTrigger);
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
 
-      // Hero animations
-      gsap.from('.events-hero h1', {
-        opacity: 0,
-        y: 50,
-        duration: 1.2,
-        ease: 'power4.out'
-      });
+        // Hero animations
+        gsap.from('.events-hero h1', { opacity: 0, y: 50, duration: 1.2, ease: 'power4.out' });
+        gsap.from('.events-hero p', { opacity: 0, y: 30, duration: 1.2, delay: 0.3, ease: 'power4.out' });
 
-      gsap.from('.events-hero p, .hero-caption', {
-        opacity: 0,
-        y: 30,
-        duration: 1.2,
-        delay: 0.3,
-        stagger: 0.2,
-        ease: 'power4.out'
-      });
-
-      // Card reveal animations
-      const cards = gsap.utils.toArray('.event-card');
-      cards.forEach((card, i) => {
-        const direction = i % 2 === 0 ? -100 : 100;
-
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          },
-          opacity: 0,
-          x: direction,
-          duration: 1,
-          ease: 'power3.out'
+        // Card reveal animations
+        const cards = gsap.utils.toArray('.event-card');
+        cards.forEach((card, i) => {
+          const direction = i % 2 === 0 ? -100 : 100;
+          gsap.from(card, {
+            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none none' },
+            opacity: 0, x: direction, duration: 1, ease: 'power3.out'
+          });
         });
-      });
 
-      // Nav scroll effect
-      window.addEventListener('scroll', () => {
-        const nav = document.getElementById('navbar');
-        if (window.scrollY > 50) {
-          nav.classList.add('nav-scrolled');
-        } else {
-          nav.classList.remove('nav-scrolled');
-        }
-      });
+        // Nav scroll effect
+        window.addEventListener('scroll', () => {
+          const nav = document.getElementById('navbar');
+          if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }
+          else { nav.classList.remove('nav-scrolled'); }
+        });
+      }
     });
   </script>
+  <script src="../../loading-screen.js"></script>
+  <script src="../../assets/js/global-nav.js"></script>
 </body>
 
 </html>
