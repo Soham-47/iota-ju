@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lord of the Ring 2026 - IOTA</title>
+
+    <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../../loading-screen.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --primary-accent: #f1c40f;
+            /* Gold for LOTR */
+            --secondary-accent: #e67e22;
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            /* Background setup */
+            background-image:
+                radial-gradient(circle at top right, rgba(241, 196, 15, 0.08), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(230, 126, 34, 0.08), transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Tight Layout container */
+        .event-split-layout {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 3rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        /* Left Side: Sticky Poster */
+        .poster-col {
+            flex: 0 0 45%;
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 120px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .poster-container {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(241, 196, 15, 0.1);
+            position: relative;
+        }
+
+        /* Blurred background layer using the same image for fill */
+        .poster-bg {
+            position: absolute;
+            inset: -10%;
+            width: 120%;
+            height: 120%;
+            background: url('../images/lotr_poster.jpg') center/cover;
+            filter: blur(20px) brightness(0.4);
+            z-index: 0;
+        }
+
+        .poster-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Right Side: Content Area */
+        .content-col {
+            flex: 1;
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(241, 196, 15, 0.1);
+            color: var(--primary-accent);
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .content-col h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .content-col>p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        /* Registration Actions Tightened up */
+        .action-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .event-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: #000;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .event-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(241, 196, 15, 0.2);
+        }
+
+        /* Compact Info Cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-box {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .info-box h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box h3 i {
+            color: var(--primary-accent);
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Clean Info List */
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .phase-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .phase-item {
+            display: flex;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            align-items: center;
+        }
+
+        .phase-num {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(241, 196, 15, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            text-align: center;
+        }
+
+        .phase-num i {
+            font-size: 1.8rem;
+        }
+
+        .phase-text h4 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .phase-text p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        /* Gallery Styles */
+        .gallery-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 3rem;
+        }
+
+        .gallery-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #fff;
+            background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: var(--card-bg);
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 0 0 400px;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(241, 196, 15, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 992px) {
+            .event-split-layout {
+                flex-direction: column;
+                padding: 100px 1.5rem 2rem;
+                height: auto;
+                display: block;
+            }
+
+            .poster-col {
+                position: relative;
+                top: 0;
+                height: 50vh;
+                margin-bottom: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-section {
+                padding: 0 1.5rem;
+                margin: 3rem auto;
+            }
+
+            .gallery-item {
+                flex: 0 0 300px;
+            }
+
+            .gallery-title {
+                font-size: 1.5rem;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="logo-section">
+            <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo"
+                onerror="this.src='../../assets/images/IOTA.png'" />
+            <div class="nav-separator"></div>
+            <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo"
+                onerror="this.src='../../assets/images/JULogo.png'" />
+        </div>
+        <div class="nav-links">
+            <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="../../projects/projects.html">Projects</a>
+            <a href="../../team/team.html">Team</a>
+            <a href="../../ABOUT US/about us.html">About Us</a>
+        </div>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <main class="event-split-layout">
+        <!-- Left: Prominent Poster Area -->
+        <div class="poster-col fade-in">
+            <div class="poster-container">
+                <div class="poster-bg"></div>
+                <img src="../images/seminar  Automotive Electronics poster.jpg" alt="Lord of the Ring Poster" class="poster-img" />
+            </div>
+        </div>
+
+        <!-- Right: Concise Content Area -->
+        <div class="content-col fade-in">
+            <span class="hero-tag">Seminar 2026</span>
+            <h1>Seminar on Automotive Electronics</h1>
+            <p>One day seminar on Automotive Electronics And The Potential Application on AI 
+                in Automotive, Organized by IOT Applications Club, Jadavpur University in 
+                collaboration with IEEE COMSOC And IEEE CAS</p>
+
+            <div class="info-grid">
+                
+                <div class="info-box">
+                    <h3><i class="fas fa-calendar-alt"></i>Seminar Day</h3>
+                    <p>February 28, 2026</p>
+                </div>
+                
+            </div>
+
+            
+
+            <a href="events.html" class="event-btn"
+                style="background: transparent; border: 1px solid var(--glass-border); color: #fff; margin-top: 2rem; width: auto; display: inline-flex;">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+        </div>
+    </main>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">Event Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="../images/seminar pic1.jpg" alt="Seminar on Automotive Electronics Event 1" />
+            </div>
+            <div class="gallery-item">
+                <img src="../images/seminar pic2.jpg" alt="Seminar on Automotive Electronics Event 2" />
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap !== 'undefined') {
+                gsap.from('.fade-in', { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, ease: 'power3.out' });
+                window.addEventListener('scroll', () => {
+                    const nav = document.getElementById('navbar');
+                    if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }
+                    else { nav.classList.remove('nav-scrolled'); }
+                });
+            }
+        });
+    </script>
+    <script src="../../loading-screen.js"></script>
+    <script src="../../assets/js/global-nav.js"></script>
+</body>
+
+</html>
