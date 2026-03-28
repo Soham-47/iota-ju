@@ -1,19 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CONNEXION - IOTA Events</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connexion 2025 - IOTA</title>
+
+    <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../../loading-screen.css" />
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Poppins:wght@300;400;500;600&display=swap');
+
         :root {
-            --primary-color: #2196F3;
-            --secondary-color: #1976D2;
-            --text-color: #333;
-            --light-bg: #f9f9f9;
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --primary-accent: #3498db;
+            --secondary-accent: #2980b9;
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
         }
 
         * {
@@ -24,231 +31,547 @@
         }
 
         body {
-            margin: 0;
-            padding: 0;
-            background: #E8F4FD; /* Light version of blue header */
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at top right, rgba(52, 152, 219, 0.1), transparent 50%),
+                radial-gradient(circle at bottom left, rgba(41, 128, 185, 0.1), transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .event-split-layout {
+            display: flex;
             min-height: 100vh;
-        }
-
-        .event-container {
-            background: #E8F4FD; /* Same as body */
-            min-height: 100vh;
-            padding: 1rem;
-        }
-
-        .event-header {
-            background: linear-gradient(135deg, #2196F3, #1976D2);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 2rem;
-        }
-
-        .event-header h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        .event-header p {
-            font-size: 1.2rem;
-            max-width: 800px;
+            padding-top: 80px;
+            max-width: 1400px;
             margin: 0 auto;
-            opacity: 0.9;
+            gap: 3rem;
+            padding-left: 3rem;
+            padding-right: 3rem;
+            padding-bottom: 3rem;
         }
 
-        .event-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
+        .poster-col {
+            flex: 0 0 45%;
+            position: sticky;
+            top: 100px;
+            height: calc(100vh - 120px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .event-details {
-            background: white; /* White background for content area */
-            border-radius: 10px;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            padding: 2.5rem;
-            margin: 2rem auto;
-            max-width: 1000px;
-            color: #333;
-        }
-
-        .event-image {
+        .poster-container {
             width: 100%;
-            max-width: 800px;
-            height: auto;
-            border-radius: 8px;
-            margin: 0 auto 2rem;
-            display: block;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .event-section {
-            margin-bottom: 2rem;
-            background: #F5FAFF; /* Very light version of blue header */
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-left: 4px solid #2196F3;
-        }
-
-        .event-section h2 {
-            color: #81D4FA;
-            margin-bottom: 1.5rem;
-            font-size: 2rem;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(52, 152, 219, 0.1);
             position: relative;
-            display: inline-block;
-            font-weight: 600;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
 
-        .event-section h2:after {
-            content: '';
+        .poster-bg {
             position: absolute;
-            width: 50%;
-            height: 3px;
-            background: var(--primary-color);
-            bottom: -5px;
-            left: 0;
+            inset: -10%;
+            width: 120%;
+            height: 120%;
+            background: url('../images/connexion.jpg') center/cover;
+            filter: blur(20px) brightness(0.4);
+            z-index: 0;
         }
 
-        .btn {
+        .poster-img {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .content-col {
+            flex: 1;
+            padding-top: 2rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-tag {
             display: inline-block;
-            background: linear-gradient(45deg, #40C4FF, #00B0FF);
-            color: #0D47A1;
-            padding: 12px 30px;
-            border-radius: 30px;
-            text-decoration: none;
+            padding: 0.4rem 1rem;
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--primary-accent);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
             font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin-bottom: 1rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
 
-        .btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background: linear-gradient(45deg, #00B0FF, #0091EA);
+        .content-col h1 {
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .back-btn {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            color: white;
-            text-decoration: none;
-            font-size: 1.2rem;
+        .content-col>p {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .action-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
             display: flex;
             align-items: center;
-            transition: all 0.3s ease;
+            justify-content: space-between;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
-        .back-btn i {
-            margin-right: 5px;
+        .event-btn {
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: #fff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .back-btn:hover {
-            transform: translateX(-5px);
+        .event-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.2);
         }
 
-        @media (max-width: 768px) {
-            .event-header h1 {
-                font-size: 2.2rem;
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-box {
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .info-box h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-box h3 i {
+            color: var(--primary-accent);
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            margin: 0;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            align-items: center;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            color: var(--primary-accent);
+            width: 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .feature-text h4 {
+            font-size: 1.1rem;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-container {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-accent);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary-accent);
+        }
+
+        .timeline-content h4 {
+            color: var(--primary-accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 992px) {
+            .event-split-layout {
+                flex-direction: column;
+                padding: 100px 1.5rem 2rem;
+                height: auto;
+                display: block;
             }
-            
-            .event-header p {
-                font-size: 1rem;
-            }
-            
-            .event-container {
-                padding: 1rem;
-            }
-            
-            .event-details {
-                padding: 1.5rem;
-            }
-            
-            .event-image {
-                height: 250px;
+
+            .poster-col {
+                position: relative;
+                top: 0;
+                height: 50vh;
+                margin-bottom: 2rem;
             }
         }
     </style>
+</head>
 
-    <link rel="stylesheet" href="../loading-screen.css">
-  </head>
 <body>
-    <header class="event-header">
-        <a href="events.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Events</a>
-        <h1>CONNEXION</h1>
-        <p>The IoT Applications Club launched its first-ever IoT Hackathon, "Connexion", inviting enthusiastic freshmen to explore the vast world of Internet of Things through innovation and teamwork.</p>
-    </header>
-
-    <div class="event-container">
-        <div class="event-details">
-            <img src="../images/connexion.jpg" alt="CONNEXION" class="event-image" style="width: 100%; max-width: 800px; height: auto; border-radius: 8px; margin: 0 auto 2rem; display: block;">
-            
-            <div class="event-section">
-                <h2>About the Event</h2>
-                <p>CONNEXION is IOTA's flagship hackathon designed exclusively for freshmen to dive into the exciting world of IoT. This event provides a platform for budding technologists to connect, collaborate, and create innovative IoT solutions to real-world problems.</p>
-            </div>
-            
-            <div class="event-section">
-                <h2>Event Highlights</h2>
-                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
-                    <li>24-hour hackathon focused on IoT solutions</li>
-                    <li>Beginner-friendly workshops and mentorship</li>
-                    <li>Hands-on experience with IoT hardware and software</li>
-                    <li>Networking with industry professionals</li>
-                    <li>Exciting prizes and goodies for winners</li>
-                </ul>
-            </div>
-            
-            <div class="event-section">
-                <h2>Event Details</h2>
-                <p><strong>Date:</strong> Coming Soon</p>
-                <p><strong>Time:</strong> 24-hour event (overnight)</p>
-                <p><strong>Venue:</strong> Jadavpur University, Kolkata</p>
-                <p><strong>Team Size:</strong> 2-4 members</p>
-                <p><strong>Eligibility:</strong> Open to all first-year students</p>
-            </div>
-            
-            <div class="event-section">
-                <h2>What You'll Learn</h2>
-                <ul style="margin-left: 1.5rem; margin-top: 1rem;">
-                    <li>Basics of IoT and its applications</li>
-                    <li>Working with microcontrollers and sensors</li>
-                    <li>Data collection and analysis</li>
-                    <li>Prototyping and presentation skills</li>
-                </ul>
-            </div>
-            
-            <a href="#" class="btn">Register Now</a>
+    <nav id="navbar">
+        <div class="logo-section">
+            <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+            <div class="nav-separator"></div>
+            <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo" />
         </div>
-    </div>
+        <div class="nav-links">
+            <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
+            <a href="events.html">Events</a>
+            <a href="../../projects/projects.html">Projects</a>
+            <a href="../../team/team.html">Team</a>
+            <a href="../../ABOUT US/about us.html">About Us</a>
+        </div>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </nav>
 
+    <main class="event-split-layout">
+        <div class="poster-col fade-in">
+            <div class="poster-container">
+                <div class="poster-bg"></div>
+                <img src="../images/connexion.png" alt="Connexion Poster" class="poster-img" />
+            </div>
+        </div>
+
+        <div class="content-col fade-in">
+            <span class="hero-tag">Jan 10, 2026</span>
+            <h1>Connexion</h1>
+            <p>IOTA's flagship hackathon designed exclusively for freshmen to dive into the exciting world of IoT. This
+                event provides a platform for budding technologists to connect, collaborate, and create innovative IoT
+                solutions.</p>
+
+            <div class="action-panel">
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Status</p>
+                    <strong style="color: var(--primary-accent); font-size: 1.2rem;">Completed</strong>
+                </div>
+                <a href="../images/brochure_connexion25.pdf" target="_blank" class="event-btn">
+                    Download Official Brochure <i class="fas fa-file-pdf"></i>
+                </a>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3><i class="fas fa-calendar-alt"></i> Finals Date</h3>
+                    <p>10th January, 2026</p>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-users"></i> Team Size</h3>
+                    <p>3 to 5 members per team.</p>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-trophy"></i> Prize Pool</h3>
+                    <p>Total ₹10,000</p>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-map-marker-alt"></i> Venue</h3>
+                    <p>Jadavpur University</p>
+                </div>
+            </div>
+
+            <h2 class="section-title">Event Timeline</h2>
+            <div class="timeline-container fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>10th January , 2026</h4>
+                        <p>Grand Finals: Offline Presentation & Prototype Demo & Result Announcement</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>13th December , 2025</h4>
+                        <p>Round 1 Results: Announcement of Shortlisted Teams</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h4>5th December  , 2025</h4>
+                        <p>Round 1: Preliminary Presentation & Ideas Submission</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title">The Battlefield (Problem Statements)</h2>
+            <p style="color: var(--text-dim); margin-bottom: 2rem;">Choose your mission from our 10 Marvel-inspired IoT
+                challenges:</p>
+            <div class="feature-list"
+                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem;">
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/ironman.png"
+                            onerror="this.src='https://img.icons8.com/color/48/iron-man.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Smart Campus Management</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Energy optimization and real-time
+                        infrastructure response, inspired by Stark Tower.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/quicksilver.png"
+                            onerror="this.src='https://img.icons8.com/color/48/flash-forward.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Ambulance Green Corridor</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">IoT systems to shift traffic lights and clear
+                        paths instantly for ambulances.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/drstrange.png"
+                            onerror="this.src='https://img.icons8.com/color/48/doctor-fate.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Remote Patient Monitoring</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Real-time emergency detection and monitoring
+                        for hospital systems.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/spiderman.png"
+                            onerror="this.src='https://img.icons8.com/color/48/spiderman-head.png'"
+                            style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Crowd Safety & Stampede Risk</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Monitor crowd density and predict surges
+                        before they escalate into crises.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/blackpanther.png"
+                            onerror="this.src='https://img.icons8.com/color/48/black-panther.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Wildlife Conservation</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Anti-poaching network using drones and camera
+                        processing for forest monitoring.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/cap.png"
+                            onerror="this.src='https://img.icons8.com/color/48/captain-america.png'"
+                            style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Child Nutrition Monitoring</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Tracking school meal details, BMI, and flag
+                        irregular growth patterns.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/nickfury.png"
+                            onerror="this.src='https://img.icons8.com/color/48/shield.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Disaster Response</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Digital command center mapping affected zones
+                        via drones and satellites.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/blackwidow.png"
+                            onerror="this.src='https://img.icons8.com/color/48/black-widow.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Women Safety System</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">SOS triggers sharing live location and
+                        context-aware automatic alerts.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/thor.png"
+                            onerror="this.src='https://img.icons8.com/color/48/thor-hammer.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Ferry Service Safety</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">Ensuring waterway safety and collision
+                        prevention during storm conditions.</p>
+                </div>
+                <div class="feature-item" style="flex-direction: column; align-items: flex-start; text-align: left;">
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <img src="../../assets/images/groot.png"
+                            onerror="this.src='https://img.icons8.com/color/48/groot.png'" style="width: 30px;">
+                        <h4 style="color: #fff; margin: 0;">Smart Irrigation</h4>
+                    </div>
+                    <p style="font-size: 0.85rem; color: var(--text-dim);">IoT monitoring of soil moisture and
+                        environmental conditions for optimized water use.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">Event Evaluation</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="feature-text">
+                        <h4>Clarity & Innovation</h4>
+                        <p>Well-defined problems with original, creative, and unique logic.</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="feature-text">
+                        <h4>Feasibility & Scalability</h4>
+                        <p>Practical implementation and potential for expansion to larger scales.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">Event Gallery</h2>
+            <div class="info-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+                <div class="info-box" style="padding: 10px; overflow: hidden; height: 200px;">
+                    <img src="../images/iota1.png" alt="IOTA Project 1"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+                <div class="info-box" style="padding: 10px; overflow: hidden; height: 200px;">
+                    <img src="../images/iota2.png" alt="IOTA Project 2"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+                <div class="info-box" style="padding: 10px; overflow: hidden; height: 200px;">
+                    <img src="../images/iota3.png" alt="IOTA Project 3"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+                <div class="info-box" style="padding: 10px; overflow: hidden; height: 200px;">
+                    <img src="../images/iota4.png" alt="IOTA Project 4"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+                <div class="info-box" style="padding: 10px; overflow: hidden; height: 200px;">
+                    <img src="../images/iota6.png" alt="IOTA Project 6"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+                <div class="info-box" style="padding: 10px; overflow: hidden; height: 200px;">
+                    <img src="../images/iota7.png" alt="IOTA Project 7"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">Winners Circle</h2>
+            <div class="info-grid">
+                <div class="info-box" style="border-left: 4px solid #f1c40f;">
+                    <h3 style="color: #f1c40f;"><i class="fas fa-trophy"></i> 1st Place</h3>
+                    <p style="font-size: 1.2rem; font-weight: 700; color: #fff;">Syntax Error 404</p>
+                </div>
+                <div class="info-box" style="border-left: 4px solid #bdc3c7;">
+                    <h3 style="color: #bdc3c7;"><i class="fas fa-trophy"></i> 2nd Place</h3>
+                    <p style="font-size: 1.2rem; font-weight: 700; color: #fff;">Tech Enovators</p>
+                </div>
+                <div class="info-box" style="border-left: 4px solid #e67e22;">
+                    <h3 style="color: #e67e22;"><i class="fas fa-trophy"></i> 3rd Place</h3>
+                    <p style="font-size: 1.2rem; font-weight: 700; color: #fff;">Byte Busters 2.0</p>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">Round 1 Results</h2>
+            <div class="info-box" style="padding: 1rem; text-align: center;">
+                <img src="../images/CONNEXION'25 Round 1 results.jpeg" alt="Round 1 Results"
+                    style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+            </div>
+
+            <h2 class="section-title" style="margin-top: 3rem;">Event Organizers</h2>
+            <div class="info-grid">
+                <div class="info-box">
+                    <h3><i class="fas fa-portrait"></i> Arghya Pratim Biswas</h3>
+                    <p>+91 89002 96753</p>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-portrait"></i> Subhojit Khatua</h3>
+                    <p>+91 89107 30680</p>
+                </div>
+                <div class="info-box">
+                    <h3><i class="fas fa-portrait"></i> Kousik Kar</h3>
+                    <p>+91 96478 00593</p>
+                </div>
+            </div>
+
+            <a href="events.html" class="event-btn"
+                style="background: transparent; border: 1px solid var(--glass-border); color: #fff; margin-top: 2rem; width: auto; display: inline-flex;">
+                <i class="fas fa-arrow-left"></i> Back to Events
+            </a>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
-        // Add any interactive elements here
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('.fade-in', { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, ease: 'power3.out' });
         });
     </script>
+    <script src="../../loading-screen.js"></script>
+    <script src="../../assets/js/global-nav.js"></script>
+</body>
 
-    <script src="../loading-screen.js"></script>
-  </body>
 </html>
