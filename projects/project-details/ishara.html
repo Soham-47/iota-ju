@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ishara: Touchless HCI | IOTA JU</title>
+
+    <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../../loading-screen.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-accent: #00d4ff;
+            /* Cyan theme for Ishara */
+            --secondary-accent: #007bff;
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../media/teambg.jpg') no-repeat center center/cover;
+            background-blend-mode: overlay;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .bg-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            filter: blur(180px);
+            border-radius: 50%;
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            top: -100px;
+            right: -100px;
+        }
+
+        .blob-2 {
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .project-header-section {
+            padding: 180px 5% 60px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(5, 10, 24, 0.95) 0%, rgba(5, 10, 24, 0) 100%);
+        }
+
+        .project-header-section h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .project-header-section p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .video-section {
+            max-width: 1000px;
+            margin: 2rem auto 4rem;
+            padding: 0 5%;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            border-radius: 30px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .content-grid {
+            max-width: 1200px;
+            margin: 0 auto 6rem;
+            padding: 0 5%;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 3rem;
+            height: fit-content;
+        }
+
+        .glass-panel h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .glass-panel h2 i {
+            color: var(--primary-accent);
+        }
+
+        .feature-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .feature-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: '\f058';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--primary-accent);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: #fff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            margin-top: 2rem;
+        }
+
+        .back-btn:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+        }
+
+        @media (max-width: 992px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav id="navbar">
+        <div class="logo-section">
+            <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+            <div class="nav-separator"></div>
+            <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo" />
+        </div>
+        <div class="nav-links">
+            <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
+            <a href="../../EVENTS (2)/views/events.html">Events</a>
+            <a href="../projects.html" class="active">Projects</a>
+            <a href="../../team/team.html">Team</a>
+            <a href="../../ABOUT US/about us.html">About Us</a>
+        </div>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <header class="project-header-section">
+        <h1 class="fade-in">Ishara: Touchless HCI</h1>
+        <p class="fade-in">Real-Time Human–Computer Interface for Media Control using Hand Gestures on Edge Devices –
+            Bharat AI-SOC Student Challenge.</p>
+    </header>
+
+    <main class="content-grid">
+        <div class="fade-in">
+            <!-- Video Showcase -->
+            <section class="video-container" style="margin-bottom: 4rem;">
+                <video controls>
+                    <source src="../media/ARM-SOC.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </section>
+
+            <div class="glass-panel" style="margin-bottom: 3rem;">
+                <h2><i class="fas fa-medal"></i> Recognition</h2>
+                <p>This project was selected as a finalist in the Bharat AI-SOC Student Challenge, demonstrating the
+                    power of Edge AI in creating intuitive, touchless user experiences.</p>
+
+                <div style="margin-top: 2rem; margin-bottom: 4rem;">
+                    <img src="../media/finalist list.jpeg" alt="Bharat AI-SOC Finalist List"
+                        style="width: 100%; border-radius: 20px; border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+                    <p style="text-align: center; color: var(--text-dim); margin-top: 1rem; font-style: italic;">
+                        Official Selection List: Bharat AI-SOC Student Challenge</p>
+                </div>
+
+                <h2 style="margin-top: 5rem;"><i class="fas fa-hand-paper"></i> Project Overview</h2>
+                <p>Ishara is a high-performance touchless interface designed for the <strong>Bharat AI-SOC Student
+                        Challenge</strong>. It leverages advanced skeletal tracking to control media players with zero
+                    physical contact, optimized specifically for the Raspberry Pi 5.</p>
+
+                <h2 style="margin-top: 5rem;"><i class="fas fa-cogs"></i> Technical Innovations</h2>
+                <ul class="feature-list">
+                    <li><strong>MediaPipe BlazePalm Integration:</strong> Implements 21-point skeletal tracking,
+                        replacing noise-sensitive contour methods with robust 3D topology.</li>
+                    <li><strong>HFSM Optimization:</strong> Engineered a Hierarchical Finite State Machine to replace
+                        heavy ML classifiers, reducing CPU load to an ultra-lean 16.9%.</li>
+                    <li><strong>Scale-Invariant Algorithm:</strong> Uses centroid normalization, allowing seamless
+                        operation at distances up to 2.4 meters.</li>
+                    <li><strong>Sliding Window Median Filter:</strong> Eliminates tracking jitter, maintaining a
+                        deterministic latency of 150ms.</li>
+                    <li><strong>Asynchronous Execution:</strong> Utilizes Pynput for real-time HID command emulation to
+                        control VLC Media Player.</li>
+                </ul>
+            </div>
+
+            <a href="../projects.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+        </div>
+
+        <aside class="fade-in">
+            <div class="glass-panel" style="padding: 2rem; margin-bottom: 2rem;">
+                <h2 style="font-size: 1.4rem;"><i class="fas fa-bolt"></i> Performance</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="stat-value">96%</div>
+                        <div class="stat-label">Accuracy Rate</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">16.9%</div>
+                        <div class="stat-label">CPU Load</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value">150ms</div>
+                        <div class="stat-label">System Latency</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel" style="padding: 2rem;">
+                <h2 style="font-size: 1.4rem;"><i class="fas fa-folder-open"></i> Project Files</h2>
+                <ul class="feature-list" style="margin-top: 1rem;">
+                    <li><a href="../media/HCI For Media Control paper.pdf" target="_blank"
+                            style="color: var(--primary-accent); text-decoration: none;">Research Paper <i
+                                class="fas fa-file-pdf"></i></a></li>
+                    <li><a href="../media/User Manual ARM gesture.pdf" target="_blank"
+                            style="color: var(--primary-accent); text-decoration: none;">User Manual <i
+                                class="fas fa-book"></i></a></li>
+                </ul>
+            </div>
+        </aside>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap !== 'undefined') {
+                gsap.from('.fade-in', { opacity: 0, y: 30, stagger: 0.15, duration: 1, ease: 'power3.out' });
+                window.addEventListener('scroll', () => {
+                    const nav = document.getElementById('navbar');
+                    if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }
+                    else { nav.classList.remove('nav-scrolled'); }
+                });
+            }
+        });
+    </script>
+    <script src="../../loading-screen.js"></script>
+    <script src="../../assets/js/global-nav.js"></script>
+</body>
+
+</html>
