@@ -148,15 +148,28 @@ nav.scrolled {
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   opacity: 0;
   visibility: hidden;
   transition: opacity 1s ease-in-out, visibility 1s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10%;
 }
 
 .hero-slide.active {
   opacity: 1;
   visibility: visible;
+}
+
+.slide-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 .hero-overlay {
@@ -172,15 +185,24 @@ nav.scrolled {
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 800px;
+  max-width: 850px;
   color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.4s;
+}
+
+.hero-slide.active .hero-content {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-title {
-  font-size: 3.5rem;
-  line-height: 1.2;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
   margin-bottom: 1.5rem;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 900;
 }
 
 .hero-title span {
@@ -256,6 +278,27 @@ nav.scrolled {
   background: #f39c12;
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(241, 196, 15, 0.4);
+}
+
+/* Slide Specific Content Styles */
+.slide-tag {
+  display: inline-block;
+  padding: 0.5rem 1.2rem;
+  background: rgba(0, 191, 166, 0.2);
+  color: var(--primary);
+  border: 1px solid rgba(0, 191, 166, 0.3);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.slide-btns {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 /* Sections */

@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero Content Animation
+        /*
         gsap.from('.hero-content', {
             y: 50,
             opacity: 0,
@@ -37,6 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: 'power3.out',
             delay: 0.5
         });
+        */
 
         // Section Animations
         const sections = document.querySelectorAll('.content-card');
@@ -67,6 +68,50 @@ document.addEventListener('DOMContentLoaded', () => {
                     toggleActions: 'play none none reverse'
                 }
             });
+        });
+    }
+    // --- Contact Form Handling (AJAX) ---
+    const contactForm = document.getElementById('footer-contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('.footer-btn');
+            const originalText = btn.textContent;
+
+            const formData = new FormData(contactForm);
+
+            // Visual Feedback: Sending state
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    btn.textContent = 'Message Sent! ✓';
+                    btn.style.background = '#27ae60';
+                    contactForm.reset();
+                } else {
+                    btn.textContent = 'Error! Try again';
+                    btn.style.background = '#e74c3c';
+                }
+            } catch (error) {
+                btn.textContent = 'Failed to send';
+                btn.style.background = '#e74c3c';
+            }
+
+            // Restore button state after delay
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                btn.disabled = false;
+            }, 3000);
         });
     }
 });

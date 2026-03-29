@@ -360,12 +360,12 @@
     <!-- Event 0: Drone Development Workshop -->
     <div class="event-card reveal-left">
       <div class="card-img-container">
-        <img src="../images/drone_workshop_poster.png" alt="Drone Workshop">
+        <img src="https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?auto=format&fit=crop&q=80&w=2000"
+          alt="Drone Workshop">
       </div>
       <div class="card-content">
         <span class="event-status"
-          style="color:#00d2ff; border-color:rgba(0,210,255,0.2); background:rgba(0,210,255,0.1)">Upcoming Batch
-          2026</span>
+          style="color:#00d2ff; border-color:rgba(0,210,255,0.2); background:rgba(0,210,255,0.1)">Upcoming</span>
         <h2
           style="background:linear-gradient(135deg, #fff, #00d2ff); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">
           Drone Development Workshop</h2>
@@ -546,12 +546,12 @@
 
       <div class="footer-col contact-col">
         <h4>Get in Touch</h4>
-        <form class="contact-form">
+        <form action="https://formspree.io/f/meepaajl" method="POST" class="contact-form" id="footer-contact-form">
           <div class="form-group">
-            <input type="email" class="footer-input" placeholder="Your Email Address" required>
+            <input type="email" name="email" class="footer-input" placeholder="Your Email Address" required>
           </div>
           <div class="form-group">
-            <textarea class="footer-input" rows="2" placeholder="Your Message" required></textarea>
+            <textarea name="message" class="footer-input" rows="2" placeholder="Your Message" required></textarea>
           </div>
           <button type="submit" class="footer-btn">Send Message</button>
         </form>
@@ -598,6 +598,46 @@
           if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }
           else { nav.classList.remove('nav-scrolled'); }
         });
+
+        // Contact Form AJAX Handling
+        const contactForm = document.getElementById('footer-contact-form');
+        if (contactForm) {
+          contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = contactForm.querySelector('.footer-btn');
+            const originalText = btn.textContent;
+            const formData = new FormData(contactForm);
+
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            try {
+              const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+              });
+
+              if (response.ok) {
+                btn.textContent = 'Message Sent! ✓';
+                btn.style.background = '#27ae60';
+                contactForm.reset();
+              } else {
+                btn.textContent = 'Error! Try again';
+                btn.style.background = '#e74c3c';
+              }
+            } catch (error) {
+              btn.textContent = 'Failed to send';
+              btn.style.background = '#e74c3c';
+            }
+
+            setTimeout(() => {
+              btn.textContent = originalText;
+              btn.style.background = '';
+              btn.disabled = false;
+            }, 3000);
+          });
+        }
       }
     });
   </script>
