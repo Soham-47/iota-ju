@@ -79,7 +79,7 @@
         }
 
         .project-header-section h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.2rem, 8vw, 4rem);
             font-weight: 800;
             font-family: 'Montserrat', sans-serif;
             margin-bottom: 1rem;
@@ -90,7 +90,7 @@
         }
 
         .project-header-section p {
-            font-size: 1.2rem;
+            font-size: clamp(1rem, 4vw, 1.2rem);
             color: var(--text-dim);
             max-width: 800px;
             margin: 0 auto;
@@ -417,7 +417,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             if (typeof gsap !== 'undefined') {
-                gsap.from('.fade-in', { opacity: 0, y: 30, stagger: 0.15, duration: 1, ease: 'power3.out' });
+                gsap.from('.fade-in', { opacity: 0, y: 30, stagger: 0.15, duration: 1, ease: 'power3.out', delay: 0.2 });
                 window.addEventListener('scroll', () => {
                     const nav = document.getElementById('navbar');
                     if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }

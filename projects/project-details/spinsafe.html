@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>VoxVision - Voice-to-Secure-PDF Exam System | IOTA JU</title>
+    <title>SpinSafe: Predictive Maintenance | IOTA JU</title>
 
     <link rel="stylesheet" href="../../assets/css/global-nav.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
@@ -14,9 +14,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
         :root {
-            --primary-accent: #ff8c00;
-            /* Orange theme for VoxVision */
-            --secondary-accent: #ff4500;
+            --primary-accent: #00d2ff;
+            /* Cyan for industrial tech */
+            --secondary-accent: #3a7bd5;
             --bg-dark: #050a18;
             --card-bg: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -80,7 +80,7 @@
         }
 
         .project-header-section h1 {
-            font-size: clamp(2.2rem, 8vw, 4rem);
+            font-size: clamp(2.2rem, 8vw, 4.5rem);
             font-weight: 800;
             font-family: 'Montserrat', sans-serif;
             margin-bottom: 1rem;
@@ -113,13 +113,12 @@
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
         }
 
-        .video-container video {
+        .video-container iframe {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
         }
 
         .content-grid {
@@ -165,6 +164,7 @@
             margin-bottom: 1rem;
             color: var(--text-dim);
             font-size: 0.95rem;
+            line-height: 1.6;
         }
 
         .feature-list li::before {
@@ -223,7 +223,7 @@
 
         .back-btn:hover {
             transform: translateX(-5px);
-            box-shadow: 0 10px 20px rgba(255, 140, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 210, 255, 0.2);
         }
 
         @media (max-width: 992px) {
@@ -255,46 +255,43 @@
     <div class="bg-blob blob-2"></div>
 
     <header class="project-header-section">
-        <h1 class="fade-in">VoxVision: Voice-to-Secure-PDF</h1>
-        <p class="fade-in">Empowering visually impaired and specially-abled students with an accessible, offline, and
-            multilingual examination system.</p>
+        <h1 class="fade-in">SpinSafe: Edge-Native Predictive Maintenance</h1>
+        <p class="fade-in">Transforming legacy industrial machinery into self-diagnosing smart hardware through
+            high-speed, closed-loop ML architecture.</p>
     </header>
 
     <main class="content-grid">
         <div class="fade-in">
             <!-- Video Showcase -->
             <section class="video-container" style="margin-bottom: 4rem;">
-                <video controls
-                    poster="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=2000">
-                    <source src="../media/voxvision.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/_8wifhkLEeQ"
+                    title="SpinSafe Project Demo" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen style="border-radius: 30px;"></iframe>
             </section>
 
             <div class="glass-panel" style="margin-bottom: 3rem;">
-                <h2><i class="fas fa-eye-slash"></i> Project Mission</h2>
-                <p>VoxVision is an inclusive, voice-powered examination system designed to replace traditional scribes
-                    for visually impaired students. It provides a screen-less, tactile hardware interface that allows
-                    students to navigate, listen, and speak their answers naturally and securely.</p>
+                <h2><i class="fas fa-industry"></i> Industrial Revolution at the Edge</h2>
+                <p>SpinSafe is an autonomous predictive maintenance system designed to modernize legacy industrial
+                    motors. By shifting intelligence from the cloud to the hardware itself, it enables sub-second
+                    reaction times to mechanical anomalies.</p>
+                <p>The system utilizes a retrofittable hardware node that captures multi-axis vibration, temperature,
+                    and electrical load data, processing it through a local AI gateway that retrains its models every 10
+                    seconds to adapt to each specific motor's "healthy" baseline.</p>
 
-                <h2 style="margin-top: 3rem;"><i class="fas fa-laptop-code"></i> Key Features</h2>
+                <h2 style="margin-top: 3rem;"><i class="fas fa-shield-virus"></i> Core Innovations</h2>
                 <ul class="feature-list">
-                    <li><strong>Hybrid Online/Offline System:</strong> Operates fully offline during exams for maximum
-                        reliability.</li>
-                    <li><strong>Tactile Hardware Interface:</strong> Screen-less device with physical buttons optimized
-                        for blind users.</li>
-                    <li><strong>15+ Indian Languages:</strong> Comprehensive support for regional languages using AI
-                        STT/TTS models.</li>
-                    <li><strong>AES-256 Encryption:</strong> Generates secure, encrypted PDFs and verifiable audit logs.
-                    </li>
-                    <li><strong>Automated Workflows:</strong> Seamlessly converts standard Excel question sheets into
-                        voice-based exams.</li>
+                    <li><strong>Dynamic Baseline Learning:</strong> Retrains a Decision Tree classifier every 10 seconds
+                        to detect unique precursors to failure.</li>
+                    <li><strong>Hardware-Level Interrupts:</strong> Bypasses network latency to cut power in
+                        milliseconds during critical failures.</li>
+                    <li><strong>Multi-Sensor Fusion:</strong> Integrates MPU6050 vibration analysis with thermal and
+                        current telemetry.</li>
+                    <li><strong>Zero-Cloud Dependency:</strong> Operates fully at the edge, ensuring security and
+                        maximum uptime for industrial networks.</li>
+                    <li><strong>Legacy Integration:</strong> Designed as a retrofittable node for rapid deployment
+                        across existing motor fleets.</li>
                 </ul>
-
-                <h2 style="margin-top: 3rem;"><i class="fas fa-shield-alt"></i> Technical Integrity</h2>
-                <p>By leveraging Edge AI on dedicated hardware, VoxVision ensures that all sensitive audio and text data
-                    remains encrypted and stored locally, synchronized with a secure web dashboard only under authorized
-                    administrator supervision.</p>
             </div>
 
             <a href="../projects.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
@@ -302,34 +299,30 @@
 
         <aside class="fade-in">
             <div class="glass-panel" style="padding: 2rem; margin-bottom: 2rem;">
-                <h2 style="font-size: 1.4rem;"><i class="fas fa-check-circle"></i> Social Impact</h2>
+                <h2 style="font-size: 1.4rem;"><i class="fas fa-tachometer-alt"></i> Edge Performance</h2>
                 <div class="stats-grid">
                     <div class="stat-box">
-                        <div class="stat-value">15+</div>
-                        <div class="stat-label">Regional Languages</div>
+                        <div class="stat-value">1ms</div>
+                        <div class="stat-label">Reaction Latency</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value">100%</div>
-                        <div class="stat-label">Offline Reliability</div>
+                        <div class="stat-value">10s</div>
+                        <div class="stat-label">Model Retraining Cycles</div>
                     </div>
                     <div class="stat-box">
-                        <div class="stat-value">AES</div>
-                        <div class="stat-label">256-bit Encryption</div>
+                        <div class="stat-value">99.8%</div>
+                        <div class="stat-label">Uptime Prediction Accuracy</div>
                     </div>
                 </div>
             </div>
 
             <div class="glass-panel" style="padding: 2rem;">
-                <h2 style="font-size: 1.4rem;"><i class="fas fa-external-link-alt"></i> Resources</h2>
+                <h2 style="font-size: 1.4rem;"><i class="fas fa-microchip"></i> Hardware Node</h2>
                 <ul class="feature-list" style="margin-top: 1rem;">
-                    <li><a href="https://voxvision-vaanika.vercel.app/" target="_blank"
-                            style="color: var(--primary-accent); text-decoration: none;">Live Web Dashboard <i
-                                class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i></a></li>
-                    <li><a href="../images/VoxVision_Secure_Voice_Assessments.pdf" target="_blank"
-                            style="color: var(--primary-accent); text-decoration: none;">Project Report (PDF) <i
-                                class="fas fa-file-pdf" style="font-size: 0.8rem;"></i></a></li>
-                    <li>AI Speech-to-Text Engine</li>
-                    <li>Multi-Robot Coordination Hub</li>
+                    <li>ESP32 Edge Processing Unit</li>
+                    <li>MPU6050 6-Axis Accelerometer</li>
+                    <li>Non-Invasive Current Sensors</li>
+                    <li>Precision Thermal Probes</li>
                 </ul>
             </div>
         </aside>
