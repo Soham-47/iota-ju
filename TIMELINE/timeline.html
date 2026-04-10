@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeline - IOTA</title>
+    <link rel="stylesheet" href="../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../loading-screen.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary-accent: #3b82f6;
+            --secondary-accent: #00d4ff;
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Abstract background */
+        .bg-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            filter: blur(180px);
+            border-radius: 50%;
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            top: -100px;
+            right: -100px;
+        }
+
+        .blob-2 {
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header Section */
+        .timeline-header {
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .timeline-header h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        .timeline-header p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* Timeline Structure */
+        .timeline-container {
+            position: relative;
+            padding: 50px 0 150px;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom,
+                    transparent,
+                    var(--primary-accent),
+                    var(--secondary-accent),
+                    transparent);
+            opacity: 0.3;
+        }
+
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 50%;
+            margin-bottom: 80px;
+            position: relative;
+            width: 100%;
+        }
+
+        .timeline-item:nth-child(even) {
+            justify-content: flex-start;
+            padding-right: 0;
+            padding-left: 50%;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--primary-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary-accent);
+            z-index: 1;
+        }
+
+        .timeline-content {
+            width: 90%;
+            max-width: 450px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 0 40px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .timeline-item:hover .timeline-content {
+            border-color: var(--primary-accent);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .timeline-date {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--primary-accent);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+        }
+
+        .timeline-content p {
+            color: var(--text-dim);
+            line-height: 1.7;
+            font-weight: 300;
+            font-size: 1rem;
+        }
+
+        /* Progress Line Animation */
+        .timeline-progress {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 0%;
+            background: linear-gradient(to bottom, var(--primary-accent), var(--secondary-accent));
+            z-index: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+
+            .timeline-container::before,
+            .timeline-progress {
+                left: 30px;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                justify-content: flex-start;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .timeline-content {
+                margin: 0;
+                max-width: 100%;
+            }
+        }
+
+        /* Footer Adjustment */
+        .footer-alt {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Standardized Navigation -->
+    <nav id="navbar">
+        <div class="logo-section">
+            <img src="../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+            <div class="nav-separator"></div>
+            <img src="../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo" />
+        </div>
+
+        <div class="nav-links">
+            <a href="../HOME/homepage-of-iota-main/home.html">Home</a>
+            <a href="../EVENTS (2)/views/events.html">Events</a>
+            <a href="../projects/projects.html">Projects</a>
+            <a href="../team/team.html">Team</a>
+            <a href="../TIMELINE/timeline.html" class="active">Timeline</a>
+            <a href="../ALUMNI/alumni.html">Alumni</a>
+            <a href="../ABOUT US/about us.html">About Us</a>
+        </div>
+
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <section class="container timeline-header">
+        <h1>JOURNEY OF IOTA</h1>
+        <p>From a small group of hardware enthusiasts to the official IoT Applications Club of Jadavpur University.
+            Here's our story of innovation and growth.</p>
+    </section>
+
+    <div class="container timeline-container">
+        <div class="timeline-progress" id="progress-line"></div>
+
+        <!-- Timeline Item 1 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">August 2023</span>
+                <h3>The Genesis</h3>
+                <p>IOTA Club was officially conceptualized and founded by a group of passionate students at Jadavpur
+                    University Main Campus, aiming to create a dedicated space for IoT and hardware innovation.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 2 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">September 2023</span>
+                <h3>Recruitment Drive</h3>
+                <p>Conducted the first official recruitment drive, onboarding 25+ talented members across hardware,
+                    software, and design domains.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 3 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">October 2023</span>
+                <h3>First Workshop: 'IoT Basics'</h3>
+                <p>Launched our first hands-on workshop, introducing students to ESP32, sensors, and cloud integration.
+                    Over 100 students participated in the session.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 4 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">December 2023</span>
+                <h3>Project 'Ishara' Phase 1</h3>
+                <p>Kicked off our flagship project 'Ishara' - a smart sign-language translator, utilizing advanced
+                    sensor integration and AI-based gesture recognition.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 5 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">February 2024</span>
+                <h3>Hackathon Success</h3>
+                <p>IOTA teams participated and secured top positions in several inter-university hackathons, showcasing
+                    projects like 'VoxVision' and the IoT-based 'Road Anomaly Detector'.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 6 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">April 2024</span>
+                <h3>'Code-To-Flight' Bootcamp</h3>
+                <p>Organized a massive multi-day drone bootcamp, covering everything from flight dynamics to autonomous
+                    navigation using Pixhawk and Raspberry Pi.</p>
+            </div>
+        </div>
+
+        <!-- Timeline Item 7 -->
+        <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+                <span class="timeline-date">January 2025</span>
+                <h3>Industry Collaborations</h3>
+                <p>Established partnerships with local hardware startups and tech companies to facilitate internships
+                    and industrial project opportunities for our members.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="new-footer footer-alt">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="footer-logo">
+                <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a
+                    better tomorrow.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL"
+                        target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/facebook (2).png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/iota_ju/" target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/Instagram (2).png" alt="Instagram"></a>
+                    <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all"
+                        target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/Linkedin (2).png" alt="LinkedIn"></a>
+                    <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/Github.png" alt="GitHub"></a>
+                </div>
+            </div>
+            <div class="footer-col links-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../HOME/homepage-of-iota-main/home.html">Home</a></li>
+                    <li><a href="../EVENTS (2)/views/events.html">Events</a></li>
+                    <li><a href="../projects/projects.html">Projects</a></li>
+                    <li><a href="../team/team.html">Team</a></li>
+                    <li><a href="../TIMELINE/timeline.html">Timeline</a></li>
+                    <li><a href="../ALUMNI/alumni.html">Alumni</a></li>
+                    <li><a href="../ABOUT US/about us.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col map-col">
+                <h4>Locate Us</h4>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="../loading-screen.js"></script>
+    <script src="../assets/js/global-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Hero animations
+            gsap.from('.timeline-header h1', {
+                opacity: 0,
+                y: 40,
+                duration: 1,
+                ease: 'power4.out'
+            });
+
+            gsap.from('.timeline-header p', {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                delay: 0.3,
+                ease: 'power3.out'
+            });
+
+            // Progress bar animation
+            gsap.to('#progress-line', {
+                height: '100%',
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: '.timeline-container',
+                    start: 'top 30%',
+                    end: 'bottom 50%',
+                    scrub: 1
+                }
+            });
+
+            // Timeline items reveal
+            const items = document.querySelectorAll('.timeline-content');
+            items.forEach((item, index) => {
+                gsap.to(item, {
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    },
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: 'power2.out',
+                    delay: 0.1
+                });
+            });
+
+            // Dots highlight
+            const dots = document.querySelectorAll('.timeline-dot');
+            dots.forEach((dot) => {
+                gsap.to(dot, {
+                    scrollTrigger: {
+                        trigger: dot,
+                        start: 'top 60%',
+                        onEnter: () => dot.style.background = '#00d4ff',
+                        onLeaveBack: () => dot.style.background = '#3b82f6'
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
