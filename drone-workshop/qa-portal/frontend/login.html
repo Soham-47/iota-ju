@@ -260,6 +260,7 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script>
         let isLoginMode = false;
         const formTitle = document.getElementById('form-title');
@@ -302,7 +303,7 @@
             const payload = isLoginMode ? { email, password } : { name, email, password };
 
             try {
-                const response = await fetch(`http://localhost:8000${endpoint}`, {
+                const response = await fetch(`${API_CONFIG.BASE_URL}${endpoint}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
@@ -320,6 +321,7 @@
                     document.querySelector('.container').style.transition = 'all 0.4s ease';
 
                     setTimeout(() => {
+                        const ws = new WebSocket(`${API_CONFIG.WS_URL}/ws/participant?token=${data.access_token}`);
                         window.location.href = "participant.html";
                     }, 400);
                 } else {

@@ -504,6 +504,7 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script>
         const token = localStorage.getItem('auth_token');
         const userName = localStorage.getItem('user_name');
@@ -519,7 +520,7 @@
             window.location.href = "login.html";
         }
 
-        const ws = new WebSocket(`ws://localhost:8000/ws/participant?token=${token}`);
+        const ws = new WebSocket(`${API_CONFIG.WS_URL}/ws/participant?token=${token}`);
         const chat = document.getElementById("chat");
         const form = document.getElementById("qa-form");
         const input = document.getElementById("question-input");

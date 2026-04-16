@@ -477,8 +477,9 @@
         </div>
     </div>
 
+    <script src="config.js"></script>
     <script>
-        const ws = new WebSocket(`ws://localhost:8000/ws/organizer`);
+        const ws = new WebSocket(`${API_CONFIG.WS_URL}/ws/organizer`);
         const questionList = document.getElementById("question-list");
         const emptyState = document.getElementById("empty-state");
         const replyPane = document.getElementById("reply-pane");
