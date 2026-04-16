@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IOTA - Loading...</title>
-    
+
     <!-- Global Loader CSS -->
     <link rel="stylesheet" href="assets/css/global-loader.css">
-    
+
     <style>
         /* Hide content until fully loaded */
         html:not(.loaded) {
@@ -15,14 +16,14 @@
             height: 100%;
             overflow: hidden;
         }
-        
+
         /* Show content after loading is complete */
         html.loaded {
             visibility: visible;
             height: auto;
             overflow: auto;
         }
-        
+
         /* Basic page styles */
         body {
             margin: 0;
@@ -33,18 +34,19 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Content will be loaded dynamically -->
-    
+
     <!-- Global Loader Script -->
     <script src="assets/js/global-loader.js"></script>
-    
+
     <script>
         // Show the page once the loading screen is ready
         document.addEventListener('DOMContentLoaded', () => {
             // Check if the page has been loaded before
             const hasLoadedBefore = localStorage.getItem('pageLoaded');
-            
+
             if (!hasLoadedBefore) {
                 // First time load - show loader
                 document.documentElement.classList.add('loaded');
@@ -54,19 +56,20 @@
                 document.documentElement.classList.add('loaded');
                 document.querySelector('html').style.visibility = 'visible';
             }
-            
+
             // Check if the user has seen the intro before
             const hasSeenIntro = sessionStorage.getItem('introShown');
-            
+
             // Redirect after a small delay to allow loading screen to initialize
             setTimeout(() => {
                 if (hasSeenIntro) {
-                    window.location.href = '/HOME/homepage-of-iota-main/home.html';
+                    window.location.href = 'HOME/homepage-of-iota-main/home.html';
                 } else {
-                    window.location.href = '/INTRO/intro.html';
+                    window.location.href = 'INTRO/intro.html';
                 }
             }, hasLoadedBefore ? 0 : 100); // No delay for subsequent visits
         });
     </script>
 </body>
+
 </html>
