@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team - IOTA</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../assets/css/global-nav.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .member-card {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      transition: background 0.3s, border-color 0.3s, box-shadow 0.3s !important;
+    }
+
+    .member-title {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    /* Hero Section Responsiveness */
+    @media (max-width: 768px) {
+      .hero {
+        height: auto;
+        padding-top: 100px;
+        justify-content: center;
+      }
+
+      .herocontent {
+        flex-direction: column;
+        height: auto;
+        width: 95vw;
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .teamlogo {
+        height: 8rem;
+        margin-top: 0;
+      }
+
+      .teamabout {
+        font-size: 1.1rem;
+        padding: 20px;
+        text-align: center;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+
+      .group-photo-text {
+        font-size: 2rem;
+      }
+    }
+
+    .herocontent {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.5s ease;
+    }
+
+    .group-photo-img {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.5s ease;
+    }
+
+    /* Prevent content from being stuck in invisible state */
+    @media (max-width: 768px) {
+
+      .herocontent,
+      .group-photo-img,
+      .member-card,
+      .member-title {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="../loading-screen.css">
+</head>
+
+<body>
+  <!-- Standardized Navigation -->
+  <nav id="navbar">
+    <div class="logo-section">
+      <img src="images/logo.png" alt="IOTA Logo" class="nav-logo" />
+      <div class="nav-separator"></div>
+      <img src="images/JULogo.png" alt="JU Logo" class="nav-logo" />
+    </div>
+
+    <div class="nav-links">
+      <a href="../HOME/homepage-of-iota-main/home.html">Home</a>
+      <a href="../EVENTS (2)/views/events.html">Events</a>
+      <a href="../projects/projects.html">Projects</a>
+      <a href="team.html" class="active">Team</a>
+      <a href="../TIMELINE/timeline.html">Timeline</a>
+      <a href="../ALUMNI/alumni.html">Alumni</a>
+      <a href="../ABOUT US/about us.html">About Us</a>
+    </div>
+
+    <div class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="herocontent">
+      <img class="teamlogo" src="images/logo.png" alt="IOTA Logo" />
+      <div class="teamabout">
+        <strong>IOTA</strong> is the official student-run IoT and Embedded Systems club of <strong>Jadavpur
+          University</strong>. <br /><br />
+        We are a community of passionate students exploring the world of <strong>Internet of Things, robotics, hardware
+          prototyping, and innovation</strong>. <br /><br />
+        From organizing workshops and hackathons to building real-world tech projects, we aim to bridge theory with
+        hands-on experience.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="group-photo-section">
+    <img src="images/groupdp.jpg" alt="Group Photo" class="group-photo-img" />
+
+  </div>
+
+  <div class="teammembers">
+    <h2 class="member-title scale">FACULTY ADVISORS</h2>
+    <div class="member-grid1">
+      <div class="member-card mentor-card">
+        <img src="images/shelimaam.jpeg" alt="Dr. Sheli Sinha Chaudhuri" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Dr. Sheli Sinha Chaudhuri</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/sheli-sinha-chaudhuri-69333a299/?originalSubdomain=in"
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:sheli.sinha@jadavpuruniversity.in" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member-card mentor-card">
+        <img src="images/chinmoysir.jpeg" alt="Dr. Chinmoy Ghorai" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Dr. Chinmoy Ghorai</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/dr-chinmoy-ghorai-30717224/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:chinmoy.ghorai@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="member-card mentor-card">
+        <img src="images/chandrimamondal.png" alt="Prof. Chandrima Mondal" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Dr. Chandrima Mondal</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <!-- Social links to be added if provided -->
+          </div>
+        </div>
+      </div>
+
+      <div class="member-card mentor-card">
+        <img src="images/pvsir.png" alt="Prof. P. Venkateswaran" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Prof. P. Venkateswaran</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <!-- Social links to be added if provided -->
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div class="teammembers board-members">
+    <h2 class="member-title scale">BOARD MEMBERS</h2>
+    <div class="board-grid">
+      <div class="member-card">
+        <img src="images/saptarshi.jpeg" alt="Saptarshi Garai" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Saptarshi Garai</p>
+          <p class="member-post scale">President</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/saptarshi-garai-14b918248" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:saptarshigarai01@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="member-card">
+        <img src="images/Koach.png" alt="Anish Chanda" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Anish Chanda</p>
+          <p class="member-post scale">Vice President</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/anish-chanda-8ab128282" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:anish.chanda28@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="member-card">
+        <img src="images/Anurag.jpeg" alt="Anurag Kar" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Anurag Kar</p>
+          <p class="member-post scale">Joint Secretary</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/anurag-kar-4a3607324" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:anuragkar660@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="member-card">
+        <img src="images/Nayan.png" alt="Nayan Singha" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Nayan Singha</p>
+          <p class="member-post scale">Joint Secretary</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/nayan-singha-b7b9a1351/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:singhnayan007@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="member-card">
+        <img src="images/srijan.jpg" alt="Srijan Roy" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Srijan Roy</p>
+          <p class="member-post scale">Joint Secretary</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/srijan-roy-197b49281/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:srijanroysr10@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="member-card">
+        <img src="images/parthiv.jpeg" alt="Parthiv Paul" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Parthiv Paul</p>
+          <p class="member-post scale">Joint Secretary</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/parthiv-paul-b1579b289" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:parthivpaul1@gmail.com"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teammembers">
+    <h2 class="member-title scale">SOFTWARE TEAM</h2>
+    <div class="member-grid centered-grid">
+      <!-- soumojeet pan -->
+      <div class="member-card">
+        <img src="images/soumojeet.jpg" alt="Soumojeet Pan" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Soumojeet Pan</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Soumojeet2910P" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/soumojeet-pan-984068371/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:pansoumo29@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Arghya pratim biswas -->
+      <div class="member-card">
+        <img src="images/arghyapratim.jpg" alt="Arghya Pratim Biswas" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Arghya Pratim Biswas</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://gitHub.com/arghya1506" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/arghya-pratim-biswas-ab7993328?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:apbiswas15a06r2005g@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/_ig_arghya_/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- soham saha -->
+      <div class="member-card">
+        <img src="images/sohamsaha.jpg" alt="Soham Saha" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Soham Saha</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Soham-47" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="http://www.linkedin.com/in/soham-saha-0bba8b284" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:sohamsaha291@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+
+          </div>
+        </div>
+      </div>
+      <!-- Aratrika Pahari -->
+      <div class="member-card">
+        <img src="images/aratrikapahari.jpg" alt="Aratrika Pahari" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Aratrika Pahari</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/arghya-pratim-biswas-ab7993328?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:apbiswas15a06r2005g@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Kousik kar -->
+      <div class="member-card">
+        <img src="images/koushikkar.jpeg" alt="Koushik Kar" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Koushik Kar</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/kousik2006" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/kousik-kar-973b31328/"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:kousikkar40@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/_kousik_kar?igsh=MW80ZGl1OGlpZWtkaQ==" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Arnab kuiry -->
+      <div class="member-card">
+        <img src="images/arnabkuiry.jpg" alt="Arnab Kuiry" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Arnab Kuiry</p>
+          <p class="member-post scale">Department of Computer Science Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/CrazyAssassin24" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/arnab-kuiry-b35027346" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:arnabkuiry123@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/crazy_assassin2024?igsh=MTh0eHFqbGY2ZmhlMA==" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teammembers">
+    <h2 class="member-title scale">ELECTRONICS TEAM</h2>
+    <div class="member-grid centered-grid">
+      <!-- Soumyajit bhowal -->
+      <div class="member-card">
+        <img src="images/soumajitbhowal.png" alt="Soumajit Bhowal" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Soumyajit Bhowal</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/soumyajit-bhowal-70aa53321" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/soumyabhowal05-debug" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="member-grid centered-grid">
+
+      <!-- Arnab Karmakar -->
+      <div class="member-card">
+        <img src="images/arnabkarmakar.jpg" alt="Arnab Karmakar" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Arnab Karmakar</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.instagram.com/a.k_4_p/" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:arnabk.2019@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/arnab-karmakar-795252211/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- suvojit khatua -->
+      <div class="member-card">
+        <img src="images/subhojeetkhatua.jpeg" alt="Subhojit Khatua" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Subhojit Khatua</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/subhojit-khatua-71b163331" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:subhojitkhatua8@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/frinken_stein?igsh=YTJsZm02N3VmZ2tk" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://github.com/zerebo-hub" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Pushpal bhar -->
+      <div class="member-card">
+        <img src="images/pushpalbhar.jpeg" alt="Pushpal Bhar" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Pushpal Bhar</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/pushpal-bhar-326b53315/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:pushpalbhar5@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/bharpushpal_2108" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Tuhin roy -->
+      <div class="member-card">
+        <img src="images/tuhin.jpg" alt="Tuhin Roy" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Tuhin Roy</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Roytuhin-electrophoenix" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/tuhin-roy-8a5135256/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:tuhinroynbp@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/tuhinroy_ju/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="teammembers">
+    <h2 class="member-title scale">MANAGEMENT TEAM</h2>
+    <div class="member-grid centered-grid">
+      <!-- Tuhin roy -->
+      <div class="member-card">
+        <img src="images/tuhin.jpg" alt="Tuhin Roy" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Tuhin Roy</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Roytuhin-electrophoenix" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/tuhin-roy-8a5135256/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:tuhinroynbp@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/tuhinroy_ju/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Pushpal bhar -->
+      <div class="member-card">
+        <img src="images/pushpalbhar.jpeg" alt="Pushpal Bhar" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Pushpal Bhar</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/pushpal-bhar-326b53315/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:pushpalbhar5@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/bharpushpal_2108" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- arghya Pratim Biswas -->
+      <div class="member-card">
+        <img src="images/arghyapratim.jpg" alt="Arghya Pratim Biswas" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Arghya Pratim Biswas</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://gitHub.com/arghya1506" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/arghya-pratim-biswas-ab7993328?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:apbiswas15a06r2005g@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/_ig_arghya_/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- suvojit khatua -->
+      <div class="member-card">
+        <img src="images/subhojeetkhatua.jpeg" alt="Subhojit Khatua" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Subhojit Khatua</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/subhojit-khatua-71b163331" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:subhojitkhatua8@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/frinken_stein?igsh=YTJsZm02N3VmZ2tk" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="https://github.com/zerebo-hub" target="_blank"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teammembers">
+    <h2 class="member-title scale">DESIGN TEAM</h2>
+    <div class="member-grid centered-grid">
+      <!-- Rohit Sharma -->
+      <div class="member-card">
+        <img src="images/ROHITSHARMA.jpeg" alt="Rohit Sharma" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Rohit Sharma</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Rohits-007" target="_blank"><i class="fab fa-github"></i></a>
+            <a
+              href="https://www.linkedin.com/in/rohit-sharma2006?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:rohitsharma.9.c.1.2020@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/artistic.rohits?igsh=MXR3bTZmY3FrNGl4NA==" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Tuhin roy -->
+      <div class="member-card">
+        <img src="images/tuhin.jpg" alt="Tuhin Roy" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Tuhin Roy</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Roytuhin-electrophoenix" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/tuhin-roy-8a5135256/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:tuhinroynbp@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/tuhinroy_ju/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- soham saha -->
+      <div class="member-card">
+        <img src="images/sohamsaha.jpg" alt="Soham Saha" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Soham Saha</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Soham-47" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="http://www.linkedin.com/in/soham-saha-0bba8b284" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:sohamsaha291@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="teammembers">
+    <h2 class="member-title scale">PR AND LOGISTICS TEAM</h2>
+    <div class="member-grid centered-grid">
+      <!-- soumadipta Bandyopadhyay -->
+      <div class="member-card">
+        <img src="images/soumyadipta.png" alt="Soumyadipta Bandyopadhyay" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Soumyadipta Bandyopadhyay</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/soumyadipta-bandyopadhyay-419b17293/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- sahana sharnim -->
+      <div class="member-card">
+        <img src="images/sahanasharmin.jpg" alt="Sahana Sharmin" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Sahana Sharmin</p>
+          <p class="member-post scale">Department of Architecture Engineering</p>
+          <div class="member-socials">
+            <a href="mailto:sahanasarmin54@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/its_sahana.25?igsh=MTdrNzc2ZndkM3pmZw==" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- devanjan Biswas -->
+      <div class="member-card">
+        <img src="images/devanjan.jpg" alt="Devanjan Biswas" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Devanjan Biswas</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a
+              href="https://www.linkedin.com/in/devanjan-biswas-560a5227a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:devanjan.biswas100@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/the.cliff19/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- manish kumar -->
+      <div class="member-card">
+        <img src="images/manish.jpg" alt="Manish Kumar" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Manish Kumar</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.instagram.com/mannish.kr?igsh=dGQ2c2o3MmV4eHJ1" target="_blank"><i
+                class="fab fa-instagram"></i></a>
+            <a href="mailto:mkmkumar282@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- tuhin roy -->
+      <div class="member-card">
+        <img src="images/tuhin.jpg" alt="Tuhin Roy" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Tuhin Roy</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/Roytuhin-electrophoenix" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/tuhin-roy-8a5135256/" target="_blank"><i
+                class="fab fa-linkedin"></i></a>
+            <a href="mailto:tuhinroynbp@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/tuhinroy_ju/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- Satyajit Mondal -->
+      <div class="member-card">
+        <img src="images/satyajit.jpeg" alt="Satyajit Mandal" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Satyajit Mandal</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/satyajit-mandal-1b7715308?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:satyajitmandal6659@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <!-- trishita Chandra -->
+      <div class="member-card">
+        <img src="images/Trishita.jpeg" alt="Trishita Chandra" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Trishita Chandra</p>
+          <p class="member-post scale">Department of Chemical Engineering</p>
+          <div class="member-socials">
+            <a href="https://github.com/trishita-616" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/trishita-chandra-9b8b11325"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:trishita616@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/_starshadow_0616_/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Abhay singh -->
+      <div class="member-card">
+        <img src="images/abhay.jpg" alt="Abhay Singh" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Abhay Singh</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://gitHub.com/singhabhay4" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/abhay-singh-4b8844351?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:officialabhay10au2004@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.instagram.com/_abhay__1008/" target="_blank"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sandip Ghosh -->
+      <div class="member-card">
+        <img src="images/Sandipghosh.jpeg" alt="Sandip Ghosh" class="member-img scale" />
+        <div class="member-info">
+          <p class="member-name scale">Sandip Ghosh</p>
+          <p class="member-post scale">Department of Electronics and Telecommunication Engineering</p>
+          <div class="member-socials">
+            <a href="https://www.linkedin.com/in/sandip-ghosh-00b110334?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+              target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:sandipghoshvivo@gmail.com" target="_blank"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <footer class="new-footer footer-alt">
+    <div class="footer-content">
+      <div class="footer-col brand-col">
+        <img src="images/IOTA.png" alt="IOTA Logo" class="footer-logo">
+        <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a better
+          tomorrow.</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL"
+            target="_blank" class="social-btn"><img src="images/facebook (2).png" alt="Facebook"></a>
+          <a href="https://www.instagram.com/iota_ju/" target="_blank" class="social-btn"><img
+              src="images/Instagram (2).png" alt="Instagram"></a>
+          <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all"
+            target="_blank" class="social-btn"><img src="images/Linkedin (2).png" alt="LinkedIn"></a>
+          <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" class="social-btn"><img
+              src="images/Github.png" alt="GitHub"></a>
+        </div>
+      </div>
+      <div class="footer-col links-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="../HOME/homepage-of-iota-main/home.html">Home</a></li>
+          <li><a href="../EVENTS (2)/views/events.html">Events</a></li>
+          <li><a href="../projects/projects.html">Projects</a></li>
+          <li><a href="team.html">Team</a></li>
+          <li><a href="../TIMELINE/timeline.html">Timeline</a></li>
+          <li><a href="../ALUMNI/alumni.html">Alumni</a></li>
+          <li><a href="../ABOUT US/about us.html">About Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col map-col">
+        <h4>Locate Us</h4>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+          allowfullscreen="" loading="lazy"></iframe>
+      </div>
+      <div class="footer-col contact-col">
+        <h4>Get in Touch</h4>
+        <form action="https://formspree.io/f/meepaajl" method="POST" class="contact-form" id="footer-contact-form">
+          <div class="form-group">
+            <input type="email" name="email" class="footer-input" placeholder="Your Email Address" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" class="footer-input" rows="2" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="footer-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-content">
+        <p>&copy; 2026 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="../loading-screen.js"></script>
+  <script src="../assets/js/global-nav.js"></script>
+  <script>
+    // Wait for full page load (including images) to ensure ScrollTrigger calculates positions correctly
+    window.addEventListener('load', () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero Content Animation
+      gsap.to('.herocontent', {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power4.out',
+        delay: 0.1
+      });
+
+      // Group Photo Animation
+      gsap.to('.group-photo-img', {
+        opacity: 1,
+        scale: 1,
+        duration: 1.5,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: '.group-photo-section',
+          start: 'top 80%'
+        }
+      });
+
+      // Robust batch animation for member cards with enhanced effect
+      ScrollTrigger.batch(".member-card", {
+        start: "top 92%",
+        onEnter: batch => gsap.to(batch, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          stagger: {
+            each: 0.1,
+            grid: [1, 3]
+          },
+          duration: 1,
+          ease: "expo.out",
+          overwrite: true
+        })
+      });
+
+      // Section Titles Animation with sliding scale effect
+      ScrollTrigger.batch('.member-title', {
+        start: "top 95%",
+        onEnter: batch => gsap.to(batch, {
+          opacity: 1,
+          x: 0,
+          scale: 1,
+          duration: 1.2,
+          ease: "power4.out",
+          overwrite: true
+        })
+      });
+
+      // Refresh ScrollTrigger to ensure all positions are recalculated
+      ScrollTrigger.refresh();
+
+      // Contact Form AJAX Handling
+      const contactForm = document.getElementById('footer-contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const btn = contactForm.querySelector('.footer-btn');
+          const originalText = btn.textContent;
+          const formData = new FormData(contactForm);
+
+          btn.textContent = 'Sending...';
+          btn.disabled = true;
+
+          try {
+            const response = await fetch(contactForm.action, {
+              method: 'POST',
+              body: formData,
+              headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+              btn.textContent = 'Message Sent! ✓';
+              btn.style.background = '#27ae60';
+              contactForm.reset();
+            } else {
+              btn.textContent = 'Error! Try again';
+              btn.style.background = '#e74c3c';
+            }
+          } catch (error) {
+            btn.textContent = 'Failed to send';
+            btn.style.background = '#e74c3c';
+          }
+
+          setTimeout(() => {
+            btn.textContent = originalText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 3000);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>

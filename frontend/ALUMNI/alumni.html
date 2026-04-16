@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alumni - IOTA</title>
+    <link rel="stylesheet" href="../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../loading-screen.css">
+
+    <style>
+        :root {
+            --primary-accent: #f59e0b;
+            /* Amber/Gold for Alumni */
+            --secondary-accent: #d97706;
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* Ambient Background */
+        .bg-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            filter: blur(180px);
+            border-radius: 50%;
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            top: -100px;
+            right: -100px;
+        }
+
+        .blob-2 {
+            bottom: -100px;
+            left: -100px;
+        }
+
+        /* Contextual Background Collage */
+        .alumni-collage {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.45;
+            /* Increased overall visibility */
+            filter: sepia(0.4) contrast(1.2) brightness(0.9);
+            /* Stronger amber warmth */
+        }
+
+        .collage-item {
+            position: absolute;
+            opacity: 0.8;
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
+        }
+
+        .collage-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 40px;
+            mask-image: radial-gradient(circle, black 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle, black 60%, transparent 100%);
+        }
+
+        .c1 {
+            width: 650px;
+            /* Bigger */
+            height: 850px;
+            top: -10%;
+            left: -10%;
+            transform: rotate(-12deg);
+            opacity: 1;
+            /* Maximum visibility within parent */
+            animation: float1 25s infinite ease-in-out;
+        }
+
+        .c2 {
+            width: 600px;
+            /* Bigger */
+            height: 750px;
+            top: 10%;
+            right: -10%;
+            transform: rotate(10deg);
+            opacity: 0.9;
+            /* More visible */
+            animation: float2 30s infinite ease-in-out;
+        }
+
+        .c3 {
+            width: 850px;
+            /* Even bigger to keep hierarchy */
+            height: 1050px;
+            bottom: -5%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: float3 35s infinite ease-in-out;
+        }
+
+        @keyframes float1 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(-12deg) scale(1);
+            }
+
+            50% {
+                transform: translate(30px, 40px) rotate(-8deg) scale(1.05);
+            }
+        }
+
+        @keyframes float2 {
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(10deg) scale(1);
+            }
+
+            50% {
+                transform: translate(-40px, -20px) rotate(14deg) scale(1.08);
+            }
+        }
+
+        @keyframes float3 {
+
+            0%,
+            100% {
+                transform: translateX(-50%) translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translateX(-50%) translate(20px, -40px) scale(1.03);
+            }
+        }
+
+        .alumni-card.featured {
+            grid-column: span 1;
+            border-color: rgba(245, 158, 11, 0.4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(245, 158, 11, 0.02));
+        }
+
+        .alumni-card.featured .alumni-img {
+            border-width: 4px;
+            box-shadow: 0 0 30px rgba(245, 158, 11, 0.2);
+        }
+
+        .container {
+            max-width: 1460px;
+            /* Widened to fit 4 cards of 320px squarely */
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero */
+        .alumni-hero {
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .alumni-hero h1 {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff, var(--primary-accent), #fff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+            animation: shine 5s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        .alumni-hero p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .founders-reveal {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-accent);
+            letter-spacing: 15px;
+            /* Cinematic spacing */
+            margin: 1.5rem 0 3rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            display: inline-block;
+            perspective: 1000px;
+        }
+
+        .founders-reveal span {
+            display: inline-block;
+            transform-origin: center;
+        }
+
+        /* Alumni Grid */
+        .alumni-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            /* Balanced gap for flex alignment */
+            padding: 60px 0 120px;
+        }
+
+        .alumni-card {
+            flex: 0 1 320px;
+            /* Consistent card width */
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(30px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .alumni-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-accent);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .alumni-img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 1/1;
+            border-radius: 20px;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            display: block;
+            border: 3px solid transparent;
+            background: linear-gradient(var(--bg-dark), var(--bg-dark)) padding-box,
+                linear-gradient(135deg, var(--primary-accent), var(--secondary-accent)) border-box;
+            padding: 4px;
+        }
+
+        .alumni-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .alumni-role {
+            font-size: 0.9rem;
+            color: var(--primary-accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .alumni-batch {
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .alumni-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .alumni-socials a {
+            color: var(--text-dim);
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
+
+        .alumni-socials a:hover {
+            color: var(--primary-accent);
+            transform: translateY(-3px);
+        }
+
+        /* Placement Badge */
+        .placement-badge {
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #fbd38d;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            display: inline-block;
+        }
+
+        /* Footer */
+        .footer-alt {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Standardized Navigation -->
+    <nav id="navbar">
+        <div class="logo-section">
+            <img src="../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+            <div class="nav-separator"></div>
+            <img src="../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo" />
+        </div>
+
+        <div class="nav-links">
+            <a href="../HOME/homepage-of-iota-main/home.html">Home</a>
+            <a href="../EVENTS (2)/views/events.html">Events</a>
+            <a href="../projects/projects.html">Projects</a>
+            <a href="../team/team.html">Team</a>
+            <a href="../TIMELINE/timeline.html">Timeline</a>
+            <a href="../ALUMNI/alumni.html" class="active">Alumni</a>
+            <a href="../ABOUT US/about us.html">About Us</a>
+        </div>
+
+        <div class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Contextual Background Collage -->
+    <div class="alumni-collage">
+        <div class="collage-item c1"><img src="assets/agnish.png" alt="Agnish"></div>
+        <div class="collage-item c2"><img src="assets/shinjan.png" alt="Shinjan"></div>
+        <div class="collage-item c3"><img src="assets/arya_speaking.png" alt="Arya Speaking"></div>
+    </div>
+
+    <section class="container alumni-hero">
+        <h1>OUR LEGACY</h1>
+        <div class="founders-reveal">THE FOUNDERS</div>
+        <p>Honoring the pioneers who built the foundations of IOTA. Our alumni continue to innovate and lead in top
+            global tech companies and research institutions.</p>
+    </section>
+
+    <div class="container">
+        <div class="alumni-grid">
+            <!-- Featured Alumni: Agnish -->
+            <div class="alumni-card featured">
+                <img src="assets/agnish2.png" alt="Agnish" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Agnish Saha</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/agnish-saha-456b7129a/?originalSubdomain=in" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-crown"></i> Founding Architect</div>
+            </div>
+
+            <!-- Featured Alumni: Soumyadeep Manna -->
+            <div class="alumni-card featured">
+                <img src="assets/soumyadeepmanna.png" alt="Soumyadeep Manna" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Soumyadeep Manna</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/soumyadip-manna-9061a7266/?originalSubdomain=in"
+                        target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-crown"></i> Founding Member</div>
+            </div>
+
+            <!-- Featured Alumni: Soumyadeep Dutta -->
+            <div class="alumni-card featured">
+                <img src="assets/soumyadeep.png" alt="Soumyadeep Dutta" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Soumyadeep Dutta</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/soumyadeep-dutta-0a52b124a/" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-handshake"></i> Relations Manager</div>
+            </div>
+
+            <!-- Alumni: Abhidipan -->
+            <div class="alumni-card">
+                <img src="assets/abhidipan.png" alt="Abhidipan" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Abhidipan Samanta</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/abhidipan-samanta-421248299/?originalSubdomain=in"
+                        target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-briefcase"></i> Communications Lead</div>
+            </div>
+
+            <!-- Alumni: Sayandeep Pramanaik -->
+            <div class="alumni-card">
+                <img src="assets/sayandeep.png" alt="Sayandeep Pramanik" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Sayandeep Pramanik</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/itzsayandeep16/" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-paint-brush"></i> UI/UX Designer</div>
+            </div>
+
+            <!-- Alumni: Arya Pandit -->
+            <div class="alumni-card">
+                <img src="assets/Arya Pandit Planning.jpg" alt="Arya Pandit" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Arya Pandit</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/arya-pandit-146023250/" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-tasks"></i> Strategy Lead</div>
+            </div>
+
+            <!-- Alumni: Srinjan Bhattacharjee -->
+            <div class="alumni-card">
+                <img src="assets/Srinjan_Content (1).jpg" alt="Srinjan" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Srinjan Bhattacharjee</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/srinjan-bhattacharjee-96a399249/?originalSubdomain=in"
+                        target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-code"></i> Engineering Pioneer</div>
+            </div>
+
+            <!-- Alumni: Sauptik Maiti -->
+            <div class="alumni-card">
+                <img src="assets/sauptik.png" alt="Sauptik Maiti" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Sauptik Maiti</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/sauptik-maiti-a7b6b7275/" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-user-circle"></i> Member</div>
+            </div>
+
+            <!-- Alumni: Soham Das -->
+            <div class="alumni-card">
+                <img src="assets/Soham Das Content team.jpg" alt="Soham Das" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Soham Das</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/soham-das-340ba2252/?originalSubdomain=in" target="_blank"><i
+                            class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-pen-nib"></i> Content Strategist</div>
+            </div>
+
+            <!-- Alumni: Saptarshi Koley -->
+            <div class="alumni-card">
+                <img src="assets/Saptarshi Koley design team .jpg" alt="Saptarshi Koley" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Saptarshi Koley</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-vector-square"></i> Visual Designer</div>
+            </div>
+
+            <!-- Alumni: Shirshendu Mandal -->
+            <div class="alumni-card">
+                <img src="assets/Shirshendu_PR.jpg" alt="Shirshendu Mandal" class="alumni-img">
+                <span class="alumni-role">Co-founder</span>
+                <p class="alumni-name">Shirshendu Mandal</p>
+                <span class="alumni-batch">Class of 2026</span>
+                <div class="alumni-socials">
+                    <a href="https://www.linkedin.com/in/shirshendu-mandal-44a94225a/?originalSubdomain=in"
+                        target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+                <div class="placement-badge"><i class="fas fa-bullhorn"></i> Outreach Coordinator</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="new-footer footer-alt">
+        <div class="footer-content">
+            <div class="footer-col brand-col">
+                <img src="../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="footer-logo">
+                <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a
+                    better tomorrow.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL"
+                        target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/facebook (2).png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/iota_ju/" target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/Instagram (2).png" alt="Instagram"></a>
+                    <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all"
+                        target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/Linkedin (2).png" alt="LinkedIn"></a>
+                    <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" class="social-btn"><img
+                            src="../HOME/homepage-of-iota-main/images/Github.png" alt="GitHub"></a>
+                </div>
+            </div>
+            <div class="footer-col links-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../HOME/homepage-of-iota-main/home.html">Home</a></li>
+                    <li><a href="../EVENTS (2)/views/events.html">Events</a></li>
+                    <li><a href="../projects/projects.html">Projects</a></li>
+                    <li><a href="../team/team.html">Team</a></li>
+                    <li><a href="../TIMELINE/timeline.html">Timeline</a></li>
+                    <li><a href="../ALUMNI/alumni.html">Alumni</a></li>
+                    <li><a href="../ABOUT US/about us.html">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-col map-col">
+                <h4>Locate Us</h4>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.8675442443073!2d88.36859267531668!3d22.496625579497192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a02713e32b77e77%3A0x2310e974d76cf91!2sPrajukti%20Bhavan%2F%20Civil%20Engineering%20Building!5e0!3m2!1sen!2sin!4v1707895678392!5m2!1sen!2sin"
+                    allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <p>&copy; 2025 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="../loading-screen.js"></script>
+    <script src="../assets/js/global-nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.registerPlugin(ScrollTrigger);
+
+            // Character Wrap for Founders text
+            const foundersText = document.querySelector('.founders-reveal');
+            const characters = foundersText.textContent.split('');
+            foundersText.innerHTML = characters.map(char =>
+                `<span>${char === ' ' ? '&nbsp;' : char}</span>`
+            ).join('');
+
+            // Hero animations
+            const tl = gsap.timeline();
+
+            tl.from('.alumni-hero h1', {
+                opacity: 0,
+                y: 50,
+                letterSpacing: "40px",
+                filter: "blur(20px)",
+                duration: 2,
+                ease: 'expo.out'
+            })
+                .to('.founders-reveal span', {
+                    opacity: 1,
+                    filter: "blur(0px)",
+                    y: 0,
+                    rotationX: 0,
+                    stagger: 0.08,
+                    duration: 1.2,
+                    ease: 'power4.out',
+                    onStart: () => {
+                        gsap.set('.founders-reveal span', {
+                            opacity: 0,
+                            filter: "blur(15px)",
+                            y: 20,
+                            rotationX: 90
+                        });
+                    }
+                }, "-=1.2")
+                .from('.alumni-hero p', {
+                    opacity: 0,
+                    y: 20,
+                    filter: "blur(10px)",
+                    duration: 1.5,
+                    ease: 'power2.out'
+                }, "-=0.8");
+
+            // Grid reveal
+            gsap.to('.alumni-card', {
+                scrollTrigger: {
+                    trigger: '.alumni-grid',
+                    start: 'top 85%',
+                },
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: 'power2.out'
+            });
+        });
+    </script>
+</body>
+
+</html>
