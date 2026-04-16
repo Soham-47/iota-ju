@@ -31,3 +31,11 @@ Thumbs.db
 
 .vercel
 .env*.local
+
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# SQLite database (contains live data, do not commit)
+*.db
