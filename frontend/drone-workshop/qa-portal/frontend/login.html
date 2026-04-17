@@ -316,12 +316,14 @@
 
         function toggleMode(forceOrganizer = false) {
             errorMsg.style.display = 'none';
+            const emailInput = document.getElementById('email');
 
             if (selectedRole === 'organizer' || forceOrganizer) {
                 formTitle.innerText = "Organizer Access";
                 formSubtitle.innerText = "Enter the shared secret to access the fleet command";
                 nameGroup.style.display = 'none';
-                document.getElementById('email').parentNode.style.display = 'none'; // Hide email for org
+                emailInput.parentNode.style.display = 'none';
+                emailInput.required = false; // Fix: Remove required from hidden field
                 document.getElementById('password').placeholder = "Enter Fleet Secret";
                 submitBtn.innerText = "Authorize & Enter";
                 toggleText.style.display = 'none';
@@ -330,7 +332,8 @@
 
             // Normal participant toggle
             isLoginMode = !isLoginMode;
-            document.getElementById('email').parentNode.style.display = 'block';
+            emailInput.parentNode.style.display = 'block';
+            emailInput.required = true; // Restore required
             toggleText.style.display = 'block';
 
             if (isLoginMode) {
