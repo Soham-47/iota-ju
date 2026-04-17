@@ -1,26 +1,12 @@
 {
     "version": 2,
-    "builds": [
-        {
-            "src": "frontend/**",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "drone-workshop/**/*.html",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "drone-workshop/**/*.js",
-            "use": "@vercel/static"
-        },
-        {
-            "src": "index.html",
-            "use": "@vercel/static"
-        }
-    ],
     "routes": [
         {
             "handle": "filesystem"
+        },
+        {
+            "src": "/",
+            "dest": "/frontend/index.html"
         },
         {
             "src": "/.*",
