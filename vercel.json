@@ -1,5 +1,57 @@
 {
     "version": 2,
+    "redirects": [
+        {
+            "source": "/ABOUT%20US/(.*)",
+            "destination": "/frontend/ABOUT%20US/$1",
+            "permanent": true
+        },
+        {
+            "source": "/ALUMNI/(.*)",
+            "destination": "/frontend/ALUMNI/$1",
+            "permanent": true
+        },
+        {
+            "source": "/EVENTS%20\\(2\\)/(.*)",
+            "destination": "/frontend/EVENTS%20(2)/$1",
+            "permanent": true
+        },
+        {
+            "source": "/HOME/(.*)",
+            "destination": "/frontend/HOME/$1",
+            "permanent": true
+        },
+        {
+            "source": "/INTRO/(.*)",
+            "destination": "/frontend/INTRO/$1",
+            "permanent": true
+        },
+        {
+            "source": "/TIMELINE/(.*)",
+            "destination": "/frontend/TIMELINE/$1",
+            "permanent": true
+        },
+        {
+            "source": "/team/(.*)",
+            "destination": "/frontend/team/$1",
+            "permanent": true
+        },
+        {
+            "source": "/projects/(.*)",
+            "destination": "/frontend/projects/$1",
+            "permanent": true
+        },
+        {
+            "source": "/assets/(.*)",
+            "destination": "/frontend/assets/$1",
+            "permanent": true
+        },
+        {
+            "source": "/loading-screen\\.(css|js)",
+            "destination": "/frontend/loading-screen.$1",
+            "permanent": true
+        }
+    ],
     "routes": [
         {
             "handle": "filesystem"
