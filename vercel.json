@@ -50,6 +50,11 @@
             "source": "/loading-screen\\.(css|js)",
             "destination": "/frontend/loading-screen.$1",
             "permanent": true
+        },
+        {
+            "source": "/drone-workshop/(.*)",
+            "destination": "/frontend/drone-workshop/$1",
+            "permanent": true
         }
     ],
     "routes": [
