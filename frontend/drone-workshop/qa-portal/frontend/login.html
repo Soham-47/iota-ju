@@ -266,15 +266,15 @@
         <form id="auth-form">
             <div class="form-group" id="name-group">
                 <label>Full Name</label>
-                <input type="text" id="name" placeholder="E.g. Jane Doe">
+                <input type="text" id="name" name="name" placeholder="E.g. Jane Doe">
             </div>
             <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" id="email" required placeholder="name@university.edu">
+                <input type="email" id="email" name="email" required placeholder="name@university.edu">
             </div>
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" id="password" required placeholder="Create a secure password">
+                <input type="password" id="password" name="password" required placeholder="Create a secure password">
             </div>
             <button type="submit" id="submit-btn">Sign Up & Connect</button>
         </form>
@@ -317,13 +317,15 @@
         function toggleMode(forceOrganizer = false) {
             errorMsg.style.display = 'none';
             const emailInput = document.getElementById('email');
+            const nameInput = document.getElementById('name');
 
             if (selectedRole === 'organizer' || forceOrganizer) {
                 formTitle.innerText = "Organizer Access";
                 formSubtitle.innerText = "Enter the shared secret to access the fleet command";
                 nameGroup.style.display = 'none';
+                nameInput.required = false;
                 emailInput.parentNode.style.display = 'none';
-                emailInput.required = false; // Fix: Remove required from hidden field
+                emailInput.required = false;
                 document.getElementById('password').placeholder = "Enter Fleet Secret";
                 submitBtn.innerText = "Authorize & Enter";
                 toggleText.style.display = 'none';
@@ -333,19 +335,21 @@
             // Normal participant toggle
             isLoginMode = !isLoginMode;
             emailInput.parentNode.style.display = 'block';
-            emailInput.required = true; // Restore required
+            emailInput.required = true;
             toggleText.style.display = 'block';
 
             if (isLoginMode) {
                 formTitle.innerText = "Welcome Back";
                 formSubtitle.innerText = "Log in to join the live session";
                 nameGroup.style.display = 'none';
+                nameInput.required = false; // Hide and disable required
                 submitBtn.innerText = "Log In to Session";
                 toggleText.innerHTML = 'Need an account? <span onclick="toggleMode()">Sign up here</span>';
             } else {
                 formTitle.innerText = "Join Drone Workshop";
                 formSubtitle.innerText = "Create an account to participate in live Q&A";
                 nameGroup.style.display = 'block';
+                nameInput.required = true; // Show and enable required
                 submitBtn.innerText = "Sign Up & Connect";
                 toggleText.innerHTML = 'Already registered? <span onclick="toggleMode()">Log in here</span>';
             }
