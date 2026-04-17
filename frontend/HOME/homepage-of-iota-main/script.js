@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         slides[currentSlide].classList.add('active');
     }
 
-    if (slides.length > 0) {
+    if (slides.length > 1) {
         setInterval(nextSlide, slideInterval);
     }
 

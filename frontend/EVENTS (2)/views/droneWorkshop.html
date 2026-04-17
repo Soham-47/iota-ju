@@ -385,29 +385,20 @@
                 gsap.from('.fade-in', { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, ease: 'power3.out' });
             }
 
-            // Live portal logic
-            const liveDate = new Date("2026-04-18T10:00:00+05:30"); // Saturday 10:00 AM IST
+            // Live portal logic (Unlocked for testing/live session)
             const joinBtn = document.getElementById("join-live-btn");
 
             function updateLiveState() {
-                if (new Date() >= liveDate) {
-                    joinBtn.innerHTML = '<i class="fas fa-satellite-dish"></i> Enter Live Portal';
-                    joinBtn.style.opacity = "1";
-                    joinBtn.style.cursor = "pointer";
-                    joinBtn.onclick = (e) => {
-                        e.preventDefault();
-                        sessionStorage.setItem('allowedToJoin', 'true');
-                        window.location.href = "../../../drone-workshop/qa-portal/frontend/login.html";
-                    };
-                } else {
-                    joinBtn.innerHTML = '<i class="fas fa-lock"></i> Unlocks Saturday 10:00 AM';
-                    joinBtn.style.opacity = "0.5";
-                    joinBtn.style.cursor = "not-allowed";
-                    joinBtn.onclick = (e) => e.preventDefault();
-                }
+                joinBtn.innerHTML = '<i class="fas fa-satellite-dish"></i> Enter Live Portal';
+                joinBtn.style.opacity = "1";
+                joinBtn.style.cursor = "pointer";
+                joinBtn.onclick = (e) => {
+                    e.preventDefault();
+                    sessionStorage.setItem('allowedToJoin', 'true');
+                    window.location.href = "../../../drone-workshop/qa-portal/frontend/login.html";
+                };
             }
             updateLiveState();
-            setInterval(updateLiveState, 1000);
         });
     </script>
     <script src="../../loading-screen.js"></script>
