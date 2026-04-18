@@ -1,4 +1,6 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect, Depends, HTTPException, Request
+import asyncio
+
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
@@ -471,7 +473,7 @@ async def websocket_participant(websocket: WebSocket, token: str = None):
         if not user:
             await websocket.accept(); await websocket.close(code=1008); return
 
-        await websocket.accept()
+        # No accept() here: manager.connect_participant does it
         await manager.connect_participant(websocket, user.name)
         await manager.broadcast_stats()
 
