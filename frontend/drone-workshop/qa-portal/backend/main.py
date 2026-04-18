@@ -5,9 +5,14 @@ from pydantic import BaseModel
 import uvicorn
 import json
 import time
+import os
+from dotenv import load_dotenv
 from datetime import datetime, timezone
 from collections import defaultdict
 from sqlalchemy.orm import Session
+
+# Load environment variables
+load_dotenv()
 
 from database import get_db, User, Question, WorkshopState, SessionLocal
 import auth
@@ -37,7 +42,7 @@ poll_votes: dict[str, dict] = {}
 task_submissions: dict[str, list] = {}
 
 # ─── Auth & Security ──────────────────────────────────────────────────────────
-ORGANIZER_PASSWORD = "iotadroneworshop-organizers-2026"
+ORGANIZER_PASSWORD = os.getenv("ORGANIZER_PASSWORD", "iota-organizer-2026")
 
 class OrgLogin(BaseModel):
     password: str
