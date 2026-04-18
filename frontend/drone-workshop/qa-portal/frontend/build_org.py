@@ -360,7 +360,9 @@ html_content = r"""<!DOCTYPE html>
                 });
             } catch(e) {}
         }
-        setInterval(pollOrgMessages, 4000);
+        // Force an immediate fetch on startup, then every 3 seconds
+        pollOrgMessages();
+        setInterval(pollOrgMessages, 3000);
 
         async function loadInitialState() {
             try {
