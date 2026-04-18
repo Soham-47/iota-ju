@@ -460,7 +460,7 @@ manager = ConnectionManager()
 
 @app.websocket("/ws/participant")
 async def websocket_participant(websocket: WebSocket, token: str = None):
-    email = auth.verify_token(token)
+    email = auth.decode_token(token)
     if not email:
         await websocket.accept()
         await websocket.send_text(json.dumps({"type": "error", "message": "Invalid session. Please login again."}))
