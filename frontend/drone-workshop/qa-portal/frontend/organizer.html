@@ -112,9 +112,9 @@
 
     <nav class="navbar">
         <div class="nav-logo">IOTA DRONE WORKSHOP <span style="background:var(--accent); color:black; font-size:10px; padding:2px 8px; border-radius:4px; font-family:'Inter'; letter-spacing:0.1em;">ADMIN</span></div>
-        <div style="font-size: 12px; color: var(--accent); display: flex; align-items: center; gap: 8px; font-weight:700;">
-            <div style="width: 8px; height: 8px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent);"></div>
-            DATALINK SECURE
+        <div id="connection-status" style="font-size: 12px; color: #ff3366; display: flex; align-items: center; gap: 8px; font-weight:700;">
+            <div id="connection-dot" style="width: 8px; height: 8px; background: #ff3366; border-radius: 50%;"></div>
+            <span id="connection-text">DATALINK OFFLINE</span>
         </div>
     </nav>
 
@@ -304,6 +304,10 @@
             ws.onopen = () => {
                 const name = localStorage.getItem('user_name') || 'IOTA Organizer';
                 ws.send(JSON.stringify({ type: "ident", name: name }));
+                document.getElementById('connection-dot').style.background = 'var(--accent)';
+                document.getElementById('connection-dot').style.boxShadow = '0 0 10px var(--accent)';
+                document.getElementById('connection-text').innerText = 'DATALINK SECURE';
+                document.getElementById('connection-status').style.color = 'var(--accent)';
             };
             ws.onmessage = (e) => {
                 const data = JSON.parse(e.data);
@@ -332,7 +336,13 @@
                 }
             };
             ws.onerror = () => {};
-            ws.onclose = () => setTimeout(initWebSocket, 5000);
+            ws.onclose = () => {
+                document.getElementById('connection-dot').style.background = '#ff3366';
+                document.getElementById('connection-dot').style.boxShadow = 'none';
+                document.getElementById('connection-text').innerText = 'DATALINK OFFLINE';
+                document.getElementById('connection-status').style.color = '#ff3366';
+                setTimeout(initWebSocket, 5000);
+            };
         }
 
         // REST polling fallback for organizer messages (in case WS fails)
@@ -348,7 +358,9 @@
                 });
             } catch(e) {}
         }
-        setInterval(pollOrgMessages, 4000);
+        // Force an immediate fetch on startup, then every 3 seconds
+        pollOrgMessages();
+        setInterval(pollOrgMessages, 3000);
 
         async function loadInitialState() {
             try {
@@ -377,7 +389,10 @@
             document.getElementById('cfg-modules-total').value = data.total_modules || 6;
         }
 
-        loadInitialState();
+        loadInitialState().then(() => {
+            // Auto-select Global Feed on load so the input box is ready
+            setTimeout(() => selectThread("Global Feed"), 500);
+        });
 
         const statCard = document.querySelector('.stat-card');
         const popup = document.getElementById('user-list-popup');
