@@ -5,7 +5,13 @@ from datetime import datetime, timezone
 SQLALCHEMY_DATABASE_URL = "sqlite:///./app.db"
 
 engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
+    SQLALCHEMY_DATABASE_URL, 
+    connect_args={"check_same_thread": False},
+    pool_size=10,
+    max_overflow=20,
+    pool_timeout=30,
+    pool_pre_ping=True,
+    pool_recycle=1800
 )
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()

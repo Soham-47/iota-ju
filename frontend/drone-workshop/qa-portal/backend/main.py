@@ -460,27 +460,22 @@ manager = ConnectionManager()
 
 @app.websocket("/ws/participant")
 async def websocket_participant(websocket: WebSocket, token: str = None):
-    db: Session = SessionLocal()
-    email = None
-    try:
-        email = auth.decode_token(token) if token else None
-        if not email:
-            await websocket.accept()
-            await websocket.send_text(json.dumps({"type": "system", "text": "Authentication Failed."}))
-            await websocket.close()
-            return
-
+    email = auth.verify_token(token)
+    if not email:
+        await websocket.accept()
+        await websocket.send_text(json.dumps({"type": "error", "message": "Invalid session. Please login again."}))
+        await websocket.close(code=1008); return
+    
+    with SessionLocal() as db:
         user = db.query(User).filter(User.email == email).first()
         if not user:
-            await websocket.accept()
-            await websocket.send_text(json.dumps({"type": "system", "text": "User not found."}))
-            await websocket.close()
-            return
+            await websocket.accept(); await websocket.close(code=1008); return
 
+        await websocket.accept()
         await manager.connect_participant(websocket, user.name)
         await manager.broadcast_stats()
 
-        # Send current state
+        # Send current state & history (Scoped)
         state = db.query(WorkshopState).first()
         if not state:
             state = WorkshopState(); db.add(state); db.commit(); db.refresh(state)
@@ -498,22 +493,22 @@ async def websocket_participant(websocket: WebSocket, token: str = None):
             "polls": json.loads(state.polls) if state.polls else []
         }))
 
-        # Send message history
         history = db.query(Question).order_by(Question.id.asc()).all()
         for q in history:
             if q.is_public or q.thread_name == user.name:
                 await websocket.send_text(json.dumps(q_to_dict(q)))
 
-        # Send both cooldown values on connect so client knows both timers
-        now = time.time()
-        priv_rem = max(0, MSG_COOLDOWN_PRIVATE - (now - _last_private_msg.get(email, 0)))
-        pub_rem  = max(0, MSG_COOLDOWN_PUBLIC  - (now - _last_public_msg.get(email, 0)))
-        await websocket.send_text(json.dumps({
-            "type": "cooldown_update",
-            "remaining": int(priv_rem), "total": MSG_COOLDOWN_PRIVATE,
-            "public_remaining": int(pub_rem), "public_total": MSG_COOLDOWN_PUBLIC
-        }))
+    # Cooldown info
+    now = time.time()
+    priv_rem = max(0, MSG_COOLDOWN_PRIVATE - (now - _last_private_msg.get(email, 0)))
+    pub_rem  = max(0, MSG_COOLDOWN_PUBLIC  - (now - _last_public_msg.get(email, 0)))
+    await websocket.send_text(json.dumps({
+        "type": "cooldown_update",
+        "remaining": int(priv_rem), "total": MSG_COOLDOWN_PRIVATE,
+        "public_remaining": int(pub_rem), "public_total": MSG_COOLDOWN_PUBLIC
+    }))
 
+    try:
         while True:
             data_str = await websocket.receive_text()
             try:
@@ -538,20 +533,22 @@ async def websocket_participant(websocket: WebSocket, token: str = None):
                         }))
                         continue
 
-                    new_q = Question(
-                        sender_role="participant", sender_name=user.name,
-                        thread_name=user.name, text=data.get("text"), is_public=is_pub
-                    )
-                    db.add(new_q); db.commit()
+                    # Open fresh session for storage
+                    with SessionLocal() as db:
+                        user = db.query(User).filter(User.email == email).first()
+                        new_q = Question(
+                            sender_role="participant", sender_name=user.name,
+                            thread_name=user.name, text=data.get("text"), is_public=is_pub
+                        )
+                        db.add(new_q); db.commit()
+                        msg_data = q_to_dict(new_q) # Convert to dict while session is active
 
                     if is_pub:
                         _last_public_msg[email] = time.time()
                     else:
                         _last_private_msg[email] = time.time()
 
-                    await manager.broadcast(q_to_dict(new_q))
-
-                    # Send updated cooldown
+                    await manager.broadcast(msg_data)
                     await websocket.send_text(json.dumps({
                         "type": "cooldown_update", "remaining": total, "total": total
                     }))
@@ -565,7 +562,6 @@ async def websocket_participant(websocket: WebSocket, token: str = None):
         manager.disconnect_participant(websocket)
         try: await manager.broadcast_stats()
         except: pass
-        db.close()
 
 # ─── WebSocket: Organizer ──────────────────────────────────────────────────────
 
@@ -578,32 +574,32 @@ async def websocket_organizer(websocket: WebSocket, token: str = None):
         await websocket.close(code=1008)
         return
 
-    db: Session = SessionLocal()
     try:
         await manager.connect_organizer(websocket)
         await manager.broadcast_stats()
 
-        state = db.query(WorkshopState).first()
-        if not state:
-            state = WorkshopState(); db.add(state); db.commit(); db.refresh(state)
+        # Initial state/history fetch (Scoped)
+        with SessionLocal() as db:
+            state = db.query(WorkshopState).first()
+            if not state:
+                state = WorkshopState(); db.add(state); db.commit(); db.refresh(state)
 
-        await websocket.send_text(json.dumps({
-            "type": "state_update",
-            "session_title": state.session_title,
-            "session_desc": state.session_desc,
-            "speaker_name": state.speaker_name,
-            "modules_completed": state.modules_completed,
-            "total_modules": state.total_modules,
-            "announcements": json.loads(state.announcements),
-            "resources": json.loads(state.resources),
-            "tasks": json.loads(state.tasks) if state.tasks else [],
-            "polls": json.loads(state.polls) if state.polls else []
-        }))
+            await websocket.send_text(json.dumps({
+                "type": "state_update",
+                "session_title": state.session_title,
+                "session_desc": state.session_desc,
+                "speaker_name": state.speaker_name,
+                "modules_completed": state.modules_completed,
+                "total_modules": state.total_modules,
+                "announcements": json.loads(state.announcements),
+                "resources": json.loads(state.resources),
+                "tasks": json.loads(state.tasks) if state.tasks else [],
+                "polls": json.loads(state.polls) if state.polls else []
+            }))
 
-        # Send ALL message history to organizer
-        history = db.query(Question).order_by(Question.id.asc()).all()
-        for q in history:
-            await websocket.send_text(json.dumps(q_to_dict(q)))
+            history = db.query(Question).order_by(Question.id.asc()).all()
+            for q in history:
+                await websocket.send_text(json.dumps(q_to_dict(q)))
 
         while True:
             data_str = await websocket.receive_text()
@@ -612,42 +608,47 @@ async def websocket_organizer(websocket: WebSocket, token: str = None):
                 if data.get("type") == "reply":
                     thread = data.get("thread", "Global")
                     text = data.get("text")
-                    # Global thread messages are ALWAYS public
                     is_pub = True if thread == "Global" else data.get("is_public", False)
                     name = data.get("name", "Organizer")
-                    new_q = Question(
-                        sender_role="organizer", sender_name=name,
-                        thread_name=thread, text=text, is_public=is_pub
-                    )
-                    db.add(new_q); db.commit()
-                    await manager.broadcast(q_to_dict(new_q))
+                    
+                    with SessionLocal() as db:
+                        new_q = Question(
+                            sender_role="organizer", sender_name=name,
+                            thread_name=thread, text=text, is_public=is_pub
+                        )
+                        db.add(new_q); db.commit()
+                        msg_data = q_to_dict(new_q)
+                    await manager.broadcast(msg_data)
 
                 elif data.get("type") == "update_state":
-                    state = db.query(WorkshopState).first()
-                    if not state:
-                        state = WorkshopState(); db.add(state)
-                    if "session_title" in data: state.session_title = data["session_title"]
-                    if "session_desc" in data: state.session_desc = data["session_desc"]
-                    if "speaker_name" in data: state.speaker_name = data["speaker_name"]
-                    if "modules_completed" in data: state.modules_completed = int(data["modules_completed"])
-                    if "total_modules" in data: state.total_modules = int(data["total_modules"])
-                    if "announcements" in data: state.announcements = json.dumps(data["announcements"])
-                    if "resources" in data: state.resources = json.dumps(data["resources"])
-                    if "tasks" in data: state.tasks = json.dumps(data["tasks"])
-                    if "polls" in data: state.polls = json.dumps(data["polls"])
-                    db.commit()
-                    await manager.broadcast({
-                        "type": "state_update",
-                        "session_title": state.session_title,
-                        "session_desc": state.session_desc,
-                        "speaker_name": state.speaker_name,
-                        "modules_completed": state.modules_completed,
-                        "total_modules": state.total_modules,
-                        "announcements": json.loads(state.announcements),
-                        "resources": json.loads(state.resources),
-                        "tasks": json.loads(state.tasks) if state.tasks else [],
-                        "polls": json.loads(state.polls) if state.polls else []
-                    })
+                    with SessionLocal() as db:
+                        state = db.query(WorkshopState).first()
+                        if not state:
+                            state = WorkshopState(); db.add(state)
+                        if "session_title" in data: state.session_title = data["session_title"]
+                        if "session_desc" in data: state.session_desc = data["session_desc"]
+                        if "speaker_name" in data: state.speaker_name = data["speaker_name"]
+                        if "modules_completed" in data: state.modules_completed = int(data["modules_completed"])
+                        if "total_modules" in data: state.total_modules = int(data["total_modules"])
+                        if "announcements" in data: state.announcements = json.dumps(data["announcements"])
+                        if "resources" in data: state.resources = json.dumps(data["resources"])
+                        if "tasks" in data: state.tasks = json.dumps(data["tasks"])
+                        if "polls" in data: state.polls = json.dumps(data["polls"])
+                        db.commit()
+                        
+                        updated_state = {
+                            "type": "state_update",
+                            "session_title": state.session_title,
+                            "session_desc": state.session_desc,
+                            "speaker_name": state.speaker_name,
+                            "modules_completed": state.modules_completed,
+                            "total_modules": state.total_modules,
+                            "announcements": json.loads(state.announcements),
+                            "resources": json.loads(state.resources),
+                            "tasks": json.loads(state.tasks) if state.tasks else [],
+                            "polls": json.loads(state.polls) if state.polls else []
+                        }
+                    await manager.broadcast(updated_state)
 
                 elif data.get("type") == "ident":
                     name = data.get("name", "Host")
@@ -671,8 +672,6 @@ async def websocket_organizer(websocket: WebSocket, token: str = None):
         manager.disconnect_organizer(websocket)
         try: await manager.broadcast_stats()
         except: pass
-        db.close()
-
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
