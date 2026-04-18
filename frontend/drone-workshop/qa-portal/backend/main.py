@@ -493,9 +493,11 @@ async def websocket_participant(websocket: WebSocket, token: str = None):
             "polls": json.loads(state.polls) if state.polls else []
         }))
 
+        await asyncio.sleep(0.1)
+
         history = db.query(Question).order_by(Question.id.asc()).all()
         for q in history:
-            if q.is_public or q.thread_name == user.name:
+            if q.is_public or q.thread_name == user.name or q.thread_name == "Global":
                 await websocket.send_text(json.dumps(q_to_dict(q)))
 
     # Cooldown info
@@ -574,6 +576,20 @@ async def websocket_organizer(websocket: WebSocket, token: str = None):
         await websocket.close(code=1008)
         return
 
+    # Single-Organizer Enforcement: Kick existing organizer session if one exists
+    if len(manager.organizers) >= 1:
+        for old_ws in list(manager.organizers.keys()):
+            try:
+                await old_ws.send_text(json.dumps({
+                    "type": "notification",
+                    "title": "Session Overridden",
+                    "message": "Fleet Command logged in from another device/tab."
+                }))
+                await old_ws.close(code=1001)
+            except:
+                pass
+            manager.disconnect_organizer(old_ws)
+
     try:
         await manager.connect_organizer(websocket)
         await manager.broadcast_stats()
@@ -596,6 +612,8 @@ async def websocket_organizer(websocket: WebSocket, token: str = None):
                 "tasks": json.loads(state.tasks) if state.tasks else [],
                 "polls": json.loads(state.polls) if state.polls else []
             }))
+
+            await asyncio.sleep(0.1)
 
             history = db.query(Question).order_by(Question.id.asc()).all()
             for q in history:

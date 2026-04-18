@@ -2,11 +2,19 @@ from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime
 from sqlalchemy.orm import declarative_base, sessionmaker
 from datetime import datetime, timezone
 
-SQLALCHEMY_DATABASE_URL = "sqlite:///./app.db"
+import os
+# Prioritize Railway PostgreSQL, fallback to local SQLite
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    SQLALCHEMY_DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    engine_args = {}
+else:
+    SQLALCHEMY_DATABASE_URL = "sqlite:///./app.db"
+    engine_args = {"connect_args": {"check_same_thread": False}}
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL, 
-    connect_args={"check_same_thread": False},
+    **engine_args,
     pool_size=10,
     max_overflow=20,
     pool_timeout=30,
@@ -51,6 +59,9 @@ Base.metadata.create_all(bind=engine)
 # ─── Safe Migrations ─────────────────────────────────────────────────────────
 # Add columns that may be missing in older DB files (ALTER TABLE is idempotent here)
 def safe_migrate():
+    # Only run SQLite-specific migrations if we are on SQLite
+    if not SQLALCHEMY_DATABASE_URL.startswith("sqlite"):
+        return
     import sqlite3
     db_path = SQLALCHEMY_DATABASE_URL.replace("sqlite:///", "")
     conn = sqlite3.connect(db_path)
