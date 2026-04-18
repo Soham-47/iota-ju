@@ -22,6 +22,11 @@
             "permanent": true
         },
         {
+            "source": "/INTRO/intro",
+            "destination": "/frontend/INTRO/intro.html",
+            "permanent": true
+        },
+        {
             "source": "/INTRO/(.*)",
             "destination": "/frontend/INTRO/$1",
             "permanent": true

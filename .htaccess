@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# 1. Map root domain to the frontend landing page
+RewriteRule ^$ frontend/index.html [L]
+
+# 2. Handle legacy paths that now live in frontend (with automatic .html extension)
+# This maps /INTRO/intro -> /frontend/INTRO/intro.html
+RewriteCond %{REQUEST_URI} !^/frontend/
+RewriteCond %{DOCUMENT_ROOT}/frontend/%{REQUEST_URI}.html -f
+RewriteRule ^(.*)$ frontend/$1.html [L,QSA]
+
+# 3. General fall-through to the frontend directory
+# This maps /assets/css/style.css -> /frontend/assets/css/style.css
+RewriteCond %{REQUEST_URI} !^/frontend/
+RewriteCond %{REQUEST_URI} !^/index\.html
+RewriteRule ^(.*)$ frontend/$1 [L,QSA]
