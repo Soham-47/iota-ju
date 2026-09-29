@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Innovatia 2026 - IOTA JU</title>
+
+    <!-- Font Awesome & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap');
+
+        :root {
+            --primary-accent: #686aee;
+            --secondary-accent: #1008f2;
+            --primary-glow: rgba(46, 204, 113, 0.25);
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.7);
+            --text-muted: rgba(255, 255, 255, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            background-image:
+                radial-gradient(circle at 15% 15%, rgba(46, 204, 113, 0.1), transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(39, 174, 96, 0.08), transparent 45%);
+            background-attachment: fixed;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        /* Top Bar Nav */
+        .top-nav {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .back-link:hover {
+            color: var(--primary-accent);
+            transform: translateX(-4px);
+        }
+
+        /* Card Container */
+        .reg-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(46, 204, 113, 0.05);
+        }
+
+        .reg-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .reg-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, var(--primary-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .reg-header p {
+            color: var(--text-dim);
+            font-size: 0.95rem;
+        }
+
+        /* Form Sections */
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-accent);
+            margin: 2rem 0 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.6rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dim);
+        }
+
+        label .req {
+            color: var(--primary-accent);
+        }
+
+        input, select, textarea {
+            background: var(--input-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 0.85rem 1rem;
+            color: #ffffff;
+            font-size: 0.92rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 12px var(--primary-glow);
+            background: rgba(255, 255, 255, 0.07);
+        }
+
+        select option {
+            background: #0d1b2a;
+            color: #ffffff;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        /* Payment Box */
+        .payment-box {
+            background: rgba(46, 204, 113, 0.05);
+            border: 1px dashed rgba(46, 204, 113, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .payment-box h4 {
+            color: var(--primary-accent);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .payment-box p {
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            margin-bottom: 0.8rem;
+        }
+
+        .upi-details {
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+            border: 1px solid var(--glass-border);
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1.1rem;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            color: #ffffff;
+            border: none;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+            box-shadow: 0 10px 25px rgba(46, 204, 113, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 32px rgba(46, 204, 113, 0.45);
+        }
+
+        /* Status Banner */
+        #responseMessage {
+            margin-top: 1.5rem;
+            border-radius: 14px;
+            display: none;
+        }
+
+        .status-success {
+            background: rgba(46, 204, 113, 0.12);
+            border: 1px solid var(--primary-accent);
+            padding: 1.5rem;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .status-success h3 {
+            color: var(--primary-accent);
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .reg-card {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Navigation Back Link -->
+        <div class="top-nav">
+            <a href="innovatia2026.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Innovatia Overview
+            </a>
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">IOTA JU GATEWAY</span>
+        </div>
+
+        <div class="reg-card">
+            <div class="reg-header">
+                <h1>Innovatia 2026 Registration</h1>
+                <p>Complete your registration details and submit UPI payment verification</p>
+            </div>
+
+            <form id="innovatiaForm" enctype="multipart/form-data">
+
+                <!-- Track Selection -->
+                <div class="form-group full-width">
+                    <label for="registration_type">Participation Type <span class="req">*</span></label>
+                    <select id="registration_type" name="registration_type" onchange="toggleTeamSection()" required>
+                        <option value="single">Single Participant</option>
+                        <option value="team">Team of 2</option>
+                    </select>
+                </div>
+
+                <!-- Member 1 Details -->
+                <div class="section-title">
+                    <i class="fas fa-user"></i> <span id="m1_title">Participant Details</span>
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Full Name <span class="req">*</span></label>
+                        <input type="text" name="m1_name" placeholder="e.g. Saptarshi Garai" required />
+                    </div>
+                    <div class="form-group">
+                        <label>College / Institution <span class="req">*</span></label>
+                        <input type="text" name="m1_college" placeholder="e.g. Jadavpur University" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Department / Course <span class="req">*</span></label>
+                        <input type="text" name="m1_department" placeholder="e.g. ETCE / CSE" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Year of Study <span class="req">*</span></label>
+                        <input type="text" name="m1_year" placeholder="e.g. 2nd Year" required />
+                    </div>
+                    <div class="form-group">
+                        <label>Email ID <span class="req">*</span></label>
+                        <input type="email" name="m1_email" placeholder="name@domain.com" required />
+                    </div>
+                    <div class="form-group">
+                        <label>WhatsApp Number <span class="req">*</span></label>
+                        <input type="tel" name="m1_whatsapp" placeholder="10-digit phone number" required />
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Alternative Phone Number (Optional)</label>
+                        <input type="tel" name="m1_alt_phone" placeholder="Emergency contact number" />
+                    </div>
+                </div>
+
+                <!-- Member 2 Details (Conditional) -->
+                <div id="member2_container" style="display: none;">
+                    <div class="section-title">
+                        <i class="fas fa-user-plus"></i> Member 2 Details
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Full Name <span class="req">*</span></label>
+                            <input type="text" id="m2_name" name="m2_name" placeholder="Team partner's full name" />
+                        </div>
+                        <div class="form-group">
+                            <label>College / Institution <span class="req">*</span></label>
+                            <input type="text" id="m2_college" name="m2_college" placeholder="College name" />
+                        </div>
+                        <div class="form-group">
+                            <label>Department / Course <span class="req">*</span></label>
+                            <input type="text" id="m2_department" name="m2_department" placeholder="Department" />
+                        </div>
+                        <div class="form-group">
+                            <label>Year of Study <span class="req">*</span></label>
+                            <input type="text" id="m2_year" name="m2_year" placeholder="Present year" />
+                        </div>
+                        <div class="form-group">
+                            <label>Email ID <span class="req">*</span></label>
+                            <input type="email" id="m2_email" name="m2_email" placeholder="partner@domain.com" />
+                        </div>
+                        <div class="form-group">
+                            <label>WhatsApp Number <span class="req">*</span></label>
+                            <input type="tel" id="m2_whatsapp" name="m2_whatsapp" placeholder="10-digit phone number" />
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Alternative Phone Number (Optional)</label>
+                            <input type="tel" name="m2_alt_phone" placeholder="Alternative contact number" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Section -->
+                <div class="section-title">
+                    <i class="fas fa-receipt"></i> Payment Verification
+                </div>
+
+                <div class="payment-box">
+                    <h4>UPI Payment Instructions</h4>
+                    <p>Transfer the registration fee to the official IOTA JU UPI ID below and attach your payment receipt screenshot.</p>
+                    <div class="upi-details"><i class="fas fa-qrcode"></i> iotaju@upi</div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>UPI Reference / Transaction ID <span class="req">*</span></label>
+                        <input type="text" name="upi_ref_id" placeholder="12-digit UPI Ref / UTR / Txn ID" required />
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Upload Payment Receipt Screenshot <span class="req">*</span></label>
+                        <input type="file" name="payment_screenshot" accept="image/*" required />
+                    </div>
+                </div>
+
+                <!-- Feedback / Optional Queries -->
+                <div class="section-title">
+                    <i class="fas fa-comment-dots"></i> Additional Information (Optional)
+                </div>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label>Expectations from Innovatia 2026</label>
+                        <textarea name="expectations" placeholder="What hardware or concepts do you hope to explore?"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label>Suggestions or Queries</label>
+                        <textarea name="suggestions_query" placeholder="Any specific requirements or questions for organizers"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    Submit Registration <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+
+            <!-- Success / Response Box -->
+            <div id="responseMessage"></div>
+        </div>
+    </div>
+
+    <!-- Submission Handler Script -->
+    <script>
+        function toggleTeamSection() {
+            const type = document.getElementById("registration_type").value;
+            const m2Container = document.getElementById("member2_container");
+            const m1Title = document.getElementById("m1_title");
+            
+            const m2Inputs = ["m2_name", "m2_college", "m2_department", "m2_year", "m2_email", "m2_whatsapp"];
+
+            if (type === "team") {
+                m2Container.style.display = "block";
+                m1Title.innerText = "Team Leader Details";
+                m2Inputs.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.setAttribute("required", "required");
+                });
+            } else {
+                m2Container.style.display = "none";
+                m1Title.innerText = "Participant Details";
+                m2Inputs.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.removeAttribute("required");
+                });
+            }
+        }
+
+        document.getElementById("innovatiaForm").addEventListener("submit", async function(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById("submitBtn");
+            const responseDiv = document.getElementById("responseMessage");
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Submitting... <i class="fas fa-spinner fa-spin"></i>';
+
+            const formData = new FormData(this);
+
+            try {
+                // Post directly to the specified backend API route
+                const response = await fetch("/EVENTS/Innovatia2026/Registration", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    document.getElementById("innovatiaForm").style.display = "none";
+                    responseDiv.className = "status-success";
+                    responseDiv.style.display = "block";
+                    responseDiv.innerHTML = `
+                        <h3><i class="fas fa-check-circle"></i> Registration Received!</h3>
+                        <p style="margin-top: 8px;">Your response has been logged successfully.</p>
+                        <p style="margin-top: 12px; font-size: 1.1rem;"><strong>Registration ID:</strong> <span style="color: #2ecc71;">${result.registration_id}</span></p>
+                        <p style="margin-top: 6px; color: var(--text-dim);"><strong>Payment Status:</strong> Pending Verification</p>
+                        <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">Organizers will cross-check your UPI transaction reference ID. You will receive confirmation once verified.</p>
+                    `;
+                } else {
+                    alert("Submission error: " + (result.message || "Please verify form inputs."));
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Network error: Could not reach the registration server.");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
+            }
+        });
+    </script>
+</body>
+</html>
