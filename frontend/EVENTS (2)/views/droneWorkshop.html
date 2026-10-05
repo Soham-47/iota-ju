@@ -254,6 +254,79 @@
                 margin-bottom: 2rem;
             }
         }
+
+        /* Gallery Styles */
+        .gallery-section {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .gallery-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            gap: 1rem;
+        }
+
+        .gallery-scroll {
+            display: flex;
+            gap: 1.5rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 1rem 0;
+            scrollbar-width: none; /* Firefox */
+        }
+
+        .gallery-scroll::-webkit-scrollbar {
+            display: none; /* Chrome, Safari */
+        }
+
+        .gallery-card {
+            min-width: 280px;
+            max-width: 320px;
+            height: 200px;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-50px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 210, 255, 0.2);
+            border-color: var(--primary-accent);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 2;
+            flex-shrink: 0;
+        }
+
+        .gallery-nav-btn:hover {
+            background: var(--primary-accent);
+            color: #000;
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.4);
+        }
     </style>
 </head>
 
@@ -298,22 +371,22 @@
             <div class="action-panel" style="margin-bottom: 1.5rem;">
                 <div>
                     <p style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Status</p>
-                    <strong style="color: var(--primary-accent); font-size: 1.2rem;">Registrations Open</strong>
+                    <strong style="color: var(--primary-accent); font-size: 1.2rem;">Completed</strong>
                 </div>
-                <a href="https://forms.gle/NaYbmY3Wths8AfeZA" target="_blank" class="event-btn">
-                    <i class="fas fa-edit"></i> Register Now
+                <a href="../images/Code To Filght/BOOTCAMP-report.pdf" target="_blank" class="event-btn" style="background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));">
+                    <i class="fas fa-file-download"></i> Download Event Report
                 </a>
             </div>
 
             <div class="action-panel"
-                style="background: rgba(0, 210, 255, 0.05); border-color: rgba(0, 210, 255, 0.2);">
+                style="background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.05); opacity: 0.5;">
                 <div>
                     <p style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Live Session</p>
-                    <strong style="color: #fff; font-size: 1.2rem;">Interactive Workshop Portal</strong>
+                    <strong style="color: #888; font-size: 1.2rem;">Interactive Workshop Portal</strong>
                 </div>
                 <a href="#" id="join-live-btn" class="event-btn"
-                    style="background: linear-gradient(135deg, #FF3366, #ff8c42);">
-                    <i class="fas fa-lock"></i> Unlocks Saturday 10 AM
+                    style="background: #333; color: #777; cursor: not-allowed; pointer-events: none; box-shadow: none;">
+                    <i class="fas fa-lock"></i> Session Ended
                 </a>
             </div>
 
@@ -363,11 +436,34 @@
             <div class="info-grid">
                 <div class="info-box">
                     <h3><i class="fas fa-calendar-check"></i> Registration</h3>
-                    <p>Open Now</p>
+                    <p>Closed</p>
                 </div>
                 <div class="info-box">
                     <h3><i class="fas fa-graduation-cap"></i> Certificate</h3>
                     <p>IOTA Signed Certificate Provided</p>
+                </div>
+            </div>
+
+            <!-- Event Gallery Section -->
+            <div class="gallery-section">
+                <h2 class="section-title">Event Gallery</h2>
+                <div class="gallery-container">
+                    <button class="gallery-nav-btn" onclick="scrollGallery(-300)"><i class="fas fa-chevron-left"></i></button>
+                    <div class="gallery-scroll" id="droneGallery">
+                        <div class="gallery-card">
+                            <img src="../images/Code To Filght/ctf1.png" alt="Drone Workshop Image 1" />
+                        </div>
+                        <div class="gallery-card">
+                            <img src="../images/Code To Filght/ctf2.png" alt="Drone Workshop Image 2" />
+                        </div>
+                        <div class="gallery-card">
+                            <img src="../images/Code To Filght/IMG-20260418-WA0012.jpg" alt="Drone Workshop Image 3" />
+                        </div>
+                        <div class="gallery-card">
+                            <img src="../images/Code To Filght/IMG-20260522-WA0018.jpg" alt="Drone Workshop Image 4" />
+                        </div>
+                    </div>
+                    <button class="gallery-nav-btn" onclick="scrollGallery(300)"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </div>
 
@@ -384,22 +480,14 @@
             if (typeof gsap !== 'undefined') {
                 gsap.from('.fade-in', { opacity: 0, y: 20, stagger: 0.1, duration: 0.8, ease: 'power3.out' });
             }
-
-            // Live portal logic (Unlocked for testing/live session)
-            const joinBtn = document.getElementById("join-live-btn");
-
-            function updateLiveState() {
-                joinBtn.innerHTML = '<i class="fas fa-satellite-dish"></i> Enter Live Portal';
-                joinBtn.style.opacity = "1";
-                joinBtn.style.cursor = "pointer";
-                joinBtn.onclick = (e) => {
-                    e.preventDefault();
-                    sessionStorage.setItem('allowedToJoin', 'true');
-                    window.location.href = "../../drone-workshop/qa-portal/frontend/login.html";
-                };
-            }
-            updateLiveState();
         });
+
+        function scrollGallery(amount) {
+            const container = document.getElementById('droneGallery');
+            if (container) {
+                container.scrollBy({ left: amount, behavior: 'smooth' });
+            }
+        }
     </script>
     <script src="../../loading-screen.js"></script>
     <script src="../../assets/js/global-nav.js"></script>
