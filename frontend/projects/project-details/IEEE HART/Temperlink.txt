@@ -1,0 +1,5 @@
+Temperlink : 
+
+TemperLink is an industrial LoRaWAN temperature monitoring system designed for long-range, low-power deployment in environments such as cold-chain, storage, industrial plants, and distributed sensing.
+
+Made with Low Power STM32 processors mounted on top of custom-made PCB board & hand-fabricated PCB Antenna, the system posess reliable communication capability upto 1km range, with smart processing & predictive intelligence.
