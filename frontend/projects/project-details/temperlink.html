@@ -260,11 +260,15 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
         }
 
-        .image-preview-container img {
+        .image-preview-container img,
+        .image-preview-container video {
             width: 100%;
             height: auto;
             display: block;
             object-fit: cover;
+        }
+
+        .image-preview-container img {
             transition: transform 0.5s ease;
         }
 
@@ -375,7 +379,10 @@
 
             <!-- Hardware Prototype Image -->
             <div class="image-preview-container">
-                <img src="IEEE HART/Temperlink img.jpeg" alt="TemperLink Hardware Prototype" onerror="this.src='../images/Temperlink img.jpeg'">
+                <video controls preload="metadata" playsinline poster="../images/Temperlink img.jpeg" aria-label="TemperLink project presentation">
+                    <source src="../media/temperlink-demo.mp4" type="video/mp4">
+                    Your browser does not support embedded video.
+                </video>
             </div>
         </div>
 

@@ -44,4 +44,25 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    const email = 'iotajuofficial@gmail.com';
+    const addContactLink = (footer) => {
+        if (footer.querySelector(`a[href="mailto:${email}"]`)) return;
+        const links = footer.querySelector('.footer-bottom-links') || document.createElement('div');
+        links.className = 'footer-bottom-links';
+        if (!links.parentElement) (footer.querySelector('.footer-bottom-content') || footer).append(links);
+        const link = document.createElement('a');
+        link.href = `mailto:${email}`;
+        link.textContent = email;
+        links.append(link);
+    };
+
+    document.querySelectorAll('footer').forEach(addContactLink);
+    if (!document.querySelector('footer')) {
+        const footer = document.createElement('footer');
+        footer.className = 'new-footer footer-alt';
+        footer.innerHTML = '<div class="footer-bottom"><div class="footer-bottom-content"><p>IOT Applications Club, Jadavpur University</p><div class="footer-bottom-links"></div></div></div>';
+        document.body.append(footer);
+        addContactLink(footer);
+    }
 });

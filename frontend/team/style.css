@@ -353,6 +353,10 @@ footer li {
 
 /* Target board members only */
 .board-members .member-card {
+  width: 100%;
+  max-width: 28rem;
+  min-width: 0;
+  margin: 0;
   background: rgba(30, 30, 47, 0.3);
   /* semi-transparent */
   backdrop-filter: blur(10px);
@@ -379,8 +383,9 @@ footer li {
 
 /* Bigger profile pictures */
 .board-members .member-img {
-  width: 16rem;
-  height: 16rem;
+  width: min(16rem, 100%);
+  aspect-ratio: 1;
+  height: auto;
   object-fit: cover;
   border-radius: 15px;
   border: 3px solid #fff;
@@ -413,7 +418,7 @@ footer li {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .board-members .board-grid {
     grid-template-columns: 1fr;
   }
@@ -521,7 +526,7 @@ footer li {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .member-grid1 {
     grid-template-columns: 1fr;
   }
