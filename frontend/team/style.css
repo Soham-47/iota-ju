@@ -59,10 +59,14 @@ nav .routes a:hover {
 
 .hero {
   background: url("media/teambg.jpg") no-repeat center center/cover;
-  height: 100vh;
+  min-height: auto;
   display: flex;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-start; /* Pulls content up toward the navbar */
+  align-items: center;
+  padding-top: 90px; /* Clears navbar while removing blank space above logo */
+  padding-bottom: 40px;
+  box-sizing: border-box;
 }
 
 .hero h1 {
@@ -87,33 +91,45 @@ nav .routes a:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2rem;
-  margin-bottom: 15vh;
-  margin-inline: auto;
+  gap: 1.25rem; /* Reduced gap between logo and text box */
+  margin: 0 auto; /* Removed 15vh bottom margin that was pushing content down */
 }
 
 .teamlogo {
-  height: 12rem;
+  height: 9rem; /* Reduced height from 12rem to save vertical space */
   margin-top: 0;
   transition: transform 0.4s ease, filter 0.3s ease;
 }
 
 
 .teamabout {
+  width: 92%;
+  max-width: 1200px; /* Keeps card wide so text flows into fewer lines */
+  margin: 0 auto;
+
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  /* for Safari */
   color: white;
-  border-radius: 20px;
-  padding: 30px 60px 30px 30px;
+  border-radius: 16px;
+
+  /* Reduced top/bottom padding to make the box compact */
+  padding: 22px 40px;
 
   font-family: "Poppins", sans-serif;
-  line-height: 1.6;
-  font-size: 1.4rem;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+  line-height: 1.45;
+  font-size: 1.15rem; /* Slightly tighter font size to save vertical space */
   text-align: center;
-  max-width: 900px;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+/* Controls paragraph gap tightly without relying on <br> breaks */
+.teamabout p {
+  margin: 0 0 10px 0;
+}
+
+.teamabout p:last-child {
+  margin-bottom: 0;
 }
 
 
@@ -414,24 +430,20 @@ footer li {
   background: linear-gradient(to bottom right, #1f1f2e, #2c2c3d);
   border: 3px solid gold;
   border-radius: 25px;
-  padding: 3rem;
-  /* Increased padding */
-  margin: 1.5rem;
+  padding: 1.5rem;
+  margin: 0;
   box-shadow: 0 12px 25px rgba(255, 215, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   backdrop-filter: blur(8px);
-
-  /* Expanded layout */
-  width: 80%;
-  max-width: 800px;
+  width: 100%;
+  max-width: none;
+  padding: 1.5rem 1rem;
   display: flex !important;
   flex-direction: column !important;
-  /* Stack vertically for centering */
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  justify-content: flex-start;
+  gap: 1rem;
   text-align: center;
-  /* Center align text */
 }
 
 .mentor-card:hover {
@@ -443,10 +455,26 @@ footer li {
 .mentor-card .member-img {
   border: 3px solid gold;
   border-radius: 50%;
-  width: 14rem;
-  height: 14rem;
+  width: 10rem;
+  height: 10rem;
   object-fit: cover;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.mentor-card .member-name {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffd700;
+  font-family: 'Poppins', serif;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+
+.mentor-card .member-post {
+  font-size: 0.95rem;
+  color: #ccc;
+  font-style: italic;
+  line-height: 1.4;
 }
 
 /* Optional: Stylish fonts for mentor name/post */
@@ -478,12 +506,25 @@ footer li {
 
 
 .member-grid1 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* Centers the items horizontally */
-  gap: 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
   width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  align-items: stretch;
+}
+
+@media (max-width: 1100px) {
+  .member-grid1 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .member-grid1 {
+    grid-template-columns: 1fr;
+  }
 }
 
 .bouncing-heading {
@@ -542,3 +583,183 @@ footer li {
     transform: translateX(0vw) translateY(0);
   }
 }
+
+/* ==========================================================================
+   ALL EXTRA SECTIONS - paste at the very end of style.css
+   (replaces the earlier Senior Members and Teams CSS blocks)
+   Contains: Senior Members (4 per row), Technical Development (4),
+   Content & Design (4), Operations & Management (4), Outreach & PR (5)
+   ========================================================================== */
+
+
+/* ---------- 1. SENIOR MEMBERS (15 cards: 4 / 4 / 4 / 3) ---------- */
+
+.senior-members .senior-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centers the shorter last row */
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.senior-members .member-card {
+  width: calc((100% - 4.5rem) / 4);
+  padding: 1.5rem 1rem;
+  background: rgba(30, 30, 47, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 198, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 12px 20px rgba(0, 198, 255, 0.2);
+}
+
+.senior-members .member-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 198, 255, 0.5);
+  border-color: #00c6ff;
+}
+
+.senior-members .member-img {
+  width: 10rem;
+  height: 10rem;
+  border: 3px solid #fff;
+  border-radius: 15px;
+}
+
+.senior-members .member-name {
+  font-size: 1.25rem;
+  color: #00c6ff;
+  margin-top: 0.75rem;
+  text-align: center;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+
+.senior-members .member-post {
+  font-size: 0.95rem;
+  color: #ccc;
+  text-align: center;
+  line-height: 1.35;
+}
+
+
+/* ---------- 2. TEAM SECTIONS (shared by all four teams) ---------- */
+
+.team-section .team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* centers a shorter last row */
+  gap: 1.5rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* 4 per row: (100% - 3 gaps) / 4 */
+.team-section .per-row-4 {
+  max-width: 1200px;
+}
+.team-section .per-row-4 .member-card {
+  width: calc((100% - 4.5rem) / 4);
+}
+
+/* 5 per row: (100% - 4 gaps) / 5 */
+.team-section .per-row-5 {
+  max-width: 1400px;
+}
+.team-section .per-row-5 .member-card {
+  width: calc((100% - 6rem) / 5);
+}
+
+/* Card look (same glass style as Board / Senior members) */
+.team-section .member-card {
+  padding: 1.5rem 1rem;
+  background: rgba(30, 30, 47, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 2px solid rgba(0, 198, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 12px 20px rgba(0, 198, 255, 0.2);
+}
+
+.team-section .member-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 198, 255, 0.5);
+  border-color: #00c6ff;
+}
+
+.team-section .member-img {
+  width: 10rem;
+  height: 10rem;
+  border: 3px solid #fff;
+  border-radius: 15px;
+}
+
+.team-section .member-name {
+  font-size: 1.25rem;
+  color: #00c6ff;
+  margin-top: 0.75rem;
+  text-align: center;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+}
+
+.team-section .member-post {
+  font-size: 0.95rem;
+  color: #ccc;
+  text-align: center;
+  line-height: 1.35;
+}
+
+/* Slightly smaller content for the 5-per-row team so nothing overflows */
+.team-section .per-row-5 .member-img {
+  width: 9rem;
+  height: 9rem;
+}
+.team-section .per-row-5 .member-name {
+  font-size: 1.15rem;
+}
+.team-section .per-row-5 .member-post {
+  font-size: 0.9rem;
+}
+
+
+/* ---------- 3. RESPONSIVE ---------- */
+
+/* Mid-size screens: 5-per-row team drops to 4 per row (5 + 5 becomes 4 + 4 + 2) */
+@media (max-width: 1200px) {
+  .team-section .per-row-5 {
+    max-width: 1200px;
+  }
+  .team-section .per-row-5 .member-card {
+    width: calc((100% - 4.5rem) / 4);
+  }
+}
+
+/* Tablets: 2 per row everywhere */
+@media (max-width: 992px) {
+  .senior-members .member-card {
+    width: calc((100% - 1.5rem) / 2);
+  }
+
+  .team-section .per-row-4,
+  .team-section .per-row-5 {
+    max-width: 700px;
+  }
+  .team-section .per-row-4 .member-card,
+  .team-section .per-row-5 .member-card {
+    width: calc((100% - 1.5rem) / 2);
+  }
+}
+
+/* Phones: 1 per row everywhere */
+@media (max-width: 480px) {
+  .senior-members .member-card,
+  .team-section .per-row-4 .member-card,
+  .team-section .per-row-5 .member-card {
+    width: 100%;
+  }
+}
+
+/* ===== END ALL EXTRA SECTIONS ===== */
