@@ -254,6 +254,104 @@
             margin: 0;
         }
 
+        /* Gallery Styles */
+        .gallery-section {
+            max-width: 1400px;
+            margin: 4rem auto;
+            padding: 0 3rem;
+        }
+
+        .gallery-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #fff;
+            background: linear-gradient(135deg, #fff 40%, var(--primary-accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gallery-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-grid {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            overflow-x: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+        }
+
+        .gallery-grid::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(241, 196, 15, 0.9);
+            color: #000;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 16px;
+        }
+
+        .gallery-nav:hover {
+            background: var(--primary-accent);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-nav.prev {
+            left: 10px;
+        }
+
+        .gallery-nav.next {
+            right: 10px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            background: var(--card-bg);
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 0 0 400px;
+            scroll-snap-align: start;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(241, 196, 15, 0.2);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
         @media (max-width: 992px) {
             .event-split-layout {
                 flex-direction: column;
@@ -310,10 +408,10 @@
             <div class="action-panel">
                 <div>
                     <p style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Status</p>
-                    <strong style="color: var(--primary-accent); font-size: 1.2rem;">Registrations Open</strong>
+                    <strong style="color: #6366f1; font-size: 1.2rem;">Completed</strong>
                 </div>
-                <a href="https://srijanju.in/events/lord-of-the-ring" target="_blank" class="event-btn">
-                    Register on Srijan <i class="fas fa-external-link-alt"></i>
+                <a href="../images/Srijan 26/LOTR/LoTR_2026_final_FINAL.pdf" target="_blank" class="event-btn" style="background: linear-gradient(135deg, #6366f1, #4f46e5); color: #fff;">
+                    Download Event Report <i class="fas fa-download"></i>
                 </a>
             </div>
 
@@ -358,13 +456,42 @@
                     </div>
                 </div>
             </div>
-
-            <a href="events.html" class="event-btn"
-                style="background: transparent; border: 1px solid var(--glass-border); color: #fff; margin-top: 2rem; width: auto; display: inline-flex;">
-                <i class="fas fa-arrow-left"></i> Back to Events
-            </a>
         </div>
     </main>
+
+    <!-- Event Gallery Section -->
+    <section class="gallery-section">
+        <h2 class="gallery-title">Event Gallery</h2>
+        <div class="gallery-container">
+            <button class="gallery-nav prev" onclick="scrollGallery(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="gallery-nav next" onclick="scrollGallery(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="gallery-grid" id="galleryGrid">
+                <div class="gallery-item">
+                    <img src="../images/Srijan 26/LOTR/11.jpeg" alt="Lord of the Ring 2026 Event 1" />
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/Srijan 26/LOTR/15.jpeg" alt="Lord of the Ring 2026 Event 2" />
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/Srijan 26/LOTR/16.jpeg" alt="Lord of the Ring 2026 Event 3" />
+                </div>
+                <div class="gallery-item">
+                    <img src="../images/Srijan 26/LOTR/18.jpeg" alt="Lord of the Ring 2026 Event 4" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div style="max-width: 1400px; margin: 0 auto; padding: 0 3rem 4rem;">
+        <a href="events.html" class="event-btn"
+            style="background: transparent; border: 1px solid var(--glass-border); color: #fff; width: auto; display: inline-flex;">
+            <i class="fas fa-arrow-left"></i> Back to Events
+        </a>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script>
@@ -378,6 +505,12 @@
                 });
             }
         });
+
+        function scrollGallery(direction) {
+            const gallery = document.getElementById('galleryGrid');
+            const itemWidth = 400 + 24; // 400px width + 24px gap
+            gallery.scrollBy({ left: direction * itemWidth, behavior: 'smooth' });
+        }
     </script>
     <script src="../../loading-screen.js"></script>
     <script src="../../assets/js/global-nav.js"></script>
