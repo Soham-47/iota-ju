@@ -1,0 +1,31 @@
+SSCS_Sirsho
+
+
+Project Title
+MediGuard – AI & IoT Based Smart Medicine Verification System
+Project Summary 
+MediGuard is an intelligent healthcare system designed to reduce medication errors by verifying both the patient and the medicine before consumption. It combines fingerprint authentication with AI-based medicine image verification using an ESP32-S3 camera system. A dedicated Android application manages patient details, medicine enrollment, and medication schedules, while Firebase and a Flask backend provide cloud connectivity and data processing.
+Project Overview
+MediGuard consists of an ESP32-S3 based embedded device integrated with an OV3660 camera, AS608 fingerprint sensor, OLED display, and speaker. Patients are authenticated using their fingerprint, after which the system retrieves their scheduled medication. The medicine is captured through the device camera and compared with previously enrolled reference images using a computer-vision pipeline based on image preprocessing, MobileNetV2 embeddings, and cosine similarity. The verification result is then communicated through the OLED and audio feedback. The Android application provides a centralized interface for patient registration, fingerprint enrollment, medicine enrollment, and schedule management.
+Hardware / Software Stacks
+Hardware:
+ESP32-S3 N16R8
+OV3660 Camera Module
+AS608 Fingerprint Sensor
+1.3-inch OLED Display
+Speaker / Audio Module
+Power Bank / Portable Power Supply
+Software:
+Arduino C++ / ESP32 Firmware
+Android Application (Java)
+Flask / Python Backend
+Firebase Firestore
+EasyOCR
+MobileNetV2
+Cosine Similarity
+REST APIs
+Wi-Fi communication
+Implementation Result (if any)
+A functional working prototype of MediGuard has been developed. The system successfully integrates fingerprint-based patient authentication, medicine reference-image enrollment, camera-based medicine verification, Firebase data management, and Android-based patient and schedule management. The ESP32-S3 communicates with the Flask backend over Wi-Fi, while verification results are displayed on the OLED and provided through audio feedback. The complete workflow—from patient authentication and medicine identification to verification and result generation—has been implemented and demonstrated
+
+VIDEO LINK- https://www.youtube.com/watch?v=obCufdvF3DQ

@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deskbot – ESP32 AI Desktop Assistant | IOTA JU</title>
+
+    <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+    <link rel="stylesheet" href="../../loading-screen.css" />
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --primary-accent: #00ff88;
+            --secondary-accent: #00d4ff;
+            --bg-dark: #050a18;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #ffffff;
+            --text-dim: rgba(255, 255, 255, 0.75);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('../media/teambg.jpg') no-repeat center center/cover;
+            background-blend-mode: overlay;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .bg-blob {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));
+            filter: blur(180px);
+            border-radius: 50%;
+            opacity: 0.12;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            top: -100px;
+            right: -100px;
+        }
+
+        .blob-2 {
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .project-header-section {
+            padding: 160px 5% 40px;
+            text-align: center;
+            background: linear-gradient(180deg, rgba(5, 10, 24, 0.95) 0%, rgba(5, 10, 24, 0) 100%);
+        }
+
+        .badge-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            color: var(--primary-accent);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .project-header-section h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 30%, var(--primary-accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .project-header-section p {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            color: var(--text-dim);
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        /* Video Showcase */
+        .video-section {
+            max-width: 1100px;
+            margin: 2rem auto 4rem;
+            padding: 0 5%;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            border-radius: 28px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Sequential Panels Container */
+        .sequential-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 5%;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .glass-panel {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+
+        /* Green Headings for all subheadings */
+        h2.green-heading,
+        .green-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.65rem;
+            font-weight: 700;
+            color: #00ff88 !important;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .green-heading i {
+            color: #00ff88;
+            font-size: 1.3rem;
+        }
+
+        h3.green-subheading,
+        .green-subheading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #00ff88 !important;
+            margin: 1.8rem 0 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .green-subheading i {
+            color: #00ff88;
+            font-size: 1.1rem;
+        }
+
+        .glass-panel p {
+            color: var(--text-dim);
+            line-height: 1.8;
+            font-size: 1rem;
+            margin-bottom: 1.2rem;
+            font-weight: 300;
+        }
+
+        /* Numbered Step/Point List */
+        .step-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 45px;
+            color: var(--text-dim);
+            font-size: 0.98rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .step-number {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: rgba(0, 255, 136, 0.12);
+            border: 1px solid rgba(0, 255, 136, 0.35);
+            color: #00ff88;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .step-list strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Back to Projects Button */
+        .back-container {
+            text-align: center;
+            margin: 4rem 0 6rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 1.1rem 3rem;
+            background: rgba(255, 255, 255, 0.04);
+            border: 2px solid rgba(0, 255, 136, 0.4);
+            color: #ffffff;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+            letter-spacing: 0.5px;
+            transition: all 0.35s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn i {
+            color: #00ff88;
+            transition: transform 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #050a18;
+            border-color: transparent;
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.35);
+        }
+
+        .back-btn:hover i {
+            color: #050a18;
+            transform: translateX(-4px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Standardized Navigation -->
+    <nav id="navbar">
+        <div class="logo-section">
+            <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo"
+                onerror="this.src='../images/IOTA.png'" />
+            <div class="nav-separator"></div>
+            <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo"
+                onerror="this.src='../images/JULogo.png'" />
+        </div>
+        <div class="nav-links">
+            <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
+            <a href="../../EVENTS (2)/views/events.html">Events</a>
+            <a href="../projects.html" class="active">Projects</a>
+            <a href="../../team/team.html">Team</a>
+            <a href="../../TIMELINE/timeline.html">Timeline</a>
+            <a href="../../ALUMNI/alumni.html">Alumni</a>
+            <a href="../../ABOUT US/about us.html">About Us</a>
+        </div>
+        <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
+    </nav>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <!-- Project Header -->
+    <header class="project-header-section">
+        <div class="badge-tag fade-in"><i class="fas fa-robot"></i> IEEE SSCS Project</div>
+        <h1 class="fade-in">Deskbot</h1>
+        <p class="fade-in">An ESP32-powered, voice-controlled AI desktop study assistant streaming audio to Gemini AI for hands-free, screen-free learning and accessibility.</p>
+    </header>
+
+    <!-- Embedded Video Section -->
+    <section class="video-section fade-in">
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/2Wbw0772TUM" 
+                title="Deskbot Project Demonstration Video" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" 
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <!-- Sequential Rounded Enclosed Boxes One by One -->
+    <main class="sequential-container">
+        <!-- Box 1: Project Summary -->
+        <div class="glass-panel fade-in">
+            <h2 class="green-heading"><i class="fas fa-file-waveform"></i> Project Summary</h2>
+            <p>Deskbot is an ESP32-powered, voice-controlled AI desktop study assistant designed to answer academic questions hands-free. It captures spoken questions, streams audio to a Python backend powered by Gemini AI, and speaks back the answers in real time. Alongside an integrated focus timer and clock to minimize phone distractions, it provides an accessible, screen-free learning device particularly helpful for visually impaired users and individuals with limited mobility.</p>
+        </div>
+
+        <!-- Box 2: Project Overview -->
+        <div class="glass-panel fade-in">
+            <h2 class="green-heading"><i class="fas fa-diagram-project"></i> Project Overview</h2>
+            
+            <h3 class="green-subheading"><i class="fas fa-network-wired"></i> System Architecture &amp; Workflow</h3>
+            <p>The end-to-end communication pipeline links micro-hardware to cloud AI:</p>
+            <ul class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    <strong>Audio Input:</strong> The onboard microphone on the ESP32 captures the user's speech and streams 16-bit PCM audio packets over Wi-Fi using the UDP protocol.
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    <strong>Backend Processing:</strong> A dedicated Python application receives the UDP stream, converts speech to text (STT), and forwards the prompt to the Gemini API.
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    <strong>Synthesis &amp; Output:</strong> Gemini’s generated answer is converted back into speech (TTS) and streamed over UDP to the ESP32, which plays it out via an amplifier and speaker.
+                </li>
+            </ul>
+
+            <h3 class="green-subheading"><i class="fas fa-microchip"></i> Engineering Challenges &amp; FreeRTOS Implementation</h3>
+            <ul class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    <strong>Audio Bottleneck:</strong> Handling continuous audio streaming without packet loss or blocking network traffic was a primary technical hurdle.
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    <strong>Multi-Task Architecture:</strong> The team utilized FreeRTOS to implement distinct parallel tasks for microphone recording, Wi-Fi packet reception, and speaker playback.
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    <strong>Buffer Management:</strong> Incoming audio packets are temporarily queued in a memory buffer to absorb network jitter and packet arrival variations, ensuring glitch-free playback.
+                </li>
+            </ul>
+        </div>
+
+        <!-- Box 3: Implementation Result -->
+        <div class="glass-panel fade-in">
+            <h2 class="green-heading"><i class="fas fa-square-poll-vertical"></i> Implementation Result</h2>
+            <ul class="step-list">
+                <li>
+                    <span class="step-number">1</span>
+                    <strong>Hands-Free Academic Q&amp;A:</strong> Successfully processed spoken questions and delivered accurate, spoken answers in clear natural language without requiring a display screen, keyboard, or mouse.
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    <strong>Real-Time Voice Pipeline:</strong> Achieved end-to-end processing—capturing spoken audio on the ESP32, streaming it via UDP over local Wi-Fi, transcribing via STT, generating an answer via Gemini API, synthesizing the speech, and playing it back through the desktop speaker.
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    <strong>Tabletop Productivity Tools:</strong> Ran an integrated tabletop digital clock alongside a dedicated study/focus timer, keeping time visible to prevent study distractions and eliminate phone pickups.
+                </li>
+                <li>
+                    <span class="step-number">4</span>
+                    <strong>Accessibility Interface:</strong> Provided a viable assistive device for visually impaired users and people with limited motor skills by replacing complex website navigation and typing with direct voice interaction.
+                </li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Back to Projects Option at the bottom (enclosed in rounded box) -->
+    <div class="back-container fade-in">
+        <a href="../projects.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Projects
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="new-footer footer-alt">
+        <div class="footer-bottom" style="margin-top:0; background: rgba(0,0,0,0.3)">
+            <div class="footer-bottom-content">
+                <p>&copy; 2026 IoT Applications Club, Jadavpur University. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof gsap !== 'undefined') {
+                gsap.from('.fade-in', { opacity: 0, y: 30, stagger: 0.12, duration: 1, ease: 'power3.out', delay: 0.1 });
+                window.addEventListener('scroll', () => {
+                    const nav = document.getElementById('navbar');
+                    if (window.scrollY > 50) { nav.classList.add('nav-scrolled'); }
+                    else { nav.classList.remove('nav-scrolled'); }
+                });
+            }
+        });
+    </script>
+    <script src="../../loading-screen.js"></script>
+    <script src="../../assets/js/global-nav.js"></script>
+</body>
+
+</html>

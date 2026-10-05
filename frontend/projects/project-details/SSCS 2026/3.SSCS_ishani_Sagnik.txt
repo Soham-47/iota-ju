@@ -1,0 +1,24 @@
+SSCS_Ripha_Sagnik
+
+Project title: Deskbot
+Project summary: Deskbot is an ESP32-powered, voice-controlled AI desktop study assistant designed to answer academic questions hands-free. It captures spoken questions, streams audio to a Python backend powered by Gemini AI, and speaks back the answers in real time. Alongside an integrated focus timer and clock to minimize phone distractions, it provides an accessible, screen-free learning device particularly helpful for visually impaired users and individuals with limited mobility.
+Project overview: 
+*System Architecture & Workflow*
+The end-to-end communication pipeline links micro-hardware to cloud AI:
+1. Audio Input: The onboard microphone on the ESP32 captures the user's speech and streams 16-bit PCM audio packets over Wi-Fi using the UDP protocol.
+2. Backend Processing: A dedicated Python application receives the UDP stream, converts speech to text (STT), and forwards the prompt to the Gemini API.
+3. Synthesis & Output: Gemini’s generated answer is converted back into speech (TTS) and streamed over UDP to the ESP32, which plays it out via an amplifier and speaker.
+
+*Engineering Challenges & FreeRTOS Implementation*
+1. Audio Bottleneck: Handling continuous audio streaming without packet loss or blocking network traffic was a primary technical hurdle.
+2. Multi-Task Architecture: The team utilized FreeRTOS to implement distinct parallel tasks for microphone recording, Wi-Fi packet reception, and speaker playback.
+3. Buffer Management: Incoming audio packets are temporarily queued in a memory buffer to absorb network jitter and packet arrival variations, ensuring glitch-free playback.
+
+Implementation result: 
+1. Hands-Free Academic Q&A: Successfully processed spoken questions and delivered accurate, spoken answers in clear natural language without requiring a display screen, keyboard, or mouse.
+2. Real-Time Voice Pipeline: Achieved end-to-end processing—capturing spoken audio on the ESP32, streaming it via UDP over local Wi-Fi, transcribing via STT, generating an answer via Gemini API, synthesizing the speech, and playing it back through the desktop speaker.
+3. Tabletop Productivity Tools: Ran an integrated tabletop digital clock alongside a dedicated study/focus timer, keeping time visible to prevent study distractions and eliminate phone pickups.
+4. Accessibility Interface: Provided a viable assistive device for visually impaired users and people with limited motor skills by replacing complex website navigation and typing with direct voice interaction.
+
+
+Video link: https://youtu.be/2Wbw0772TUM?si=lOBTD1bJ_qJHCDfS

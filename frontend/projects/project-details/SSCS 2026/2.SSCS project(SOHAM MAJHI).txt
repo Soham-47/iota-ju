@@ -1,0 +1,21 @@
+SSCS project(SOHAM MAJHI)
+Project Title: Gamepad
+Project Summary: A custom-engineered, standalone 8-bit handheld console powered by an ATmega328P microcontroller running on a custom 2-layer PCB designed in KiCad. The system utilizes an extensible object-oriented C++ game engine to execute seven classic titles, including a raycasted 3D DOOM demake on a 128 x 64 monochrome OLED screen. By leveraging non-volatile flash memory (PROGMEM) and fixed-point arithmetic, the console achieves real-time physics and rendering under strict 2 KB SRAM limitations within an ergonomic 3D-printed enclosure.
+Project Overview: The project transitions classic breadboard retro-gaming concepts into a robust, integrated consumer-grade embedded system. The hardware core features an ATmega328P MCU driving a high-contrast I2C OLED display alongside a tactile pushbutton control interface routed onto a custom, compact PCB.
+On the software layer, rather than hardcoding static game loops, a polymorphic engine structure was built around a Finite State Machine (FSM). This modular architecture decouples display drivers, input debouncing, and game state loops, allowing scalable expansion across 7 titles: Space Trash, Breakout, T-Rex Run, DOOM, Snake, Space Wars, and Tetris. The firmware is optimized for extreme memory constraints through bitwise operations, custom collision algorithms, and static memory allocation to avoid heap fragmentation.
+
+Hardware Stack: 
+1) Processor: ATmega328P (16 MHz, 5V logic)
+2) Display: 0.96-inch monochrome SSD1306 OLED (128 x 64, I2C interface)
+3) PCB Design: Custom 2-layer PCB routed in KiCad (optimized trace routing, active pull-ups, power decoupling)
+4) Inputs: Tactile digital momentary pushbuttons
+
+Software & Toolchain Stack:
+1) Language/Environment: C++, Arduino IDE 
+2) Core Architecture: Object-Oriented Polymorphic Engine, Finite State Machine (FSM)
+3) Memory Optimization: Flash asset allocation via PROGMEM, Fixed-Point Math, Bit-masking
+4) CAD / EDA Tools: KiCad (Schematic capture & PCB layout)
+
+
+
+Video link: https://youtu.be/_hJZmpj65aE?si=XS29vwEn6ujbOH89
