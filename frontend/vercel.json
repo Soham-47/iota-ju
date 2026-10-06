@@ -30,15 +30,15 @@
     { "source": "/timeline", "destination": "/TIMELINE/timeline" },
     { "source": "/team", "destination": "/team/team" },
     { "source": "/projects", "destination": "/projects/projects" },
-    { "source": "/events", "destination": "/EVENTS%20(2)/views/events" },
+    { "source": "/events", "destination": "/EVENTS%20%282%29/views/events" },
     { "source": "/project/:slug", "destination": "/projects/project-details/:slug" },
-    { "source": "/events/drone-workshop", "destination": "/EVENTS%20(2)/views/droneWorkshop" },
-    { "source": "/events/iota-bidwars", "destination": "/EVENTS%20(2)/views/iotaBidwars" },
-    { "source": "/events/lord-of-the-ring", "destination": "/EVENTS%20(2)/views/lordOfTheRings" },
-    { "source": "/events/lord-of-the-rings", "destination": "/EVENTS%20(2)/views/lordOfRings" },
-    { "source": "/events/connexion", "destination": "/EVENTS%20(2)/views/connexion" },
-    { "source": "/events/innovatia", "destination": "/EVENTS%20(2)/views/innovatia" },
-    { "source": "/events/lord-of-the-rings-2025", "destination": "/EVENTS%20(2)/views/lordOfRings25" },
-    { "source": "/events/automotive-electronics-seminar", "destination": "/EVENTS%20(2)/views/seminarAutomotiveElectronics" }
+    { "source": "/events/drone-workshop", "destination": "/EVENTS%20%282%29/views/droneWorkshop" },
+    { "source": "/events/iota-bidwars", "destination": "/EVENTS%20%282%29/views/iotaBidwars" },
+    { "source": "/events/lord-of-the-ring", "destination": "/EVENTS%20%282%29/views/lordOfTheRings" },
+    { "source": "/events/lord-of-the-rings", "destination": "/EVENTS%20%282%29/views/lordOfRings" },
+    { "source": "/events/connexion", "destination": "/EVENTS%20%282%29/views/connexion" },
+    { "source": "/events/innovatia", "destination": "/EVENTS%20%282%29/views/innovatia" },
+    { "source": "/events/lord-of-the-rings-2025", "destination": "/EVENTS%20%282%29/views/lordOfRings25" },
+    { "source": "/events/automotive-electronics-seminar", "destination": "/EVENTS%20%282%29/views/seminarAutomotiveElectronics" }
   ]
 }
