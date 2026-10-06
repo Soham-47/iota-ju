@@ -42,21 +42,19 @@ The folders under `frontend/` are a static site, not a framework application. So
 
 ## Run the website locally
 
-Use Python 3 to serve the repository root. This preserves the `/frontend/...` paths used by the root redirect and the site’s links:
+Use the dependency-free local runner from the repository root. It serves the actual HTTP aliases (`/home`, `/events`, `/project/drone`, and so on) as well as legacy file paths:
 
 ```bash
-python3 -m http.server 8000
+npm --prefix frontend start
 ```
 
-Then open <http://localhost:8000/>. To open a page directly, use its path under `/frontend/`, for example:
+Then open <http://localhost:4173/>. To open a page directly, use a clean route, for example:
 
-- <http://localhost:8000/frontend/HOME/homepage-of-iota-main/home.html>
-- <http://localhost:8000/frontend/projects/projects.html>
-- <http://localhost:8000/frontend/team/team.html>
+- <http://localhost:4173/home>
+- <http://localhost:4173/events>
+- <http://localhost:4173/projects>
 
-Do not open pages with a `file://` URL when checking them in a browser; relative paths, media, and browser APIs may behave differently from a served site.
-
-There is also a minimal npm helper in `frontend/package.json` (`npm start`), which serves that directory. The Python command above is the simplest option when you need the repository’s root redirect as well.
+Do not open pages with a `file://` URL when checking them in a browser; root-relative resources and clean routes only work over HTTP.
 
 ## Update site content
 

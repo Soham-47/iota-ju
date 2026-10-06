@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Drone Development Workshop - IOTA</title>
 
-    <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/global-nav.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link rel="stylesheet" href="../../loading-screen.css" />
+    <link rel="stylesheet" href="/frontend/loading-screen.css" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Poppins:wght@300;400;500;600&display=swap');
@@ -41,22 +41,20 @@
         }
 
         .event-split-layout {
-            display: flex;
-            min-height: 100vh;
-            padding-top: 80px;
+            display: grid;
+            grid-template-columns: minmax(18rem, 0.9fr) minmax(0, 1.1fr);
+            align-items: start;
             max-width: 1400px;
             margin: 0 auto;
             gap: 3rem;
-            padding-left: 3rem;
-            padding-right: 3rem;
-            padding-bottom: 3rem;
+            padding: 7rem 2rem 3rem;
         }
 
         .poster-col {
-            flex: 0 0 45%;
             position: sticky;
-            top: 100px;
-            height: calc(100vh - 120px);
+            top: 6rem;
+            height: min(72vh, 760px);
+            min-height: 24rem;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -77,7 +75,7 @@
             inset: -10%;
             width: 120%;
             height: 120%;
-            background: url('../images/droneworkshop.png') center/cover;
+            background: url('/frontend/EVENTS%20(2)/images/droneworkshop.png') center/cover;
             filter: blur(20px) brightness(0.4);
             z-index: 0;
         }
@@ -91,9 +89,8 @@
         }
 
         .content-col {
-            flex: 1;
-            padding-top: 2rem;
-            padding-bottom: 4rem;
+            min-width: 0;
+            padding: 0 0 3rem;
         }
 
         .hero-tag {
@@ -162,9 +159,9 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 1rem;
-            margin-bottom: 3rem;
+            margin: 0 0 3rem;
         }
 
         .info-box {
@@ -202,7 +199,8 @@
 
         .feature-list {
             display: grid;
-            gap: 1.5rem;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1rem;
             margin-bottom: 3rem;
         }
 
@@ -212,7 +210,7 @@
             background: var(--card-bg);
             border: 1px solid var(--glass-border);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 1.25rem;
             align-items: flex-start;
         }
 
@@ -233,25 +231,54 @@
         }
 
         .feature-text p {
-            font-size: 1.1rem;
+            font-size: 0.95rem;
             color: var(--text-dim);
-            line-height: 1.8;
+            line-height: 1.65;
             margin: 0;
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 900px) {
             .event-split-layout {
-                flex-direction: column;
-                padding: 100px 1.5rem 2rem;
-                height: auto;
-                display: block;
+                grid-template-columns: minmax(0, 1fr);
+                gap: 1.5rem;
+                padding: 6rem 1.25rem 2rem;
             }
 
             .poster-col {
                 position: relative;
-                top: 0;
-                height: 50vh;
-                margin-bottom: 2rem;
+                top: auto;
+                height: clamp(18rem, 56vw, 32rem);
+                min-height: 0;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .event-split-layout {
+                gap: 1rem;
+                padding-right: 1rem;
+                padding-left: 1rem;
+            }
+
+            .feature-list {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-item {
+                gap: 0.75rem;
+                padding: 1rem;
+            }
+
+            .feature-text p {
+                font-size: 0.9rem;
+            }
+
+            .action-panel {
+                align-items: flex-start;
+            }
+
+            .event-btn {
+                justify-content: center;
+                padding: 0.85rem 1rem;
             }
         }
 
@@ -295,7 +322,7 @@
         }
 
         .gallery-card:hover {
-            transform: translateY(-50px) scale(1.03);
+            transform: translateY(-6px) scale(1.02);
             box-shadow: 0 10px 25px rgba(0, 210, 255, 0.2);
             border-color: var(--primary-accent);
         }
@@ -333,65 +360,65 @@
 <body>
     <nav id="navbar">
         <div class="logo-section">
-            <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+            <img src="/frontend/HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
             <div class="nav-separator"></div>
-            <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo" />
+            <img src="/frontend/HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo" />
         </div>
         <div class="nav-links">
-            <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
-            <a href="events.html">Events</a>
-            <a href="../../projects/projects.html">Projects</a>
-            <a href="../../team/team.html">Team</a>
-            <a href="../../TIMELINE/timeline.html">Timeline</a>
-            <a href="../../ALUMNI/alumni.html">Alumni</a>
-            <a href="../../ABOUT US/about us.html">About Us</a>
+            <a href="/home">Home</a>
+            <a href="/events">Events</a>
+            <a href="/projects">Projects</a>
+            <a href="/team">Team</a>
+            <a href="/timeline">Timeline</a>
+            <a href="/alumni">Alumni</a>
+            <a href="/about">About Us</a>
         </div>
         <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
     </nav>
 
     <main class="event-split-layout">
         <!-- Left: Poster Area -->
-        <div class="poster-col fade-in">
+        <aside class="poster-col fade-in" aria-label="Drone workshop poster">
             <div class="poster-container">
-                <div class="poster-bg"
-                    style="background: url('https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?auto=format&fit=crop&q=80&w=2000') center/cover;">
-                </div>
-                <img src="../images/droneworkshop.png" alt="Drone Development Workshop" class="poster-img" />
+                <div class="poster-bg" aria-hidden="true"></div>
+                <img src="/frontend/EVENTS%20(2)/images/droneworkshop.png" alt="Drone Development Workshop" class="poster-img" />
             </div>
-        </div>
+        </aside>
 
-        <!-- Right: Content Area -->
-        <div class="content-col fade-in">
-            <span class="hero-tag">New Event</span>
+        <!-- Workshop information -->
+        <article class="content-col fade-in">
+            <span class="hero-tag">Workshop archive</span>
             <h1>Hands-on Drone Development Workshop and Exhibition</h1>
-            <p>Master the art of advanced custom drone engineering. This workshop and exhibition session will
-                bring your very own flying creations to life, covering everything from flight controllers to autonomous
-                navigation.</p>
+            <p>The Code to Flight workshop has concluded. Explore the curriculum and highlights from this hands-on
+                program in drone software, avionics, flight control, and hardware design.</p>
 
             <div class="action-panel" style="margin-bottom: 1.5rem;">
                 <div>
                     <p style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Status</p>
                     <strong style="color: var(--primary-accent); font-size: 1.2rem;">Completed</strong>
                 </div>
-                <a href="../images/Code To Filght/BOOTCAMP-report.pdf" target="_blank" class="event-btn" style="background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));">
+                <a href="/frontend/EVENTS%20(2)/images/Code%20To%20Filght/BOOTCAMP-report.pdf" target="_blank" class="event-btn" style="background: linear-gradient(135deg, var(--primary-accent), var(--secondary-accent));">
                     <i class="fas fa-file-download"></i> Download Event Report
                 </a>
             </div>
 
-            <div class="action-panel"
-                style="background: rgba(255, 255, 255, 0.02); border-color: rgba(255, 255, 255, 0.05); opacity: 0.5;">
-                <div>
-                    <p style="font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase;">Live Session</p>
-                    <strong style="color: #888; font-size: 1.2rem;">Interactive Workshop Portal</strong>
-                </div>
-                <span id="join-live-btn" class="event-btn" aria-disabled="true"
-                    style="background: #333; color: #777; cursor: not-allowed; pointer-events: none; box-shadow: none;">
-                    <i class="fas fa-lock"></i> Session Ended
-                </span>
-            </div>
 
-            <h2 class="section-title">Technical Curriculum</h2>
-            <div class="feature-list">
+            <section class="info-section" aria-label="Workshop details">
+                <div class="info-grid">
+                    <div class="info-box">
+                        <h3><i class="fas fa-calendar-check"></i> Registration</h3>
+                        <p>Closed</p>
+                    </div>
+                    <div class="info-box">
+                        <h3><i class="fas fa-graduation-cap"></i> Certificate</h3>
+                        <p>IOTA Signed Certificate Provided</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="curriculum-section" aria-labelledby="curriculum-title">
+                <h2 class="section-title" id="curriculum-title">Technical Curriculum</h2>
+                <div class="feature-list">
                 <div class="feature-item">
                     <div class="feature-icon"><i class="fas fa-code-branch"></i></div>
                     <div class="feature-text">
@@ -432,46 +459,37 @@
                     </div>
                 </div>
             </div>
+            </section>
 
-            <div class="info-grid">
-                <div class="info-box">
-                    <h3><i class="fas fa-calendar-check"></i> Registration</h3>
-                    <p>Closed</p>
-                </div>
-                <div class="info-box">
-                    <h3><i class="fas fa-graduation-cap"></i> Certificate</h3>
-                    <p>IOTA Signed Certificate Provided</p>
-                </div>
-            </div>
 
             <!-- Event Gallery Section -->
-            <div class="gallery-section">
-                <h2 class="section-title">Event Gallery</h2>
+            <section class="gallery-section" aria-labelledby="gallery-title">
+                <h2 class="section-title" id="gallery-title">Workshop Gallery</h2>
                 <div class="gallery-container">
-                    <button class="gallery-nav-btn" onclick="scrollGallery(-300)"><i class="fas fa-chevron-left"></i></button>
+                    <button class="gallery-nav-btn" type="button" aria-label="Scroll gallery left" onclick="scrollGallery(-300)"><i class="fas fa-chevron-left"></i></button>
                     <div class="gallery-scroll" id="droneGallery">
                         <div class="gallery-card">
-                            <img src="../images/Code To Filght/ctf1.png" alt="Drone Workshop Image 1" />
+                            <img src="/frontend/EVENTS%20(2)/images/Code%20To%20Filght/ctf1.png" alt="Drone Workshop Image 1" />
                         </div>
                         <div class="gallery-card">
-                            <img src="../images/Code To Filght/ctf2.png" alt="Drone Workshop Image 2" />
+                            <img src="/frontend/EVENTS%20(2)/images/Code%20To%20Filght/ctf2.png" alt="Drone Workshop Image 2" />
                         </div>
                         <div class="gallery-card">
-                            <img src="../images/Code To Filght/IMG-20260418-WA0012.jpg" alt="Drone Workshop Image 3" />
+                            <img src="/frontend/EVENTS%20(2)/images/Code%20To%20Filght/IMG-20260418-WA0012.jpg" alt="Drone Workshop Image 3" />
                         </div>
                         <div class="gallery-card">
-                            <img src="../images/Code To Filght/IMG-20260522-WA0018.jpg" alt="Drone Workshop Image 4" />
+                            <img src="/frontend/EVENTS%20(2)/images/Code%20To%20Filght/IMG-20260522-WA0018.jpg" alt="Drone Workshop Image 4" />
                         </div>
                     </div>
-                    <button class="gallery-nav-btn" onclick="scrollGallery(300)"><i class="fas fa-chevron-right"></i></button>
+                    <button class="gallery-nav-btn" type="button" aria-label="Scroll gallery right" onclick="scrollGallery(300)"><i class="fas fa-chevron-right"></i></button>
                 </div>
-            </div>
+            </section>
 
-            <a href="events.html" class="event-btn"
+            <a href="/events" class="event-btn"
                 style="background: transparent; border: 1px solid var(--glass-border); color: #fff; margin-top: 2rem; width: auto; display: inline-flex;">
                 <i class="fas fa-arrow-left"></i> Back to Events
             </a>
-        </div>
+        </article>
     </main>
 
     <footer class="new-footer footer-alt">
@@ -498,8 +516,8 @@
             }
         }
     </script>
-    <script src="../../loading-screen.js"></script>
-    <script src="../../assets/js/global-nav.js"></script>
+    <script src="/frontend/loading-screen.js"></script>
+    <script src="/frontend/assets/js/global-nav.js"></script>
 </body>
 
 </html>

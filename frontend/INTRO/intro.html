@@ -32,12 +32,12 @@
         }
     </style>
 
-    <link rel="stylesheet" href="../loading-screen.css">
+    <link rel="stylesheet" href="/frontend/loading-screen.css">
   </head>
 <body>
     <div class="splash-screen">
         <video id="introVideo" autoplay muted>
-            <source src="IOTA_intro.mp4" type="video/mp4">
+            <source src="/frontend/INTRO/IOTA_intro.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
@@ -46,11 +46,12 @@
         const video = document.getElementById("introVideo");
 
         video.addEventListener("ended", () => {
-            window.location.href = "../HOME/homepage-of-iota-main/home.html";
+            sessionStorage.setItem("introShown", "1");
+            window.location.href = "/home";
  // Redirect to home page after video ends
         });
     </script>
 
-    <script src="../loading-screen.js"></script>
+    <script src="/frontend/loading-screen.js"></script>
   </body>
 </html>

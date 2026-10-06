@@ -5,14 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects - IOTA</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="../assets/css/global-nav.css" />
+  <link rel="stylesheet" href="/frontend/projects/style.css" />
+  <link rel="stylesheet" href="/frontend/assets/css/global-nav.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <!-- Global Loader CSS -->
 
-  <link rel="stylesheet" href="../loading-screen.css" />
+  <link rel="stylesheet" href="/frontend/loading-screen.css" />
   <style>
     /* Import Montserrat and Poppins fonts */
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -58,7 +58,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('media/teambg.jpg') no-repeat center center/cover;
+      background: url('/frontend/projects/media/teambg.jpg') no-repeat center center/cover;
       background-blend-mode: overlay;
       opacity: 0.4;
       z-index: -1;
@@ -298,26 +298,26 @@
     }
   </style>
 
-  <link rel="stylesheet" href="../loading-screen.css">
+  <link rel="stylesheet" href="/frontend/loading-screen.css">
 </head>
 
 <body>
   <!-- Standardized Navigation -->
   <nav id="navbar">
     <div class="logo-section">
-      <img src="images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
+      <img src="/frontend/projects/images/IOTA.png" alt="IOTA Logo" class="nav-logo" />
       <div class="nav-separator"></div>
-      <img src="images/JULogo.png" alt="JU Logo" class="nav-logo" />
+      <img src="/frontend/projects/images/JULogo.png" alt="JU Logo" class="nav-logo" />
     </div>
 
     <div class="nav-links">
-      <a href="../HOME/homepage-of-iota-main/home.html">Home</a>
-      <a href="../EVENTS (2)/views/events.html">Events</a>
-      <a href="projects.html" class="active">Projects</a>
-      <a href="../team/team.html">Team</a>
-      <a href="../TIMELINE/timeline.html">Timeline</a>
-      <a href="../ALUMNI/alumni.html">Alumni</a>
-      <a href="../ABOUT US/about us.html">About Us</a>
+      <a href="/home">Home</a>
+      <a href="/events">Events</a>
+      <a href="/projects" class="active">Projects</a>
+      <a href="/team">Team</a>
+      <a href="/timeline">Timeline</a>
+      <a href="/alumni">Alumni</a>
+      <a href="/about">About Us</a>
     </div>
 
     <div class="mobile-menu-btn">
@@ -347,7 +347,7 @@
         <span class="project-status">IEEE SSCS 2026</span>
         <h2>MediGuard</h2>
         <p>An intelligent AI &amp; IoT healthcare system designed to eliminate medication errors by verifying both patient biometric fingerprints and medicine computer-vision signatures with ESP32-S3 and MobileNetV2.</p>
-        <a href="project-details/mediguard.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+        <a href="/project/mediguard" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
@@ -360,7 +360,7 @@
         <span class="project-status">IEEE SSCS 2026</span>
         <h2>Gamepad: 8-Bit Console</h2>
         <p>A custom-engineered standalone retro console running on an ATmega328P MCU and custom KiCad PCB. Powered by an extensible polymorphic C++ game engine executing 7 titles including raycasted 3D DOOM.</p>
-        <a href="project-details/gamepad.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+        <a href="/project/gamepad" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
@@ -373,7 +373,7 @@
         <span class="project-status">IEEE SSCS 2026</span>
         <h2>Deskbot AI Assistant</h2>
         <p>An ESP32-powered, voice-controlled AI desktop study assistant. Streams audio over UDP to Gemini AI for hands-free real-time question answering with integrated FreeRTOS multi-tasking and accessibility tools.</p>
-        <a href="project-details/deskbot.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+        <a href="/project/deskbot" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
@@ -386,48 +386,48 @@
         <span class="project-status">IEEE SSCS</span>
         <h2>Smart AI Ebook Reader</h2>
         <p>An ESP32-based multi-feature study companion featuring 32GB SD eBook reader, FTP network file server, Bluetooth A2DP audio streaming, macro remote keypad, and Android AI flashcard companion app.</p>
-        <a href="project-details/smart-ebook-reader.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+        <a href="/project/smart-ebook-reader" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
     <!-- Project 5: TemperLink (IEEE HART) -->
     <div class="project-card reveal-left">
       <div class="card-img-container">
-        <img src="project-details/IEEE HART/Temperlink img.jpeg" alt="TemperLink LoRaWAN Monitoring">
+        <img src="/frontend/projects/project-details/IEEE%20HART/Temperlink%20img.jpeg" alt="TemperLink LoRaWAN Monitoring">
       </div>
       <div class="card-content">
         <span class="project-status" style="color: #00ff88; border-color: rgba(0,255,136,0.3); background: rgba(0,255,136,0.1);">Global top 50</span>
         <h2>TemperLink</h2>
         <p>An industrial LoRaWAN temperature monitoring system for long-range, ultra-low power deployment across cold-chain, storage, and industrial plants with STM32 processors and custom planar PCB antennas.</p>
-        <a href="project-details/temperlink.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+        <a href="/project/temperlink" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
     <!-- Project 6: Drone Automation -->
     <div class="project-card reveal-right">
       <div class="card-img-container">
-        <img src="images/drone.jpg" alt="Drone Project">
+        <img src="/frontend/projects/images/drone.jpg" alt="Drone Project">
       </div>
       <div class="card-content">
         <span class="project-status">Vanguard</span>
         <h2>Drone Automation</h2>
         <p>An innovative autonomous vehicle project focusing on navigation, obstacle detection, and smart control
           systems. It is a drone that can navigate through the air and avoid obstacles with computer vision.</p>
-        <a href="project-details/drone.html" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
+        <a href="/project/drone" class="project-button">Learn More <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
 
     <!-- Project 2: Netra-Link -->
     <div class="project-card reveal-right">
       <div class="card-img-container">
-        <img src="images/netralink1.png" alt="Netra-Link Project">
+        <img src="/frontend/projects/images/netralink1.png" alt="Netra-Link Project">
       </div>
       <div class="card-content">
         <span class="project-status">Global 3rd</span>
         <h2>Netra-Link: IoT Goggle</h2>
         <p>3rd Prize Winner at IEEE SSCS Competition. An IoT-enabled assistive goggle translating eye-blinks into
           commands for home automation and emergency response, featuring unconsciousness detection.</p>
-        <a href="project-details/netralink.html" class="project-button">Learn More <i
+        <a href="/project/netralink" class="project-button">Learn More <i
             class="fas fa-arrow-right"></i></a>
       </div>
     </div>
@@ -435,7 +435,7 @@
     <!-- Project 3: Ishara -->
     <div class="project-card reveal-left">
       <div class="card-img-container">
-        <img src="project-details/Isharaa Image.jpeg" alt="Ishara: Touchless HCI">
+        <img src="/frontend/projects/project-details/Isharaa%20Image.jpeg" alt="Ishara: Touchless HCI">
       </div>
       <div class="card-content">
         <span class="project-status"
@@ -446,7 +446,7 @@
           Ishara: Touchless HCI</h2>
         <p>A high-performance touchless media controller for Raspberry Pi 5. Using MediaPipe and HFSM, it achieves 96%+
           accuracy with an ultra-lean 16.9% CPU load for robust gesture interaction.</p>
-        <a href="project-details/ishara.html" class="project-button"
+        <a href="/project/ishara" class="project-button"
           style="background:linear-gradient(135deg, #00d4ff, #007bff); color: #fff;">Open Technical Report <i
             class="fas fa-arrow-right"></i></a>
       </div>
@@ -455,14 +455,14 @@
     <!-- Project 4: Road Anomaly Detection -->
     <div class="project-card reveal-right">
       <div class="card-img-container">
-        <img src="images/road_anomaly_poster.png" alt="Road Anomaly Detection">
+        <img src="/frontend/projects/images/road_anomaly_poster.png" alt="Road Anomaly Detection">
       </div>
       <div class="card-content">
         <span class="project-status">Edge AI Optimized</span>
         <h2>Road Anomaly Detection</h2>
         <p>Real-time edge AI application for Raspberry Pi that detects and logs potholes and road cracks from dashcam
           footage with 60.4% mAP for automated infrastructure health checks.</p>
-        <a href="project-details/road-anomaly.html" class="project-button">View Edge Report <i
+        <a href="/project/road-anomaly" class="project-button">View Edge Report <i
             class="fas fa-arrow-right"></i></a>
       </div>
     </div>
@@ -481,7 +481,7 @@
           VoxVision</h2>
         <p>A voice-to-secure-PDF examination system for visually impaired students. Offline-first, multilingual, and
           AES-256 encrypted to empower independent learning.</p>
-        <a href="project-details/voxvision.html" class="project-button"
+        <a href="/project/voxvision" class="project-button"
           style="background:linear-gradient(135deg, #ff8c00, #ff4500); color: #fff;">Learn More <i
             class="fas fa-arrow-right"></i></a>
       </div>
@@ -490,7 +490,7 @@
     <!-- Project 6: Autonomous Ground Vehicles (AGVs) -->
     <div class="project-card reveal-right">
       <div class="card-img-container">
-        <img src="images/4wheeler.jpg" alt="Autonomous Ground Vehicles">
+        <img src="/frontend/projects/images/4wheeler.jpg" alt="Autonomous Ground Vehicles">
       </div>
       <div class="card-content">
         <span class="project-status">Featured Research Track</span>
@@ -498,7 +498,7 @@
         <p>A comprehensive research track exploring the future of mobility. This project merges our work in 2-Wheeler
           self-balancing, 4-Wheeler autonomous pathfinding, and ML-Integrated Rescue systems into a unified robotic
           mobility framework.</p>
-        <a href="project-details/autonomous-mobility.html" class="project-button">Explore the AGV Series <i
+        <a href="/project/autonomous-mobility" class="project-button">Explore the AGV Series <i
             class="fas fa-arrow-right"></i></a>
       </div>
     </div>
@@ -506,7 +506,7 @@
     <!-- Project 7: SpinSafe -->
     <div class="project-card reveal-left">
       <div class="card-img-container">
-        <img src="images/spinsafe_poster.png" alt="SpinSafe Predictive Maintenance">
+        <img src="/frontend/projects/images/spinsafe_poster.png" alt="SpinSafe Predictive Maintenance">
       </div>
       <div class="card-content">
         <span class="project-status"
@@ -517,7 +517,7 @@
         <p>An autonomous predictive maintenance system for industrial motors. Using ESP32 nodes and local Decision Tree
           classifiers, it achieves 1ms reaction latency to prevent mechanical failure through hardware-level interrupts.
         </p>
-        <a href="project-details/spinsafe.html" class="project-button"
+        <a href="/project/spinsafe" class="project-button"
           style="background:linear-gradient(135deg, #00d2ff, #3a7bd5); color: #fff;">Read Industrial Report <i
             class="fas fa-arrow-right"></i></a>
       </div>
@@ -529,18 +529,18 @@
     <div class="footer-content">
       <!-- Brand Column -->
       <div class="footer-col brand-col">
-        <img src="images/IOTA.png" alt="IOTA Logo" class="footer-logo">
+        <img src="/frontend/projects/images/IOTA.png" alt="IOTA Logo" class="footer-logo">
         <p class="footer-tagline">Innovating the Future with IoT. Join us in building smart solutions for a better
           tomorrow.</p>
         <div class="social-links">
           <a href="https://www.facebook.com/people/IOT-Applications-Club-Jadavpur-University/61550560228682/?mibextid=ZbWKwL"
-            target="_blank" class="social-btn"><img src="images/facebook (2).png" alt="Facebook"></a>
+            target="_blank" class="social-btn"><img src="/frontend/projects/images/facebook%20(2).png" alt="Facebook"></a>
           <a href="https://www.instagram.com/iota_ju/" target="_blank" class="social-btn"><img
-              src="images/Instagram (2).png" alt="Instagram"></a>
+              src="/frontend/projects/images/Instagram%20(2).png" alt="Instagram"></a>
           <a href="https://www.linkedin.com/company/iot-applications-club-jadavpur-university/posts/?feedView=all"
-            target="_blank" class="social-btn"><img src="images/Linkedin (2).png" alt="LinkedIn"></a>
+            target="_blank" class="social-btn"><img src="/frontend/projects/images/Linkedin%20(2).png" alt="LinkedIn"></a>
           <a href="https://github.com/IoTA-Jadavpur-Univeristy" target="_blank" class="social-btn"><img
-              src="images/Github.png" alt="GitHub"></a>
+              src="/frontend/projects/images/Github.png" alt="GitHub"></a>
         </div>
       </div>
 
@@ -548,13 +548,13 @@
       <div class="footer-col links-col">
         <h4>Quick Links</h4>
         <ul>
-          <li><a href="../HOME/homepage-of-iota-main/home.html">Home</a></li>
-          <li><a href="../EVENTS (2)/views/events.html">Events</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="../team/team.html">Team</a></li>
-          <li><a href="../TIMELINE/timeline.html">Timeline</a></li>
-          <li><a href="../ALUMNI/alumni.html">Alumni</a></li>
-          <li><a href="../ABOUT US/about us.html">About Us</a></li>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/events">Events</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/team">Team</a></li>
+          <li><a href="/timeline">Timeline</a></li>
+          <li><a href="/alumni">Alumni</a></li>
+          <li><a href="/about">About Us</a></li>
         </ul>
       </div>
 
@@ -598,41 +598,49 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      gsap.registerPlugin(ScrollTrigger);
+      const hasGsap = typeof gsap !== 'undefined';
+      const hasScrollTrigger = hasGsap && typeof ScrollTrigger !== 'undefined';
 
-      // Hero animations
-      gsap.from('.projects-hero h1', {
-        opacity: 0,
-        y: 50,
-        duration: 1.2,
-        ease: 'power4.out'
-      });
+      if (hasGsap && hasScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
-      gsap.from('.projects-hero p', {
-        opacity: 0,
-        y: 30,
-        duration: 1.2,
-        delay: 0.3,
-        ease: 'power4.out'
-      });
-
-      // Card reveal animations
-      const cards = gsap.utils.toArray('.project-card');
-      cards.forEach((card, i) => {
-        const direction = i % 2 === 0 ? -100 : 100;
-
-        gsap.from(card, {
-          scrollTrigger: {
-            trigger: card,
-            start: 'top 85%',
-            toggleActions: 'play none none none'
-          },
+      if (hasGsap) {
+        // Hero animations
+        gsap.from('.projects-hero h1', {
           opacity: 0,
-          x: direction,
-          duration: 1,
-          ease: 'power3.out'
+          y: 50,
+          duration: 1.2,
+          ease: 'power4.out'
         });
-      });
+
+        gsap.from('.projects-hero p', {
+          opacity: 0,
+          y: 30,
+          duration: 1.2,
+          delay: 0.3,
+          ease: 'power4.out'
+        });
+
+        // Card reveal animations
+        const cards = gsap.utils.toArray('.project-card');
+        cards.forEach((card, i) => {
+          const direction = i % 2 === 0 ? -100 : 100;
+
+          const animation = {
+            opacity: 0,
+            x: direction,
+            duration: 1,
+            ease: 'power3.out'
+          };
+          if (hasScrollTrigger && gsap.plugins && gsap.plugins.ScrollTrigger) {
+            animation.scrollTrigger = {
+              trigger: card,
+              start: 'top 85%',
+              toggleActions: 'play none none none'
+            };
+          }
+          gsap.from(card, animation);
+        });
+      }
 
       // Nav scroll effect
       window.addEventListener('scroll', () => {
@@ -685,8 +693,8 @@
       }
     });
   </script>
-  <script src="../loading-screen.js"></script>
-  <script src="../assets/js/global-nav.js"></script>
+  <script src="/frontend/loading-screen.js"></script>
+  <script src="/frontend/assets/js/global-nav.js"></script>
 </body>
 
 </html>

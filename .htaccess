@@ -1,16 +1,82 @@
+Options -MultiViews
 RewriteEngine On
 
-# 1. Map root domain to the frontend landing page
-RewriteRule ^$ frontend/index.html [L]
+RewriteRule ^$ frontend/index.html [END]
 
-# 2. Handle legacy paths that now live in frontend (with automatic .html extension)
-# This maps /INTRO/intro -> /frontend/INTRO/intro.html
+# Canonicalize legacy HTML page URLs while keeping the original files available
+# through the clean aliases below.
+RewriteRule ^(?:frontend/)?index\.html$ /intro [R=301,END]
+RewriteRule ^(?:frontend/)?HOME/homepage-of-iota-main/home\.html$ /home [R=301,END]
+RewriteRule ^(?:frontend/)?INTRO/intro\.html$ /intro [R=301,END]
+RewriteRule ^(?:frontend/)?ABOUT\ US/about\ us\.html$ /about [R=301,END]
+RewriteRule ^(?:frontend/)?ALUMNI/alumni\.html$ /alumni [R=301,END]
+RewriteRule ^(?:frontend/)?TIMELINE/timeline\.html$ /timeline [R=301,END]
+RewriteRule ^(?:frontend/)?team/team\.html$ /team [R=301,END]
+RewriteRule ^(?:frontend/)?projects/projects\.html$ /projects [R=301,END]
+RewriteRule ^(?:frontend/)?projects/project-details/([a-z0-9-]+)\.html$ /project/$1 [R=301,END,NE]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/events\.html$ /events [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/droneWorkshop\.html$ /events/drone-workshop [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/iotaBidwars\.html$ /events/iota-bidwars [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/lordOfTheRings\.html$ /events/lord-of-the-ring [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/lordOfRings\.html$ /events/lord-of-the-rings [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/connexion\.html$ /events/connexion [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/innovatia\.html$ /events/innovatia [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/lordOfRings25\.html$ /events/lord-of-the-rings-2025 [R=301,END]
+RewriteRule ^(?:frontend/)?EVENTS\ \(2\)/views/seminarAutomotiveElectronics\.html$ /events/automotive-electronics-seminar [R=301,END]
+
+# Preserve historical folder URLs and resource paths while the clean aliases
+# below become the canonical public links.
+RewriteRule ^ABOUT\ US/(.*)$ frontend/ABOUT\ US/$1 [END]
+RewriteRule ^ALUMNI/(.*)$ frontend/ALUMNI/$1 [END]
+RewriteRule ^EVENTS\ \(2\)/(.*)$ frontend/EVENTS\ \(2\)/$1 [END]
+RewriteRule ^HOME/(.*)$ frontend/HOME/$1 [END]
+RewriteRule ^INTRO/(.*)$ frontend/INTRO/$1 [END]
+RewriteRule ^TIMELINE/(.*)$ frontend/TIMELINE/$1 [END]
+RewriteRule ^team/(.*)$ frontend/team/$1 [END]
+RewriteRule ^projects/(.*)$ frontend/projects/$1 [END]
+RewriteRule ^assets/(.*)$ frontend/assets/$1 [END]
+RewriteRule ^loading-screen\.(css|js)$ frontend/loading-screen.$1 [END]
+RewriteRule ^drone-workshop/(.*)$ frontend/drone-workshop/$1 [END]
+
+# Keep clean public URLs working when the repository root is the Apache document root.
+RewriteRule ^home/?$ frontend/HOME/homepage-of-iota-main/home.html [END]
+RewriteRule ^intro/?$ frontend/INTRO/intro.html [END]
+RewriteRule ^about/?$ frontend/ABOUT\ US/about\ us.html [END]
+RewriteRule ^alumni/?$ frontend/ALUMNI/alumni.html [END]
+RewriteRule ^timeline/?$ frontend/TIMELINE/timeline.html [END]
+RewriteRule ^team/?$ frontend/team/team.html [END]
+RewriteRule ^projects/?$ frontend/projects/projects.html [END]
+RewriteRule ^events/?$ frontend/EVENTS\ \(2\)/views/events.html [END]
+
+RewriteRule ^project/2wheeler/?$ frontend/projects/project-details/2wheeler.html [END]
+RewriteRule ^project/4wheeler/?$ frontend/projects/project-details/4wheeler.html [END]
+RewriteRule ^project/autonomous-mobility/?$ frontend/projects/project-details/autonomous-mobility.html [END]
+RewriteRule ^project/deskbot/?$ frontend/projects/project-details/deskbot.html [END]
+RewriteRule ^project/drone/?$ frontend/projects/project-details/drone.html [END]
+RewriteRule ^project/gamepad/?$ frontend/projects/project-details/gamepad.html [END]
+RewriteRule ^project/ishara/?$ frontend/projects/project-details/ishara.html [END]
+RewriteRule ^project/mediguard/?$ frontend/projects/project-details/mediguard.html [END]
+RewriteRule ^project/netralink/?$ frontend/projects/project-details/netralink.html [END]
+RewriteRule ^project/rescue-car/?$ frontend/projects/project-details/rescue-car.html [END]
+RewriteRule ^project/road-anomaly/?$ frontend/projects/project-details/road-anomaly.html [END]
+RewriteRule ^project/smart-ebook-reader/?$ frontend/projects/project-details/smart-ebook-reader.html [END]
+RewriteRule ^project/spinsafe/?$ frontend/projects/project-details/spinsafe.html [END]
+RewriteRule ^project/temperlink/?$ frontend/projects/project-details/temperlink.html [END]
+RewriteRule ^project/voxvision/?$ frontend/projects/project-details/voxvision.html [END]
+
+RewriteRule ^events/drone-workshop/?$ frontend/EVENTS\ \(2\)/views/droneWorkshop.html [END]
+RewriteRule ^events/iota-bidwars/?$ frontend/EVENTS\ \(2\)/views/iotaBidwars.html [END]
+RewriteRule ^events/lord-of-the-ring/?$ frontend/EVENTS\ \(2\)/views/lordOfTheRings.html [END]
+RewriteRule ^events/lord-of-the-rings/?$ frontend/EVENTS\ \(2\)/views/lordOfRings.html [END]
+RewriteRule ^events/connexion/?$ frontend/EVENTS\ \(2\)/views/connexion.html [END]
+RewriteRule ^events/innovatia/?$ frontend/EVENTS\ \(2\)/views/innovatia.html [END]
+RewriteRule ^events/lord-of-the-rings-2025/?$ frontend/EVENTS\ \(2\)/views/lordOfRings25.html [END]
+RewriteRule ^events/automotive-electronics-seminar/?$ frontend/EVENTS\ \(2\)/views/seminarAutomotiveElectronics.html [END]
+
+# Keep the previous static fall-through for any legacy page or asset that has
+# not received a clean alias yet.
 RewriteCond %{REQUEST_URI} !^/frontend/
 RewriteCond %{DOCUMENT_ROOT}/frontend/%{REQUEST_URI}.html -f
-RewriteRule ^(.*)$ frontend/$1.html [L,QSA]
-
-# 3. General fall-through to the frontend directory
-# This maps /assets/css/style.css -> /frontend/assets/css/style.css
+RewriteRule ^(.*)$ frontend/$1.html [END,QSA]
 RewriteCond %{REQUEST_URI} !^/frontend/
-RewriteCond %{REQUEST_URI} !^/index\.html
-RewriteRule ^(.*)$ frontend/$1 [L,QSA]
+RewriteRule ^(.*)$ frontend/$1 [END,QSA]

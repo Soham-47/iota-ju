@@ -1,3 +1,46 @@
+# Clean routes also work when frontend/ is the Apache document root.
+Options -MultiViews
+RewriteEngine On
+RewriteRule ^frontend/(.*)$ $1 [END]
+
+# Canonicalize legacy HTML page URLs while retaining extensionless fallbacks.
+RewriteRule ^index\.html$ /intro [R=301,END]
+RewriteRule ^HOME/homepage-of-iota-main/home\.html$ /home [R=301,END]
+RewriteRule ^INTRO/intro\.html$ /intro [R=301,END]
+RewriteRule ^ABOUT\ US/about\ us\.html$ /about [R=301,END]
+RewriteRule ^ALUMNI/alumni\.html$ /alumni [R=301,END]
+RewriteRule ^TIMELINE/timeline\.html$ /timeline [R=301,END]
+RewriteRule ^team/team\.html$ /team [R=301,END]
+RewriteRule ^projects/projects\.html$ /projects [R=301,END]
+RewriteRule ^projects/project-details/([a-z0-9-]+)\.html$ /project/$1 [R=301,END,NE]
+RewriteRule ^EVENTS\ \(2\)/views/events\.html$ /events [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/droneWorkshop\.html$ /events/drone-workshop [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/iotaBidwars\.html$ /events/iota-bidwars [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/lordOfTheRings\.html$ /events/lord-of-the-ring [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/lordOfRings\.html$ /events/lord-of-the-rings [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/connexion\.html$ /events/connexion [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/innovatia\.html$ /events/innovatia [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/lordOfRings25\.html$ /events/lord-of-the-rings-2025 [R=301,END]
+RewriteRule ^EVENTS\ \(2\)/views/seminarAutomotiveElectronics\.html$ /events/automotive-electronics-seminar [R=301,END]
+
+RewriteRule ^home/?$ HOME/homepage-of-iota-main/home.html [END]
+RewriteRule ^intro/?$ INTRO/intro.html [END]
+RewriteRule ^about/?$ ABOUT\ US/about\ us.html [END]
+RewriteRule ^alumni/?$ ALUMNI/alumni.html [END]
+RewriteRule ^timeline/?$ TIMELINE/timeline.html [END]
+RewriteRule ^team/?$ team/team.html [END]
+RewriteRule ^projects/?$ projects/projects.html [END]
+RewriteRule ^events/?$ EVENTS\ \(2\)/views/events.html [END]
+RewriteRule ^project/([^/]+)/?$ projects/project-details/$1.html [END]
+RewriteRule ^events/drone-workshop/?$ EVENTS\ \(2\)/views/droneWorkshop.html [END]
+RewriteRule ^events/iota-bidwars/?$ EVENTS\ \(2\)/views/iotaBidwars.html [END]
+RewriteRule ^events/lord-of-the-ring/?$ EVENTS\ \(2\)/views/lordOfTheRings.html [END]
+RewriteRule ^events/lord-of-the-rings/?$ EVENTS\ \(2\)/views/lordOfRings.html [END]
+RewriteRule ^events/connexion/?$ EVENTS\ \(2\)/views/connexion.html [END]
+RewriteRule ^events/innovatia/?$ EVENTS\ \(2\)/views/innovatia.html [END]
+RewriteRule ^events/lord-of-the-rings-2025/?$ EVENTS\ \(2\)/views/lordOfRings25.html [END]
+RewriteRule ^events/automotive-electronics-seminar/?$ EVENTS\ \(2\)/views/seminarAutomotiveElectronics.html [END]
+
 # Enable compression
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/plain

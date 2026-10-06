@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta http-equiv="refresh" content="0; url=/frontend/index.html">
-    <script type="text/javascript">
-        window.location.href = "/frontend/index.html"
-    </script>
-    <title>IOTA JU</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IOTA JU</title>
 </head>
-
 <body>
-    If you are not redirected, <a href="/frontend/index.html">click here</a>.
+  <script>
+    const destination = sessionStorage.getItem('introShown') ? '/home' : '/intro';
+    window.location.replace(destination);
+  </script>
+  <p>If you are not redirected, <a href="/intro">open IOTA JU</a>.</p>
 </body>
-
 </html>

@@ -1,17 +1,44 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "**/*.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "**/*.@(js|css|jpg|jpeg|png|gif|ico|svg|woff|woff2|ttf|eot|mp4|webm|json)",
-      "use": "@vercel/static"
-    }
+  "cleanUrls": true,
+  "redirects": [
+    { "source": "/index.html", "destination": "/intro", "permanent": true },
+    { "source": "/HOME/homepage-of-iota-main/home.html", "destination": "/home", "permanent": true },
+    { "source": "/INTRO/intro.html", "destination": "/intro", "permanent": true },
+    { "source": "/ABOUT%20US/about%20us.html", "destination": "/about", "permanent": true },
+    { "source": "/ALUMNI/alumni.html", "destination": "/alumni", "permanent": true },
+    { "source": "/TIMELINE/timeline.html", "destination": "/timeline", "permanent": true },
+    { "source": "/team/team.html", "destination": "/team", "permanent": true },
+    { "source": "/projects/projects.html", "destination": "/projects", "permanent": true },
+    { "source": "/projects/project-details/:slug.html", "destination": "/project/:slug", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/events.html", "destination": "/events", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/droneWorkshop.html", "destination": "/events/drone-workshop", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/iotaBidwars.html", "destination": "/events/iota-bidwars", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/lordOfTheRings.html", "destination": "/events/lord-of-the-ring", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/lordOfRings.html", "destination": "/events/lord-of-the-rings", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/connexion.html", "destination": "/events/connexion", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/innovatia.html", "destination": "/events/innovatia", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/lordOfRings25.html", "destination": "/events/lord-of-the-rings-2025", "permanent": true },
+    { "source": "/EVENTS%20\\(2\\)/views/seminarAutomotiveElectronics.html", "destination": "/events/automotive-electronics-seminar", "permanent": true }
   ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/.*", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/frontend/:path*", "destination": "/:path*" },
+    { "source": "/home", "destination": "/HOME/homepage-of-iota-main/home" },
+    { "source": "/intro", "destination": "/INTRO/intro" },
+    { "source": "/about", "destination": "/ABOUT%20US/about%20us" },
+    { "source": "/alumni", "destination": "/ALUMNI/alumni" },
+    { "source": "/timeline", "destination": "/TIMELINE/timeline" },
+    { "source": "/team", "destination": "/team/team" },
+    { "source": "/projects", "destination": "/projects/projects" },
+    { "source": "/events", "destination": "/EVENTS%20(2)/views/events" },
+    { "source": "/project/:slug", "destination": "/projects/project-details/:slug" },
+    { "source": "/events/drone-workshop", "destination": "/EVENTS%20(2)/views/droneWorkshop" },
+    { "source": "/events/iota-bidwars", "destination": "/EVENTS%20(2)/views/iotaBidwars" },
+    { "source": "/events/lord-of-the-ring", "destination": "/EVENTS%20(2)/views/lordOfTheRings" },
+    { "source": "/events/lord-of-the-rings", "destination": "/EVENTS%20(2)/views/lordOfRings" },
+    { "source": "/events/connexion", "destination": "/EVENTS%20(2)/views/connexion" },
+    { "source": "/events/innovatia", "destination": "/EVENTS%20(2)/views/innovatia" },
+    { "source": "/events/lord-of-the-rings-2025", "destination": "/EVENTS%20(2)/views/lordOfRings25" },
+    { "source": "/events/automotive-electronics-seminar", "destination": "/EVENTS%20(2)/views/seminarAutomotiveElectronics" }
   ]
 }

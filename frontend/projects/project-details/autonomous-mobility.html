@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Autonomous Ground Vehicles - IOTA JU</title>
 
-    <link rel="stylesheet" href="../../assets/css/global-nav.css" />
+    <link rel="stylesheet" href="/frontend/assets/css/global-nav.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-    <link rel="stylesheet" href="../../loading-screen.css" />
+    <link rel="stylesheet" href="/frontend/loading-screen.css" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap');
@@ -44,7 +44,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('../media/teambg.jpg') no-repeat center center/cover;
+            background: url('/frontend/projects/media/teambg.jpg') no-repeat center center/cover;
             background-blend-mode: overlay;
             opacity: 0.3;
             z-index: -1;
@@ -275,18 +275,20 @@
 <body>
     <nav id="navbar">
         <div class="logo-section">
-            <img src="../../HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo"
-                onerror="this.src='../../assets/images/IOTA.png'" />
+            <img src="/frontend/HOME/homepage-of-iota-main/images/IOTA.png" alt="IOTA Logo" class="nav-logo"
+                />
             <div class="nav-separator"></div>
-            <img src="../../HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo"
-                onerror="this.src='../../assets/images/JULogo.png'" />
+            <img src="/frontend/HOME/homepage-of-iota-main/images/JULogo.png" alt="JU Logo" class="nav-logo"
+                />
         </div>
         <div class="nav-links">
-            <a href="../../HOME/homepage-of-iota-main/home.html">Home</a>
-            <a href="../../EVENTS (2)/views/events.html">Events</a>
-            <a href="../projects.html" class="active">Projects</a>
-            <a href="../../team/team.html">Team</a>
-            <a href="../../ABOUT US/about us.html">About Us</a>
+            <a href="/home">Home</a>
+            <a href="/events">Events</a>
+            <a href="/projects" class="active">Projects</a>
+            <a href="/team">Team</a>
+            <a href="/timeline">Timeline</a>
+            <a href="/alumni">Alumni</a>
+            <a href="/about">About Us</a>
         </div>
         <div class="mobile-menu-btn"><i class="fas fa-bars"></i></div>
     </nav>
@@ -318,7 +320,7 @@
     <main class="content-grid">
         <!-- Section 1: 4-Wheeler -->
         <div class="project-detail-block fade-in">
-            <img src="../images/4wheeler.jpg" alt="4-Wheeler Automation" class="block-image">
+            <img src="/frontend/projects/images/4wheeler.jpg" alt="4-Wheeler Automation" class="block-image">
             <div class="text-content">
                 <h2>Phase I: 4-Wheeler Automation</h2>
                 <p>The 4-Wheeler track focuses on large-scale urban mobility. By integrating high-precision LIDAR and
@@ -336,7 +338,7 @@
 
         <!-- Section 2: 2-Wheeler -->
         <div class="project-detail-block fade-in">
-            <img src="../images/2wheeler.jpg" alt="2-Wheeler Dynamics" class="block-image">
+            <img src="/frontend/projects/images/2wheeler.jpg" alt="2-Wheeler Dynamics" class="block-image">
             <div class="text-content">
                 <h2>Phase II: Self-Balancing Dynamics</h2>
                 <p>Exploring the complex physics of single-track vehicles. This project utilizes high-speed IMU sensor
@@ -353,7 +355,7 @@
 
         <!-- Section 3: ML Rescue Car -->
         <div class="project-detail-block fade-in">
-            <img src="../images/Robot Pic 1.jpg" alt="ML-Integrated Rescue Car" class="block-image">
+            <img src="/frontend/projects/images/Robot%20Pic%201.jpg" alt="ML-Integrated Rescue Car" class="block-image">
             <div class="text-content">
                 <h2>Phase III: AI Search & Rescue</h2>
                 <p>Our most advanced robotics project, designed for disaster response. The ML-Integrated Rescue Car
@@ -395,7 +397,7 @@
             </div>
 
             <div style="text-align: center; margin-top: 4rem;">
-                <a href="../projects.html" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+                <a href="/projects" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Projects</a>
             </div>
         </div>
     </main>
@@ -434,8 +436,8 @@
             }
         });
     </script>
-    <script src="../../loading-screen.js"></script>
-    <script src="../../assets/js/global-nav.js"></script>
+    <script src="/frontend/loading-screen.js"></script>
+    <script src="/frontend/assets/js/global-nav.js"></script>
 </body>
 
 </html>

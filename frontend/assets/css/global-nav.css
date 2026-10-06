@@ -12,6 +12,10 @@
     --font-body: 'Poppins', sans-serif;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 /* Navigation */
 nav {
     position: fixed;

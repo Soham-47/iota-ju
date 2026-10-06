@@ -641,7 +641,7 @@ h2 {
   position: absolute;
   background: #1a1a2e;
   /* Fallback color */
-  background: url('../../images/space-bg.jpg') no-repeat center center fixed;
+  background: url('/frontend/EVENTS%20(2)/media/teambg.jpg') no-repeat center center fixed;
   background-size: cover;
   background-attachment: fixed;
   display: flex;
@@ -707,7 +707,7 @@ h2 {
   position: relative;
   background: #0f0c29;
   /* Fallback color */
-  background: url('../../images/stars-bg.jpg') no-repeat center center fixed;
+  background: url('/frontend/EVENTS%20(2)/media/teambg.jpg') no-repeat center center fixed;
   background-size: cover;
   background-attachment: fixed;
   top: 15%;

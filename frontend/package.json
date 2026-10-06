@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "IOTA official website",
   "scripts": {
-    "start": "npx -y serve .",
+    "start": "node dev-server.mjs",
     "build": "echo 'Build script completed. No build step required for static files.'"
   },
   "engines": {

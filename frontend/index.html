@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IOTA - Loading...</title>
-    <link rel="icon" type="image/png" href="HOME/homepage-of-iota-main/images/logo.png">
+    <link rel="icon" type="image/png" href="/frontend/HOME/homepage-of-iota-main/images/logo.png">
 
     <!-- Global Loader CSS -->
-    <link rel="stylesheet" href="assets/css/global-loader.css">
+    <link rel="stylesheet" href="/frontend/assets/css/global-loader.css">
 
     <style>
         /* Hide content until fully loaded */
@@ -40,7 +40,7 @@
     <!-- Content will be loaded dynamically -->
 
     <!-- Global Loader Script -->
-    <script src="assets/js/global-loader.js"></script>
+    <script src="/frontend/assets/js/global-loader.js"></script>
 
     <script>
         // Show the page once the loading screen is ready
@@ -64,9 +64,9 @@
             // Redirect after a small delay to allow loading screen to initialize
             setTimeout(() => {
                 if (hasSeenIntro) {
-                    window.location.href = 'HOME/homepage-of-iota-main/home.html';
+                    window.location.href = '/home';
                 } else {
-                    window.location.href = 'INTRO/intro.html';
+                    window.location.href = '/intro';
                 }
             }, hasLoadedBefore ? 0 : 100); // No delay for subsequent visits
         });
