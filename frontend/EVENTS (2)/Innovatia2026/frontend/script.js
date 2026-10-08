@@ -1,9 +1,10 @@
 /**
- * Innovatia 2026 Registration Frontend Script
- * Location: EVENTS (2)/Innovatia2026/frontend/script.js
- * Handles dynamic team member fields and form submission to local Python server.
+ * Innovatia 2026 Registration Frontend Script (v3)
+ * Location: EVENTS/Innovatia2026/frontend/script.js
+ * Handles dynamic team member fields, file pre-validation, and submission to backend API.
  */
 
+// Toggle Member 2 (Team Partner) fields based on participation selection
 function toggleTeamSection() {
     const typeSelect = document.getElementById("registration_type");
     if (!typeSelect) return;
@@ -31,16 +32,49 @@ function toggleTeamSection() {
     }
 }
 
+// Bind form submission event handler on DOM load
 document.addEventListener("DOMContentLoaded", function () {
     const regForm = document.getElementById("innovatiaForm") || document.getElementById("regForm");
     if (!regForm) return;
 
+    // Attach toggle handler to registration type selector
+    const typeSelect = document.getElementById("registration_type");
+    if (typeSelect) {
+        typeSelect.addEventListener("change", toggleTeamSection);
+        toggleTeamSection(); // Initial state check
+    }
+
     regForm.addEventListener("submit", async function (e) {
         e.preventDefault();
-        
+
         const submitBtn = document.getElementById("submitBtn");
         const responseDiv = document.getElementById("responseMessage");
 
+        // Client-side file pre-validation
+        const fileInput = document.getElementById("payment_screenshot") || regForm.querySelector('input[type="file"]');
+        if (fileInput && fileInput.files && fileInput.files[0]) {
+            const file = fileInput.files[0];
+            const maxMB = 5;
+            const maxBytes = maxMB * 1024 * 1024;
+            const allowedTypes = ["image/jpeg", "image/png", "image/jpg"];
+            const allowedExts = [".png", ".jpg", ".jpeg"];
+
+            const fileName = file.name.toLowerCase();
+            const hasValidExt = allowedExts.some(ext => fileName.endsWith(ext));
+            const hasValidType = allowedTypes.includes(file.type.toLowerCase());
+
+            if (!hasValidExt && !hasValidType) {
+                alert("Invalid file format. Please upload a PNG or JPEG screenshot.");
+                return;
+            }
+
+            if (file.size > maxBytes) {
+                alert(`File size exceeds ${maxMB}MB limit. Please upload a smaller screenshot.`);
+                return;
+            }
+        }
+
+        // Lock submit button during request execution
         if (submitBtn) {
             submitBtn.disabled = true;
             submitBtn.innerHTML = 'Submitting... <i class="fas fa-spinner fa-spin"></i>';
@@ -48,28 +82,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const formData = new FormData(regForm);
 
-        // Target the endpoint dynamically relative to current origin
-        const targetUrl = window.location.origin + "/EVENTS (2)/Innovatia2026/Registration";
-        console.log("Submitting form to:", targetUrl);
+        // API Endpoint routing: local server relative route vs production backend API domain
+        const isLocalHost = window.location.hostname === "localhost" || 
+                            window.location.hostname === "127.0.0.1" || 
+                            window.location.hostname.startsWith("192.168.");
+        
+        // Use relative URL for local development; configure production backend endpoint URL for live static hosts
+        const API_BASE_URL = isLocalHost 
+            ? "" 
+            : (window.SERVER_API_URL || "https://iota-ju-backend.up.railway.app");
+
+        const targetEndpoint = `${API_BASE_URL}/EVENTS/Innovatia2026/Registration`;
 
         try {
-            const response = await fetch(targetUrl, {
+            const response = await fetch(targetEndpoint, {
                 method: "POST",
                 body: formData
             });
 
-            const text = await response.text();
             let result = {};
             try {
-                result = JSON.parse(text);
-            } catch (pErr) {
-                console.error("Non-JSON server response:", text);
-                alert(`Server returned status ${response.status} (${response.statusText}). Check your terminal running python server.py.`);
-                if (submitBtn) {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
-                }
-                return;
+                result = await response.json();
+            } catch (jsonErr) {
+                result = { message: `Server error (${response.status} ${response.statusText})` };
             }
 
             if (response.ok && result.status === "success") {
@@ -86,15 +121,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     `;
                 }
             } else {
-                alert("Submission error: " + (result.message || `Server Status ${response.status}`));
+                const errorMsg = result.message || "Please verify form inputs and try again.";
+                alert("Submission error: " + errorMsg);
                 if (submitBtn) {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
                 }
             }
         } catch (err) {
-            console.error("Registration fetch error:", err);
-            alert("Network connection failed. Make sure 'python server.py' is running in terminal on port 3000.");
+            console.error("Registration submission error:", err);
+            alert("Network error: Could not reach the registration server. Please check your connection and try again.");
             if (submitBtn) {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
