@@ -27,7 +27,7 @@ const API_CONFIG = {
 function parseEnvText(text) {
     const env = {};
     if (!text) return env;
-    const lines = text.split("\n");
+    const lines = text.split(/\r?\n/);
     for (let line of lines) {
         line = line.trim();
         if (!line || line.startsWith("#")) continue;
@@ -35,9 +35,9 @@ function parseEnvText(text) {
         if (equalIdx > 0) {
             const key = line.substring(0, equalIdx).trim();
             let val = line.substring(equalIdx + 1).trim();
-            // Remove wrapping quotes if present
+            // Remove wrapping quotes and extra whitespace if present
             if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) {
-                val = val.slice(1, -1);
+                val = val.slice(1, -1).trim();
             }
             env[key] = val;
         }
@@ -61,10 +61,10 @@ API_CONFIG.ready = (async function loadEnv() {
         if (response.ok) {
             const text = await response.text();
             const parsed = parseEnvText(text);
-            if (parsed.SUPABASE_URL) API_CONFIG.SUPABASE_URL = parsed.SUPABASE_URL;
-            if (parsed.SUPABASE_ANON_KEY) API_CONFIG.SUPABASE_ANON_KEY = parsed.SUPABASE_ANON_KEY;
-            if (parsed.TABLE_NAME) API_CONFIG.TABLE_NAME = parsed.TABLE_NAME;
-            if (parsed.STORAGE_BUCKET) API_CONFIG.STORAGE_BUCKET = parsed.STORAGE_BUCKET;
+            if (parsed.SUPABASE_URL) API_CONFIG.SUPABASE_URL = parsed.SUPABASE_URL.trim();
+            if (parsed.SUPABASE_ANON_KEY) API_CONFIG.SUPABASE_ANON_KEY = parsed.SUPABASE_ANON_KEY.trim();
+            if (parsed.TABLE_NAME) API_CONFIG.TABLE_NAME = parsed.TABLE_NAME.trim();
+            if (parsed.STORAGE_BUCKET) API_CONFIG.STORAGE_BUCKET = parsed.STORAGE_BUCKET.trim();
         }
     } catch (e) {
         // Fallback cleanly when served under protocols restricting local fetch (e.g. file://)

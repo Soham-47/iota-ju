@@ -6,9 +6,13 @@
  * Uploads receipt screenshots to Supabase Storage and records registrations in Supabase PostgreSQL.
  */
 
-// -------------------------------------------------------------
+
+
+
 // 1. RESOLVE CONFIGURATION (FROM config.js OR FALLBACK)
-// -------------------------------------------------------------
+
+
+
 const CONFIG = (typeof API_CONFIG !== "undefined" && API_CONFIG) ? API_CONFIG : {
     SUPABASE_URL: "https://sndmziujhdylwxtbmkyl.supabase.co",
     SUPABASE_ANON_KEY: "sb_publishable_MuWOqIoA84vAXkPizVCMew_TMZkYGww",
@@ -166,11 +170,23 @@ function prepareImageForUpload(file) {
             return resolve(file);
         }
 
+        // 8-second safety timeout: fallback to original file if compression takes too long
+        const timeoutId = setTimeout(() => {
+            console.warn("Image optimization timed out, uploading original file.");
+            resolve(file);
+        }, 8000);
+
         const reader = new FileReader();
-        reader.onerror = () => resolve(file);
+        reader.onerror = () => {
+            clearTimeout(timeoutId);
+            resolve(file);
+        };
         reader.onload = () => {
             const img = new Image();
-            img.onerror = () => resolve(file);
+            img.onerror = () => {
+                clearTimeout(timeoutId);
+                resolve(file);
+            };
             img.onload = () => {
                 const maxDim = 1600;
                 let width = img.width;
@@ -193,8 +209,10 @@ function prepareImageForUpload(file) {
                 ctx.drawImage(img, 0, 0, width, height);
 
                 canvas.toBlob((blob) => {
+                    clearTimeout(timeoutId);
                     if (blob && blob.size < file.size) {
-                        const optimizedFile = new File([blob], file.name, { type: "image/jpeg" });
+                        const baseName = file.name.substring(0, file.name.lastIndexOf('.')) || file.name;
+                        const optimizedFile = new File([blob], `${baseName}.jpg`, { type: "image/jpeg" });
                         resolve(optimizedFile);
                     } else {
                         resolve(file);
@@ -211,15 +229,31 @@ function prepareImageForUpload(file) {
  * Upload screenshot to Supabase Storage bucket and return public URL
  */
 async function uploadScreenshotToStorage(file, regId) {
-    const bucket = CONFIG.STORAGE_BUCKET || "payment-receipts";
-    const ext = file.name.split('.').pop().toLowerCase() || "jpg";
-    const filePath = `${regId}-${Date.now()}.${ext}`;
+    const bucket = (CONFIG.STORAGE_BUCKET || (typeof API_CONFIG !== "undefined" && API_CONFIG.STORAGE_BUCKET) || "payment-receipts").trim();
 
     // 1. Optimize image payload if necessary
     const uploadPayload = await prepareImageForUpload(file);
     const contentType = uploadPayload.type || file.type || "image/jpeg";
 
+    // Determine clean file extension matched to payload MIME type
+    let ext = "jpg";
+    if (contentType === "image/png") {
+        ext = "png";
+    } else if (contentType === "image/jpeg" || contentType === "image/jpg") {
+        ext = "jpg";
+    } else {
+        ext = file.name.split('.').pop().toLowerCase() || "jpg";
+    }
+
+    const filePath = `${regId}-${Date.now()}.${ext}`;
+    const targetHost = (function() {
+        try { return new URL(CONFIG.SUPABASE_URL).host; } catch (_) { return CONFIG.SUPABASE_URL; }
+    })();
+
+    console.log(`[Innovatia 2026 Storage] Uploading receipt: host="${targetHost}", bucket="${bucket}", path="${filePath}"`);
+
     const client = getSupabaseClient();
+    let publicUrl = "";
 
     // Try Supabase JS client storage upload first
     if (client && client.storage) {
@@ -232,6 +266,7 @@ async function uploadScreenshotToStorage(file, regId) {
             });
 
         if (uploadError) {
+            console.error("[Innovatia 2026 Storage] SDK upload failed:", { targetHost, bucket, filePath, error: uploadError });
             throw new Error(uploadError.message || "Failed to upload screenshot to Supabase Storage.");
         }
 
@@ -240,32 +275,41 @@ async function uploadScreenshotToStorage(file, regId) {
             .getPublicUrl(filePath);
 
         if (publicUrlData && publicUrlData.publicUrl) {
-            return publicUrlData.publicUrl;
+            publicUrl = publicUrlData.publicUrl;
+        } else {
+            publicUrl = `${CONFIG.SUPABASE_URL}/storage/v1/object/public/${bucket}/${filePath}`;
         }
-        return `${CONFIG.SUPABASE_URL}/storage/v1/object/public/${bucket}/${filePath}`;
+    } else {
+        // Direct Supabase Storage REST API fallback
+        const uploadUrl = `${CONFIG.SUPABASE_URL}/storage/v1/object/${bucket}/${filePath}`;
+        const response = await fetch(uploadUrl, {
+            method: "POST",
+            headers: {
+                "apikey": CONFIG.SUPABASE_ANON_KEY,
+                "Authorization": `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
+                "Content-Type": contentType
+            },
+            body: uploadPayload
+        });
+
+        if (!response.ok) {
+            let errJson = null;
+            try { errJson = await response.json(); } catch (_) {}
+            const errorMsg = (errJson && (errJson.message || errJson.error)) ||
+                             `Storage upload failed with HTTP ${response.status} (${response.statusText})`;
+            console.error("[Innovatia 2026 Storage] REST upload failed:", { targetHost, bucket, filePath, error: errJson || response.statusText });
+            throw new Error(errorMsg);
+        }
+
+        publicUrl = `${CONFIG.SUPABASE_URL}/storage/v1/object/public/${bucket}/${filePath}`;
     }
 
-    // Direct Supabase Storage REST API fallback
-    const uploadUrl = `${CONFIG.SUPABASE_URL}/storage/v1/object/${bucket}/${filePath}`;
-    const response = await fetch(uploadUrl, {
-        method: "POST",
-        headers: {
-            "apikey": CONFIG.SUPABASE_ANON_KEY,
-            "Authorization": `Bearer ${CONFIG.SUPABASE_ANON_KEY}`,
-            "Content-Type": contentType
-        },
-        body: uploadPayload
-    });
-
-    if (!response.ok) {
-        let errJson = null;
-        try { errJson = await response.json(); } catch (_) {}
-        const errorMsg = (errJson && (errJson.message || errJson.error)) ||
-                         `Storage upload failed with HTTP ${response.status} (${response.statusText})`;
-        throw new Error(errorMsg);
+    // Strict assertion: Verify URL is a valid Supabase Storage HTTP(S) URL and NEVER Base64
+    if (!publicUrl || !publicUrl.startsWith("http") || publicUrl.startsWith("data:")) {
+        throw new Error("Invalid Supabase Storage URL generated. Could not obtain a valid public URL.");
     }
 
-    return `${CONFIG.SUPABASE_URL}/storage/v1/object/public/${bucket}/${filePath}`;
+    return publicUrl;
 }
 
 /**
@@ -278,7 +322,7 @@ async function insertRegistrationToSupabase(record) {
         const { data, error } = await client
             .from(CONFIG.TABLE_NAME)
             .insert([record])
-            .select();
+
 
         if (error) {
             throw new Error(error.message || error.details || "Database insertion failed.");
@@ -311,9 +355,13 @@ async function insertRegistrationToSupabase(record) {
     return await response.json();
 }
 
-// -------------------------------------------------------------
+
+
+
 // 2. DOM INITIALIZATION & SUBMIT HANDLER
-// -------------------------------------------------------------
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const regForm = document.getElementById("innovatiaForm") ||
                     document.getElementById("regForm") ||
@@ -347,7 +395,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Ensure .env variables have finished loading if promise is pending
         if (CONFIG.ready && typeof CONFIG.ready.then === "function") {
             try {
-                await CONFIG.ready;
+                        await CONFIG.ready;
+
+        console.log('[Innovatia 2026 Config] STORAGE_BUCKET (CONFIG):', CONFIG.STORAGE_BUCKET);
+        console.log('[Innovatia 2026 Config] STORAGE_BUCKET (derived):', (CONFIG.STORAGE_BUCKET || (typeof API_CONFIG !== "undefined" && API_CONFIG.STORAGE_BUCKET) || "payment-receipts").trim());
             } catch (_) {}
         }
 
@@ -394,14 +445,39 @@ document.addEventListener("DOMContentLoaded", function () {
                 throw new Error(`Receipt screenshot upload failed: ${storageErr.message}\n\nPlease verify that the Supabase storage bucket '${CONFIG.STORAGE_BUCKET}' exists and allows public uploads.`);
             }
 
+            // Hard security assertion: Guarantee screenshotUrl is strictly a valid HTTP/HTTPS storage URL and never Base64
+            if (!screenshotUrl || !screenshotUrl.startsWith("http") || screenshotUrl.startsWith("data:")) {
+                throw new Error("Invalid receipt screenshot URL. A valid Supabase Storage public URL is required.");
+            }
+
             // 4. Construct record matching existing database schema
             const formData = new FormData(regForm);
             const regType = (formData.get("registration_type") || "single").toLowerCase();
             const isTeam = regType === "team";
 
+
             const record = {
-                id: regId,
-                registration_type: regType,
+                // Primary key will be auto‑generated (bigint)
+                // Use the generated registration ID for our custom identifier
+                registration_id: regId,
+
+                // Map primary participant fields to top‑level columns
+                full_name: (formData.get("m1_name") || "").trim(),
+                email: (formData.get("m1_email") || "").trim(),
+                phone: (formData.get("m1_whatsapp") || "").trim(),
+                college: (formData.get("m1_college") || "").trim(),
+                department: (formData.get("m1_department") || "").trim(),
+                year_of_study: (formData.get("m1_year") || "").trim(),
+                // Team name – use second member name if this is a team registration
+                team_name: isTeam ? ((formData.get("m2_name") || "").trim() || null) : null,
+                event_name: "Innovatia2026",
+                // Payment fields
+                payment_amount: null,
+                transaction_id: (formData.get("upi_ref_id") || "").trim(),
+                payment_screenshot_url: screenshotUrl,
+                payment_status: "PENDING",
+                expectations: (formData.get("expectations") || "").trim() || null,
+                // Preserve the detailed per‑member columns that already exist in the table
                 m1_name: (formData.get("m1_name") || "").trim(),
                 m1_college: (formData.get("m1_college") || "").trim(),
                 m1_department: (formData.get("m1_department") || "").trim(),
@@ -417,9 +493,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 m2_whatsapp: isTeam ? ((formData.get("m2_whatsapp") || "").trim() || null) : null,
                 m2_alt_phone: isTeam ? ((formData.get("m2_alt_phone") || "").trim() || null) : null,
                 upi_ref_id: (formData.get("upi_ref_id") || "").trim(),
-                payment_screenshot_url: screenshotUrl,
-                payment_status: "PENDING",
-                expectations: (formData.get("expectations") || "").trim() || null,
                 suggestions_query: (formData.get("suggestions_query") || "").trim() || null
             };
 
