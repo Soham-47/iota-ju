@@ -370,7 +370,8 @@
                     </div>
                     <div class="form-group full-width">
                         <label>Upload Payment Receipt Screenshot <span class="req">*</span></label>
-                        <input type="file" name="payment_screenshot" accept="image/*" required />
+                        <input type="file" name="payment_screenshot" id="payment_screenshot" accept="image/png, image/jpeg, image/jpg" required />
+                        <small style="color: var(--text-muted); font-size: 0.78rem;">Accepted formats: PNG, JPG/JPEG &mdash; Max size: 5 MB</small>
                     </div>
                 </div>
 
@@ -399,74 +400,9 @@
         </div>
     </div>
 
-    <!-- Submission Handler Script -->
-    <script>
-        function toggleTeamSection() {
-            const type = document.getElementById("registration_type").value;
-            const m2Container = document.getElementById("member2_container");
-            const m1Title = document.getElementById("m1_title");
-            
-            const m2Inputs = ["m2_name", "m2_college", "m2_department", "m2_year", "m2_email", "m2_whatsapp"];
-
-            if (type === "team") {
-                m2Container.style.display = "block";
-                m1Title.innerText = "Team Leader Details";
-                m2Inputs.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.setAttribute("required", "required");
-                });
-            } else {
-                m2Container.style.display = "none";
-                m1Title.innerText = "Participant Details";
-                m2Inputs.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el) el.removeAttribute("required");
-                });
-            }
-        }
-
-        document.getElementById("innovatiaForm").addEventListener("submit", async function(e) {
-            e.preventDefault();
-            const submitBtn = document.getElementById("submitBtn");
-            const responseDiv = document.getElementById("responseMessage");
-
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Submitting... <i class="fas fa-spinner fa-spin"></i>';
-
-            const formData = new FormData(this);
-
-            try {
-                // Post directly to the specified backend API route
-                const response = await fetch("/EVENTS/Innovatia2026/Registration", {
-                    method: "POST",
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    document.getElementById("innovatiaForm").style.display = "none";
-                    responseDiv.className = "status-success";
-                    responseDiv.style.display = "block";
-                    responseDiv.innerHTML = `
-                        <h3><i class="fas fa-check-circle"></i> Registration Received!</h3>
-                        <p style="margin-top: 8px;">Your response has been logged successfully.</p>
-                        <p style="margin-top: 12px; font-size: 1.1rem;"><strong>Registration ID:</strong> <span style="color: #2ecc71;">${result.registration_id}</span></p>
-                        <p style="margin-top: 6px; color: var(--text-dim);"><strong>Payment Status:</strong> Pending Verification</p>
-                        <p style="margin-top: 16px; font-size: 0.85rem; color: var(--text-muted);">Organizers will cross-check your UPI transaction reference ID. You will receive confirmation once verified.</p>
-                    `;
-                } else {
-                    alert("Submission error: " + (result.message || "Please verify form inputs."));
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
-                }
-            } catch (err) {
-                console.error(err);
-                alert("Network error: Could not reach the registration server.");
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Submit Registration <i class="fas fa-paper-plane"></i>';
-            }
-        });
-    </script>
+    <!-- Central Configuration & Supabase Handler Scripts -->
+    <script src="config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
 </body>
 </html>
