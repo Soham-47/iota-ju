@@ -1,3 +1,4 @@
+
 import { createServer } from 'node:http';
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
@@ -24,6 +25,10 @@ const cleanPages = new Map([
   ['/events/innovatia', 'frontend/EVENTS (2)/views/innovatia.html'],
   ['/events/lord-of-the-rings-2025', 'frontend/EVENTS (2)/views/lordOfRings25.html'],
   ['/events/automotive-electronics-seminar', 'frontend/EVENTS (2)/views/seminarAutomotiveElectronics.html'],
+
+  // Innovatia 2027 routes
+  ['/events/innovatia2027', 'frontend/EVENTS (2)/Innovatia2027/frontend/innovatia2027.html'],
+  ['/events/innovatia2027/register', 'frontend/EVENTS (2)/Innovatia2027/frontend/RegisterInnovatia2027.html'],
 ]);
 
 const legacyPrefixes = new Map([
@@ -66,20 +71,47 @@ const contentTypes = {
 };
 
 function safePath(relativePath) {
-  const candidate = path.resolve(siteRoot, relativePath.replace(/^\/+/, ''));
-  return candidate === siteRoot || candidate.startsWith(`${siteRoot}${path.sep}`) ? candidate : null;
+  const candidate = path.resolve(
+    siteRoot,
+    relativePath.replace(/^\/+/, '')
+  );
+
+  return candidate === siteRoot ||
+    candidate.startsWith(`${siteRoot}${path.sep}`)
+    ? candidate
+    : null;
 }
 
 function requestFile(pathname) {
-  if (pathname === '/') return safePath('index.html');
-  const cleanPath = pathname.length > 1 ? pathname.replace(/\/$/, '') : pathname;
-  if (cleanPages.has(cleanPath)) return safePath(cleanPages.get(cleanPath));
+  if (pathname === '/') {
+    return safePath('index.html');
+  }
 
-  const projectMatch = cleanPath.match(/^\/project\/([a-z0-9-]+)$/i);
-  if (projectMatch) return safePath(`frontend/projects/project-details/${projectMatch[1]}.html`);
+  const cleanPath =
+    pathname.length > 1
+      ? pathname.replace(/\/$/, '')
+      : pathname;
+
+  if (cleanPages.has(cleanPath)) {
+    return safePath(cleanPages.get(cleanPath));
+  }
+
+  const projectMatch = cleanPath.match(
+    /^\/project\/([a-z0-9-]+)$/i
+  );
+
+  if (projectMatch) {
+    return safePath(
+      `frontend/projects/project-details/${projectMatch[1]}.html`
+    );
+  }
 
   for (const [prefix, replacement] of legacyPrefixes) {
-    if (pathname.startsWith(prefix)) return safePath(`${replacement}${pathname.slice(prefix.length)}`);
+    if (pathname.startsWith(prefix)) {
+      return safePath(
+        `${replacement}${pathname.slice(prefix.length)}`
+      );
+    }
   }
 
   return safePath(pathname);
@@ -93,21 +125,49 @@ const server = createServer(async (request, response) => {
   }
 
   try {
-    const pathname = decodeURIComponent(new URL(request.url, 'http://localhost').pathname);
+    const pathname = decodeURIComponent(
+      new URL(request.url, 'http://localhost').pathname
+    );
+
     let filePath = requestFile(pathname);
+
     if (filePath) {
       const stats = await fs.stat(filePath);
-      if (stats.isDirectory()) filePath = safePath(path.join(pathname, 'index.html'));
+
+      if (stats.isDirectory()) {
+        filePath = safePath(
+          path.join(pathname, 'index.html')
+        );
+      }
     }
+
     const body = filePath && await fs.readFile(filePath);
-    if (!body) throw new Error('Not found');
-    response.writeHead(200, { 'Content-Type': contentTypes[path.extname(filePath)] || 'application/octet-stream' });
-    if (request.method === 'GET') response.end(body);
-    else response.end();
+
+    if (!body) {
+      throw new Error('Not found');
+    }
+
+    response.writeHead(200, {
+      'Content-Type':
+        contentTypes[path.extname(filePath)] ||
+        'application/octet-stream',
+    });
+
+    if (request.method === 'GET') {
+      response.end(body);
+    } else {
+      response.end();
+    }
+
   } catch {
-    response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });
+    response.writeHead(404, {
+      'Content-Type': 'text/plain; charset=utf-8',
+    });
+
     response.end('Not found');
   }
 });
 
-server.listen(port, () => console.log(`IOTA site: http://localhost:${port}`));
+server.listen(port, () =>
+  console.log(`IOTA site: http://localhost:${port}`)
+);
